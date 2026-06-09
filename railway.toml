@@ -1,5 +1,5 @@
 [build]
-buildCommand = "pnpm install --frozen-lockfile && pnpm --filter @fano/db db:generate && pnpm --filter @fano/web build"
+builder = "NIXPACKS"
 
 [deploy]
 startCommand = "pnpm --filter @fano/web start"
