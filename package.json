@@ -1,0 +1,29 @@
+{
+  "name": "fano-realestate",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@11.3.0",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "db:generate": "turbo run db:generate",
+    "db:push": "turbo run db:push",
+    "db:migrate": "turbo run db:migrate",
+    "db:studio": "pnpm --filter @fano/db db:studio",
+    "test": "pnpm --filter @fano/e2e test",
+    "test:ui": "pnpm --filter @fano/e2e test:ui",
+    "test:report": "pnpm --filter @fano/e2e test:report"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.4",
+    "prettier": "^3.4.2",
+    "eslint": "^9.21.0",
+    "@types/node": "^22.13.9"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}

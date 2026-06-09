@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "/opt/homebrew/bin/pnpm",
+      "runtimeArgs": ["--filter", "@fano/web", "dev"],
+      "autoPort": true
+    },
+    {
+      "name": "admin",
+      "runtimeExecutable": "/opt/homebrew/bin/pnpm",
+      "runtimeArgs": ["--filter", "@fano/admin", "dev"],
+      "port": 3001
+    }
+  ]
+}
