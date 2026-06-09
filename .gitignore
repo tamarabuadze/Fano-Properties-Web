@@ -1,0 +1,18 @@
+node_modules
+.next
+.turbo
+dist
+build
+*.env
+.env.local
+.env.*.local
+.DS_Store
+*.log
+.vercel
+.cache
+# Playwright
+apps/e2e/test-results/
+apps/e2e/playwright-report/
+apps/e2e/.auth/
+# Supabase schema helper (keep in repo for reference)
+# supabase-schema.sql
