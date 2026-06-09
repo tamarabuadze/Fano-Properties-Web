@@ -1,6 +1,5 @@
 [build]
 builder = "NIXPACKS"
-buildCommand = "npm install -g pnpm@11.3.0 && pnpm install --frozen-lockfile && pnpm --filter @fano/db db:generate && pnpm --filter @fano/web build"
 
 [deploy]
 startCommand = "pnpm --filter @fano/web start"
