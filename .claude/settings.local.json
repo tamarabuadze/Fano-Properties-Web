@@ -5,7 +5,9 @@
       "Bash(npx playwright *)",
       "Bash(DATABASE_URL=\"postgresql://Mac@localhost:5432/fano\" DIRECT_URL=\"postgresql://Mac@localhost:5432/fano\" npx prisma db push)",
       "Bash(node seed-demo.mjs)",
-      "Bash(/opt/homebrew/bin/pnpm --filter @fano/web build)"
+      "Bash(/opt/homebrew/bin/pnpm --filter @fano/web build)",
+      "Bash(git remote *)",
+      "Bash(git push *)"
     ]
   }
 }
