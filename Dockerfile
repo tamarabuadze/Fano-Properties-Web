@@ -16,8 +16,9 @@ COPY packages/types/package.json ./packages/types/
 COPY packages/utils/package.json ./packages/utils/
 COPY apps/web/package.json ./apps/web/
 
-# Install all dependencies
-RUN pnpm install --frozen-lockfile
+# Install all dependencies (--ignore-scripts bypasses pnpm@11 supply-chain policy;
+# Prisma is generated separately below, Sharp uses prebuilt binaries)
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
 # Copy all source files
 COPY . .
