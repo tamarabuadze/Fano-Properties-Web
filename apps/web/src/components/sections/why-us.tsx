@@ -33,7 +33,7 @@ export function WhyUsSection() {
   return (
     <section className="section-y bg-white">
       <div className="container-site">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-24 items-center">
           {/* Image side */}
           <motion.div
             initial={{ opacity: 0, x: -32 }}
@@ -42,7 +42,7 @@ export function WhyUsSection() {
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="relative"
           >
-            <div className="relative h-[480px] lg:h-[560px] rounded-3xl overflow-hidden bg-zinc-100">
+            <div className="relative h-[280px] sm:h-[380px] lg:h-[520px] rounded-3xl overflow-hidden bg-zinc-100">
               <Image
                 src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format"
                 alt="Why choose Fano"
@@ -53,7 +53,7 @@ export function WhyUsSection() {
             </div>
 
             {/* Floating stat card */}
-            <div className="absolute -bottom-6 -right-6 bg-black text-white rounded-2xl p-6 shadow-2xl">
+            <div className="absolute bottom-4 right-4 lg:-bottom-6 lg:-right-6 bg-black text-white rounded-2xl p-4 lg:p-6 shadow-2xl">
               <p className="text-3xl font-semibold [letter-spacing:-0.03em]">98%</p>
               <p className="text-white/60 text-sm mt-1">Client satisfaction rate</p>
             </div>

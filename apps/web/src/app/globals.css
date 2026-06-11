@@ -70,11 +70,11 @@
   }
 
   .section-y {
-    @apply py-20 lg:py-28 xl:py-36;
+    @apply py-12 lg:py-20 xl:py-28;
   }
 
   .section-y-sm {
-    @apply py-14 lg:py-20;
+    @apply py-8 lg:py-14;
   }
 
   .heading-display {

@@ -36,7 +36,7 @@ export function Footer() {
 
       {/* Links grid */}
       <div className="container-site py-16">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8">
           {/* Brand col */}
           <div className="col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center mb-4">
