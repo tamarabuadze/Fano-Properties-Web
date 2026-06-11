@@ -1,19 +1,12 @@
-import { AdminSidebar } from "@/components/admin/admin-sidebar";
-import { AdminHeader } from "@/components/admin/admin-header";
+import { AdminShell } from "@/components/admin/admin-shell";
 import { requireAdmin } from "@/lib/admin-auth";
 
 export default async function ProtectedLayout({ children }: { children: React.ReactNode }) {
   const session = await requireAdmin();
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
-      <AdminSidebar />
-      <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
-        <AdminHeader user={session.user} />
-        <main className="flex-1 overflow-y-auto">
-          {children}
-        </main>
-      </div>
-    </div>
+    <AdminShell user={session.user}>
+      {children}
+    </AdminShell>
   );
 }

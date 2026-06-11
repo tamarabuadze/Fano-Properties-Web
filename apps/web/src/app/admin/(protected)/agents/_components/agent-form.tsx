@@ -69,7 +69,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
       <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
         <h2 className="font-semibold text-foreground">Personal Information</h2>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>First Name</label>
             <input {...register("firstName")} className={inputCls} placeholder="John" />
@@ -86,7 +86,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>Email</label>
             <input
@@ -105,7 +105,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>Title / Role</label>
             <input
@@ -139,7 +139,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
       <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
         <h2 className="font-semibold text-foreground">Professional Details</h2>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>License Number</label>
             <input {...register("licenseNumber")} className={inputCls} placeholder="RE-12345" />

@@ -103,7 +103,7 @@ export function PropertyForm({ agents, defaultValues, propertyId }: PropertyForm
           {errors.description && <p className="text-xs text-red-500 mt-1">{errors.description.message}</p>}
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>Property Type</label>
             <select {...register("propertyType")} className={selectCls}>
@@ -122,7 +122,7 @@ export function PropertyForm({ agents, defaultValues, propertyId }: PropertyForm
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>Status</label>
             <select {...register("status")} className={selectCls}>
@@ -148,7 +148,7 @@ export function PropertyForm({ agents, defaultValues, propertyId }: PropertyForm
       <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
         <h2 className="font-semibold text-foreground">Pricing & Details</h2>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>Price</label>
             <input {...register("price")} type="number" className={inputCls} placeholder="0" />
@@ -164,7 +164,7 @@ export function PropertyForm({ agents, defaultValues, propertyId }: PropertyForm
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className={labelCls}>Bedrooms</label>
             <input {...register("bedrooms")} type="number" min="0" className={inputCls} />
@@ -188,7 +188,7 @@ export function PropertyForm({ agents, defaultValues, propertyId }: PropertyForm
           <input {...register("location")} className={inputCls} placeholder="e.g. 123 Main St, Downtown" />
           {errors.location && <p className="text-xs text-red-500 mt-1">{errors.location.message}</p>}
         </div>
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className={labelCls}>City</label>
             <input {...register("city")} className={inputCls} />

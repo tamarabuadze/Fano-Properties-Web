@@ -34,6 +34,7 @@ export function AgentsTable({ agents }: { agents: Agent[] }) {
 
   return (
     <div className="rounded-2xl border border-border bg-card overflow-hidden">
+      <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-border bg-secondary/40">
@@ -110,6 +111,7 @@ export function AgentsTable({ agents }: { agents: Agent[] }) {
           )}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }

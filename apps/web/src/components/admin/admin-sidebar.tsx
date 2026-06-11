@@ -15,6 +15,7 @@ import {
   Home,
   LogOut,
   ChevronRight,
+  X,
 } from "lucide-react";
 import { cn } from "@fano/utils";
 
@@ -27,14 +28,19 @@ const navItems = [
   { href: "/admin/settings", icon: Settings, label: "Settings" },
 ];
 
-export function AdminSidebar() {
+interface AdminSidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+function SidebarContent({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden lg:flex flex-col w-64 shrink-0 border-r border-border bg-card h-full">
+    <div className="flex flex-col h-full">
       {/* Logo */}
-      <div className="h-16 flex items-center px-6 border-b border-border">
-        <Link href="/admin/dashboard" className="flex items-center gap-2.5">
+      <div className="h-16 flex items-center px-6 border-b border-border shrink-0">
+        <Link href="/admin/dashboard" className="flex items-center" onClick={onClose}>
           <Image
             src="/logo-dark.png"
             alt="Fano Properties"
@@ -44,6 +50,15 @@ export function AdminSidebar() {
             priority
           />
         </Link>
+        {onClose && (
+          <button
+            onClick={onClose}
+            aria-label="Close menu"
+            className="ml-auto h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors lg:hidden"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        )}
       </div>
 
       {/* Nav */}
@@ -54,8 +69,9 @@ export function AdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onClose}
               className={cn(
-                "flex items-center gap-3 px-3 h-10 rounded-xl text-sm font-medium transition-all duration-150 group",
+                "flex items-center gap-3 px-3 h-10 rounded-xl text-sm font-medium transition-all duration-150",
                 active
                   ? "bg-primary text-primary-foreground"
                   : "text-muted-foreground hover:bg-secondary hover:text-foreground"
@@ -70,24 +86,50 @@ export function AdminSidebar() {
       </nav>
 
       {/* Bottom */}
-      <div className="px-3 pb-4 border-t border-border pt-4">
+      <div className="px-3 pb-4 border-t border-border pt-4 space-y-1">
         <a
           href={process.env.NEXT_PUBLIC_WEB_URL ?? "http://localhost:3000"}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={onClose}
           className="flex items-center gap-3 px-3 h-10 rounded-xl text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-all"
         >
           <Home className="h-4 w-4" />
           View Website
         </a>
         <button
-          onClick={() => signOut({ callbackUrl: "/login" })}
+          onClick={() => signOut({ callbackUrl: "/admin/login" })}
           className="w-full flex items-center gap-3 px-3 h-10 rounded-xl text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-all"
         >
           <LogOut className="h-4 w-4" />
           Sign Out
         </button>
       </div>
-    </aside>
+    </div>
+  );
+}
+
+export function AdminSidebar({ isOpen = false, onClose }: AdminSidebarProps) {
+  return (
+    <>
+      {/* Desktop sidebar */}
+      <aside className="hidden lg:flex flex-col w-64 shrink-0 border-r border-border bg-card h-full">
+        <SidebarContent />
+      </aside>
+
+      {/* Mobile drawer */}
+      {isOpen && (
+        <div className="lg:hidden fixed inset-0 z-50 flex">
+          <div
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={onClose}
+            aria-hidden
+          />
+          <aside className="relative w-72 max-w-[85vw] bg-card h-full border-r border-border shadow-2xl flex flex-col">
+            <SidebarContent onClose={onClose} />
+          </aside>
+        </div>
+      )}
+    </>
   );
 }

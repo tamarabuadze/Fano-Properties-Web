@@ -115,7 +115,7 @@ export function ArticleForm({ categories, defaultValues, articleId }: ArticleFor
       <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
         <h2 className="font-semibold text-foreground">Details</h2>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>Category</label>
             <select {...register("categoryId")} className={selectCls}>

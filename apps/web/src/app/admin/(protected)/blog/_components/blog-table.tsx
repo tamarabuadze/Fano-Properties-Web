@@ -32,6 +32,7 @@ export function BlogTable({ articles }: { articles: Article[] }) {
 
   return (
     <div className="rounded-2xl border border-border bg-card overflow-hidden">
+      <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b border-border bg-secondary/40">
@@ -95,6 +96,7 @@ export function BlogTable({ articles }: { articles: Article[] }) {
           )}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }
