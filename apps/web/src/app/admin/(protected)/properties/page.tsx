@@ -24,7 +24,7 @@ export default async function PropertiesPage({
       }
     : {};
 
-  const [properties, total] = await Promise.all([
+  const [rawProperties, total] = await Promise.all([
     prisma.property.findMany({
       where,
       take: pageSize,
@@ -34,6 +34,7 @@ export default async function PropertiesPage({
     }),
     prisma.property.count({ where }),
   ]);
+  const properties = rawProperties.map((p) => ({ ...p, price: Number(p.price) }));
 
   return (
     <div className="p-6 lg:p-8 space-y-6">

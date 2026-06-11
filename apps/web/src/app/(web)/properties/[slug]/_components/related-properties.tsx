@@ -27,8 +27,20 @@ export function RelatedProperties({ properties }: RelatedPropertiesProps) {
         {properties.map((p) => (
           <PropertyCard
             key={p.id}
-            {...p}
-            price={typeof p.price === "string" ? parseFloat(p.price) : p.price}
+            id={p.id}
+            title={p.title}
+            slug={p.slug}
+            propertyType={p.propertyType}
+            listingType={p.listingType}
+            price={Number(p.price)}
+            currency={p.currency}
+            location={p.location}
+            city={p.city}
+            bedrooms={p.bedrooms}
+            bathrooms={p.bathrooms}
+            sqft={p.sqft}
+            coverImage={p.coverImage}
+            featured={p.featured}
           />
         ))}
       </div>

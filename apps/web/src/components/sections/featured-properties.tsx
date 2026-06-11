@@ -54,8 +54,20 @@ export function FeaturedPropertiesSection({ properties }: FeaturedPropertiesProp
             {properties.map((property) => (
               <PropertyCard
                 key={property.id}
-                {...property}
-                price={typeof property.price === "string" ? parseFloat(property.price) : property.price}
+                id={property.id}
+                title={property.title}
+                slug={property.slug}
+                propertyType={property.propertyType}
+                listingType={property.listingType}
+                price={Number(property.price)}
+                currency={property.currency}
+                location={property.location}
+                city={property.city}
+                bedrooms={property.bedrooms}
+                bathrooms={property.bathrooms}
+                sqft={property.sqft}
+                coverImage={property.coverImage}
+                featured={property.featured}
               />
             ))}
           </AnimateStagger>
