@@ -29,7 +29,7 @@ export function HeroSection() {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
   // Lazy-load video after page is interactive so the poster image wins the LCP race
   useEffect(() => {
@@ -56,7 +56,7 @@ export function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative h-[100svh] min-h-[640px] max-h-[1080px] overflow-hidden bg-black"
+      className="relative h-[100svh] min-h-[700px] max-h-[1080px] overflow-hidden bg-black"
     >
       {/* Background: poster + video fade */}
       <div className="absolute inset-0" aria-hidden>
@@ -153,7 +153,7 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="flex flex-wrap gap-8 pt-8 border-t border-white/20"
+              className="hidden sm:flex flex-wrap gap-8 pt-8 border-t border-white/20"
             >
               {stats.map((s) => (
                 <div key={s.label}>
