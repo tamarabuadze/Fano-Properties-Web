@@ -74,7 +74,7 @@ export function PropertyForm({ agents, defaultValues, propertyId }: PropertyForm
 
     if (result.success) {
       toast.success(propertyId ? "Property updated" : "Property created");
-      router.push("/properties");
+      router.push("/admin/properties");
     } else {
       toast.error((result as { error?: string }).error ?? "Something went wrong");
     }
@@ -242,7 +242,7 @@ export function PropertyForm({ agents, defaultValues, propertyId }: PropertyForm
         </button>
         <button
           type="button"
-          onClick={() => router.push("/properties")}
+          onClick={() => router.push("/admin/properties")}
           className="h-11 px-6 rounded-xl border border-border text-muted-foreground font-medium text-sm hover:text-foreground transition-colors"
         >
           Cancel
