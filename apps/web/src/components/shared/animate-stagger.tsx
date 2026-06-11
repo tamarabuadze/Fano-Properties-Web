@@ -47,7 +47,7 @@ export function AnimateStagger({ children, className, delay = 0 }: AnimateStagge
     >
       {React.Children.map(children, (child) =>
         child ? (
-          <motion.div variants={item}>{child}</motion.div>
+          <motion.div variants={item} className="h-full">{child}</motion.div>
         ) : null
       )}
     </motion.div>

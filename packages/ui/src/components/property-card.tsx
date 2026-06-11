@@ -55,12 +55,12 @@ function PropertyCard({
     <Link
       href={`/properties/${slug}`}
       className={cn(
-        "group block overflow-hidden rounded-2xl bg-white border border-border",
+        "group flex flex-col overflow-hidden rounded-2xl bg-white border border-border h-full",
         "transition-all duration-500 hover:shadow-xl hover:-translate-y-1",
         className
       )}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100">
+      <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100 shrink-0">
         <Image
           src={coverImage}
           alt={title}
@@ -85,7 +85,7 @@ function PropertyCard({
         </div>
       </div>
 
-      <div className="p-5">
+      <div className="flex flex-col flex-1 p-5">
         <div className="mb-3">
           <p className="text-2xl font-semibold tracking-tight [letter-spacing:-0.02em]" style={{ color: "#7e6244" }}>
             {formatPrice(price, currency)}
@@ -99,7 +99,7 @@ function PropertyCard({
           {title}
         </h3>
 
-        <div className="flex items-center gap-1.5 mb-4" style={{ color: "#9a7957" }}>
+        <div className="flex items-center gap-1.5 mb-4 flex-1" style={{ color: "#9a7957" }}>
           <MapPin className="h-3.5 w-3.5 shrink-0" />
           <p className="text-sm line-clamp-1">
             {location}, {city}

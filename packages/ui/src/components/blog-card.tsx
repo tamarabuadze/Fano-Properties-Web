@@ -79,12 +79,12 @@ function BlogCard({
     <Link
       href={`/blog/${slug}`}
       className={cn(
-        "group block overflow-hidden rounded-2xl bg-white border border-border",
+        "group flex flex-col overflow-hidden rounded-2xl bg-white border border-border h-full",
         "transition-all duration-500 hover:shadow-xl hover:-translate-y-1",
         className
       )}
     >
-      <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100">
+      <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100 shrink-0">
         {coverImage ? (
           <Image
             src={coverImage}
@@ -107,7 +107,7 @@ function BlogCard({
         )}
       </div>
 
-      <div className="p-5">
+      <div className="flex flex-col flex-1 p-5">
         <div className="flex items-center gap-2 text-xs text-text-secondary mb-3">
           {date && <span>{date}</span>}
           {date && readTime && <span>·</span>}
@@ -118,7 +118,7 @@ function BlogCard({
           {title}
         </h3>
 
-        <p className="text-sm line-clamp-2 leading-relaxed" style={{ color: "#7e6244" }}>
+        <p className="text-sm line-clamp-3 leading-relaxed flex-1" style={{ color: "#7e6244" }}>
           {excerpt}
         </p>
 

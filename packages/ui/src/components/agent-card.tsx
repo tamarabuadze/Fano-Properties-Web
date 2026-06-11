@@ -36,7 +36,7 @@ function AgentCard({
     <Link
       href={`/agents/${slug}`}
       className={cn(
-        "group flex flex-col items-center text-center p-6 rounded-2xl bg-white border border-border",
+        "group flex flex-col items-center text-center p-6 rounded-2xl bg-white border border-border h-full",
         "transition-all duration-500 hover:shadow-xl hover:-translate-y-1",
         className
       )}
@@ -59,23 +59,25 @@ function AgentCard({
         )}
       </div>
 
-      <h3 className="font-semibold text-lg" style={{ color: "#3d3020" }}>
-        {firstName} {lastName}
-      </h3>
-      {title && (
-        <p className="text-sm mt-0.5" style={{ color: "#9a7957" }}>{title}</p>
-      )}
-      {specialization && (
-        <p className="text-xs mt-1" style={{ color: "#b09070" }}>{specialization}</p>
-      )}
+      <div className="flex-1 flex flex-col items-center">
+        <h3 className="font-semibold text-lg" style={{ color: "#3d3020" }}>
+          {firstName} {lastName}
+        </h3>
+        {title && (
+          <p className="text-sm mt-0.5" style={{ color: "#9a7957" }}>{title}</p>
+        )}
+        {specialization && (
+          <p className="text-xs mt-1" style={{ color: "#b09070" }}>{specialization}</p>
+        )}
 
-      {totalListings !== undefined && (
-        <div className="mt-3 px-3 py-1 rounded-full border" style={{ backgroundColor: "#faf7f2", borderColor: "#e6d8c4" }}>
-          <span className="text-xs font-medium" style={{ color: "#9a7957" }}>
-            {totalListings} listings
-          </span>
-        </div>
-      )}
+        {totalListings !== undefined && (
+          <div className="mt-3 px-3 py-1 rounded-full border" style={{ backgroundColor: "#faf7f2", borderColor: "#e6d8c4" }}>
+            <span className="text-xs font-medium" style={{ color: "#9a7957" }}>
+              {totalListings} listings
+            </span>
+          </div>
+        )}
+      </div>
 
       <div className="mt-4 flex gap-2 w-full">
         {phone && (
