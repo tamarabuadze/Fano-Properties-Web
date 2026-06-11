@@ -24,9 +24,9 @@ export default function ContactPage() {
 
           <div className="space-y-6 mb-10">
             {[
-              { icon: MapPin, text: "123 Premium Avenue, New York, NY 10001" },
-              { icon: Phone, text: "+1 (800) 123-4567" },
-              { icon: Mail, text: "hello@fanorealestate.com" },
+              { icon: MapPin, text: "3404, 34th Floor, Churchill Tower, Business Bay, Dubai, UAE" },
+              { icon: Phone, text: "+971 52 571 9164" },
+              { icon: Mail, text: "info@fanoproperties.com" },
               { icon: Clock, text: "Mon–Fri 9am–6pm, Sat 10am–4pm" },
             ].map(({ icon: Icon, text }) => (
               <div key={text} className="flex items-center gap-4 text-sm text-zinc-600">
