@@ -55,14 +55,15 @@ export function Navbar() {
       >
         <div className="container-site">
           <div className="flex h-16 lg:h-20 items-center justify-between gap-8">
-            {/* Logo */}
+            {/* Logo — always beige/gold brand color */}
             <Link href="/" className="flex items-center">
               <Image
-                src={scrolled || !isHome || mobileOpen ? "/logo-dark.png" : "/logo-white.png"}
+                src="/logo-dark.png"
                 alt="Fano Properties"
                 width={160}
                 height={52}
                 className="h-9 w-auto object-contain transition-all duration-300"
+                style={{ filter: "brightness(0) saturate(100%) invert(77%) sepia(16%) saturate(430%) hue-rotate(2deg) brightness(96%)" }}
                 priority
               />
             </Link>
