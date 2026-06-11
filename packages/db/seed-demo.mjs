@@ -1,11 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { createRequire } from "module";
 
-const require = createRequire(import.meta.url);
-const dotenv = require("dotenv");
-dotenv.config({ path: "./apps/web/.env.local" });
-
-// Use direct URL to bypass pgbouncer transaction-mode restrictions
+// Direct URL (port 5432) bypasses pgbouncer transaction-mode restrictions
 const directUrl =
   process.env.DIRECT_URL ||
   "postgresql://postgres.spjwekprwjkikcbogtil:Fanorock2027%40@aws-1-eu-west-2.pooler.supabase.com:5432/postgres";

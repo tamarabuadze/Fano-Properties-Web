@@ -12,7 +12,7 @@ const testimonials = [
     quote:
       "Fano made buying our first luxury home an absolute joy. Their team was attentive, knowledgeable, and never made us feel rushed. We found our dream home in just three weeks.",
     name: "Sarah & James Mitchell",
-    role: "Homeowners, Miami",
+    role: "Homeowners, Dubai",
     avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format",
   },
   {
@@ -28,7 +28,7 @@ const testimonials = [
     quote:
       "We relocated from London and were nervous about navigating the US market. Our Fano agent held our hand through everything. Couldn't recommend them more highly.",
     name: "Emma & David Harrington",
-    role: "Relocating Family, New York",
+    role: "Relocating Family, Abu Dhabi",
     avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format",
   },
 ];

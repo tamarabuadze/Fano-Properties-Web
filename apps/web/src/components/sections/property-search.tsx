@@ -103,7 +103,7 @@ export function PropertySearchSection() {
           {/* Quick links */}
           <div className="mt-5 flex flex-wrap gap-2">
             <span className="text-xs text-zinc-400">Popular:</span>
-            {["New York", "Miami", "Los Angeles", "Chicago", "Austin"].map((city) => (
+            {["Dubai", "Abu Dhabi", "London", "Paris", "Amsterdam"].map((city) => (
               <button
                 key={city}
                 type="button"
