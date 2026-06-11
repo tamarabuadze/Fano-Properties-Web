@@ -93,7 +93,7 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="container-site py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="container-site pt-6 pb-24 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40">
             © {new Date().getFullYear()} Fano Real Estate. All rights reserved.
           </p>
