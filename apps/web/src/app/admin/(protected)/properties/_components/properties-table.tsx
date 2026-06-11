@@ -131,7 +131,7 @@ export function PropertiesTable({ properties, total, page, pageSize }: Propertie
                           {p.published ? <EyeOff className="h-4 w-4" /> : <Globe className="h-4 w-4" />}
                         </button>
                         <Link
-                          href={`/properties/${p.id}`}
+                          href={`/admin/properties/${p.id}`}
                           aria-label="Edit"
                           className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
                         >

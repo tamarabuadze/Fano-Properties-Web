@@ -79,7 +79,7 @@ export function BlogTable({ articles }: { articles: Article[] }) {
                     >
                       {a.published ? <EyeOff className="h-4 w-4" /> : <Globe className="h-4 w-4" />}
                     </button>
-                    <Link href={`/blog/${a.id}`} aria-label="Edit" className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors">
+                    <Link href={`/admin/blog/${a.id}`} aria-label="Edit" className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors">
                       <Edit className="h-4 w-4" />
                     </Link>
                     <button

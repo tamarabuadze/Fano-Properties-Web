@@ -38,12 +38,16 @@ export function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  const navBg = scrolled || !isHome || mobileOpen
-    ? "bg-white/95 backdrop-blur-md border-b border-border shadow-sm"
+  // Scrolled/non-home: dark brown (matching footer), transparent on home hero
+  const isOpaque = scrolled || !isHome || mobileOpen;
+
+  const navBg = isOpaque
+    ? "bg-[#1a1410]/95 backdrop-blur-md border-b border-white/10 shadow-sm"
     : "bg-transparent border-b border-transparent";
 
-  const textColor = scrolled || !isHome || mobileOpen ? "text-black" : "text-white";
-  const logoColor = scrolled || !isHome || mobileOpen ? "text-black" : "text-white";
+  // Links are beige/gold when opaque, white when transparent over hero
+  const linkColor = isOpaque ? "text-[#c9a96e]" : "text-white";
+  const hoverBg = isOpaque ? "hover:bg-white/10" : "hover:bg-white/10";
 
   return (
     <>
@@ -76,18 +80,17 @@ export function Navbar() {
                   href={link.href}
                   className={cn(
                     "relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-200",
-                    "hover:bg-black/5",
+                    hoverBg,
                     pathname.startsWith(link.href)
-                      ? cn(textColor, "bg-black/5")
-                      : textColor,
-                    !scrolled && isHome && "hover:bg-white/10"
+                      ? cn(linkColor, "bg-white/10")
+                      : linkColor
                   )}
                 >
                   {link.label}
                   {pathname.startsWith(link.href) && (
                     <motion.div
                       layoutId="nav-indicator"
-                      className="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-[#9a7957]"
+                      className="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-[#c9a96e]"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
@@ -111,7 +114,7 @@ export function Navbar() {
                 onClick={() => setMobileOpen((v) => !v)}
                 className={cn(
                   "lg:hidden h-10 w-10 rounded-full flex items-center justify-center transition-colors",
-                  scrolled || !isHome || mobileOpen ? "text-black hover:bg-zinc-100" : "text-white hover:bg-white/10"
+                  isOpaque ? "text-[#c9a96e] hover:bg-white/10" : "text-white hover:bg-white/10"
                 )}
                 aria-label="Toggle menu"
               >
@@ -122,7 +125,7 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu — dark brown like footer */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
@@ -130,7 +133,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed inset-0 z-40 bg-white pt-16 lg:hidden"
+            className="fixed inset-0 z-40 bg-[#1a1410] pt-16 lg:hidden"
           >
             <div className="container-site py-8 flex flex-col gap-1">
               {navLinks.map((link, i) => (
@@ -145,8 +148,8 @@ export function Navbar() {
                     className={cn(
                       "flex items-center h-14 px-4 rounded-xl text-lg font-medium transition-colors",
                       pathname.startsWith(link.href)
-                        ? "bg-zinc-100 text-black"
-                        : "text-black hover:bg-zinc-50"
+                        ? "bg-white/10 text-[#c9a96e]"
+                        : "text-[#c9a96e]/80 hover:bg-white/10 hover:text-[#c9a96e]"
                     )}
                   >
                     {link.label}
@@ -157,7 +160,7 @@ export function Navbar() {
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.06, duration: 0.2 }}
-                className="mt-4 pt-4 border-t border-border"
+                className="mt-4 pt-4 border-t border-white/10"
               >
                 <Link
                   href="/contact"

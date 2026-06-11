@@ -53,21 +53,21 @@ export default async function DashboardPage() {
       value: stats.totalProperties,
       sub: `${stats.publishedProperties} published`,
       icon: Building2,
-      href: "/properties",
+      href: "/admin/properties",
     },
     {
       label: "Active Agents",
       value: stats.totalAgents,
       sub: "Verified agents",
       icon: Users,
-      href: "/agents",
+      href: "/admin/agents",
     },
     {
       label: "Total Inquiries",
       value: stats.totalInquiries,
       sub: `${stats.newInquiries} new`,
       icon: MessageSquare,
-      href: "/inquiries",
+      href: "/admin/inquiries",
       highlight: stats.newInquiries > 0,
     },
     {
@@ -75,7 +75,7 @@ export default async function DashboardPage() {
       value: stats.totalArticles,
       sub: "Blog posts",
       icon: TrendingUp,
-      href: "/blog",
+      href: "/admin/blog",
     },
   ];
 
@@ -114,7 +114,7 @@ export default async function DashboardPage() {
         <div className="bg-card rounded-2xl border border-border">
           <div className="flex items-center justify-between px-5 py-4 border-b border-border">
             <h2 className="font-semibold text-foreground text-sm">Recent Inquiries</h2>
-            <Link href="/inquiries" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/admin/inquiries" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               View all →
             </Link>
           </div>
@@ -156,7 +156,7 @@ export default async function DashboardPage() {
         <div className="bg-card rounded-2xl border border-border">
           <div className="flex items-center justify-between px-5 py-4 border-b border-border">
             <h2 className="font-semibold text-foreground text-sm">Recent Properties</h2>
-            <Link href="/properties" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/admin/properties" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               View all →
             </Link>
           </div>
@@ -167,7 +167,7 @@ export default async function DashboardPage() {
               stats.recentProperties.map((p) => (
                 <Link
                   key={p.id}
-                  href={`/properties/${p.id}`}
+                  href={`/admin/properties/${p.id}`}
                   className="flex items-center gap-3 px-5 py-3.5 hover:bg-secondary/50 transition-colors"
                 >
                   <div className="h-8 w-8 rounded-lg bg-secondary flex items-center justify-center shrink-0">

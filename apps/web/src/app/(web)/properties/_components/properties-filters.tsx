@@ -61,16 +61,16 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
   const hasFilters = Object.values(initialFilters).some(Boolean);
 
   return (
-    <div className="bg-white rounded-2xl border border-border p-5 sticky top-24 space-y-6">
+    <div className="rounded-2xl p-5 sticky top-24 space-y-6" style={{ backgroundColor: "#1a1410" }}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <SlidersHorizontal className="h-4 w-4 text-zinc-400" />
-          <span className="font-semibold text-sm text-black">Filters</span>
+          <SlidersHorizontal className="h-4 w-4 text-[#c9a96e]" />
+          <span className="font-semibold text-sm text-[#c9a96e]">Filters</span>
         </div>
         {hasFilters && (
           <button
             onClick={clearFilters}
-            className="text-xs text-zinc-400 hover:text-black transition-colors"
+            className="text-xs text-white/40 hover:text-white transition-colors"
           >
             Clear all
           </button>
@@ -79,11 +79,11 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
 
       {/* Search */}
       <div>
-        <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2 block">
+        <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
           Search
         </label>
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
           <input
             type="text"
             defaultValue={initialFilters.search}
@@ -93,14 +93,14 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
                 updateFilters("search", (e.target as HTMLInputElement).value);
               }
             }}
-            className="w-full h-10 pl-9 pr-3 rounded-xl border border-border text-sm focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent"
+            className="w-full h-10 pl-9 pr-3 rounded-xl border border-white/15 bg-white/5 text-white placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-[#c9a96e]/30 focus:border-transparent"
           />
         </div>
       </div>
 
       {/* Listing Type */}
       <div>
-        <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2 block">
+        <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
           Listing Type
         </label>
         <div className="grid grid-cols-2 gap-1.5">
@@ -112,8 +112,8 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
                 "h-9 px-3 rounded-xl text-sm font-medium border transition-all",
                 initialFilters.listingType === t.value ||
                   (!initialFilters.listingType && t.value === "")
-                  ? "bg-black text-white border-black"
-                  : "border-border text-zinc-600 hover:border-zinc-300"
+                  ? "bg-[#c9a96e] text-[#1a1410] border-[#c9a96e]"
+                  : "border-white/15 text-white/60 hover:border-[#c9a96e]/50 hover:text-white"
               )}
             >
               {t.label}
@@ -124,7 +124,7 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
 
       {/* Property Type */}
       <div>
-        <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2 block">
+        <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
           Property Type
         </label>
         <div className="space-y-1">
@@ -136,8 +136,8 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
                 "w-full text-left px-3 h-9 rounded-xl text-sm transition-all",
                 initialFilters.propertyType === t.value ||
                   (!initialFilters.propertyType && t.value === "")
-                  ? "bg-zinc-100 font-medium text-black"
-                  : "text-zinc-600 hover:bg-zinc-50"
+                  ? "bg-[#c9a96e]/20 font-medium text-[#c9a96e]"
+                  : "text-white/60 hover:bg-white/10 hover:text-white"
               )}
             >
               {t.label}
@@ -148,7 +148,7 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
 
       {/* Bedrooms */}
       <div>
-        <label className="text-xs font-medium text-zinc-500 uppercase tracking-wider mb-2 block">
+        <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
           Bedrooms
         </label>
         <div className="flex gap-1.5 flex-wrap">
@@ -160,8 +160,8 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
                 "h-9 px-4 rounded-xl text-sm font-medium border transition-all",
                 initialFilters.minBedrooms === b.value ||
                   (!initialFilters.minBedrooms && b.value === "")
-                  ? "bg-black text-white border-black"
-                  : "border-border text-zinc-600 hover:border-zinc-300"
+                  ? "bg-[#c9a96e] text-[#1a1410] border-[#c9a96e]"
+                  : "border-white/15 text-white/60 hover:border-[#c9a96e]/50 hover:text-white"
               )}
             >
               {b.label}
@@ -172,7 +172,7 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
 
       {/* Featured toggle */}
       <div className="flex items-center justify-between">
-        <label className="text-sm font-medium text-black">Featured only</label>
+        <label className="text-sm font-medium text-white/80">Featured only</label>
         <button
           role="switch"
           aria-checked={initialFilters.featured === "true"}
@@ -185,8 +185,8 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
           className={cn(
             "relative h-6 w-11 rounded-full border-2 transition-all duration-200",
             initialFilters.featured === "true"
-              ? "bg-black border-black"
-              : "bg-zinc-200 border-zinc-200"
+              ? "bg-[#c9a96e] border-[#c9a96e]"
+              : "bg-white/10 border-white/20"
           )}
         >
           <span
