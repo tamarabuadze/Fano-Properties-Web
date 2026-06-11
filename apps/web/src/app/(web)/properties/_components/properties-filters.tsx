@@ -51,12 +51,12 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
         if (v) params.set(k, v);
       });
       params.delete("page");
-      router.push(`${pathname}?${params.toString()}`);
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     },
     [initialFilters, pathname, router]
   );
 
-  const clearFilters = () => router.push(pathname);
+  const clearFilters = () => router.replace(pathname, { scroll: false });
 
   const hasFilters = Object.values(initialFilters).some(Boolean);
 
@@ -183,10 +183,10 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
             )
           }
           className={cn(
-            "relative h-6 w-11 rounded-full border-2 transition-all duration-200",
+            "relative h-6 w-11 rounded-full transition-all duration-200",
             initialFilters.featured === "true"
-              ? "bg-[#c9a96e] border-[#c9a96e]"
-              : "bg-white/10 border-white/20"
+              ? "bg-[#c9a96e]"
+              : "bg-[#3a3028]"
           )}
         >
           <span
