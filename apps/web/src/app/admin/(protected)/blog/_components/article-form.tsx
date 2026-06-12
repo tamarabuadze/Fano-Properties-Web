@@ -59,7 +59,7 @@ export function ArticleForm({ categories, defaultValues, articleId }: ArticleFor
 
     if (result.success) {
       toast.success(articleId ? "Article updated" : "Article created");
-      router.push("/blog");
+      router.push("/admin/blog");
     } else {
       toast.error((result as { error?: string }).error ?? "Something went wrong");
     }
@@ -197,7 +197,7 @@ export function ArticleForm({ categories, defaultValues, articleId }: ArticleFor
         </button>
         <button
           type="button"
-          onClick={() => router.push("/blog")}
+          onClick={() => router.push("/admin/blog")}
           className="h-11 px-6 rounded-xl border border-border text-muted-foreground font-medium text-sm hover:text-foreground transition-colors"
         >
           Cancel

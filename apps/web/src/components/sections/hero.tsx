@@ -1,13 +1,17 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Search } from "lucide-react";
-import { cn } from "@fano/utils";
 
-const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop";
+// Pexels: "Aerial Footage of Buildings in Dubai" — free to use
+const HERO_VIDEO =
+  "https://videos.pexels.com/video-files/1409899/1409899-hd_1920_1080_25fps.mp4";
+
+// Poster shown immediately as the LCP element; video fades in over it
+const HERO_POSTER =
+  "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2071&auto=format&fit=crop";
 
 const stats = [
   { value: "2,400+", label: "Properties Listed" },
@@ -18,27 +22,68 @@ const stats = [
 
 export function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoReady, setVideoReady] = useState(false);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
+
+  // Lazy-load video after page is interactive so the poster image wins the LCP race
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Respect prefers-reduced-motion — keep static poster
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const load = () => {
+      video.src = HERO_VIDEO;
+      video.load();
+    };
+
+    if (document.readyState === "complete") {
+      // Small delay to let the browser paint the poster first
+      const t = setTimeout(load, 300);
+      return () => clearTimeout(t);
+    }
+    window.addEventListener("load", load, { once: true });
+    return () => window.removeEventListener("load", load);
+  }, []);
 
   return (
-    <section ref={ref} className="relative h-[100svh] min-h-[640px] max-h-[1080px] overflow-hidden bg-black">
-      {/* Parallax BG */}
-      <motion.div
-        style={{ y }}
-        className="absolute inset-0 scale-110"
-        aria-hidden
-      >
+    <section
+      ref={ref}
+      className="relative h-[100svh] min-h-[700px] max-h-[1080px] overflow-hidden bg-[#1a1410]"
+    >
+      {/* Background: poster + video fade */}
+      <div className="absolute inset-0" aria-hidden>
+        {/* Poster image — always present, serves as LCP */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+          style={{
+            backgroundImage: `url(${HERO_POSTER})`,
+            opacity: videoReady ? 0 : 1,
+          }}
         />
+
+        {/* Video — fades in once it can play */}
+        <video
+          ref={videoRef}
+          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000"
+          style={{ opacity: videoReady ? 1 : 0 }}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          onCanPlay={() => setVideoReady(true)}
+        />
+
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
-      </motion.div>
+      </div>
 
       {/* Content */}
       <motion.div
@@ -108,11 +153,13 @@ export function HeroSection() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="flex flex-wrap gap-8 pt-8 border-t border-white/20"
+              className="hidden sm:flex flex-wrap gap-8 pt-8 border-t border-white/20"
             >
               {stats.map((s) => (
                 <div key={s.label}>
-                  <p className="text-2xl font-semibold [letter-spacing:-0.02em]" style={{ color: "#c3ae8f" }}>{s.value}</p>
+                  <p className="text-2xl font-semibold [letter-spacing:-0.02em]" style={{ color: "#c3ae8f" }}>
+                    {s.value}
+                  </p>
                   <p className="text-xs mt-0.5 uppercase tracking-wider text-white/50">{s.label}</p>
                 </div>
               ))}

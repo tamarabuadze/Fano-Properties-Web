@@ -57,7 +57,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
 
     if (result.success) {
       toast.success(agentId ? "Agent updated" : "Agent created");
-      router.push("/agents");
+      router.push("/admin/agents");
     } else {
       toast.error((result as { error?: string }).error ?? "Something went wrong");
     }
@@ -237,7 +237,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
         </button>
         <button
           type="button"
-          onClick={() => router.push("/agents")}
+          onClick={() => router.push("/admin/agents")}
           className="h-11 px-6 rounded-xl border border-border text-muted-foreground font-medium text-sm hover:text-foreground transition-colors"
         >
           Cancel

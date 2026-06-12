@@ -93,12 +93,20 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="container-site py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="container-site pt-6 pb-24 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40">
             © {new Date().getFullYear()} Fano Real Estate. All rights reserved.
           </p>
           <p className="text-xs text-white/40">
-            Premium properties, exceptional service.
+            Developed by{" "}
+            <a
+              href="https://thestargen.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/70 transition-colors duration-150 underline underline-offset-2"
+            >
+              Stargen Enterprises
+            </a>
           </p>
         </div>
       </div>

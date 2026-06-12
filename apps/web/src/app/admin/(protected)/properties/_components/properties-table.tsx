@@ -11,7 +11,7 @@ interface Property {
   title: string;
   propertyType: string;
   listingType: string;
-  price: { toString(): string };
+  price: number;
   currency: string;
   city: string;
   status: string;
@@ -87,7 +87,7 @@ export function PropertiesTable({ properties, total, page, pageSize }: Propertie
                         style: "currency",
                         currency: p.currency,
                         maximumFractionDigits: 0,
-                      }).format(parseFloat(p.price.toString()))}
+                      }).format(p.price)}
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
@@ -131,7 +131,7 @@ export function PropertiesTable({ properties, total, page, pageSize }: Propertie
                           {p.published ? <EyeOff className="h-4 w-4" /> : <Globe className="h-4 w-4" />}
                         </button>
                         <Link
-                          href={`/properties/${p.id}`}
+                          href={`/admin/properties/${p.id}`}
                           aria-label="Edit"
                           className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
                         >

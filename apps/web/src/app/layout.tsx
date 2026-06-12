@@ -10,29 +10,46 @@ const inter = Inter({
   display: "swap",
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
+
 export const metadata: Metadata = {
   title: {
-    default: "Fano Real Estate — Premium Properties",
-    template: "%s | Fano Real Estate",
+    default: "Fano Properties — Luxury Real Estate in Dubai",
+    template: "%s | Fano Properties",
   },
   description:
-    "Discover premium properties for sale and rent. Find your dream home with Fano Real Estate — luxury living redefined.",
-  keywords: ["real estate", "luxury properties", "homes for sale", "rentals", "premium listings"],
-  authors: [{ name: "Fano Real Estate" }],
-  creator: "Fano Real Estate",
+    "Discover luxury properties for sale and rent in Dubai. Find your dream home with Fano Properties — premium real estate, exceptional service.",
+  keywords: [
+    "luxury real estate Dubai", "properties for sale Dubai", "Dubai villas for sale",
+    "Dubai apartments", "premium properties", "real estate investment Dubai",
+    "Fano Properties", "homes for rent Dubai",
+  ],
+  authors: [{ name: "Fano Properties" }],
+  creator: "Fano Properties",
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: process.env.NEXT_PUBLIC_SITE_URL,
-    siteName: "Fano Real Estate",
-    title: "Fano Real Estate — Premium Properties",
+    url: SITE_URL,
+    siteName: "Fano Properties",
+    title: "Fano Properties — Luxury Real Estate in Dubai",
     description:
-      "Discover premium properties for sale and rent. Find your dream home with Fano Real Estate.",
+      "Discover luxury properties for sale and rent in Dubai. Premium real estate, exceptional service.",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Fano Properties — Luxury Real Estate in Dubai",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fano Real Estate — Premium Properties",
-    description: "Discover premium properties for sale and rent.",
+    title: "Fano Properties — Luxury Real Estate in Dubai",
+    description: "Discover luxury properties for sale and rent in Dubai.",
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -48,7 +65,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#1a1410",
   width: "device-width",
   initialScale: 1,
 };

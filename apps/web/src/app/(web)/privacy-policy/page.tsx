@@ -10,7 +10,7 @@ export default function PrivacyPolicyPage() {
     <div className="min-h-screen bg-white pt-20">
       <div className="border-b border-border bg-zinc-50 py-12">
         <div className="container-site">
-          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-black">
+          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#1a1410]">
             Privacy Policy
           </h1>
           <p className="text-zinc-500 mt-3">Last updated: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>

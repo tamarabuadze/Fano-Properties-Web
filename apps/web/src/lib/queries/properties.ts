@@ -1,13 +1,25 @@
 import { prisma } from "@fano/db";
 import type { PropertyFilters } from "@fano/types";
 
+// Prisma returns Decimal objects for price/lat/lng which can't cross the
+// Server → Client Component boundary. Convert them to plain numbers here.
+function serialize<T extends { price: unknown; lat?: unknown; lng?: unknown }>(p: T) {
+  return {
+    ...p,
+    price: Number(p.price),
+    lat: p.lat != null ? Number(p.lat) : null,
+    lng: p.lng != null ? Number(p.lng) : null,
+  };
+}
+
 export async function getFeaturedProperties(limit = 6) {
-  return prisma.property.findMany({
+  const rows = await prisma.property.findMany({
     where: { featured: true, published: true },
     take: limit,
     orderBy: { createdAt: "desc" },
     include: { images: { orderBy: { position: "asc" }, take: 1 } },
   });
+  return rows.map(serialize);
 }
 
 export async function getProperties(filters: PropertyFilters = {}) {
@@ -56,7 +68,7 @@ export async function getProperties(filters: PropertyFilters = {}) {
   ]);
 
   return {
-    data,
+    data: data.map(serialize),
     total,
     page,
     pageSize,
@@ -65,17 +77,18 @@ export async function getProperties(filters: PropertyFilters = {}) {
 }
 
 export async function getPropertyBySlug(slug: string) {
-  return prisma.property.findUnique({
+  const row = await prisma.property.findUnique({
     where: { slug },
     include: {
       images: { orderBy: { position: "asc" } },
       agent: true,
     },
   });
+  return row ? serialize(row) : null;
 }
 
 export async function getRelatedProperties(propertyId: string, propertyType: string, limit = 3) {
-  return prisma.property.findMany({
+  const rows = await prisma.property.findMany({
     where: {
       published: true,
       propertyType: propertyType as never,
@@ -85,6 +98,7 @@ export async function getRelatedProperties(propertyId: string, propertyType: str
     orderBy: { createdAt: "desc" },
     include: { images: { orderBy: { position: "asc" }, take: 1 } },
   });
+  return rows.map(serialize);
 }
 
 export async function incrementPropertyViewCount(id: string) {
