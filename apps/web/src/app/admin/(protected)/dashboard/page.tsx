@@ -18,23 +18,23 @@ async function getDashboardStats() {
     recentInquiries,
     recentProperties,
   ] = await Promise.all([
-    prisma.property.count(),
-    prisma.property.count({ where: { published: true } }),
-    prisma.property.count({ where: { featured: true } }),
-    prisma.agent.count({ where: { active: true } }),
-    prisma.inquiry.count(),
-    prisma.inquiry.count({ where: { status: "new" } }),
-    prisma.blogArticle.count({ where: { published: true } }),
+    prisma.property.count().catch(() => 0),
+    prisma.property.count({ where: { published: true } }).catch(() => 0),
+    prisma.property.count({ where: { featured: true } }).catch(() => 0),
+    prisma.agent.count({ where: { active: true } }).catch(() => 0),
+    prisma.inquiry.count().catch(() => 0),
+    prisma.inquiry.count({ where: { status: "new" } }).catch(() => 0),
+    prisma.blogArticle.count({ where: { published: true } }).catch(() => 0),
     prisma.inquiry.findMany({
       take: 5,
       orderBy: { createdAt: "desc" },
       include: { property: { select: { title: true } } },
-    }),
+    }).catch(() => []),
     prisma.property.findMany({
       take: 5,
       orderBy: { createdAt: "desc" },
       select: { id: true, title: true, price: true, currency: true, status: true, published: true, listingType: true },
-    }),
+    }).catch(() => []),
   ]);
 
   return {

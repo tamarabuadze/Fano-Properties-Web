@@ -12,7 +12,11 @@ export default async function Image() {
   try {
     const res = await fetch(heroImageUrl);
     const buf = await res.arrayBuffer();
-    imageData = `data:image/jpeg;base64,${Buffer.from(buf).toString("base64")}`;
+    // btoa works in both Edge Runtime and Node.js (Buffer is Node-only)
+    const bytes = new Uint8Array(buf);
+    let binary = "";
+    for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+    imageData = `data:image/jpeg;base64,${btoa(binary)}`;
   } catch {
     // fall through — show gradient-only background
   }
