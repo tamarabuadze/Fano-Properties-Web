@@ -56,7 +56,7 @@ export function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative h-[100svh] min-h-[700px] max-h-[1080px] overflow-hidden bg-black"
+      className="relative h-[100svh] min-h-[700px] max-h-[1080px] overflow-hidden bg-[#1a1410]"
     >
       {/* Background: poster + video fade */}
       <div className="absolute inset-0" aria-hidden>

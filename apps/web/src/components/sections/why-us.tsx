@@ -55,7 +55,7 @@ export function WhyUsSection() {
             </div>
 
             {/* Floating stat card */}
-            <div className="absolute bottom-4 right-4 lg:-bottom-6 lg:-right-6 bg-black text-white rounded-2xl p-4 lg:p-6 shadow-2xl">
+            <div className="absolute bottom-4 right-4 lg:-bottom-6 lg:-right-6 bg-[#1a1410] text-white rounded-2xl p-4 lg:p-6 shadow-2xl">
               <p className="text-3xl font-semibold [letter-spacing:-0.03em]">98%</p>
               <p className="text-white/60 text-sm mt-1">Client satisfaction rate</p>
             </div>
