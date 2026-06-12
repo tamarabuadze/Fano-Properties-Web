@@ -15,7 +15,7 @@ export default function ContactPage() {
         {/* Left — form */}
         <div className="flex flex-col justify-center px-6 sm:px-12 lg:px-16 xl:px-24 py-16">
           <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-4">Contact Us</p>
-          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-black mb-4">
+          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#1a1410] mb-4">
             Get in Touch
           </h1>
           <p className="text-zinc-500 mb-10 leading-relaxed max-w-md">

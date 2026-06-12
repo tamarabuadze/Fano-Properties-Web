@@ -33,7 +33,7 @@ export async function PropertiesGrid({ filters }: PropertiesGridProps) {
   if (result.data.length === 0) {
     return (
       <div className="py-24 text-center">
-        <p className="text-2xl font-semibold text-black mb-3">No properties found</p>
+        <p className="text-2xl font-semibold text-[#1a1410] mb-3">No properties found</p>
         <p className="text-zinc-500">Try adjusting your filters or search terms.</p>
       </div>
     );
@@ -43,7 +43,7 @@ export async function PropertiesGrid({ filters }: PropertiesGridProps) {
     <div>
       <div className="flex items-center justify-between mb-6">
         <p className="text-sm text-zinc-500">
-          <span className="font-semibold text-black">{result.total}</span> properties found
+          <span className="font-semibold text-[#1a1410]">{result.total}</span> properties found
         </p>
       </div>
 
