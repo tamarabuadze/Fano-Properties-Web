@@ -98,7 +98,15 @@ export function Footer() {
             © {new Date().getFullYear()} Fano Real Estate. All rights reserved.
           </p>
           <p className="text-xs text-white/40">
-            Premium properties, exceptional service.
+            Developed by{" "}
+            <a
+              href="https://thestargen.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/70 transition-colors duration-150 underline underline-offset-2"
+            >
+              Stargen Enterprises
+            </a>
           </p>
         </div>
       </div>
