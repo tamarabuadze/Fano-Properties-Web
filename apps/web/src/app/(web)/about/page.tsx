@@ -110,7 +110,7 @@ export default function AboutPage() {
         <div className="container-site">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { value: "$2B+", label: "Properties Sold" },
+              { value: "AED 7B+", label: "Properties Sold" },
               { value: "2,400+", label: "Happy Clients" },
               { value: "50+", label: "Expert Agents" },
               { value: "98%", label: "Satisfaction Rate" },

@@ -43,4 +43,8 @@ const result: NextAuthResult = NextAuth({
   },
 });
 
-export const { handlers, signIn, signOut, auth } = result;
+// Explicit NextAuthResult types avoid the TS2742 "cannot be named" error
+export const handlers = result.handlers;
+export const signIn   = result.signIn   as NextAuthResult["signIn"];
+export const signOut  = result.signOut  as NextAuthResult["signOut"];
+export const auth     = result.auth     as NextAuthResult["auth"];

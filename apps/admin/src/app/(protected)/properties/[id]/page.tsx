@@ -41,7 +41,7 @@ export default async function EditPropertyPage({ params }: { params: Promise<{ i
           listingType: property.listingType,
           status: property.status,
           price: parseFloat(property.price.toString()),
-          currency: property.currency,
+          currency: "AED" as const,
           location: property.location,
           city: property.city,
           state: property.state ?? undefined,

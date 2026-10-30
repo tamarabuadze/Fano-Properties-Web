@@ -15,6 +15,7 @@ const footerLinks = {
     { label: "For Rent", href: "/properties?listingType=rent" },
     { label: "Featured", href: "/properties?featured=true" },
     { label: "All Listings", href: "/properties" },
+    { label: "ROI Calculator", href: "/roi-calculator" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },

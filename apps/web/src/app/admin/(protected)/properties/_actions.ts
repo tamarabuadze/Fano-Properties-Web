@@ -13,7 +13,7 @@ const propertySchema = z.object({
   listingType: z.enum(["sale", "rent", "lease"]),
   status: z.enum(["available", "sold", "rented", "off_market"]).default("available"),
   price: z.number().positive(),
-  currency: z.string().default("USD"),
+  currency: z.literal("AED").default("AED"),
   location: z.string().min(1),
   city: z.string().min(1),
   state: z.string().optional(),

@@ -11,6 +11,7 @@ import { cn } from "@fano/utils";
 const navLinks = [
   { label: "Properties", href: "/properties" },
   { label: "Agents", href: "/agents" },
+  { label: "ROI Calculator", href: "/roi-calculator" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },

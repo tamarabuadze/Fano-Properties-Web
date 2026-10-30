@@ -17,7 +17,7 @@ const stats = [
   { value: "2,400+", label: "Properties Listed" },
   { value: "98%", label: "Client Satisfaction" },
   { value: "12+", label: "Years Experience" },
-  { value: "$2B+", label: "Properties Sold" },
+  { value: "AED 7B+", label: "Properties Sold" },
 ];
 
 export function HeroSection() {

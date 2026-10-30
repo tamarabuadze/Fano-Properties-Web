@@ -109,7 +109,7 @@ model Property {
   listingType     ListingType
   status          PropertyStatus  @default(available)
   price           Decimal         @db.Decimal(15, 2)
-  currency        String          @default("USD")
+  currency        String          @default("AED")
   location        String
   city            String
   state           String?

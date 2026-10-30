@@ -31,7 +31,7 @@ const features = [
 
 export function WhyUsSection() {
   return (
-    <section className="section-y bg-white">
+    <section className="section-y bg-white overflow-x-clip">
       <div className="container-site">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-24 items-center">
           {/* Image side */}

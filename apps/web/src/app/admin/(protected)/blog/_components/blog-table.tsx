@@ -68,7 +68,7 @@ export function BlogTable({ articles }: { articles: Article[] }) {
                   </span>
                 </td>
                 <td className="px-4 py-3 text-xs text-muted-foreground">
-                  {new Date(a.createdAt).toLocaleDateString()}
+                  {new Date(a.createdAt).toLocaleDateString("en-US", { timeZone: "UTC" })}
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex items-center justify-end gap-1">

@@ -30,7 +30,7 @@ export interface PropertyCardProps {
   priority?: boolean;
 }
 
-function formatPrice(price: number, currency = "USD"): string {
+function formatPrice(price: number, currency = "AED"): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,
@@ -44,7 +44,7 @@ function PropertyCard({
   propertyType,
   listingType,
   price,
-  currency = "USD",
+  currency = "AED",
   location,
   city,
   bedrooms,
@@ -125,7 +125,7 @@ function PropertyCard({
           </div>
           <div className="flex items-center gap-1.5">
             <Maximize2 className="h-4 w-4" />
-            <span>{sqft.toLocaleString()} sqft</span>
+            <span>{sqft.toLocaleString("en-US")} sqft</span>
           </div>
         </div>
       </div>

@@ -6,9 +6,11 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./apps/web/.env.local" });
 
 // Use direct URL to bypass pgbouncer transaction-mode restrictions
-const directUrl =
-  process.env.DIRECT_URL ||
-  "postgresql://postgres.spjwekprwjkikcbogtil:Fanorock2027%40@aws-1-eu-west-2.pooler.supabase.com:5432/postgres";
+const directUrl = process.env.DIRECT_URL;
+if (!directUrl) {
+  console.error("DIRECT_URL is not set. Add it to apps/web/.env.local or the environment.");
+  process.exit(1);
+}
 
 const prisma = new PrismaClient({
   datasources: { db: { url: directUrl } },
@@ -337,7 +339,7 @@ Dubai offers direct non-stop flights to virtually every major European city in u
 
 With Expo City Dubai now a permanent business and innovation district, and new master communities like Dubai Creek Harbour and Dubai South maturing, 2026 presents a compelling entry point before the next phase of price appreciation.`,
         coverImage:
-          "https://images.unsplash.com/photo-1582407947304-fd86f28f4248?w=800&auto=format",
+          "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&auto=format",
         readTime: 5,
         published: true,
         publishedAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000),

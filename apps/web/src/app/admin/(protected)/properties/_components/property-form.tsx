@@ -14,7 +14,7 @@ const schema = z.object({
   listingType: z.enum(["sale", "rent", "lease"]),
   status: z.enum(["available", "sold", "rented", "off_market"]),
   price: z.number({ coerce: true }).positive("Must be positive"),
-  currency: z.string(),
+  currency: z.literal("AED"),
   location: z.string().min(1, "Required"),
   city: z.string().min(1, "Required"),
   state: z.string().optional(),
@@ -53,7 +53,7 @@ export function PropertyForm({ agents, defaultValues, propertyId }: PropertyForm
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      currency: "USD",
+      currency: "AED",
       status: "available",
       listingType: "sale",
       propertyType: "apartment",
@@ -157,9 +157,7 @@ export function PropertyForm({ agents, defaultValues, propertyId }: PropertyForm
           <div>
             <label className={labelCls}>Currency</label>
             <select {...register("currency")} className={selectCls}>
-              <option value="USD">USD ($)</option>
-              <option value="EUR">EUR (€)</option>
-              <option value="GBP">GBP (£)</option>
+              <option value="AED">AED (د.إ)</option>
             </select>
           </div>
         </div>
