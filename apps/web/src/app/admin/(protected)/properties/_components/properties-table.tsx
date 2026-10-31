@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Edit, Eye, Trash2, Star, Globe, EyeOff } from "lucide-react";
-import { cn } from "@fano/utils";
+import { cn, unitTypeLabel } from "@fano/utils";
 import { toast } from "sonner";
 import { deleteProperty, togglePropertyPublished, togglePropertyFeatured } from "../_actions";
 
@@ -10,6 +10,7 @@ interface Property {
   id: string;
   title: string;
   propertyType: string;
+  unitType?: string | null;
   listingType: string;
   price: number;
   currency: string;
@@ -80,7 +81,9 @@ export function PropertiesTable({ properties, total, page, pageSize }: Propertie
                       </div>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="capitalize text-muted-foreground">{p.propertyType}</span>
+                      <span className="capitalize text-muted-foreground">
+                        {p.propertyType === "commercial" && p.unitType ? `Commercial · ${unitTypeLabel(p.unitType)}` : p.propertyType}
+                      </span>
                     </td>
                     <td className="px-4 py-3 font-medium">
                       {new Intl.NumberFormat("en-US", {

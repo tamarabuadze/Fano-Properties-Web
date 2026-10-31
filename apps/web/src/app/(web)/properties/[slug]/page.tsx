@@ -73,8 +73,10 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
       addressLocality: property.city,
       addressCountry: property.country ?? "AE",
     },
-    numberOfRooms: property.bedrooms,
-    numberOfBathroomsTotal: property.bathrooms,
+    ...(property.propertyType !== "commercial" && {
+      numberOfRooms: property.bedrooms,
+      numberOfBathroomsTotal: property.bathrooms,
+    }),
     floorSize: {
       "@type": "QuantitativeValue",
       value: property.sqft,

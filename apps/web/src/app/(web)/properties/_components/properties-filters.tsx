@@ -3,7 +3,7 @@
 import React, { useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { Search, SlidersHorizontal } from "lucide-react";
-import { cn } from "@fano/utils";
+import { COMMERCIAL_UNIT_TYPES, cn } from "@fano/utils";
 
 const LISTING_TYPES = [
   { label: "Any", value: "" },
@@ -18,9 +18,10 @@ const PROPERTY_TYPES = [
   { label: "Villa", value: "villa" },
   { label: "House", value: "house" },
   { label: "Penthouse", value: "penthouse" },
-  { label: "Commercial", value: "commercial" },
   { label: "Land", value: "land" },
 ];
+
+const UNIT_TYPES = [{ label: "Any Unit", value: "" }, ...COMMERCIAL_UNIT_TYPES];
 
 const BEDROOMS = [
   { label: "Any", value: "" },
@@ -56,9 +57,12 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
     [initialFilters, pathname, router]
   );
 
-  const clearFilters = () => router.replace(pathname, { scroll: false });
+  const isCommercial = initialFilters.category === "commercial";
 
-  const hasFilters = Object.values(initialFilters).some(Boolean);
+  const clearFilters = () =>
+    router.replace(isCommercial ? `${pathname}?category=commercial` : pathname, { scroll: false });
+
+  const hasFilters = Object.entries(initialFilters).some(([k, v]) => k !== "category" && Boolean(v));
 
   return (
     <div className="rounded-2xl p-5 sticky top-24 space-y-6" style={{ backgroundColor: "#1a1410" }}>
@@ -122,8 +126,34 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
         </div>
       </div>
 
+      {/* Unit Type (commercial) */}
+      {isCommercial && (
+        <div>
+          <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
+            Unit Type
+          </label>
+          <div className="space-y-1">
+            {UNIT_TYPES.map((t) => (
+              <button
+                key={t.value}
+                onClick={() => updateFilters("unitType", t.value)}
+                className={cn(
+                  "w-full text-left px-3 h-9 rounded-xl text-sm transition-all",
+                  initialFilters.unitType === t.value ||
+                    (!initialFilters.unitType && t.value === "")
+                    ? "bg-[#c9a96e]/20 font-medium text-[#c9a96e]"
+                    : "text-white/60 hover:bg-white/10 hover:text-white"
+                )}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Property Type */}
-      <div>
+      {!isCommercial && <div>
         <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
           Property Type
         </label>
@@ -144,10 +174,10 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
             </button>
           ))}
         </div>
-      </div>
+      </div>}
 
       {/* Bedrooms */}
-      <div>
+      {!isCommercial && <div>
         <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
           Bedrooms
         </label>
@@ -168,7 +198,7 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
             </button>
           ))}
         </div>
-      </div>
+      </div>}
 
       {/* Featured toggle */}
       <div className="flex items-center justify-between">

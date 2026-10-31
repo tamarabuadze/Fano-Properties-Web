@@ -28,7 +28,7 @@ test.describe("Properties CRUD", () => {
     await page.locator('[name="status"]').selectOption("available");
 
     await page.locator('[name="price"]').fill("500000");
-    await page.locator('[name="currency"]').selectOption("USD");
+    await page.locator('[name="currency"]').selectOption("AED");
     await page.locator('[name="bedrooms"]').fill("4");
     await page.locator('[name="bathrooms"]').fill("3");
     await page.locator('[name="sqft"]').fill("2800");
@@ -36,11 +36,14 @@ test.describe("Properties CRUD", () => {
     await page.locator('[name="location"]').fill("456 Palm Drive, Beverly Hills");
     await page.locator('[name="city"]').fill("Beverly Hills");
     await page.locator('[name="state"]').fill("CA");
-    await page.locator('[name="country"]').fill("US");
+    await page.locator('[name="country"]').fill("AE");
 
-    await page.locator('[name="coverImage"]').fill(
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800"
-    );
+    await page.locator('input[type="file"]').first().setInputFiles({
+      name: "cover.jpg",
+      mimeType: "image/jpeg",
+      buffer: Buffer.from("ffd8ffe000104a46494600", "hex"),
+    });
+    await expect(page.locator("form img").first()).toBeAttached();
 
     await page.getByRole("button", { name: /create property/i }).click();
 

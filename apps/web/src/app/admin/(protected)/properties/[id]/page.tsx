@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { prisma } from "@fano/db";
+import { isUploadStorageConfigured } from "@fano/utils";
 import { PropertyForm } from "../_components/property-form";
 
 export const metadata: Metadata = { title: "Edit Property" };
@@ -10,7 +11,7 @@ export const metadata: Metadata = { title: "Edit Property" };
 export default async function EditPropertyPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const [property, agents] = await Promise.all([
-    prisma.property.findUnique({ where: { id } }),
+    prisma.property.findUnique({ where: { id }, include: { images: { orderBy: { position: "asc" } } } }),
     prisma.agent.findMany({
       where: { active: true },
       select: { id: true, firstName: true, lastName: true },
@@ -34,12 +35,15 @@ export default async function EditPropertyPage({ params }: { params: Promise<{ i
       <PropertyForm
         agents={agents}
         propertyId={property.id}
+        uploadsEnabled={isUploadStorageConfigured()}
+        defaultGallery={property.images.map((img) => img.url)}
         defaultValues={{
           title: property.title,
           description: property.description,
           propertyType: property.propertyType,
           listingType: property.listingType,
           status: property.status,
+          unitType: property.unitType,
           price: parseFloat(property.price.toString()),
           currency: "AED" as const,
           location: property.location,

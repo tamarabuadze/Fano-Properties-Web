@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { PropertiesGrid } from "./_components/properties-grid";
 import { PropertiesFilters } from "./_components/properties-filters";
 import { PropertiesHeader } from "./_components/properties-header";
+import { PropertiesCategoryTabs } from "./_components/properties-category-tabs";
 
 export const metadata: Metadata = {
   title: "Properties — Browse Listings",
@@ -14,6 +15,8 @@ export const revalidate = 300;
 interface PropertiesPageProps {
   searchParams: Promise<{
     search?: string;
+    category?: string;
+    unitType?: string;
     propertyType?: string;
     listingType?: string;
     city?: string;
@@ -27,11 +30,21 @@ interface PropertiesPageProps {
 }
 
 export default async function PropertiesPage({ searchParams }: PropertiesPageProps) {
-  const params = await searchParams;
+  const raw = await searchParams;
+  // Older links use propertyType=commercial; they open the Commercial tab
+  const isCommercial = raw.category === "commercial" || raw.propertyType === "commercial";
+  const params = {
+    ...raw,
+    category: isCommercial ? "commercial" : undefined,
+    propertyType: isCommercial ? undefined : raw.propertyType,
+    unitType: isCommercial ? raw.unitType : undefined,
+    minBedrooms: isCommercial ? undefined : raw.minBedrooms,
+  };
   return (
     <div className="min-h-screen bg-white pt-20">
       <PropertiesHeader />
       <div className="container-site py-10">
+        <PropertiesCategoryTabs commercial={isCommercial} search={params.search} listingType={params.listingType} />
         <div className="flex flex-col lg:flex-row gap-8">
           <aside className="w-full lg:w-72 shrink-0">
             <PropertiesFilters initialFilters={params} />

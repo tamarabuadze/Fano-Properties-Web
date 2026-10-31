@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@fano/utils";
+import { cn, isOptimizedImageHost } from "@fano/utils";
 
 export interface BlogCardProps {
   id: string;
@@ -54,6 +54,7 @@ function BlogCard({
           {coverImage && (
             <Image
               src={coverImage}
+              unoptimized={!isOptimizedImageHost(coverImage)}
               alt={title}
               fill
               sizes="96px"
@@ -93,6 +94,7 @@ function BlogCard({
         {coverImage ? (
           <Image
             src={coverImage}
+            unoptimized={!isOptimizedImageHost(coverImage)}
             alt={title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

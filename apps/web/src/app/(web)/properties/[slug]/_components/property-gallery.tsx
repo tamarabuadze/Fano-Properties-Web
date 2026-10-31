@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, X, Grid3X3 } from "lucide-react";
-import { cn } from "@fano/utils";
+import { ChevronLeft, ChevronRight, X, Grid3X3, Play } from "lucide-react";
+import { isOptimizedImageHost, isVideoUrl } from "@fano/utils";
 
 interface PropertyGalleryProps {
   images: string[];
@@ -35,6 +35,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
           {images[0] && (
             <Image
               src={images[0]}
+              unoptimized={!isOptimizedImageHost(images[0])}
               alt={title}
               fill
               sizes="50vw"
@@ -51,13 +52,25 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
             className="relative overflow-hidden bg-zinc-100 group"
             onClick={() => openLightbox(i + 1)}
           >
-            <Image
-              src={img}
-              alt={`${title} ${i + 2}`}
-              fill
-              sizes="25vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
+            {isVideoUrl(img) ? (
+              <>
+                <video src={img} muted playsInline preload="metadata" className="absolute inset-0 h-full w-full object-cover" />
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <span className="h-11 w-11 rounded-full bg-black/60 flex items-center justify-center text-white">
+                    <Play className="h-5 w-5" />
+                  </span>
+                </span>
+              </>
+            ) : (
+              <Image
+                src={img}
+                unoptimized={!isOptimizedImageHost(img)}
+                alt={`${title} ${i + 2}`}
+                fill
+                sizes="25vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            )}
             {i === 3 && images.length > 5 && (
               <div className="absolute inset-0 bg-black/50 flex items-center justify-center gap-2 text-white">
                 <Grid3X3 className="h-5 w-5" />
@@ -110,9 +123,12 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
                   transition={{ duration: 0.2 }}
                   className="relative aspect-[16/10]"
                 >
-                  {images[activeIndex] && (
+                  {isVideoUrl(images[activeIndex]) ? (
+                    <video src={images[activeIndex]} controls autoPlay playsInline className="absolute inset-0 h-full w-full object-contain" />
+                  ) : images[activeIndex] && (
                     <Image
                       src={images[activeIndex]}
+                      unoptimized={!isOptimizedImageHost(images[activeIndex])}
                       alt={`${title} ${activeIndex + 1}`}
                       fill
                       sizes="90vw"

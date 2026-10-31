@@ -9,6 +9,7 @@ interface RelatedPropertiesProps {
     listingType: string;
     price: number | string;
     currency: string;
+    unitType?: string | null;
     location: string;
     city: string;
     bedrooms: number;
@@ -31,6 +32,7 @@ export function RelatedProperties({ properties }: RelatedPropertiesProps) {
             title={p.title}
             slug={p.slug}
             propertyType={p.propertyType}
+            unitType={p.unitType}
             listingType={p.listingType}
             price={Number(p.price)}
             currency={p.currency}

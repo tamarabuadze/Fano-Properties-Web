@@ -25,6 +25,8 @@ export async function getFeaturedProperties(limit = 6) {
 export async function getProperties(filters: PropertyFilters = {}) {
   const {
     search,
+    category,
+    unitType,
     propertyType,
     listingType,
     city,
@@ -47,7 +49,10 @@ export async function getProperties(filters: PropertyFilters = {}) {
         { city: { contains: search, mode: "insensitive" as const } },
       ],
     }),
+    ...(category === "commercial" && { propertyType: "commercial" as const }),
+    ...(category === "residential" && { propertyType: { not: "commercial" as const } }),
     ...(propertyType && { propertyType }),
+    ...(unitType && { unitType }),
     ...(listingType && { listingType }),
     ...(city && { city: { contains: city, mode: "insensitive" as const } }),
     ...(minPrice !== undefined && { price: { gte: minPrice } }),

@@ -4,6 +4,8 @@ import { getProperties } from "@/lib/queries/properties";
 interface PropertiesGridProps {
   filters: {
     search?: string;
+    category?: string;
+    unitType?: string;
     propertyType?: string;
     listingType?: string;
     city?: string;
@@ -19,6 +21,8 @@ interface PropertiesGridProps {
 export async function PropertiesGrid({ filters }: PropertiesGridProps) {
   const result = await getProperties({
     search: filters.search,
+    category: filters.category === "commercial" ? "commercial" : "residential",
+    unitType: filters.unitType as never,
     propertyType: filters.propertyType as never,
     listingType: filters.listingType as never,
     city: filters.city,
@@ -55,6 +59,7 @@ export async function PropertiesGrid({ filters }: PropertiesGridProps) {
             title={property.title}
             slug={property.slug}
             propertyType={property.propertyType}
+            unitType={property.unitType}
             listingType={property.listingType}
             price={parseFloat(property.price.toString())}
             currency={property.currency}
