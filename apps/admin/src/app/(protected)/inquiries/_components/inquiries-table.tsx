@@ -87,7 +87,7 @@ export function InquiriesTable({ inquiries, total, page, pageSize }: InquiriesTa
                       <p className="text-xs text-muted-foreground line-clamp-2">{inq.message}</p>
                     </td>
                     <td className="px-4 py-3 text-xs text-muted-foreground whitespace-nowrap">
-                      {new Date(inq.createdAt).toLocaleDateString()}
+                      {new Date(inq.createdAt).toLocaleDateString("en-US", { timeZone: "UTC" })}
                     </td>
                     <td className="px-4 py-3">
                       <select

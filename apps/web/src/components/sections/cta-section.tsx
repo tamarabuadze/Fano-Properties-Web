@@ -15,7 +15,7 @@ export function CtaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="relative overflow-hidden rounded-3xl bg-black min-h-[400px] lg:min-h-[480px] flex items-center"
+          className="relative overflow-hidden rounded-3xl bg-[#1a1410] min-h-[400px] lg:min-h-[480px] flex items-center"
         >
           {/* Background image */}
           <div className="absolute inset-0">
@@ -26,7 +26,7 @@ export function CtaSection() {
               sizes="100vw"
               className="object-cover opacity-40"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#1a1410] via-[#1a1410]/80 to-transparent" />
           </div>
 
           <div className="relative z-10 p-10 lg:p-16 max-w-2xl">

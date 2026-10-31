@@ -16,7 +16,7 @@ export async function BlogGrid({
   if (result.data.length === 0) {
     return (
       <div className="py-24 text-center">
-        <p className="text-xl font-semibold text-black mb-2">No articles yet</p>
+        <p className="text-xl font-semibold text-[#1a1410] mb-2">No articles yet</p>
         <p className="text-zinc-500">Check back soon for market insights and news.</p>
       </div>
     );

@@ -5,8 +5,8 @@ export default auth((req) => {
   const { pathname } = req.nextUrl;
   const isLoggedIn = !!req.auth;
 
-  // Pass auth API requests through
-  if (pathname.startsWith("/api/auth")) return NextResponse.next();
+  // Pass auth API requests through (both standard and legacy paths)
+  if (pathname.startsWith("/api/auth") || pathname.startsWith("/admin/api/auth")) return NextResponse.next();
 
   // Admin root → dashboard
   if (pathname === "/admin" || pathname === "/admin/") {

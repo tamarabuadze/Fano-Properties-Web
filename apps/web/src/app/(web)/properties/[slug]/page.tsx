@@ -7,23 +7,36 @@ import { PropertyAmenities } from "./_components/property-amenities";
 import { PropertyInquiryForm } from "./_components/property-inquiry-form";
 import { RelatedProperties } from "./_components/related-properties";
 import { PropertyAgentCard } from "./_components/property-agent-card";
+import { RoiCalculator } from "@/components/roi/roi-calculator";
 
 interface PropertyPageProps {
   params: Promise<{ slug: string }>;
 }
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
 export async function generateMetadata({ params }: PropertyPageProps): Promise<Metadata> {
   const { slug } = await params;
   const property = await getPropertyBySlug(slug);
   if (!property) return { title: "Property Not Found" };
 
+  const url = `${SITE_URL}/properties/${slug}`;
   return {
     title: property.metaTitle ?? property.title,
     description: property.metaDescription ?? property.description.slice(0, 160),
+    alternates: { canonical: url },
     openGraph: {
+      type: "website",
+      url,
       title: property.title,
       description: property.description.slice(0, 160),
-      images: [{ url: property.coverImage }],
+      images: [{ url: property.coverImage, width: 1200, height: 800, alt: property.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: property.title,
+      description: property.description.slice(0, 160),
+      images: [property.coverImage],
     },
   };
 }
@@ -41,8 +54,42 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
     ...property.images.map((img) => img.url),
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    name: property.title,
+    description: property.description.slice(0, 300),
+    url: `${SITE_URL}/properties/${slug}`,
+    image: allImages,
+    offers: {
+      "@type": "Offer",
+      price: parseFloat(property.price.toString()),
+      priceCurrency: property.currency,
+      availability: "https://schema.org/InStock",
+    },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: property.location,
+      addressLocality: property.city,
+      addressCountry: property.country ?? "AE",
+    },
+    ...(property.propertyType !== "commercial" && {
+      numberOfRooms: property.bedrooms,
+      numberOfBathroomsTotal: property.bathrooms,
+    }),
+    floorSize: {
+      "@type": "QuantitativeValue",
+      value: property.sqft,
+      unitCode: "SqFt",
+    },
+  };
+
   return (
     <div className="min-h-screen bg-white pt-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Gallery */}
       <PropertyGallery images={allImages} title={property.title} />
 
@@ -53,6 +100,21 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
             <PropertyOverview property={property as never} />
             {property.amenities.length > 0 && (
               <PropertyAmenities amenities={property.amenities} />
+            )}
+            {property.listingType === "sale" && (
+              <section id="roi" className="scroll-mt-24">
+                <h2 className="text-2xl font-semibold [letter-spacing:-0.02em] text-[#1a1410]">Investment calculator</h2>
+                <p className="text-sm text-zinc-500 mt-1 mb-6">
+                  Estimate the rental yield and return on this property. Adjust any figure to match your plans.
+                </p>
+                <RoiCalculator
+                  variant="compact"
+                  price={Number(property.price)}
+                  sizeSqft={property.sqft}
+                  propertyId={property.id}
+                  propertyTitle={property.title}
+                />
+              </section>
             )}
           </div>
 

@@ -1,10 +1,11 @@
-import { BedDouble, Bath, Maximize2, MapPin, Calendar, Eye } from "lucide-react";
-import { formatPrice, formatDate } from "@fano/utils";
+import { BedDouble, Bath, Maximize2, MapPin, Calendar, Eye, Store } from "lucide-react";
+import { PROPERTY_STATUS_LABELS, formatPrice, formatDate, unitTypeLabel } from "@fano/utils";
 
 interface Property {
   title: string;
   description: string;
   propertyType: string;
+  unitType?: string | null;
   listingType: string;
   status: string;
   price: number | string;
@@ -21,6 +22,7 @@ interface Property {
 }
 
 export function PropertyOverview({ property }: { property: Property }) {
+  const isCommercial = property.propertyType === "commercial";
   const price = typeof property.price === "string" ? parseFloat(property.price) : property.price;
 
   return (
@@ -32,14 +34,14 @@ export function PropertyOverview({ property }: { property: Property }) {
             For {property.listingType}
           </span>
           <span className="inline-flex items-center px-3 py-1 rounded-full bg-zinc-100 text-zinc-700 text-xs font-medium capitalize">
-            {property.propertyType}
+            {isCommercial && property.unitType ? `Commercial · ${unitTypeLabel(property.unitType)}` : property.propertyType}
           </span>
           <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium capitalize ${
             property.status === "available"
               ? "bg-emerald-50 text-emerald-700"
               : "bg-amber-50 text-amber-700"
           }`}>
-            {property.status.replace("_", " ")}
+            {PROPERTY_STATUS_LABELS[property.status] ?? property.status}
           </span>
         </div>
 
@@ -64,17 +66,27 @@ export function PropertyOverview({ property }: { property: Property }) {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-10 p-6 rounded-2xl bg-zinc-50 border border-border">
-        <div className="flex flex-col items-center gap-1.5 text-center">
-          <BedDouble className="h-5 w-5 text-zinc-400" />
-          <p className="text-xl font-semibold text-black">{property.bedrooms}</p>
-          <p className="text-xs text-zinc-500">Bedrooms</p>
-        </div>
-        <div className="flex flex-col items-center gap-1.5 text-center border-x border-border">
-          <Bath className="h-5 w-5 text-zinc-400" />
-          <p className="text-xl font-semibold text-black">{property.bathrooms}</p>
-          <p className="text-xs text-zinc-500">Bathrooms</p>
-        </div>
+      <div className={`grid ${isCommercial ? "grid-cols-2" : "grid-cols-3"} gap-4 mb-10 p-6 rounded-2xl bg-zinc-50 border border-border`}>
+        {isCommercial ? (
+          <div className="flex flex-col items-center gap-1.5 text-center border-r border-border">
+            <Store className="h-5 w-5 text-zinc-400" />
+            <p className="text-xl font-semibold text-black">{unitTypeLabel(property.unitType)}</p>
+            <p className="text-xs text-zinc-500">Unit Type</p>
+          </div>
+        ) : (
+          <>
+            <div className="flex flex-col items-center gap-1.5 text-center">
+              <BedDouble className="h-5 w-5 text-zinc-400" />
+              <p className="text-xl font-semibold text-black">{property.bedrooms}</p>
+              <p className="text-xs text-zinc-500">Bedrooms</p>
+            </div>
+            <div className="flex flex-col items-center gap-1.5 text-center border-x border-border">
+              <Bath className="h-5 w-5 text-zinc-400" />
+              <p className="text-xl font-semibold text-black">{property.bathrooms}</p>
+              <p className="text-xs text-zinc-500">Bathrooms</p>
+            </div>
+          </>
+        )}
         <div className="flex flex-col items-center gap-1.5 text-center">
           <Maximize2 className="h-5 w-5 text-zinc-400" />
           <p className="text-xl font-semibold text-black">{property.sqft.toLocaleString()}</p>

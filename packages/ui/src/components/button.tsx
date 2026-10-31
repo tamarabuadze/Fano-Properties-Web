@@ -10,20 +10,20 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-black text-white hover:bg-zinc-800 active:scale-[0.98]",
+          "bg-[#1a1410] text-white hover:bg-[#2a2118] active:scale-[0.98]",
         outline:
-          "border border-black bg-transparent text-black hover:bg-black hover:text-white active:scale-[0.98]",
+          "border border-[#1a1410] bg-transparent text-[#1a1410] hover:bg-[#1a1410] hover:text-white active:scale-[0.98]",
         ghost:
-          "bg-transparent text-black hover:bg-zinc-100 active:scale-[0.98]",
+          "bg-transparent text-[#1a1410] hover:bg-zinc-100 active:scale-[0.98]",
         secondary:
-          "bg-zinc-100 text-black hover:bg-zinc-200 active:scale-[0.98]",
+          "bg-zinc-100 text-[#1a1410] hover:bg-zinc-200 active:scale-[0.98]",
         destructive:
           "bg-red-500 text-white hover:bg-red-600 active:scale-[0.98]",
-        link: "text-black underline-offset-4 hover:underline p-0 h-auto",
+        link: "text-[#1a1410] underline-offset-4 hover:underline p-0 h-auto",
         white:
-          "bg-white text-black hover:bg-zinc-100 active:scale-[0.98]",
+          "bg-white text-[#1a1410] hover:bg-zinc-100 active:scale-[0.98]",
         "outline-white":
-          "border border-white bg-transparent text-white hover:bg-white hover:text-black active:scale-[0.98]",
+          "border border-white bg-transparent text-white hover:bg-white hover:text-[#1a1410] active:scale-[0.98]",
       },
       size: {
         sm: "h-9 px-4 text-sm rounded-full",

@@ -18,17 +18,24 @@ const authConfig: Parameters<typeof NextAuth>[0] = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const adminEmail = process.env.ADMIN_EMAIL;
-        const adminHash  = process.env.ADMIN_PASSWORD_HASH;
-        if (!adminEmail || !adminHash) return null;
         if (!credentials?.email || !credentials?.password) return null;
-        if (credentials.email !== adminEmail) return null;
-        const valid = await bcrypt.compare(
-          credentials.password as string,
-          adminHash
-        );
+
+        // Build list of admins from env — supports up to 5 pairs
+        const admins: { email: string; hash: string }[] = [];
+        for (let i = 1; i <= 5; i++) {
+          const suffix = i === 1 ? "" : `${i}`;
+          const email = process.env[`ADMIN${suffix}_EMAIL`];
+          const hash  = process.env[`ADMIN${suffix}_PASSWORD_HASH`];
+          if (email && hash) admins.push({ email, hash });
+        }
+        if (admins.length === 0) return null;
+
+        const admin = admins.find(a => a.email === credentials.email);
+        if (!admin) return null;
+
+        const valid = await bcrypt.compare(credentials.password as string, admin.hash);
         if (!valid) return null;
-        return { id: "admin", email: adminEmail, role: "admin" } as any;
+        return { id: admin.email, email: admin.email, role: "admin" } as any;
       },
     }),
   ],

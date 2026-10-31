@@ -3,15 +3,20 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BedDouble, Bath, Maximize2, MapPin } from "lucide-react";
-import { cn } from "@fano/utils";
+import { BedDouble, Bath, Maximize2, MapPin, Store } from "lucide-react";
+import { cn, isOptimizedImageHost, unitTypeLabel } from "@fano/utils";
 import { Badge } from "./badge";
+
+// Tiny warm-beige JPEG used as blur placeholder before real image loads
+const BLUR_PLACEHOLDER =
+  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAAECAADAAQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQQG/8QAHBAAAgMAAwEAAAAAAAAAAAAAAQIDBAASITH/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJXi1KrXLpKhbIxWkQMVIOhGR3Qf/9k=";
 
 export interface PropertyCardProps {
   id: string;
   title: string;
   slug: string;
   propertyType: string;
+  unitType?: string | null;
   listingType: string;
   price: number;
   currency?: string;
@@ -26,7 +31,7 @@ export interface PropertyCardProps {
   priority?: boolean;
 }
 
-function formatPrice(price: number, currency = "USD"): string {
+function formatPrice(price: number, currency = "AED"): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,
@@ -38,9 +43,10 @@ function PropertyCard({
   title,
   slug,
   propertyType,
+  unitType,
   listingType,
   price,
-  currency = "USD",
+  currency = "AED",
   location,
   city,
   bedrooms,
@@ -51,6 +57,8 @@ function PropertyCard({
   className,
   priority = false,
 }: PropertyCardProps) {
+  const isCommercial = propertyType === "commercial";
+
   return (
     <Link
       href={`/properties/${slug}`}
@@ -63,10 +71,13 @@ function PropertyCard({
       <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100 shrink-0">
         <Image
           src={coverImage}
+          unoptimized={!isOptimizedImageHost(coverImage)}
           alt={title}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 group-hover:scale-105"
+          placeholder="blur"
+          blurDataURL={BLUR_PLACEHOLDER}
           priority={priority}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -81,7 +92,9 @@ function PropertyCard({
           )}
         </div>
         <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-2.5 py-1">
-          <span className="text-xs font-medium capitalize text-black">{propertyType}</span>
+          <span className="text-xs font-medium capitalize text-black">
+            {isCommercial ? unitTypeLabel(unitType) : propertyType}
+          </span>
         </div>
       </div>
 
@@ -109,17 +122,26 @@ function PropertyCard({
         <div className="h-px bg-border mb-4" />
 
         <div className="flex items-center justify-between text-sm" style={{ color: "#9a7957" }}>
-          <div className="flex items-center gap-1.5">
-            <BedDouble className="h-4 w-4" />
-            <span>{bedrooms} Beds</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Bath className="h-4 w-4" />
-            <span>{bathrooms} Baths</span>
-          </div>
+          {isCommercial ? (
+            <div className="flex items-center gap-1.5">
+              <Store className="h-4 w-4" />
+              <span>{unitTypeLabel(unitType)}</span>
+            </div>
+          ) : (
+            <>
+              <div className="flex items-center gap-1.5">
+                <BedDouble className="h-4 w-4" />
+                <span>{bedrooms} Beds</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <Bath className="h-4 w-4" />
+                <span>{bathrooms} Baths</span>
+              </div>
+            </>
+          )}
           <div className="flex items-center gap-1.5">
             <Maximize2 className="h-4 w-4" />
-            <span>{sqft.toLocaleString()} sqft</span>
+            <span>{sqft.toLocaleString("en-US")} sqft</span>
           </div>
         </div>
       </div>

@@ -20,7 +20,7 @@ export default async function BlogAdminPage() {
           <p className="text-muted-foreground text-sm mt-1">{articles.length} articles</p>
         </div>
         <Link
-          href="/blog/new"
+          href="/admin/blog/new"
           className="inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
         >
           <Plus className="h-4 w-4" />

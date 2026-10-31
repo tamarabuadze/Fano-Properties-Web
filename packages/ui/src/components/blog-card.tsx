@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@fano/utils";
+import { cn, isOptimizedImageHost } from "@fano/utils";
 
 export interface BlogCardProps {
   id: string;
@@ -17,6 +17,9 @@ export interface BlogCardProps {
   className?: string;
   variant?: "default" | "horizontal";
 }
+
+const BLUR_PLACEHOLDER =
+  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAAECAADAAQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQQG/8QAHBAAAgMAAwEAAAAAAAAAAAAAAQIDBAASITH/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJXi1KrXLpKhbIxWkQMVIOhGR3Qf/9k=";
 
 function BlogCard({
   title,
@@ -51,10 +54,13 @@ function BlogCard({
           {coverImage && (
             <Image
               src={coverImage}
+              unoptimized={!isOptimizedImageHost(coverImage)}
               alt={title}
               fill
               sizes="96px"
               className="object-cover transition-transform duration-500 group-hover:scale-105"
+              placeholder="blur"
+              blurDataURL={BLUR_PLACEHOLDER}
             />
           )}
         </div>
@@ -88,10 +94,13 @@ function BlogCard({
         {coverImage ? (
           <Image
             src={coverImage}
+            unoptimized={!isOptimizedImageHost(coverImage)}
             alt={title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-700 group-hover:scale-105"
+            placeholder="blur"
+            blurDataURL={BLUR_PLACEHOLDER}
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-zinc-50">

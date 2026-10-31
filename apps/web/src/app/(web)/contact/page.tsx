@@ -15,7 +15,7 @@ export default function ContactPage() {
         {/* Left — form */}
         <div className="flex flex-col justify-center px-6 sm:px-12 lg:px-16 xl:px-24 py-16">
           <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-4">Contact Us</p>
-          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-black mb-4">
+          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#1a1410] mb-4">
             Get in Touch
           </h1>
           <p className="text-zinc-500 mb-10 leading-relaxed max-w-md">
@@ -24,9 +24,9 @@ export default function ContactPage() {
 
           <div className="space-y-6 mb-10">
             {[
-              { icon: MapPin, text: "123 Premium Avenue, New York, NY 10001" },
-              { icon: Phone, text: "+1 (800) 123-4567" },
-              { icon: Mail, text: "hello@fanorealestate.com" },
+              { icon: MapPin, text: "3404, 34th Floor, Churchill Tower, Business Bay, Dubai, UAE" },
+              { icon: Phone, text: "+971 52 571 9164" },
+              { icon: Mail, text: "info@fanoproperties.com" },
               { icon: Clock, text: "Mon–Fri 9am–6pm, Sat 10am–4pm" },
             ].map(({ icon: Icon, text }) => (
               <div key={text} className="flex items-center gap-4 text-sm text-zinc-600">

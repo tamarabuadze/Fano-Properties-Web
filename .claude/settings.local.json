@@ -7,7 +7,10 @@
       "Bash(node seed-demo.mjs)",
       "Bash(/opt/homebrew/bin/pnpm --filter @fano/web build)",
       "Bash(git remote *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git merge *)"
     ]
   }
 }

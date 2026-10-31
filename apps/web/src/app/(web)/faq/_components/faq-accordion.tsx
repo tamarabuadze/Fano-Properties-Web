@@ -17,7 +17,7 @@ export function FaqAccordion({ faqs }: { faqs: FaqItem[] }) {
           key={i}
           className={cn(
             "rounded-2xl border transition-colors duration-200",
-            open === i ? "border-black bg-zinc-50" : "border-border bg-white hover:border-zinc-300"
+            open === i ? "border-[#1a1410] bg-zinc-50" : "border-border bg-white hover:border-zinc-300"
           )}
         >
           <button
@@ -26,13 +26,13 @@ export function FaqAccordion({ faqs }: { faqs: FaqItem[] }) {
           >
             <span className={cn(
               "font-medium text-base transition-colors",
-              open === i ? "text-black" : "text-zinc-700"
+              open === i ? "text-[#1a1410]" : "text-zinc-700"
             )}>
               {faq.q}
             </span>
             <div className={cn(
               "h-8 w-8 rounded-full flex items-center justify-center shrink-0 transition-colors",
-              open === i ? "bg-black text-white" : "bg-zinc-100 text-zinc-500"
+              open === i ? "bg-[#1a1410] text-white" : "bg-zinc-100 text-zinc-500"
             )}>
               {open === i ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
             </div>

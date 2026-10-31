@@ -45,7 +45,7 @@ export function GoogleReviewsSection() {
               <span className="text-xs font-medium text-zinc-400 tracking-wide">Reviews</span>
             </div>
 
-            <div className="text-7xl font-bold text-black [letter-spacing:-0.04em] leading-none mb-3">
+            <div className="text-7xl font-bold text-[#1a1410] [letter-spacing:-0.04em] leading-none mb-3">
               {RATING}
             </div>
 
@@ -56,7 +56,7 @@ export function GoogleReviewsSection() {
             </div>
 
             <p className="text-sm text-zinc-500">
-              Based on <span className="font-semibold text-black">{REVIEW_COUNT.toLocaleString()}</span> reviews
+              Based on <span className="font-semibold text-[#1a1410]">{REVIEW_COUNT.toLocaleString()}</span> reviews
             </p>
           </div>
 
@@ -82,7 +82,7 @@ export function GoogleReviewsSection() {
                 href="https://g.page/r/review"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-full bg-black text-white text-sm font-medium hover:bg-zinc-800 transition-colors"
+                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-full bg-[#1a1410] text-white text-sm font-medium hover:bg-[#2a2118] transition-colors"
               >
                 {/* Google G icon */}
                 <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">

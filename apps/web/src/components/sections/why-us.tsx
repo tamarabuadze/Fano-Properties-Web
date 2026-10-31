@@ -31,7 +31,7 @@ const features = [
 
 export function WhyUsSection() {
   return (
-    <section className="section-y bg-white">
+    <section className="section-y bg-white overflow-x-clip">
       <div className="container-site">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-24 items-center">
           {/* Image side */}
@@ -49,11 +49,13 @@ export function WhyUsSection() {
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAAECAADAAQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQQG/8QAHBAAAgMAAwEAAAAAAAAAAAAAAQIDBAASITH/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJXi1KrXLpKhbIxWkQMVIOhGR3Qf/9k="
               />
             </div>
 
             {/* Floating stat card */}
-            <div className="absolute bottom-4 right-4 lg:-bottom-6 lg:-right-6 bg-black text-white rounded-2xl p-4 lg:p-6 shadow-2xl">
+            <div className="absolute bottom-4 right-4 lg:-bottom-6 lg:-right-6 bg-[#1a1410] text-white rounded-2xl p-4 lg:p-6 shadow-2xl">
               <p className="text-3xl font-semibold [letter-spacing:-0.03em]">98%</p>
               <p className="text-white/60 text-sm mt-1">Client satisfaction rate</p>
             </div>
