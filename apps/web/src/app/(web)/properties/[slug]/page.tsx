@@ -18,7 +18,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com
 export async function generateMetadata({ params }: PropertyPageProps): Promise<Metadata> {
   const { slug } = await params;
   const property = await getPropertyBySlug(slug);
-  if (!property) return { title: "Property Not Found" };
+  if (!property || !property.published) return { title: "Property Not Found", robots: { index: false } };
 
   const url = `${SITE_URL}/properties/${slug}`;
   return {
