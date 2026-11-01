@@ -302,7 +302,7 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
               allowVideo
               value={gallery}
               onChange={setGallery}
-              hint="JPG, PNG or WEBP up to 10 MB, MP4 up to 100 MB"
+              hint="JPG, PNG or WEBP up to 10 MB, MP4 up to 50 MB"
             />
           </div>
         )}
