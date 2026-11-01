@@ -91,6 +91,11 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
     if (!(statuses as readonly string[]).includes(getValues("status"))) setValue("status", "available");
   }, [statuses, getValues, setValue]);
 
+  // Commercial listings are for sale or lease only
+  useEffect(() => {
+    if (isCommercial && getValues("listingType") === "rent") setValue("listingType", "lease");
+  }, [isCommercial, getValues, setValue]);
+
   async function onSubmit(data: FormData) {
     const result = propertyId
       ? await updateProperty(propertyId, { ...data, gallery })
@@ -164,7 +169,7 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
             <label className={labelCls}>Listing Type</label>
             <select {...register("listingType")} className={selectCls}>
               <option value="sale">For Sale</option>
-              <option value="rent">For Rent</option>
+              {!isCommercial && <option value="rent">For Rent</option>}
               <option value="lease">For Lease</option>
             </select>
           </div>

@@ -36,7 +36,13 @@ const propertySchema = z.object({
 function normalizeCategory<T extends Partial<z.infer<typeof propertySchema>>>(data: T): T {
   if (data.propertyType === undefined) return data;
   if (data.propertyType === "commercial") {
-    return { ...data, bedrooms: 0, bathrooms: 0, status: data.status === "rented" ? "available" : data.status };
+    return {
+      ...data,
+      bedrooms: 0,
+      bathrooms: 0,
+      status: data.status === "rented" ? "available" : data.status,
+      listingType: data.listingType === "rent" ? "lease" : data.listingType,
+    };
   }
   return { ...data, unitType: null, status: data.status === "off_payment_plan" ? "available" : data.status };
 }

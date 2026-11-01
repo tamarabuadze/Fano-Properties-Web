@@ -60,9 +60,12 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
   const isCommercial = initialFilters.category === "commercial";
 
   const clearFilters = () =>
-    router.replace(isCommercial ? `${pathname}?category=commercial` : pathname, { scroll: false });
+    router.replace(
+      isCommercial ? `${pathname}?category=commercial&listingType=${initialFilters.listingType ?? "sale"}` : pathname,
+      { scroll: false }
+    );
 
-  const hasFilters = Object.entries(initialFilters).some(([k, v]) => k !== "category" && Boolean(v));
+  const hasFilters = Object.entries(initialFilters).some(([k, v]) => k !== "category" && !(isCommercial && k === "listingType") && Boolean(v));
 
   return (
     <div className="rounded-2xl p-5 sticky top-24 space-y-6" style={{ backgroundColor: "#1a1410" }}>
@@ -102,8 +105,8 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
         </div>
       </div>
 
-      {/* Listing Type */}
-      <div>
+      {/* Listing Type (commercial uses the Buy / Lease tabs instead) */}
+      {!isCommercial && <div>
         <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
           Listing Type
         </label>
@@ -124,7 +127,7 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
             </button>
           ))}
         </div>
-      </div>
+      </div>}
 
       {/* Unit Type (commercial) */}
       {isCommercial && (

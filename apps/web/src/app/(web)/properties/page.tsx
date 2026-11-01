@@ -38,6 +38,8 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
     category: isCommercial ? "commercial" : undefined,
     propertyType: isCommercial ? undefined : raw.propertyType,
     unitType: isCommercial ? raw.unitType : undefined,
+    // Commercial is Buy or Lease only, and opens on Buy
+    listingType: isCommercial ? (raw.listingType === "lease" ? "lease" : "sale") : raw.listingType,
     minBedrooms: isCommercial ? undefined : raw.minBedrooms,
   };
   return (
