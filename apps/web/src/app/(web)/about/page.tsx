@@ -73,10 +73,6 @@ export default function AboutPage() {
                   className="object-cover"
                 />
               </div>
-              <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl p-6 border border-border">
-                <p className="text-3xl font-semibold text-[#1a1410] [letter-spacing:-0.03em]">12+</p>
-                <p className="text-zinc-500 text-sm">Years of Excellence</p>
-              </div>
             </div>
           </div>
         </div>
@@ -105,26 +101,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="section-y bg-[#1a1410] text-white">
-        <div className="container-site">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { value: "AED 7B+", label: "Properties Sold" },
-              { value: "2,400+", label: "Happy Clients" },
-              { value: "50+", label: "Expert Agents" },
-              { value: "98%", label: "Satisfaction Rate" },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.03em] mb-2">
-                  {stat.value}
-                </p>
-                <p className="text-white/50 text-sm uppercase tracking-wider">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

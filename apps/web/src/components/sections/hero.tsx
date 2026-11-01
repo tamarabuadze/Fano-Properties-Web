@@ -13,13 +13,6 @@ const HERO_VIDEO =
 const HERO_POSTER =
   "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2071&auto=format&fit=crop";
 
-const stats = [
-  { value: "2,400+", label: "Properties Listed" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "12+", label: "Years Experience" },
-  { value: "AED 7B+", label: "Properties Sold" },
-];
-
 export function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -148,22 +141,6 @@ export function HeroSection() {
               </Link>
             </motion.div>
 
-            {/* Stats strip */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="hidden sm:flex flex-wrap gap-8 pt-8 border-t border-white/20"
-            >
-              {stats.map((s) => (
-                <div key={s.label}>
-                  <p className="text-2xl font-semibold [letter-spacing:-0.02em]" style={{ color: "#c3ae8f" }}>
-                    {s.value}
-                  </p>
-                  <p className="text-xs mt-0.5 uppercase tracking-wider text-white/50">{s.label}</p>
-                </div>
-              ))}
-            </motion.div>
           </div>
         </div>
       </motion.div>

@@ -99,15 +99,7 @@ export function Footer() {
             © {new Date().getFullYear()} Fano Real Estate. All rights reserved.
           </p>
           <p className="text-xs text-white/40">
-            Developed by{" "}
-            <a
-              href="https://thestargen.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white/70 transition-colors duration-150 underline underline-offset-2"
-            >
-              Stargen Enterprises
-            </a>
+            Designed &amp; developed in-house by Fano Properties
           </p>
         </div>
       </div>
