@@ -5,14 +5,16 @@ interface PropertiesCategoryTabsProps {
   commercial: boolean;
   search?: string;
   listingType?: string;
+  unitType?: string;
 }
 
-export function PropertiesCategoryTabs({ commercial, search, listingType }: PropertiesCategoryTabsProps) {
+export function PropertiesCategoryTabs({ commercial, search, listingType, unitType }: PropertiesCategoryTabsProps) {
   const href = (toCommercial: boolean, toListingType?: string) => {
     const params = new URLSearchParams();
     if (toCommercial) params.set("category", "commercial");
     if (search) params.set("search", search);
     if (toListingType) params.set("listingType", toListingType);
+    if (toCommercial && unitType) params.set("unitType", unitType);
     const qs = params.toString();
     return qs ? `/properties?${qs}` : "/properties";
   };

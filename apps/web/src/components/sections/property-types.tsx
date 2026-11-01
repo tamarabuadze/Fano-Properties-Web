@@ -26,6 +26,13 @@ const types = [
     count: "200+ listings",
     image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format",
   },
+  {
+    label: "Offices",
+    value: "offices",
+    href: "/properties?category=commercial&unitType=offices",
+    count: "Commercial",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format",
+  },
 ];
 
 export function PropertyTypesSection() {
@@ -39,7 +46,7 @@ export function PropertyTypesSection() {
           className="mb-12"
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
           {types.map((type, i) => (
             <motion.div
               key={type.value}
@@ -49,14 +56,14 @@ export function PropertyTypesSection() {
               transition={{ duration: 0.55, delay: i * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               <Link
-                href={`/properties?propertyType=${type.value}`}
+                href={type.href ?? `/properties?propertyType=${type.value}`}
                 className="group relative block h-72 lg:h-80 overflow-hidden rounded-2xl bg-zinc-200"
               >
                 <Image
                   src={type.image}
                   alt={type.label}
                   fill
-                  sizes="(max-width: 640px) 100vw, 33vw"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

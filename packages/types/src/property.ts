@@ -69,7 +69,8 @@ export type PropertyCardData = Pick<
 export type PropertyFilters = {
   search?: string;
   category?: PropertyCategory;
-  unitType?: CommercialUnitType;
+  /** "offices" matches both office floors and office spaces */
+  unitType?: CommercialUnitType | "offices";
   propertyType?: PropertyType;
   listingType?: ListingType;
   city?: string;

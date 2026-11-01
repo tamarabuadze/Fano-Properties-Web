@@ -52,7 +52,9 @@ export async function getProperties(filters: PropertyFilters = {}) {
     ...(category === "commercial" && { propertyType: "commercial" as const }),
     ...(category === "residential" && { propertyType: { not: "commercial" as const } }),
     ...(propertyType && { propertyType }),
-    ...(unitType && { unitType }),
+    ...(unitType === "offices"
+      ? { unitType: { in: ["office_floor" as const, "office_space" as const] } }
+      : unitType && { unitType }),
     ...(listingType && { listingType }),
     ...(city && { city: { contains: city, mode: "insensitive" as const } }),
     ...(minPrice !== undefined && { price: { gte: minPrice } }),

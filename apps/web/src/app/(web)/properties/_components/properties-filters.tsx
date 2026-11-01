@@ -21,7 +21,7 @@ const PROPERTY_TYPES = [
   { label: "Land", value: "land" },
 ];
 
-const UNIT_TYPES = [{ label: "Any Unit", value: "" }, ...COMMERCIAL_UNIT_TYPES];
+const UNIT_TYPES = [{ label: "Any Unit", value: "" }, { label: "Offices", value: "offices" }, ...COMMERCIAL_UNIT_TYPES];
 
 const BEDROOMS = [
   { label: "Any", value: "" },
