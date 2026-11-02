@@ -49,6 +49,7 @@ const jsonLd = {
         "https://www.facebook.com/fanoproperties",
         "https://www.youtube.com/@FanoProperties",
         "https://www.propertyfinder.ae/en/broker/fano-properties-l-l-c-v2-12901",
+        "https://www.bayut.com/companies/fano-properties-109679/",
       ],
     },
     {
