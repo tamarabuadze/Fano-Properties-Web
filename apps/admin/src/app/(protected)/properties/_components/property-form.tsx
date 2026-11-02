@@ -69,7 +69,7 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
     resolver: zodResolver(schema),
     defaultValues: {
       currency: "AED",
-      priceUnit: "total",
+      priceUnit: "per_sqft",
       status: "available",
       listingType: "sale",
       propertyType: "apartment",
@@ -217,8 +217,8 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
           <div>
             <label className={labelCls}>Price Basis</label>
             <select {...register("priceUnit")} className={selectCls}>
-              <option value="total">Total price</option>
               <option value="per_sqft">Per sq ft</option>
+              <option value="total">Total price</option>
             </select>
           </div>
         </div>
