@@ -25,7 +25,7 @@ export default function ContactPage() {
           <div className="space-y-6 mb-10">
             {[
               { icon: MapPin, text: "3404, 34th Floor, Churchill Tower, Business Bay, Dubai, UAE" },
-              { icon: Phone, text: "+971 52 571 9164" },
+              { icon: Phone, text: "04 564 4635" },
               { icon: Mail, text: "info@fanoproperties.com" },
               { icon: Clock, text: "Mon–Fri 9am–6pm, Sat 10am–4pm" },
             ].map(({ icon: Icon, text }) => (

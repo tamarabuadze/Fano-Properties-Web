@@ -40,7 +40,7 @@ const jsonLd = {
         addressLocality: "Dubai",
         addressCountry: "AE",
       },
-      telephone: "+971525719164",
+      telephone: "+97145644635",
       email: "info@fanoproperties.com",
       areaServed: ["Dubai", "Abu Dhabi", "United Arab Emirates"],
       sameAs: [
