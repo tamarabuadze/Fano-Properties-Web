@@ -8,6 +8,7 @@ import { PropertyInquiryForm } from "./_components/property-inquiry-form";
 import { RelatedProperties } from "./_components/related-properties";
 import { PropertyAgentCard } from "./_components/property-agent-card";
 import { RoiCalculator } from "@/components/roi/roi-calculator";
+import { totalPrice } from "@fano/utils";
 
 interface PropertyPageProps {
   params: Promise<{ slug: string }>;
@@ -54,6 +55,8 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
     ...property.images.map((img) => img.url),
   ];
 
+  const fullPrice = totalPrice(Number(property.price), property.priceUnit, property.sqft);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "RealEstateListing",
@@ -63,7 +66,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
     image: allImages,
     offers: {
       "@type": "Offer",
-      price: parseFloat(property.price.toString()),
+      price: fullPrice,
       priceCurrency: property.currency,
       availability: "https://schema.org/InStock",
     },
@@ -101,7 +104,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
             {property.amenities.length > 0 && (
               <PropertyAmenities amenities={property.amenities} />
             )}
-            {property.listingType === "sale" && (
+            {property.listingType === "sale" && fullPrice > 0 && (
               <section id="roi" className="scroll-mt-24">
                 <h2 className="text-2xl font-semibold [letter-spacing:-0.02em] text-[#1a1410]">Investment calculator</h2>
                 <p className="text-sm text-zinc-500 mt-1 mb-6">
@@ -109,7 +112,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                 </p>
                 <RoiCalculator
                   variant="compact"
-                  price={Number(property.price)}
+                  price={fullPrice}
                   sizeSqft={property.sqft}
                   propertyId={property.id}
                   propertyTitle={property.title}

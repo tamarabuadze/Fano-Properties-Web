@@ -32,6 +32,11 @@ export function isUploadStorageConfigured(): boolean {
   return !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
 }
 
+/** Total price of a property, whether its price is stored as a total or per sq ft */
+export function totalPrice(price: number, priceUnit?: string | null, sqft?: number | null): number {
+  return priceUnit === "per_sqft" ? price * (sqft ?? 0) : price;
+}
+
 export function isVideoUrl(url?: string | null): boolean {
   return !!url && /\.mp4($|\?)/i.test(url);
 }

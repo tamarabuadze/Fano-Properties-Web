@@ -60,6 +60,7 @@ export async function PropertiesGrid({ filters }: PropertiesGridProps) {
             slug={property.slug}
             propertyType={property.propertyType}
             unitType={property.unitType}
+            priceUnit={property.priceUnit}
             listingType={property.listingType}
             price={parseFloat(property.price.toString())}
             currency={property.currency}

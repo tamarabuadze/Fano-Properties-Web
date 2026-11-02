@@ -17,6 +17,7 @@ const schema = z.object({
   listingType: z.enum(["sale", "rent", "lease"]),
   status: z.enum(["available", "sold", "rented", "off_market", "off_payment_plan"]),
   price: z.number({ coerce: true }).positive("Must be positive"),
+  priceUnit: z.enum(["total", "per_sqft"]),
   currency: z.literal("AED"),
   location: z.string().min(1, "Required"),
   city: z.string().min(1, "Required"),
@@ -68,6 +69,7 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
     resolver: zodResolver(schema),
     defaultValues: {
       currency: "AED",
+      priceUnit: "total",
       status: "available",
       listingType: "sale",
       propertyType: "apartment",
@@ -202,7 +204,7 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className={labelCls}>Price</label>
+            <label className={labelCls}>{watch("priceUnit") === "per_sqft" ? "Price per sq ft" : "Price"}</label>
             <input {...register("price")} type="number" className={inputCls} placeholder="0" />
             {errors.price && <p className="text-xs text-red-500 mt-1">{errors.price.message}</p>}
           </div>
@@ -210,6 +212,13 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
             <label className={labelCls}>Currency</label>
             <select {...register("currency")} className={selectCls}>
               <option value="AED">AED (د.إ)</option>
+            </select>
+          </div>
+          <div>
+            <label className={labelCls}>Price Basis</label>
+            <select {...register("priceUnit")} className={selectCls}>
+              <option value="total">Total price</option>
+              <option value="per_sqft">Per sq ft</option>
             </select>
           </div>
         </div>

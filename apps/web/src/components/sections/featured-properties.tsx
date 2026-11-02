@@ -11,6 +11,7 @@ interface Property {
   slug: string;
   propertyType: string;
   unitType?: string | null;
+  priceUnit?: string | null;
   listingType: string;
   price: number | string;
   currency: string;
@@ -60,6 +61,7 @@ export function FeaturedPropertiesSection({ properties }: FeaturedPropertiesProp
                 slug={property.slug}
                 propertyType={property.propertyType}
                 unitType={property.unitType}
+                priceUnit={property.priceUnit}
                 listingType={property.listingType}
                 price={Number(property.price)}
                 currency={property.currency}

@@ -9,6 +9,7 @@ interface Property {
   listingType: string;
   status: string;
   price: number | string;
+  priceUnit?: string | null;
   currency: string;
   location: string;
   city: string;
@@ -59,6 +60,9 @@ export function PropertyOverview({ property }: { property: Property }) {
 
         <p className="text-3xl font-semibold text-black [letter-spacing:-0.02em]">
           {formatPrice(price, property.currency)}
+          {property.priceUnit === "per_sqft" && (
+            <span className="text-lg font-normal text-zinc-500"> /sq ft</span>
+          )}
           {property.listingType === "rent" && (
             <span className="text-lg font-normal text-zinc-500">/month</span>
           )}

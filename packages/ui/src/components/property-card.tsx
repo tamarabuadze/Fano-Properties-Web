@@ -17,6 +17,7 @@ export interface PropertyCardProps {
   slug: string;
   propertyType: string;
   unitType?: string | null;
+  priceUnit?: string | null;
   listingType: string;
   price: number;
   currency?: string;
@@ -44,6 +45,7 @@ function PropertyCard({
   slug,
   propertyType,
   unitType,
+  priceUnit,
   listingType,
   price,
   currency = "AED",
@@ -102,6 +104,9 @@ function PropertyCard({
         <div className="mb-3">
           <p className="text-2xl font-semibold tracking-tight [letter-spacing:-0.02em]" style={{ color: "#7e6244" }}>
             {formatPrice(price, currency)}
+            {priceUnit === "per_sqft" && (
+              <span className="text-sm font-normal text-text-secondary"> /sq ft</span>
+            )}
             {listingType === "rent" && (
               <span className="text-sm font-normal text-text-secondary">/mo</span>
             )}

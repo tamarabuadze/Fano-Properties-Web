@@ -141,6 +141,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
                       slug={p.slug}
                       propertyType={p.propertyType}
                       unitType={p.unitType}
+                      priceUnit={p.priceUnit}
                       listingType={p.listingType}
                       price={parseFloat(p.price.toString())}
                       currency={p.currency}

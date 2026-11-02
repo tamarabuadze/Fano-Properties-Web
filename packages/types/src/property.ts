@@ -23,6 +23,8 @@ export type Property = WithTimestamps & {
   listingType: ListingType;
   status: PropertyStatus;
   price: number;
+  /** "per_sqft" means price is AED per square foot */
+  priceUnit?: "total" | "per_sqft";
   currency: string;
   location: string;
   city: string;
