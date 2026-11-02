@@ -1,17 +1,21 @@
 import Link from "next/link";
 import { cn } from "@fano/utils";
 
+type Category = "all" | "residential" | "commercial";
+
 interface PropertiesCategoryTabsProps {
-  commercial: boolean;
+  category: Category;
   search?: string;
   listingType?: string;
   unitType?: string;
 }
 
-export function PropertiesCategoryTabs({ commercial, search, listingType, unitType }: PropertiesCategoryTabsProps) {
-  const href = (toCommercial: boolean, toListingType?: string) => {
+export function PropertiesCategoryTabs({ category, search, listingType, unitType }: PropertiesCategoryTabsProps) {
+  const commercial = category === "commercial";
+  const href = (toCategory: Category, toListingType?: string) => {
+    const toCommercial = toCategory === "commercial";
     const params = new URLSearchParams();
-    if (toCommercial) params.set("category", "commercial");
+    if (toCategory !== "all") params.set("category", toCategory);
     if (search) params.set("search", search);
     if (toListingType) params.set("listingType", toListingType);
     if (toCommercial && unitType) params.set("unitType", unitType);
@@ -23,18 +27,19 @@ export function PropertiesCategoryTabs({ commercial, search, listingType, unitTy
     <div className="flex flex-wrap items-center gap-3 mb-8">
     <div className="inline-flex rounded-full border border-border p-1 bg-zinc-50" role="tablist" aria-label="Property category">
       {[
-        { label: "Residential", value: false },
-        { label: "Commercial", value: true },
+        { label: "All", value: "all" as const },
+        { label: "Residential", value: "residential" as const },
+        { label: "Commercial", value: "commercial" as const },
       ].map((tab) => (
         <Link
           key={tab.label}
           href={href(tab.value)}
           role="tab"
-          aria-selected={commercial === tab.value}
+          aria-selected={category === tab.value}
           scroll={false}
           className={cn(
             "px-6 h-10 inline-flex items-center rounded-full text-sm font-medium transition-colors",
-            commercial === tab.value ? "bg-[#1a1410] text-[#c9a96e]" : "text-zinc-600 hover:text-[#1a1410]"
+            category === tab.value ? "bg-[#1a1410] text-[#c9a96e]" : "text-zinc-600 hover:text-[#1a1410]"
           )}
         >
           {tab.label}
@@ -50,7 +55,7 @@ export function PropertiesCategoryTabs({ commercial, search, listingType, unitTy
         ].map((tab) => (
           <Link
             key={tab.value}
-            href={href(true, tab.value)}
+            href={href("commercial", tab.value)}
             role="tab"
             aria-selected={listingType === tab.value}
             scroll={false}

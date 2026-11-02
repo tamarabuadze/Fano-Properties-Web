@@ -11,19 +11,19 @@ const types = [
   {
     label: "Apartments",
     value: "apartment",
-    count: "140+ listings",
+    count: "Residential",
     image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=735&auto=format",
   },
   {
     label: "Villas",
     value: "villa",
-    count: "60+ listings",
+    count: "Residential",
     image: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=800&auto=format",
   },
   {
     label: "Houses",
     value: "house",
-    count: "200+ listings",
+    count: "Residential",
     image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format",
   },
   {

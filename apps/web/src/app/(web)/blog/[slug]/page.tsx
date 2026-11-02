@@ -6,6 +6,8 @@ import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { getBlogArticleBySlug } from "@/lib/queries/blog";
 import { formatDate } from "@fano/utils";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
+
 interface BlogArticlePageProps {
   params: Promise<{ slug: string }>;
 }
@@ -13,11 +15,12 @@ interface BlogArticlePageProps {
 export async function generateMetadata({ params }: BlogArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
   const article = await getBlogArticleBySlug(slug);
-  if (!article) return { title: "Article Not Found" };
+  if (!article || !article.published) return { title: "Article Not Found", robots: { index: false } };
 
   return {
     title: article.metaTitle ?? article.title,
     description: article.metaDescription ?? article.excerpt,
+    alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       title: article.title,
       description: article.excerpt,
@@ -33,8 +36,27 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
   const article = await getBlogArticleBySlug(slug);
   if (!article || !article.published) notFound();
 
+  const url = `${SITE_URL}/blog/${slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description: article.metaDescription ?? article.excerpt,
+    url,
+    mainEntityOfPage: url,
+    ...(article.coverImage && { image: [article.coverImage] }),
+    ...(article.publishedAt && { datePublished: article.publishedAt.toISOString() }),
+    dateModified: article.updatedAt.toISOString(),
+    author: { "@type": "Organization", name: "Fano Properties", url: SITE_URL },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+  };
+
   return (
     <div className="min-h-screen bg-white pt-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="container-site max-w-3xl py-12">
         {/* Back */}
         <Link

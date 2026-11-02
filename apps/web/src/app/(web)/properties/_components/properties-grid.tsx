@@ -21,7 +21,7 @@ interface PropertiesGridProps {
 export async function PropertiesGrid({ filters }: PropertiesGridProps) {
   const result = await getProperties({
     search: filters.search,
-    category: filters.category === "commercial" ? "commercial" : "residential",
+    category: filters.category as never,
     unitType: filters.unitType as never,
     propertyType: filters.propertyType as never,
     listingType: filters.listingType as never,

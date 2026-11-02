@@ -6,7 +6,8 @@ import { SectionHeader } from "@/components/shared/section-header";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: "Learn about Fano Real Estate — our story, mission, and the team behind the brand.",
+  description: "Learn about Fano Properties — our story, mission, and the team behind the brand.",
+  alternates: { canonical: "/about" },
 };
 
 const values = [

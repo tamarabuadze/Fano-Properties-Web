@@ -23,7 +23,7 @@ const footerLinks = {
   ],
 };
 
-export function Footer() {
+export function Footer({ showAgents = true }: { showAgents?: boolean }) {
   return (
     <footer className="bg-[#1a1410] text-white">
       {/* Large brand wordmark */}
@@ -70,7 +70,9 @@ export function Footer() {
             </div>
           </div>
 
-          {Object.entries(footerLinks).map(([heading, links]) => (
+          {Object.entries(footerLinks).map(([heading, allLinks]) => {
+            const links = showAgents ? allLinks : allLinks.filter((l) => l.href !== "/agents");
+            return (
             <div key={heading}>
               <p className="text-xs font-medium uppercase tracking-widest text-white/40 mb-5">
                 {heading}
@@ -88,7 +90,8 @@ export function Footer() {
                 ))}
               </ul>
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 

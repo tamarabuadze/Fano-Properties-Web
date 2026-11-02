@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: AgentPageProps): Promise<Meta
   return {
     title: `${agent.firstName} ${agent.lastName} — Real Estate Agent`,
     description: agent.bio?.slice(0, 160),
+    alternates: { canonical: `/agents/${slug}` },
   };
 }
 

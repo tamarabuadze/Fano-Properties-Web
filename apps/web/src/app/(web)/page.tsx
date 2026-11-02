@@ -16,13 +16,14 @@ import { getLatestArticles } from "@/lib/queries/blog";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
 export const metadata: Metadata = {
-  title: "Fano Properties — Luxury Real Estate in Dubai",
+  title: { absolute: "Fano Properties — Luxury Real Estate in Dubai" },
   description:
     "Discover luxury properties for sale and rent in Dubai. Find your dream home with Fano Properties — premium real estate, exceptional service.",
   alternates: { canonical: SITE_URL },
 };
 
-export const revalidate = 3600;
+// Rendered on request: the build has no database, so a cached build-time page shows no listings
+export const dynamic = "force-dynamic";
 
 const jsonLd = {
   "@context": "https://schema.org",

@@ -7,9 +7,10 @@ import { getBlogCategories } from "@/lib/queries/blog";
 export const metadata: Metadata = {
   title: "Blog & Insights",
   description: "Real estate market insights, buying guides, investment tips, and industry news.",
+  alternates: { canonical: "/blog" },
 };
 
-export const revalidate = 1800;
+export const dynamic = "force-dynamic";
 
 interface BlogPageProps {
   searchParams: Promise<{ category?: string; page?: string; search?: string }>;

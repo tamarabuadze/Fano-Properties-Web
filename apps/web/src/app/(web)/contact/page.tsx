@@ -5,7 +5,8 @@ import { ContactForm } from "./_components/contact-form";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: "Get in touch with Fano Real Estate. We're ready to help you with your property needs.",
+  description: "Get in touch with Fano Properties. We're ready to help you with your property needs.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

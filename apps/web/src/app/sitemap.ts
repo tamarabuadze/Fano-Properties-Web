@@ -1,12 +1,16 @@
 import { MetadataRoute } from "next";
 import { prisma } from "@fano/db";
 
+// Built on request: the build has no database, so a build-time sitemap lists no properties
+export const dynamic = "force-dynamic";
+
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
     { url: `${BASE_URL}/properties`, lastModified: new Date(), changeFrequency: "hourly", priority: 0.9 },
+    { url: `${BASE_URL}/properties?category=commercial`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
     { url: `${BASE_URL}/agents`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
     { url: `${BASE_URL}/roi-calculator`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
@@ -51,5 +55,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...propertyPages, ...agentPages, ...articlePages];
+  const listedStatic = agents.length > 0 ? staticPages : staticPages.filter((p) => !p.url.endsWith("/agents"));
+
+  return [...listedStatic, ...propertyPages, ...agentPages, ...articlePages];
 }

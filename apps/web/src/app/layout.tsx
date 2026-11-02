@@ -27,7 +27,6 @@ export const metadata: Metadata = {
   authors: [{ name: "Fano Properties" }],
   creator: "Fano Properties",
   metadataBase: new URL(SITE_URL),
-  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_US",
