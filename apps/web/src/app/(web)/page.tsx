@@ -46,7 +46,9 @@ const jsonLd = {
       areaServed: ["Dubai", "Abu Dhabi", "United Arab Emirates"],
       sameAs: [
         "https://www.instagram.com/fanoproperties",
-        "https://www.linkedin.com/company/fanoproperties",
+        "https://www.facebook.com/fanoproperties",
+        "https://www.youtube.com/@FanoProperties",
+        "https://www.propertyfinder.ae/en/broker/fano-properties-l-l-c-v2-12901",
       ],
     },
     {

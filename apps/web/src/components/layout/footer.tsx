@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Instagram, Linkedin, Twitter } from "lucide-react";
+import { Building2, Facebook, Instagram, Youtube } from "lucide-react";
 
 const footerLinks = {
   Company: [
@@ -54,14 +54,18 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
             </p>
             <div className="flex gap-3 mt-6">
               {[
-                { icon: Instagram, href: "#", label: "Instagram" },
-                { icon: Linkedin, href: "#", label: "LinkedIn" },
-                { icon: Twitter, href: "#", label: "Twitter" },
+                { icon: Instagram, href: "https://www.instagram.com/fanoproperties", label: "Instagram" },
+                { icon: Facebook, href: "https://www.facebook.com/fanoproperties", label: "Facebook" },
+                { icon: Youtube, href: "https://www.youtube.com/@FanoProperties", label: "YouTube" },
+                { icon: Building2, href: "https://www.propertyfinder.ae/en/broker/fano-properties-l-l-c-v2-12901", label: "Property Finder" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
+                  title={label}
                   className="h-9 w-9 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-white/60 transition-all duration-200"
                 >
                   <Icon className="h-4 w-4" />
