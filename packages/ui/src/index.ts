@@ -8,6 +8,7 @@ export * from "./components/label";
 export * from "./components/separator";
 export * from "./components/skeleton";
 export * from "./components/property-card";
+export * from "./components/media-upload";
 export * from "./components/agent-card";
 export * from "./components/blog-card";
 export * from "./components/section-header";

@@ -18,17 +18,47 @@ const authConfig: Parameters<typeof NextAuth>[0] = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const adminEmail = process.env.ADMIN_EMAIL;
-        const adminHash  = process.env.ADMIN_PASSWORD_HASH;
-        if (!adminEmail || !adminHash) return null;
         if (!credentials?.email || !credentials?.password) return null;
-        if (credentials.email !== adminEmail) return null;
-        const valid = await bcrypt.compare(
-          credentials.password as string,
-          adminHash
-        );
-        if (!valid) return null;
-        return { id: "admin", email: adminEmail, role: "admin" } as any;
+
+        // Build list of admins from env — supports up to 5 pairs
+        const admins: { email: string; hash: string }[] = [];
+        for (let i = 1; i <= 5; i++) {
+          const suffix = i === 1 ? "" : `${i}`;
+          const email = process.env[`ADMIN${suffix}_EMAIL`];
+          const hash  = process.env[`ADMIN${suffix}_PASSWORD_HASH`];
+          // Tolerate stray spaces, quotes and \$ escapes from pasting into a settings panel
+          if (email && hash) {
+            admins.push({
+              email: email.trim().toLowerCase(),
+              hash: hash.trim().replace(/^["']|["']$/g, "").replace(/\\\$/g, "$"),
+            });
+          }
+        }
+        // Logs never include the password, the hash or the email that was typed
+        if (admins.length === 0) {
+          console.warn("[admin-login] failed: no admin configured (need ADMIN_EMAIL and ADMIN_PASSWORD_HASH)", {
+            hasAdminEmail: !!process.env.ADMIN_EMAIL,
+            hasPasswordHash: !!process.env.ADMIN_PASSWORD_HASH,
+            hasAdminPasswordVar: !!process.env.ADMIN_PASSWORD,
+          });
+          return null;
+        }
+
+        const admin = admins.find(a => a.email === (credentials.email as string).trim().toLowerCase());
+        if (!admin) {
+          console.warn("[admin-login] failed: email does not match any configured admin", { configuredAdmins: admins.length });
+          return null;
+        }
+
+        const valid = await bcrypt.compare(credentials.password as string, admin.hash);
+        if (!valid) {
+          console.warn("[admin-login] failed: password does not match the hash", {
+            hashLength: admin.hash.length,
+            hashFormatOk: /^\$2[aby]\$\d{2}\$.{53}$/.test(admin.hash),
+          });
+          return null;
+        }
+        return { id: admin.email, email: admin.email, role: "admin" } as any;
       },
     }),
   ],

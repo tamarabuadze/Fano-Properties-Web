@@ -13,6 +13,7 @@ const PROPERTY_TYPES = [
   "House",
   "Penthouse",
   "Commercial",
+  "Offices",
 ];
 
 const LISTING_TYPES = ["Buy", "Rent", "Lease"];
@@ -28,7 +29,12 @@ export function PropertySearchSection() {
     const params = new URLSearchParams();
     if (listingType !== "Buy") params.set("listingType", listingType.toLowerCase());
     if (location) params.set("search", location);
-    if (propertyType !== "All Types") params.set("propertyType", propertyType.toLowerCase());
+    if (propertyType === "Offices") {
+      params.set("category", "commercial");
+      params.set("unitType", "offices");
+    } else if (propertyType !== "All Types") {
+      params.set("propertyType", propertyType.toLowerCase());
+    }
     router.push(`/properties?${params.toString()}`);
   }
 
@@ -51,8 +57,8 @@ export function PropertySearchSection() {
                 className={cn(
                   "px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                   listingType === type
-                    ? "bg-black text-white shadow-sm"
-                    : "text-zinc-600 hover:text-black"
+                    ? "bg-[#1a1410] text-white shadow-sm"
+                    : "text-zinc-600 hover:text-[#1a1410]"
                 )}
               >
                 {type}
@@ -92,7 +98,7 @@ export function PropertySearchSection() {
               {/* Search button */}
               <button
                 type="submit"
-                className="h-14 px-8 rounded-xl bg-black text-white font-medium text-sm flex items-center gap-2 hover:bg-zinc-800 transition-colors whitespace-nowrap"
+                className="h-14 px-8 rounded-xl bg-[#1a1410] text-white font-medium text-sm flex items-center gap-2 hover:bg-[#2a2118] transition-colors whitespace-nowrap"
               >
                 <Search className="h-4 w-4" />
                 Search

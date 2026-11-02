@@ -2,7 +2,9 @@ import type { WithTimestamps, Coordinates } from "./common";
 
 export type PropertyType = "apartment" | "villa" | "house" | "commercial" | "land" | "penthouse" | "townhouse";
 export type ListingType = "sale" | "rent" | "lease";
-export type PropertyStatus = "available" | "sold" | "rented" | "off_market";
+export type PropertyStatus = "available" | "sold" | "rented" | "off_market" | "off_payment_plan";
+export type CommercialUnitType = "shop" | "warehouse" | "office_floor" | "office_space";
+export type PropertyCategory = "residential" | "commercial";
 
 export type PropertyImage = {
   id: string;
@@ -21,6 +23,8 @@ export type Property = WithTimestamps & {
   listingType: ListingType;
   status: PropertyStatus;
   price: number;
+  /** "per_sqft" means price is AED per square foot */
+  priceUnit?: "total" | "per_sqft";
   currency: string;
   location: string;
   city: string;
@@ -30,6 +34,7 @@ export type Property = WithTimestamps & {
   bedrooms: number;
   bathrooms: number;
   sqft: number;
+  unitType?: CommercialUnitType | null;
   amenities: string[];
   coverImage: string;
   gallery: PropertyImage[];
@@ -57,6 +62,7 @@ export type PropertyCardData = Pick<
   | "bedrooms"
   | "bathrooms"
   | "sqft"
+  | "unitType"
   | "coverImage"
   | "featured"
   | "status"
@@ -64,6 +70,9 @@ export type PropertyCardData = Pick<
 
 export type PropertyFilters = {
   search?: string;
+  category?: PropertyCategory;
+  /** "offices" matches both office floors and office spaces */
+  unitType?: CommercialUnitType | "offices";
   propertyType?: PropertyType;
   listingType?: ListingType;
   city?: string;

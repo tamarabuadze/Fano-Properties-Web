@@ -10,6 +10,8 @@ interface Property {
   title: string;
   slug: string;
   propertyType: string;
+  unitType?: string | null;
+  priceUnit?: string | null;
   listingType: string;
   price: number | string;
   currency: string;
@@ -54,8 +56,22 @@ export function FeaturedPropertiesSection({ properties }: FeaturedPropertiesProp
             {properties.map((property) => (
               <PropertyCard
                 key={property.id}
-                {...property}
-                price={typeof property.price === "string" ? parseFloat(property.price) : property.price}
+                id={property.id}
+                title={property.title}
+                slug={property.slug}
+                propertyType={property.propertyType}
+                unitType={property.unitType}
+                priceUnit={property.priceUnit}
+                listingType={property.listingType}
+                price={Number(property.price)}
+                currency={property.currency}
+                location={property.location}
+                city={property.city}
+                bedrooms={property.bedrooms}
+                bathrooms={property.bathrooms}
+                sqft={property.sqft}
+                coverImage={property.coverImage}
+                featured={property.featured}
               />
             ))}
           </AnimateStagger>

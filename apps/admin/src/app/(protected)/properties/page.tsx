@@ -24,7 +24,7 @@ export default async function PropertiesPage({
       }
     : {};
 
-  const [properties, total] = await Promise.all([
+  const [rawProperties, total] = await Promise.all([
     prisma.property.findMany({
       where,
       take: pageSize,
@@ -34,6 +34,13 @@ export default async function PropertiesPage({
     }),
     prisma.property.count({ where }),
   ]);
+  // Prisma Decimals can't be passed to Client Components
+  const properties = rawProperties.map((p) => ({
+    ...p,
+    price: Number(p.price),
+    lat: p.lat === null ? null : Number(p.lat),
+    lng: p.lng === null ? null : Number(p.lng),
+  }));
 
   return (
     <div className="p-6 lg:p-8 space-y-6">

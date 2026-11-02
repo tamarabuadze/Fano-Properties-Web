@@ -25,7 +25,7 @@ export function BlogCategories({
         className={cn(
           "inline-flex items-center h-9 px-4 rounded-full text-sm font-medium transition-all",
           !activeSlug
-            ? "bg-black text-white"
+            ? "bg-[#1a1410] text-white"
             : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
         )}
       >
@@ -38,7 +38,7 @@ export function BlogCategories({
           className={cn(
             "inline-flex items-center h-9 px-4 rounded-full text-sm font-medium transition-all gap-1.5",
             activeSlug === cat.slug
-              ? "bg-black text-white"
+              ? "bg-[#1a1410] text-white"
               : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
           )}
         >

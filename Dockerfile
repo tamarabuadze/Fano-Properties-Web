@@ -1,5 +1,7 @@
 FROM node:22-slim AS builder
 
+RUN apt-get update -y && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # Install pnpm
@@ -25,12 +27,17 @@ COPY . .
 # Generate Prisma client (explicit — replaces the blocked postinstall)
 RUN pnpm --filter @fano/db db:generate
 
+# Fetch the engine "prisma db push" needs at start, so a problem shows at build time
+RUN pnpm --filter @fano/db exec prisma version
+
 # Build Next.js web app
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN pnpm --filter @fano/web build
 
 # ---- Runner ----
 FROM node:22-slim AS runner
+
+RUN apt-get update -y && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -44,4 +51,4 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 EXPOSE 3000
 
-CMD ["pnpm", "--filter", "@fano/web", "start"]
+CMD ["sh", "scripts/start-production.sh"]

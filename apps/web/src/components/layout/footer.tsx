@@ -15,6 +15,7 @@ const footerLinks = {
     { label: "For Rent", href: "/properties?listingType=rent" },
     { label: "Featured", href: "/properties?featured=true" },
     { label: "All Listings", href: "/properties" },
+    { label: "ROI Calculator", href: "/roi-calculator" },
   ],
   Legal: [
     { label: "Privacy Policy", href: "/privacy-policy" },
@@ -93,12 +94,12 @@ export function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="container-site py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="container-site pt-6 pb-24 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40">
             © {new Date().getFullYear()} Fano Real Estate. All rights reserved.
           </p>
           <p className="text-xs text-white/40">
-            Premium properties, exceptional service.
+            Designed &amp; developed in-house by Fano Properties
           </p>
         </div>
       </div>

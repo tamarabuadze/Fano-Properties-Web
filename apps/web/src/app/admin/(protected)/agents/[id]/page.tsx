@@ -21,7 +21,7 @@ export default async function EditAgentPage({
     <div className="p-6 lg:p-8 max-w-3xl space-y-6">
       <div className="flex items-center gap-4">
         <Link
-          href="/agents"
+          href="/admin/agents"
           className="h-9 w-9 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />

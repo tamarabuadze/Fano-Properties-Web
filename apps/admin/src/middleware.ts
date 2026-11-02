@@ -23,5 +23,5 @@ export default auth((req) => {
 }) as unknown as NextMiddleware;
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.jpg$|.*\\.svg$|.*\\.ico$|.*\\.webp$).*)"],
+  matcher: ["/((?!api/upload|_next/static|_next/image|favicon.ico|.*\\.png$|.*\\.jpg$|.*\\.svg$|.*\\.ico$|.*\\.webp$).*)"],
 };

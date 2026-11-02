@@ -88,7 +88,7 @@ function SidebarContent({ onClose }: { onClose?: () => void }) {
       {/* Bottom */}
       <div className="px-3 pb-4 border-t border-border pt-4 space-y-1">
         <a
-          href={process.env.NEXT_PUBLIC_WEB_URL ?? "http://localhost:3000"}
+          href="/"
           target="_blank"
           rel="noopener noreferrer"
           onClick={onClose}

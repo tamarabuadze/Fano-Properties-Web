@@ -94,7 +94,7 @@ export function AgentsTable({ agents }: { agents: Agent[] }) {
                     >
                       {a.active ? <ToggleRight className="h-4 w-4 text-green-600" /> : <ToggleLeft className="h-4 w-4" />}
                     </button>
-                    <Link href={`/agents/${a.id}`} aria-label="Edit" className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors">
+                    <Link href={`/admin/agents/${a.id}`} aria-label="Edit" className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors">
                       <Edit className="h-4 w-4" />
                     </Link>
                     <button

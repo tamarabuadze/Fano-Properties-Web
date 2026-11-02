@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 export function LoginForm() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -28,8 +26,7 @@ export function LoginForm() {
       return;
     }
 
-    router.push("/admin/dashboard");
-    router.refresh();
+    window.location.href = "/admin/dashboard";
   }
 
   const inputCls =
