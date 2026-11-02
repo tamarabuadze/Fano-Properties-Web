@@ -13,7 +13,7 @@ interface AgentPageProps {
 export async function generateMetadata({ params }: AgentPageProps): Promise<Metadata> {
   const { slug } = await params;
   const agent = await getAgentBySlug(slug);
-  if (!agent) return { title: "Agent Not Found" };
+  if (!agent || !agent.active) return { title: "Agent Not Found", robots: { index: false } };
   return {
     title: `${agent.firstName} ${agent.lastName} — Real Estate Agent`,
     description: agent.bio?.slice(0, 160),

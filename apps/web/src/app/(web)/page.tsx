@@ -82,7 +82,7 @@ export default async function HomePage() {
       <FeaturedPropertiesSection properties={properties as never} />
       <PropertyTypesSection />
       <WhyUsSection />
-      <AgentsShowcaseSection agents={agents as never} />
+      {agents.length > 0 && <AgentsShowcaseSection agents={agents as never} />}
       <TestimonialsSection />
       <GoogleReviewsSection />
       <LatestArticlesSection articles={articles as never} />
