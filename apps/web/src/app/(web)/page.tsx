@@ -12,6 +12,7 @@ import { CtaSection } from "@/components/sections/cta-section";
 import { getFeaturedProperties } from "@/lib/queries/properties";
 import { getAgents } from "@/lib/queries/agents";
 import { getLatestArticles } from "@/lib/queries/blog";
+import { SOCIAL_LINKS } from "@/lib/social-links";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
@@ -44,13 +45,7 @@ const jsonLd = {
       telephone: "+97145644635",
       email: "info@fanoproperties.com",
       areaServed: ["Dubai", "Abu Dhabi", "United Arab Emirates"],
-      sameAs: [
-        "https://www.instagram.com/fanoproperties",
-        "https://www.facebook.com/fanoproperties",
-        "https://www.youtube.com/@FanoProperties",
-        "https://www.propertyfinder.ae/en/broker/fano-properties-l-l-c-v2-12901",
-        "https://www.bayut.com/companies/fano-properties-109679/",
-      ],
+      sameAs: SOCIAL_LINKS.map((l) => l.href),
     },
     {
       "@type": "WebSite",

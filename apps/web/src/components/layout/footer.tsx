@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Building2, Facebook, House, Instagram, Youtube } from "lucide-react";
+import { SOCIAL_LINKS } from "@/lib/social-links";
 
 const footerLinks = {
   Company: [
@@ -53,13 +53,7 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
               Premium real estate for discerning buyers, sellers, and investors.
             </p>
             <div className="flex gap-3 mt-6">
-              {[
-                { icon: Instagram, href: "https://www.instagram.com/fanoproperties", label: "Instagram" },
-                { icon: Facebook, href: "https://www.facebook.com/fanoproperties", label: "Facebook" },
-                { icon: Youtube, href: "https://www.youtube.com/@FanoProperties", label: "YouTube" },
-                { icon: Building2, href: "https://www.propertyfinder.ae/en/broker/fano-properties-l-l-c-v2-12901", label: "Property Finder" },
-                { icon: House, href: "https://www.bayut.com/companies/fano-properties-109679/", label: "Bayut" },
-              ].map(({ icon: Icon, href, label }) => (
+              {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}

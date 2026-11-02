@@ -2,6 +2,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { WhatsAppButton } from "@/components/layout/whatsapp-button";
 import { RoiButton } from "@/components/layout/roi-button";
+import { SocialButton } from "@/components/layout/social-button";
 import { getAgents } from "@/lib/queries/agents";
 
 export default async function WebLayout({ children }: { children: React.ReactNode }) {
@@ -12,6 +13,7 @@ export default async function WebLayout({ children }: { children: React.ReactNod
       <Navbar showAgents={showAgents} />
       <main>{children}</main>
       <Footer showAgents={showAgents} />
+      <SocialButton />
       <RoiButton />
       <WhatsAppButton />
     </>
