@@ -21,7 +21,7 @@ interface PropertiesGridProps {
 export async function PropertiesGrid({ filters }: PropertiesGridProps) {
   const result = await getProperties({
     search: filters.search,
-    category: filters.category === "commercial" ? "commercial" : "residential",
+    category: filters.category as never,
     unitType: filters.unitType as never,
     propertyType: filters.propertyType as never,
     listingType: filters.listingType as never,
@@ -60,6 +60,7 @@ export async function PropertiesGrid({ filters }: PropertiesGridProps) {
             slug={property.slug}
             propertyType={property.propertyType}
             unitType={property.unitType}
+            priceUnit={property.priceUnit}
             listingType={property.listingType}
             price={parseFloat(property.price.toString())}
             currency={property.currency}

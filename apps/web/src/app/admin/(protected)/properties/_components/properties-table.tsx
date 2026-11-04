@@ -13,6 +13,7 @@ interface Property {
   unitType?: string | null;
   listingType: string;
   price: number;
+  priceUnit?: string | null;
   currency: string;
   city: string;
   status: string;
@@ -91,6 +92,7 @@ export function PropertiesTable({ properties, total, page, pageSize }: Propertie
                         currency: p.currency,
                         maximumFractionDigits: 0,
                       }).format(p.price)}
+                      {p.priceUnit === "per_sqft" && " /sq ft"}
                     </td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">

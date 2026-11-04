@@ -1,7 +1,8 @@
 "use server";
 
 import { prisma } from "@fano/db";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { CACHE_TAGS } from "@/lib/cache";
 import { z } from "zod";
 import { generateSlug } from "@fano/utils";
 import { requireAdmin } from "@/lib/admin-auth";
@@ -13,6 +14,7 @@ const propertySchema = z.object({
   listingType: z.enum(["sale", "rent", "lease"]),
   status: z.enum(["available", "sold", "rented", "off_market", "off_payment_plan"]).default("available"),
   price: z.number().positive(),
+  priceUnit: z.enum(["total", "per_sqft"]).default("total"),
   currency: z.literal("AED").default("AED"),
   location: z.string().min(1),
   city: z.string().min(1),
@@ -29,6 +31,7 @@ const propertySchema = z.object({
   published: z.boolean().default(false),
   agentId: z.string().optional(),
   metaTitle: z.string().optional(),
+  permitNumber: z.string().trim().max(40).optional(),
   metaDescription: z.string().optional(),
 });
 
@@ -36,7 +39,13 @@ const propertySchema = z.object({
 function normalizeCategory<T extends Partial<z.infer<typeof propertySchema>>>(data: T): T {
   if (data.propertyType === undefined) return data;
   if (data.propertyType === "commercial") {
-    return { ...data, bedrooms: 0, bathrooms: 0, status: data.status === "rented" ? "available" : data.status };
+    return {
+      ...data,
+      bedrooms: 0,
+      bathrooms: 0,
+      status: data.status === "rented" ? "available" : data.status,
+      listingType: data.listingType === "rent" ? "lease" : data.listingType,
+    };
   }
   return { ...data, unitType: null, status: data.status === "off_payment_plan" ? "available" : data.status };
 }
@@ -56,7 +65,9 @@ export async function createProperty(data: z.infer<typeof propertySchema>) {
       data: { ...rest, images: { create: (gallery ?? []).map((url, position) => ({ url, position })) }, slug, price: parsed.data.price, agentId: parsed.data.agentId || undefined },
     });
     revalidatePath("/admin/properties");
+    revalidateTag(CACHE_TAGS.properties);
     revalidatePath("/admin/properties");
+    revalidateTag(CACHE_TAGS.properties);
     return { success: true, id: property.id };
   } catch (e: unknown) {
     if ((e as { code?: string }).code === "P2002") return { success: false, error: "A property with this title already exists." };
@@ -79,6 +90,7 @@ export async function updateProperty(id: string, data: Partial<z.infer<typeof pr
       },
     });
     revalidatePath("/admin/properties");
+    revalidateTag(CACHE_TAGS.properties);
     revalidatePath(`/properties/${id}`);
     return { success: true };
   } catch {
@@ -91,6 +103,7 @@ export async function deleteProperty(id: string) {
   try {
     await prisma.property.delete({ where: { id } });
     revalidatePath("/admin/properties");
+    revalidateTag(CACHE_TAGS.properties);
     return { success: true };
   } catch {
     return { success: false, error: "Failed to delete property." };
@@ -102,6 +115,7 @@ export async function togglePropertyPublished(id: string, published: boolean) {
   try {
     await prisma.property.update({ where: { id }, data: { published } });
     revalidatePath("/admin/properties");
+    revalidateTag(CACHE_TAGS.properties);
     revalidatePath(`/properties/${id}`);
     return { success: true };
   } catch {
@@ -114,6 +128,7 @@ export async function togglePropertyFeatured(id: string, featured: boolean) {
   try {
     await prisma.property.update({ where: { id }, data: { featured } });
     revalidatePath("/admin/properties");
+    revalidateTag(CACHE_TAGS.properties);
     return { success: true };
   } catch {
     return { success: false, error: "Failed to update." };

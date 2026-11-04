@@ -13,6 +13,7 @@ const propertySchema = z.object({
   listingType: z.enum(["sale", "rent", "lease"]),
   status: z.enum(["available", "sold", "rented", "off_market", "off_payment_plan"]).default("available"),
   price: z.number().positive(),
+  priceUnit: z.enum(["total", "per_sqft"]).default("total"),
   currency: z.literal("AED").default("AED"),
   location: z.string().min(1),
   city: z.string().min(1),
@@ -36,7 +37,13 @@ const propertySchema = z.object({
 function normalizeCategory<T extends Partial<z.infer<typeof propertySchema>>>(data: T): T {
   if (data.propertyType === undefined) return data;
   if (data.propertyType === "commercial") {
-    return { ...data, bedrooms: 0, bathrooms: 0, status: data.status === "rented" ? "available" : data.status };
+    return {
+      ...data,
+      bedrooms: 0,
+      bathrooms: 0,
+      status: data.status === "rented" ? "available" : data.status,
+      listingType: data.listingType === "rent" ? "lease" : data.listingType,
+    };
   }
   return { ...data, unitType: null, status: data.status === "off_payment_plan" ? "available" : data.status };
 }

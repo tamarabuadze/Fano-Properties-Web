@@ -4,6 +4,7 @@ import { FaqAccordion } from "./_components/faq-accordion";
 export const metadata: Metadata = {
   title: "FAQ",
   description: "Frequently asked questions about buying, selling, and renting properties with Fano.",
+  alternates: { canonical: "/faq" },
 };
 
 const faqs = [
@@ -51,7 +52,7 @@ export default function FaqPage() {
             Frequently Asked Questions
           </h1>
           <p className="text-zinc-500 mt-3 max-w-xl">
-            Everything you need to know about working with Fano Real Estate.
+            Everything you need to know about working with Fano Properties.
           </p>
         </div>
       </div>

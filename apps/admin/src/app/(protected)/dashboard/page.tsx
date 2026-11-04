@@ -33,7 +33,7 @@ async function getDashboardStats() {
     prisma.property.findMany({
       take: 5,
       orderBy: { createdAt: "desc" },
-      select: { id: true, title: true, price: true, currency: true, status: true, published: true, listingType: true },
+      select: { id: true, title: true, price: true, priceUnit: true, currency: true, status: true, published: true, listingType: true },
     }),
   ]);
 
@@ -176,7 +176,7 @@ export default async function DashboardPage() {
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-foreground truncate">{p.title}</p>
                     <p className="text-xs text-muted-foreground">
-                      {formatPrice(parseFloat(p.price.toString()), p.currency)}
+                      {formatPrice(parseFloat(p.price.toString()), p.currency)}{p.priceUnit === "per_sqft" && " /sq ft"}
                     </p>
                   </div>
                   <div className={`px-2 py-0.5 rounded-full text-xs font-medium ${

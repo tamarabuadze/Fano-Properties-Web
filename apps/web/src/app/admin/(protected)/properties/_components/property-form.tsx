@@ -17,6 +17,7 @@ const schema = z.object({
   listingType: z.enum(["sale", "rent", "lease"]),
   status: z.enum(["available", "sold", "rented", "off_market", "off_payment_plan"]),
   price: z.number({ coerce: true }).positive("Must be positive"),
+  priceUnit: z.enum(["total", "per_sqft"]),
   currency: z.literal("AED"),
   location: z.string().min(1, "Required"),
   city: z.string().min(1, "Required"),
@@ -31,6 +32,7 @@ const schema = z.object({
   published: z.boolean(),
   agentId: z.string().optional(),
   metaTitle: z.string().optional(),
+  permitNumber: z.string().trim().max(40).optional(),
   metaDescription: z.string().optional(),
 }).refine((d) => d.propertyType !== "commercial" || !!d.unitType, {
   message: "Choose a unit type",
@@ -68,6 +70,7 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
     resolver: zodResolver(schema),
     defaultValues: {
       currency: "AED",
+      priceUnit: "per_sqft",
       status: "available",
       listingType: "sale",
       propertyType: "apartment",
@@ -90,6 +93,11 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
   useEffect(() => {
     if (!(statuses as readonly string[]).includes(getValues("status"))) setValue("status", "available");
   }, [statuses, getValues, setValue]);
+
+  // Commercial listings are for sale or lease only
+  useEffect(() => {
+    if (isCommercial && getValues("listingType") === "rent") setValue("listingType", "lease");
+  }, [isCommercial, getValues, setValue]);
 
   async function onSubmit(data: FormData) {
     const result = propertyId
@@ -164,7 +172,7 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
             <label className={labelCls}>Listing Type</label>
             <select {...register("listingType")} className={selectCls}>
               <option value="sale">For Sale</option>
-              <option value="rent">For Rent</option>
+              {!isCommercial && <option value="rent">For Rent</option>}
               <option value="lease">For Lease</option>
             </select>
           </div>
@@ -197,7 +205,7 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label className={labelCls}>Price</label>
+            <label className={labelCls}>{watch("priceUnit") === "per_sqft" ? "Price per sq ft" : "Price"}</label>
             <input {...register("price")} type="number" className={inputCls} placeholder="0" />
             {errors.price && <p className="text-xs text-red-500 mt-1">{errors.price.message}</p>}
           </div>
@@ -205,6 +213,13 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
             <label className={labelCls}>Currency</label>
             <select {...register("currency")} className={selectCls}>
               <option value="AED">AED (د.إ)</option>
+            </select>
+          </div>
+          <div>
+            <label className={labelCls}>Price Basis</label>
+            <select {...register("priceUnit")} className={selectCls}>
+              <option value="per_sqft">Per sq ft</option>
+              <option value="total">Total price</option>
             </select>
           </div>
         </div>
@@ -238,6 +253,10 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
           <div>
             <label className={labelCls}>Square Feet</label>
             <input {...register("sqft")} type="number" min="0" className={inputCls} />
+          </div>
+          <div>
+            <label className={labelCls}>DLD Permit No. (Trakheesi)</label>
+            <input {...register("permitNumber")} className={inputCls} placeholder="Required before advertising in Dubai" />
           </div>
         </div>
       </section>
@@ -297,7 +316,7 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
               allowVideo
               value={gallery}
               onChange={setGallery}
-              hint="JPG, PNG or WEBP up to 10 MB, MP4 up to 100 MB"
+              hint="JPG, PNG or WEBP up to 10 MB, MP4 up to 50 MB"
             />
           </div>
         )}

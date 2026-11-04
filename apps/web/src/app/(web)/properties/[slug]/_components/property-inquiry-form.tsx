@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
 import { submitInquiry } from "@/lib/actions/inquiry";
+import { trackLead } from "@/lib/analytics";
 
 const schema = z.object({
   firstName: z.string().min(1, "Required"),
@@ -38,6 +39,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
   async function onSubmit(data: FormData) {
     const result = await submitInquiry({ ...data, propertyId, type: "property" });
     if (result.success) {
+      trackLead("property_inquiry", { property_title: propertyTitle });
       toast.success("Inquiry sent! We'll be in touch shortly.");
       reset();
     } else {

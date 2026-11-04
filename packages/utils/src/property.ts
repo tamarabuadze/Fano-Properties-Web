@@ -28,7 +28,13 @@ const OPTIMIZED_IMAGE_HOSTS = [/\.supabase\.co$/, /^images\.unsplash\.com$/, /^p
 /** Server-side only: reads secret env vars. Local development saves uploads to disk. */
 export function isUploadStorageConfigured(): boolean {
   if (process.env.NODE_ENV !== "production") return true;
+  if (process.env.UPLOAD_DIR || process.env.RAILWAY_VOLUME_MOUNT_PATH) return true;
   return !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
+}
+
+/** Total price of a property, whether its price is stored as a total or per sq ft */
+export function totalPrice(price: number, priceUnit?: string | null, sqft?: number | null): number {
+  return priceUnit === "per_sqft" ? price * (sqft ?? 0) : price;
 }
 
 export function isVideoUrl(url?: string | null): boolean {

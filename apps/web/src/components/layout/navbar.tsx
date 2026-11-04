@@ -17,7 +17,8 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-export function Navbar() {
+export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
+  const links = showAgents ? navLinks : navLinks.filter((l) => l.href !== "/agents");
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -75,7 +76,7 @@ export function Navbar() {
 
             {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
+              {links.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -137,7 +138,7 @@ export function Navbar() {
             className="fixed inset-0 z-40 bg-[#1a1410] pt-16 lg:hidden"
           >
             <div className="container-site py-8 flex flex-col gap-1">
-              {navLinks.map((link, i) => (
+              {links.map((link, i) => (
                 <motion.div
                   key={link.href}
                   initial={{ opacity: 0, x: -16 }}
@@ -160,7 +161,7 @@ export function Navbar() {
               <motion.div
                 initial={{ opacity: 0, x: -16 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navLinks.length * 0.06, duration: 0.2 }}
+                transition={{ delay: links.length * 0.06, duration: 0.2 }}
                 className="mt-4 pt-4 border-t border-white/10"
               >
                 <Link

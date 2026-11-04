@@ -12,17 +12,19 @@ import { CtaSection } from "@/components/sections/cta-section";
 import { getFeaturedProperties } from "@/lib/queries/properties";
 import { getAgents } from "@/lib/queries/agents";
 import { getLatestArticles } from "@/lib/queries/blog";
+import { SOCIAL_LINKS } from "@/lib/social-links";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
 export const metadata: Metadata = {
-  title: "Fano Properties — Luxury Real Estate in Dubai",
+  title: { absolute: "Fano Properties — Luxury Real Estate in Dubai" },
   description:
     "Discover luxury properties for sale and rent in Dubai. Find your dream home with Fano Properties — premium real estate, exceptional service.",
   alternates: { canonical: SITE_URL },
 };
 
-export const revalidate = 3600;
+// Rendered on request: the build has no database, so a cached build-time page shows no listings
+export const dynamic = "force-dynamic";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -40,13 +42,10 @@ const jsonLd = {
         addressLocality: "Dubai",
         addressCountry: "AE",
       },
-      telephone: "+971525719164",
+      telephone: "+97145644635",
       email: "info@fanoproperties.com",
       areaServed: ["Dubai", "Abu Dhabi", "United Arab Emirates"],
-      sameAs: [
-        "https://www.instagram.com/fanoproperties",
-        "https://www.linkedin.com/company/fanoproperties",
-      ],
+      sameAs: SOCIAL_LINKS.map((l) => l.href),
     },
     {
       "@type": "WebSite",
@@ -81,7 +80,7 @@ export default async function HomePage() {
       <FeaturedPropertiesSection properties={properties as never} />
       <PropertyTypesSection />
       <WhyUsSection />
-      <AgentsShowcaseSection agents={agents as never} />
+      {agents.length > 0 && <AgentsShowcaseSection agents={agents as never} />}
       <TestimonialsSection />
       <GoogleReviewsSection />
       <LatestArticlesSection articles={articles as never} />

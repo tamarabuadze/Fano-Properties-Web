@@ -38,6 +38,11 @@ enum PropertyStatus {
   off_payment_plan
 }
 
+enum PriceUnit {
+  total
+  per_sqft
+}
+
 enum CommercialUnitType {
   shop
   warehouse
@@ -118,6 +123,7 @@ model Property {
   status          PropertyStatus  @default(available)
   price           Decimal         @db.Decimal(15, 2)
   currency        String          @default("AED")
+  priceUnit       PriceUnit       @default(total)
   location        String
   city            String
   state           String?
@@ -135,6 +141,8 @@ model Property {
   lng             Decimal?        @db.Decimal(11, 8)
   metaTitle       String?
   metaDescription String?
+  /// Dubai Land Department (Trakheesi) advertising permit number
+  permitNumber    String?
   viewCount       Int             @default(0)
   agentId         String?
   agent           Agent?          @relation(fields: [agentId], references: [id], onDelete: SetNull)

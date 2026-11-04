@@ -13,6 +13,7 @@ const PROPERTY_TYPES = [
   "House",
   "Penthouse",
   "Commercial",
+  "Offices",
 ];
 
 const LISTING_TYPES = ["Buy", "Rent", "Lease"];
@@ -28,7 +29,12 @@ export function PropertySearchSection() {
     const params = new URLSearchParams();
     if (listingType !== "Buy") params.set("listingType", listingType.toLowerCase());
     if (location) params.set("search", location);
-    if (propertyType !== "All Types") params.set("propertyType", propertyType.toLowerCase());
+    if (propertyType === "Offices") {
+      params.set("category", "commercial");
+      params.set("unitType", "offices");
+    } else if (propertyType !== "All Types") {
+      params.set("propertyType", propertyType.toLowerCase());
+    }
     router.push(`/properties?${params.toString()}`);
   }
 

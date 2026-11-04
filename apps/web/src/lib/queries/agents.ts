@@ -1,6 +1,7 @@
 import { prisma } from "@fano/db";
+import { cached, CACHE_TAGS } from "@/lib/cache";
 
-export async function getAgents(limit?: number) {
+async function getAgentsUncached(limit?: number) {
   return prisma.agent.findMany({
     where: { active: true },
     take: limit,
@@ -11,7 +12,7 @@ export async function getAgents(limit?: number) {
   });
 }
 
-export async function getAgentBySlug(slug: string) {
+async function getAgentBySlugUncached(slug: string) {
   return prisma.agent.findUnique({
     where: { slug },
     include: {
@@ -24,3 +25,6 @@ export async function getAgentBySlug(slug: string) {
     },
   });
 }
+
+export const getAgents = cached(getAgentsUncached, "getAgents", [CACHE_TAGS.agents, CACHE_TAGS.properties]);
+export const getAgentBySlug = cached(getAgentBySlugUncached, "getAgentBySlug", [CACHE_TAGS.agents, CACHE_TAGS.properties]);

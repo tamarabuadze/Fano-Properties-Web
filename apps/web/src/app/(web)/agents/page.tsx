@@ -3,12 +3,18 @@ import { AgentCard } from "@fano/ui";
 import { getAgents } from "@/lib/queries/agents";
 import { AnimateStagger } from "@/components/shared/animate-stagger";
 
-export const metadata: Metadata = {
-  title: "Our Agents",
-  description: "Meet our team of expert real estate agents ready to help you find your dream property.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const hasAgents = (await getAgents(1).catch(() => [])).length > 0;
+  return {
+    title: "Our Agents",
+    description: "Meet our team of expert real estate agents ready to help you find your dream property.",
+    alternates: { canonical: "/agents" },
+    // An empty team page stays out of search results
+    ...(!hasAgents && { robots: { index: false, follow: true } }),
+  };
+}
 
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export default async function AgentsPage() {
   const agents = await getAgents().catch(() => []);

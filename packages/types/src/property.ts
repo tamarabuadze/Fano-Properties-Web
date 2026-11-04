@@ -23,6 +23,8 @@ export type Property = WithTimestamps & {
   listingType: ListingType;
   status: PropertyStatus;
   price: number;
+  /** "per_sqft" means price is AED per square foot */
+  priceUnit?: "total" | "per_sqft";
   currency: string;
   location: string;
   city: string;
@@ -69,7 +71,8 @@ export type PropertyCardData = Pick<
 export type PropertyFilters = {
   search?: string;
   category?: PropertyCategory;
-  unitType?: CommercialUnitType;
+  /** "offices" matches both office floors and office spaces */
+  unitType?: CommercialUnitType | "offices";
   propertyType?: PropertyType;
   listingType?: ListingType;
   city?: string;

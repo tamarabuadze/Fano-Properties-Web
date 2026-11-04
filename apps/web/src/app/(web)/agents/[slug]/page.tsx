@@ -13,10 +13,11 @@ interface AgentPageProps {
 export async function generateMetadata({ params }: AgentPageProps): Promise<Metadata> {
   const { slug } = await params;
   const agent = await getAgentBySlug(slug);
-  if (!agent) return { title: "Agent Not Found" };
+  if (!agent || !agent.active) return { title: "Agent Not Found", robots: { index: false } };
   return {
     title: `${agent.firstName} ${agent.lastName} — Real Estate Agent`,
     description: agent.bio?.slice(0, 160),
+    alternates: { canonical: `/agents/${slug}` },
   };
 }
 
@@ -141,6 +142,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
                       slug={p.slug}
                       propertyType={p.propertyType}
                       unitType={p.unitType}
+                      priceUnit={p.priceUnit}
                       listingType={p.listingType}
                       price={parseFloat(p.price.toString())}
                       currency={p.currency}

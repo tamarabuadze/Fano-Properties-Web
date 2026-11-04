@@ -15,7 +15,7 @@ const ALLOWED: Record<string, { ext: string; maxSize: number; matches: (b: Buffe
     maxSize: 10 * MB,
     matches: (b) => b.subarray(0, 4).toString("latin1") === "RIFF" && b.subarray(8, 12).toString("latin1") === "WEBP",
   },
-  "video/mp4": { ext: "mp4", maxSize: 100 * MB, matches: (b) => b.subarray(4, 8).toString("latin1") === "ftyp" },
+  "video/mp4": { ext: "mp4", maxSize: 50 * MB, matches: (b) => b.subarray(4, 8).toString("latin1") === "ftyp" },
 };
 
 export async function POST(req: Request) {
@@ -44,6 +44,16 @@ export async function POST(req: Request) {
   }
 
   const name = `${randomUUID()}.${rule.ext}`;
+
+  // Railway Volume: attaching a volume sets RAILWAY_VOLUME_MOUNT_PATH
+  const mount = process.env.RAILWAY_VOLUME_MOUNT_PATH;
+  const volumeDir = process.env.UPLOAD_DIR ?? (mount ? path.join(mount, "uploads") : null);
+  if (volumeDir) {
+    await mkdir(volumeDir, { recursive: true });
+    await writeFile(path.join(volumeDir, name), bytes);
+    return NextResponse.json({ url: `/media/${name}` });
+  }
+
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -61,7 +71,7 @@ export async function POST(req: Request) {
   }
 
   // Local development only: files go to the web app's public folder.
-  // Railway's disk is wiped on deploy, so production must use Supabase.
+  // Railway's normal disk is wiped on deploy, so production needs a volume or Supabase.
   if (process.env.NODE_ENV === "production") {
     return NextResponse.json({ error: "File storage isn't configured yet." }, { status: 500 });
   }
