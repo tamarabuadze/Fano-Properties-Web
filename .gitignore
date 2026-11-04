@@ -16,3 +16,6 @@ apps/e2e/playwright-report/
 apps/e2e/.auth/
 # Supabase schema helper (keep in repo for reference)
 # supabase-schema.sql
+
+# TypeScript incremental build cache
+*.tsbuildinfo
