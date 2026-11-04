@@ -1,5 +1,6 @@
 import { prisma } from "@fano/db";
 import type { PropertyFilters } from "@fano/types";
+import { cached, CACHE_TAGS } from "@/lib/cache";
 
 // Prisma returns Decimal objects for price/lat/lng which can't cross the
 // Server → Client Component boundary. Convert them to plain numbers here.
@@ -12,7 +13,7 @@ function serialize<T extends { price: unknown; lat?: unknown; lng?: unknown }>(p
   };
 }
 
-export async function getFeaturedProperties(limit = 6) {
+async function getFeaturedPropertiesUncached(limit = 6) {
   const rows = await prisma.property.findMany({
     where: { featured: true, published: true },
     take: limit,
@@ -22,7 +23,7 @@ export async function getFeaturedProperties(limit = 6) {
   return rows.map(serialize);
 }
 
-export async function getProperties(filters: PropertyFilters = {}) {
+async function getPropertiesUncached(filters: PropertyFilters = {}) {
   const {
     search,
     category,
@@ -83,7 +84,7 @@ export async function getProperties(filters: PropertyFilters = {}) {
   };
 }
 
-export async function getPropertyBySlug(slug: string) {
+async function getPropertyBySlugUncached(slug: string) {
   const row = await prisma.property.findUnique({
     where: { slug },
     include: {
@@ -94,7 +95,7 @@ export async function getPropertyBySlug(slug: string) {
   return row ? serialize(row) : null;
 }
 
-export async function getRelatedProperties(propertyId: string, propertyType: string, limit = 3) {
+async function getRelatedPropertiesUncached(propertyId: string, propertyType: string, limit = 3) {
   const rows = await prisma.property.findMany({
     where: {
       published: true,
@@ -114,3 +115,8 @@ export async function incrementPropertyViewCount(id: string) {
     data: { viewCount: { increment: 1 } },
   });
 }
+
+export const getFeaturedProperties = cached(getFeaturedPropertiesUncached, "getFeaturedProperties", [CACHE_TAGS.properties]);
+export const getProperties = cached(getPropertiesUncached, "getProperties", [CACHE_TAGS.properties]);
+export const getPropertyBySlug = cached(getPropertyBySlugUncached, "getPropertyBySlug", [CACHE_TAGS.properties]);
+export const getRelatedProperties = cached(getRelatedPropertiesUncached, "getRelatedProperties", [CACHE_TAGS.properties]);

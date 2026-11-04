@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { after } from "next/server";
 import { getPropertyBySlug, getRelatedProperties, incrementPropertyViewCount } from "@/lib/queries/properties";
 import { PropertyGallery } from "./_components/property-gallery";
 import { PropertyOverview } from "./_components/property-overview";
@@ -48,7 +49,8 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
   if (!property || !property.published) notFound();
 
   const related = await getRelatedProperties(property.id, property.propertyType, 3);
-  await incrementPropertyViewCount(property.id);
+  // Counted after the response is sent, so visitors do not wait on it
+  after(() => incrementPropertyViewCount(property.id).catch(() => {}));
 
   const allImages = [
     property.coverImage,

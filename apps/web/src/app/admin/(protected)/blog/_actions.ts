@@ -1,7 +1,8 @@
 "use server";
 
 import { prisma } from "@fano/db";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { CACHE_TAGS } from "@/lib/cache";
 import { z } from "zod";
 import { generateSlug } from "@fano/utils";
 import { requireAdmin } from "@/lib/admin-auth";
@@ -35,6 +36,7 @@ export async function createArticle(data: z.infer<typeof articleSchema>) {
       },
     });
     revalidatePath("/admin/blog");
+    revalidateTag(CACHE_TAGS.blog);
     return { success: true, id: article.id };
   } catch {
     return { success: false, error: "Failed to create article." };
@@ -51,6 +53,7 @@ export async function updateArticle(id: string, data: Partial<z.infer<typeof art
     };
     await prisma.blogArticle.update({ where: { id }, data: updateData });
     revalidatePath("/admin/blog");
+    revalidateTag(CACHE_TAGS.blog);
     return { success: true };
   } catch {
     return { success: false, error: "Failed to update article." };
@@ -62,6 +65,7 @@ export async function deleteArticle(id: string) {
   try {
     await prisma.blogArticle.delete({ where: { id } });
     revalidatePath("/admin/blog");
+    revalidateTag(CACHE_TAGS.blog);
     return { success: true };
   } catch {
     return { success: false, error: "Failed to delete article." };
@@ -76,6 +80,7 @@ export async function toggleArticlePublished(id: string, published: boolean) {
       data: { published, publishedAt: published ? new Date() : null },
     });
     revalidatePath("/admin/blog");
+    revalidateTag(CACHE_TAGS.blog);
     return { success: true };
   } catch {
     return { success: false, error: "Failed to update." };

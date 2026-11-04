@@ -1,6 +1,7 @@
 import { prisma } from "@fano/db";
+import { cached, CACHE_TAGS } from "@/lib/cache";
 
-export async function getBlogArticles(options: {
+async function getBlogArticlesUncached(options: {
   limit?: number;
   page?: number;
   categorySlug?: string;
@@ -43,7 +44,7 @@ export async function getBlogArticles(options: {
   };
 }
 
-export async function getBlogArticleBySlug(slug: string) {
+async function getBlogArticleBySlugUncached(slug: string) {
   return prisma.blogArticle.findUnique({
     where: { slug },
     include: {
@@ -53,7 +54,7 @@ export async function getBlogArticleBySlug(slug: string) {
   });
 }
 
-export async function getLatestArticles(limit = 3) {
+async function getLatestArticlesUncached(limit = 3) {
   return prisma.blogArticle.findMany({
     where: { published: true },
     take: limit,
@@ -62,8 +63,13 @@ export async function getLatestArticles(limit = 3) {
   });
 }
 
-export async function getBlogCategories() {
+async function getBlogCategoriesUncached() {
   return prisma.blogCategory.findMany({
     include: { _count: { select: { articles: { where: { published: true } } } } },
   });
 }
+
+export const getBlogArticles = cached(getBlogArticlesUncached, "getBlogArticles", [CACHE_TAGS.blog]);
+export const getBlogArticleBySlug = cached(getBlogArticleBySlugUncached, "getBlogArticleBySlug", [CACHE_TAGS.blog]);
+export const getLatestArticles = cached(getLatestArticlesUncached, "getLatestArticles", [CACHE_TAGS.blog]);
+export const getBlogCategories = cached(getBlogCategoriesUncached, "getBlogCategories", [CACHE_TAGS.blog]);

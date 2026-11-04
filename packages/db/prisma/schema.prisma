@@ -141,6 +141,8 @@ model Property {
   lng             Decimal?        @db.Decimal(11, 8)
   metaTitle       String?
   metaDescription String?
+  /// Dubai Land Department (Trakheesi) advertising permit number
+  permitNumber    String?
   viewCount       Int             @default(0)
   agentId         String?
   agent           Agent?          @relation(fields: [agentId], references: [id], onDelete: SetNull)

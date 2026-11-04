@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
           <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#1a1410]">
             Privacy Policy
           </h1>
-          <p className="text-zinc-500 mt-3">Last updated: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</p>
+          <p className="text-zinc-500 mt-3">Last updated: November 4, 2026</p>
         </div>
       </div>
 
@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
         <div className="prose prose-zinc max-w-none prose-headings:font-semibold prose-headings:[letter-spacing:-0.02em]">
           <h2>Information We Collect</h2>
           <p>
-            We collect information you provide directly to us, such as when you create an account, submit an inquiry, or communicate with our team. This may include your name, email address, phone number, and property preferences.
+            We collect information you provide directly to us, such as when you submit an inquiry, use our ROI calculator, or communicate with our team. This may include your name, email address, phone number, and property preferences.
           </p>
 
           <h2>How We Use Your Information</h2>
@@ -40,9 +40,12 @@ export default function PrivacyPolicyPage() {
             We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
           </p>
 
-          <h2>Cookies</h2>
+          <h2>Cookies, Analytics and Advertising</h2>
           <p>
-            We use cookies and similar tracking technologies to enhance your experience on our website. You can control cookie settings through your browser preferences.
+            We use Google Analytics to understand how visitors use our website, and Google Ads to show our property advertisements and measure how they perform, for example when an inquiry is sent or a call or WhatsApp link is tapped. These services use cookies and similar technologies and may collect information such as your device, browser, approximate location and the pages you visit. Google processes this information under its own privacy policy, available at policies.google.com/privacy.
+          </p>
+          <p>
+            Visitors in the European Economic Area, the United Kingdom and Switzerland are asked for consent before these cookies are used, and can decline. Anyone can control or delete cookies through their browser settings, and can manage personalised advertising at adssettings.google.com.
           </p>
 
           <h2>Your Rights</h2>

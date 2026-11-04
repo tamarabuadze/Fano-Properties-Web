@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { formatPrice } from "@fano/utils";
 import { submitInquiry } from "@/lib/actions/inquiry";
 import type { RoiInputs, RoiResult } from "@/lib/roi";
+import { trackLead } from "@/lib/analytics";
 
 const schema = z.object({
   firstName: z.string().min(1, "Required"),
@@ -59,6 +60,7 @@ export function RoiLeadForm({ inputs, result, propertyId, propertyTitle }: RoiLe
       type: propertyId ? "property" : "general",
     });
     if (res.success) {
+      trackLead("roi_lead");
       toast.success("Thanks! An advisor will contact you about these numbers shortly.");
       reset();
     } else {

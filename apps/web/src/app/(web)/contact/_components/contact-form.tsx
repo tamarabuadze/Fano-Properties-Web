@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
 import { submitInquiry } from "@/lib/actions/inquiry";
+import { trackLead } from "@/lib/analytics";
 
 const schema = z.object({
   firstName: z.string().min(1, "Required"),
@@ -27,6 +28,7 @@ export function ContactForm() {
   async function onSubmit(data: FormData) {
     const result = await submitInquiry({ ...data, type: "general" });
     if (result.success) {
+      trackLead("contact");
       toast.success("Message sent! We'll be in touch shortly.");
       reset();
     } else {

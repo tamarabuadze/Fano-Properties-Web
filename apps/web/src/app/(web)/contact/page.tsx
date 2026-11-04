@@ -26,15 +26,21 @@ export default function ContactPage() {
           <div className="space-y-6 mb-10">
             {[
               { icon: MapPin, text: "3404, 34th Floor, Churchill Tower, Business Bay, Dubai, UAE" },
-              { icon: Phone, text: "04 564 4635" },
-              { icon: Mail, text: "info@fanoproperties.com" },
+              { icon: Phone, text: "04 564 4635", href: "tel:+97145644635" },
+              { icon: Mail, text: "info@fanoproperties.com", href: "mailto:info@fanoproperties.com" },
               { icon: Clock, text: "Mon–Fri 9am–6pm, Sat 10am–4pm" },
-            ].map(({ icon: Icon, text }) => (
+            ].map(({ icon: Icon, text, href }: { icon: typeof Phone; text: string; href?: string }) => (
               <div key={text} className="flex items-center gap-4 text-sm text-zinc-600">
                 <div className="h-9 w-9 rounded-xl bg-zinc-100 flex items-center justify-center shrink-0">
                   <Icon className="h-4 w-4 text-zinc-500" />
                 </div>
-                <span>{text}</span>
+                {href ? (
+                  <a href={href} data-track={href.startsWith("tel:") ? "phone_click" : undefined} className="hover:text-[#1a1410] underline-offset-4 hover:underline">
+                    {text}
+                  </a>
+                ) : (
+                  <span>{text}</span>
+                )}
               </div>
             ))}
           </div>

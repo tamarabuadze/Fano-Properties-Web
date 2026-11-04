@@ -1,7 +1,8 @@
 "use server";
 
 import { prisma } from "@fano/db";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { CACHE_TAGS } from "@/lib/cache";
 import { z } from "zod";
 import { generateSlug } from "@fano/utils";
 import { requireAdmin } from "@/lib/admin-auth";
@@ -41,6 +42,7 @@ export async function createAgent(data: z.infer<typeof agentSchema>) {
       },
     });
     revalidatePath("/admin/agents");
+    revalidateTag(CACHE_TAGS.agents);
     return { success: true, id: agent.id };
   } catch {
     return { success: false, error: "Failed to create agent." };
@@ -52,6 +54,7 @@ export async function updateAgent(id: string, data: Partial<z.infer<typeof agent
   try {
     await prisma.agent.update({ where: { id }, data });
     revalidatePath("/admin/agents");
+    revalidateTag(CACHE_TAGS.agents);
     return { success: true };
   } catch {
     return { success: false, error: "Failed to update agent." };
@@ -63,6 +66,7 @@ export async function deleteAgent(id: string) {
   try {
     await prisma.agent.delete({ where: { id } });
     revalidatePath("/admin/agents");
+    revalidateTag(CACHE_TAGS.agents);
     return { success: true };
   } catch {
     return { success: false, error: "Failed to delete agent." };
@@ -74,6 +78,7 @@ export async function toggleAgentActive(id: string, active: boolean) {
   try {
     await prisma.agent.update({ where: { id }, data: { active } });
     revalidatePath("/admin/agents");
+    revalidateTag(CACHE_TAGS.agents);
     return { success: true };
   } catch {
     return { success: false, error: "Failed to update." };

@@ -59,6 +59,7 @@ export default async function EditPropertyPage({ params }: { params: Promise<{ i
           published: property.published,
           agentId: property.agentId ?? undefined,
           metaTitle: property.metaTitle ?? undefined,
+          permitNumber: property.permitNumber ?? undefined,
           metaDescription: property.metaDescription ?? undefined,
         }}
       />

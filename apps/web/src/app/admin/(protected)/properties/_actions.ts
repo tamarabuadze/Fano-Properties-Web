@@ -1,7 +1,8 @@
 "use server";
 
 import { prisma } from "@fano/db";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { CACHE_TAGS } from "@/lib/cache";
 import { z } from "zod";
 import { generateSlug } from "@fano/utils";
 import { requireAdmin } from "@/lib/admin-auth";
@@ -30,6 +31,7 @@ const propertySchema = z.object({
   published: z.boolean().default(false),
   agentId: z.string().optional(),
   metaTitle: z.string().optional(),
+  permitNumber: z.string().trim().max(40).optional(),
   metaDescription: z.string().optional(),
 });
 
@@ -63,7 +65,9 @@ export async function createProperty(data: z.infer<typeof propertySchema>) {
       data: { ...rest, images: { create: (gallery ?? []).map((url, position) => ({ url, position })) }, slug, price: parsed.data.price, agentId: parsed.data.agentId || undefined },
     });
     revalidatePath("/admin/properties");
+    revalidateTag(CACHE_TAGS.properties);
     revalidatePath("/admin/properties");
+    revalidateTag(CACHE_TAGS.properties);
     return { success: true, id: property.id };
   } catch (e: unknown) {
     if ((e as { code?: string }).code === "P2002") return { success: false, error: "A property with this title already exists." };
@@ -86,6 +90,7 @@ export async function updateProperty(id: string, data: Partial<z.infer<typeof pr
       },
     });
     revalidatePath("/admin/properties");
+    revalidateTag(CACHE_TAGS.properties);
     revalidatePath(`/properties/${id}`);
     return { success: true };
   } catch {
@@ -98,6 +103,7 @@ export async function deleteProperty(id: string) {
   try {
     await prisma.property.delete({ where: { id } });
     revalidatePath("/admin/properties");
+    revalidateTag(CACHE_TAGS.properties);
     return { success: true };
   } catch {
     return { success: false, error: "Failed to delete property." };
@@ -109,6 +115,7 @@ export async function togglePropertyPublished(id: string, published: boolean) {
   try {
     await prisma.property.update({ where: { id }, data: { published } });
     revalidatePath("/admin/properties");
+    revalidateTag(CACHE_TAGS.properties);
     revalidatePath(`/properties/${id}`);
     return { success: true };
   } catch {
@@ -121,6 +128,7 @@ export async function togglePropertyFeatured(id: string, featured: boolean) {
   try {
     await prisma.property.update({ where: { id }, data: { featured } });
     revalidatePath("/admin/properties");
+    revalidateTag(CACHE_TAGS.properties);
     return { success: true };
   } catch {
     return { success: false, error: "Failed to update." };

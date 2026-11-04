@@ -32,6 +32,7 @@ const schema = z.object({
   published: z.boolean(),
   agentId: z.string().optional(),
   metaTitle: z.string().optional(),
+  permitNumber: z.string().trim().max(40).optional(),
   metaDescription: z.string().optional(),
 }).refine((d) => d.propertyType !== "commercial" || !!d.unitType, {
   message: "Choose a unit type",
@@ -252,6 +253,10 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
           <div>
             <label className={labelCls}>Square Feet</label>
             <input {...register("sqft")} type="number" min="0" className={inputCls} />
+          </div>
+          <div>
+            <label className={labelCls}>DLD Permit No. (Trakheesi)</label>
+            <input {...register("permitNumber")} className={inputCls} placeholder="Required before advertising in Dubai" />
           </div>
         </div>
       </section>

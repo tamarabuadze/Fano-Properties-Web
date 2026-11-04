@@ -1,4 +1,4 @@
-import { BedDouble, Bath, Maximize2, MapPin, Calendar, Eye, Store } from "lucide-react";
+import { BedDouble, Bath, Maximize2, MapPin, Calendar, Eye, Store, BadgeCheck } from "lucide-react";
 import { PROPERTY_STATUS_LABELS, formatPrice, formatDate, unitTypeLabel } from "@fano/utils";
 
 interface Property {
@@ -20,6 +20,7 @@ interface Property {
   sqft: number;
   viewCount: number;
   createdAt: Date;
+  permitNumber?: string | null;
 }
 
 export function PropertyOverview({ property }: { property: Property }) {
@@ -120,6 +121,12 @@ export function PropertyOverview({ property }: { property: Property }) {
           <Eye className="h-4 w-4" />
           <span>{property.viewCount.toLocaleString()} views</span>
         </div>
+        {property.permitNumber && (
+          <div className="flex items-center gap-2">
+            <BadgeCheck className="h-4 w-4" />
+            <span>DLD Permit No. {property.permitNumber}</span>
+          </div>
+        )}
       </div>
     </div>
   );
