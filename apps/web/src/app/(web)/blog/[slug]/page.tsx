@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: BlogArticlePageProps): Promis
   if (!article || !article.published) return { title: "Article Not Found", robots: { index: false } };
 
   return {
-    title: article.metaTitle ?? article.title,
-    description: article.metaDescription ?? article.excerpt,
+    title: article.metaTitle?.trim() || article.title,
+    description: article.metaDescription?.trim() || article.excerpt,
     alternates: { canonical: `/blog/${slug}` },
     openGraph: {
       title: article.title,
@@ -41,7 +41,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: article.title,
-    description: article.metaDescription ?? article.excerpt,
+    description: article.metaDescription?.trim() || article.excerpt,
     url,
     mainEntityOfPage: url,
     ...(article.coverImage && { image: [article.coverImage] }),

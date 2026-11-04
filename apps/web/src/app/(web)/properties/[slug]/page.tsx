@@ -24,8 +24,8 @@ export async function generateMetadata({ params }: PropertyPageProps): Promise<M
 
   const url = `${SITE_URL}/properties/${slug}`;
   return {
-    title: property.metaTitle ?? property.title,
-    description: property.metaDescription ?? property.description.slice(0, 160),
+    title: property.metaTitle?.trim() || property.title,
+    description: property.metaDescription?.trim() || property.description.slice(0, 160),
     alternates: { canonical: url },
     openGraph: {
       type: "website",
