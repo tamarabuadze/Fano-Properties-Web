@@ -31,7 +31,7 @@ const features = [
 
 export function WhyUsSection() {
   return (
-    <section className="section-y bg-white overflow-x-clip">
+    <section className="section-y bg-surface overflow-x-clip">
       <div className="container-site">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-24 items-center">
           {/* Image side */}
@@ -81,11 +81,11 @@ export function WhyUsSection() {
                   className="flex gap-4"
                 >
                   <div className="h-10 w-10 rounded-xl bg-zinc-50 border border-border flex items-center justify-center shrink-0">
-                    <f.icon className="h-5 w-5 text-[#9a7957]" />
+                    <f.icon className="h-5 w-5 text-[#8C6A47]" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-[#3d3020] text-sm mb-1">{f.title}</h3>
-                    <p className="text-sm text-[#7e6244]/70 leading-relaxed">{f.description}</p>
+                    <h3 className="font-semibold text-[#2B2520] text-sm mb-1">{f.title}</h3>
+                    <p className="text-sm text-[#6B5038]/70 leading-relaxed">{f.description}</p>
                   </div>
                 </motion.div>
               ))}

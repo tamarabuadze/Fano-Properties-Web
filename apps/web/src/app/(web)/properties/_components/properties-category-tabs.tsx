@@ -39,7 +39,7 @@ export function PropertiesCategoryTabs({ category, search, listingType, unitType
           scroll={false}
           className={cn(
             "px-6 h-10 inline-flex items-center rounded-full text-sm font-medium transition-colors",
-            category === tab.value ? "bg-[#1a1410] text-[#c9a96e]" : "text-zinc-600 hover:text-[#1a1410]"
+            category === tab.value ? "bg-[#2B2520] text-[#E2A862]" : "text-zinc-600 hover:text-[#2B2520]"
           )}
         >
           {tab.label}
@@ -61,7 +61,7 @@ export function PropertiesCategoryTabs({ category, search, listingType, unitType
             scroll={false}
             className={cn(
               "px-6 h-10 inline-flex items-center rounded-full text-sm font-medium transition-colors",
-              listingType === tab.value ? "bg-[#c9a96e] text-[#1a1410]" : "text-zinc-600 hover:text-[#1a1410]"
+              listingType === tab.value ? "bg-[#E2A862] text-[#2B2520]" : "text-zinc-600 hover:text-[#2B2520]"
             )}
           >
             {tab.label}

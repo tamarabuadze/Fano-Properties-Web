@@ -41,7 +41,7 @@ export function SectionHeader({
           "font-semibold leading-tight text-balance",
           "[letter-spacing:-0.025em]",
           "text-3xl sm:text-4xl lg:text-[2.75rem]",
-          light ? "text-white" : "text-[#3d3020]"
+          light ? "text-white" : "text-[#2B2520]"
         )}
       >
         {title}
@@ -50,7 +50,7 @@ export function SectionHeader({
         <p
           className={cn(
             "text-base lg:text-lg leading-relaxed",
-            light ? "text-white/60" : "text-[#7e6244]/80"
+            light ? "text-white/60" : "text-[#6B5038]/80"
           )}
         >
           {description}

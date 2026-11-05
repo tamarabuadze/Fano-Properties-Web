@@ -29,7 +29,7 @@ export default async function Image() {
           height: "100%",
           display: "flex",
           position: "relative",
-          background: "#1a1410",
+          background: "#2B2520",
           fontFamily: "system-ui, sans-serif",
         }}
       >
@@ -74,7 +74,7 @@ export default async function Image() {
           {/* Eyebrow */}
           <div
             style={{
-              color: "#c9a96e",
+              color: "#E2A862",
               fontSize: 18,
               fontWeight: 600,
               letterSpacing: "0.18em",
@@ -123,7 +123,7 @@ export default async function Image() {
           >
             <div
               style={{
-                background: "#c9a96e",
+                background: "#E2A862",
                 color: "#ffffff",
                 padding: "14px 36px",
                 borderRadius: 50,

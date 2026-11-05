@@ -39,12 +39,12 @@ function AgentCard({
     <Link
       href={`/agents/${slug}`}
       className={cn(
-        "group flex flex-col items-center text-center p-6 rounded-2xl bg-white border border-border h-full",
+        "group flex flex-col items-center text-center p-6 rounded-2xl bg-surface border border-border h-full",
         "transition-all duration-500 hover:shadow-xl hover:-translate-y-1",
         className
       )}
     >
-      <div className="relative h-20 w-20 rounded-full overflow-hidden bg-zinc-100 mb-4 ring-2 ring-transparent group-hover:ring-[#c3ae8f]/40 transition-all duration-300">
+      <div className="relative h-20 w-20 rounded-full overflow-hidden bg-zinc-100 mb-4 ring-2 ring-transparent group-hover:ring-[#E2A862]/40 transition-all duration-300">
         {avatar ? (
           <Image
             src={avatar}
@@ -65,11 +65,11 @@ function AgentCard({
       </div>
 
       <div className="flex-1 flex flex-col items-center">
-        <h3 className="font-semibold text-lg" style={{ color: "#3d3020" }}>
+        <h3 className="font-semibold text-lg" style={{ color: "#2B2520" }}>
           {firstName} {lastName}
         </h3>
         {title && (
-          <p className="text-sm mt-0.5" style={{ color: "#9a7957" }}>{title}</p>
+          <p className="text-sm mt-0.5" style={{ color: "#8C6A47" }}>{title}</p>
         )}
         {specialization && (
           <p className="text-xs mt-1" style={{ color: "#b09070" }}>{specialization}</p>
@@ -77,7 +77,7 @@ function AgentCard({
 
         {totalListings !== undefined && (
           <div className="mt-3 px-3 py-1 rounded-full border" style={{ backgroundColor: "#faf7f2", borderColor: "#e6d8c4" }}>
-            <span className="text-xs font-medium" style={{ color: "#9a7957" }}>
+            <span className="text-xs font-medium" style={{ color: "#8C6A47" }}>
               {totalListings} listings
             </span>
           </div>
@@ -86,12 +86,12 @@ function AgentCard({
 
       <div className="mt-4 flex gap-2 w-full">
         {phone && (
-          <div className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl border transition-colors" style={{ borderColor: "#e6d8c4", color: "#9a7957" }}>
+          <div className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl border transition-colors" style={{ borderColor: "#e6d8c4", color: "#8C6A47" }}>
             <Phone className="h-3.5 w-3.5" />
             <span>Call</span>
           </div>
         )}
-        <div className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl border transition-colors" style={{ borderColor: "#e6d8c4", color: "#9a7957" }}>
+        <div className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl border transition-colors" style={{ borderColor: "#e6d8c4", color: "#8C6A47" }}>
           <Mail className="h-3.5 w-3.5" />
           <span>Email</span>
         </div>

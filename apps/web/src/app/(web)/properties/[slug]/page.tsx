@@ -90,7 +90,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div className="min-h-screen bg-surface pt-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -108,7 +108,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
             )}
             {property.listingType === "sale" && fullPrice > 0 && (
               <section id="roi" className="scroll-mt-24">
-                <h2 className="text-2xl font-semibold [letter-spacing:-0.02em] text-[#1a1410]">Investment calculator</h2>
+                <h2 className="text-2xl font-semibold [letter-spacing:-0.02em] text-[#2B2520]">Investment calculator</h2>
                 <p className="text-sm text-zinc-500 mt-1 mb-6">
                   Estimate the rental yield and return on this property. Adjust any figure to match your plans.
                 </p>

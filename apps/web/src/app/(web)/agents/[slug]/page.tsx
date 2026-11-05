@@ -33,7 +33,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
   ].filter((l) => l.href);
 
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div className="min-h-screen bg-surface pt-20">
       <div className="container-site py-16">
         <div className="grid lg:grid-cols-3 gap-12 mb-16">
           {/* Agent profile */}
@@ -58,7 +58,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
                 )}
               </div>
 
-              <h1 className="text-2xl font-semibold [letter-spacing:-0.02em] text-[#1a1410]">
+              <h1 className="text-2xl font-semibold [letter-spacing:-0.02em] text-[#2B2520]">
                 {agent.firstName} {agent.lastName}
               </h1>
               {agent.title && (
@@ -69,7 +69,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
                 {agent.phone && (
                   <a
                     href={`tel:${agent.phone}`}
-                    className="flex items-center gap-3 text-sm text-zinc-700 hover:text-[#1a1410] transition-colors"
+                    className="flex items-center gap-3 text-sm text-zinc-700 hover:text-[#2B2520] transition-colors"
                   >
                     <Phone className="h-4 w-4 text-zinc-400" />
                     {agent.phone}
@@ -77,7 +77,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
                 )}
                 <a
                   href={`mailto:${agent.email}`}
-                  className="flex items-center gap-3 text-sm text-zinc-700 hover:text-[#1a1410] transition-colors"
+                  className="flex items-center gap-3 text-sm text-zinc-700 hover:text-[#2B2520] transition-colors"
                 >
                   <Mail className="h-4 w-4 text-zinc-400" />
                   {agent.email}
@@ -93,7 +93,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={label}
-                      className="h-10 w-10 rounded-full border border-border flex items-center justify-center text-zinc-500 hover:text-[#1a1410] hover:border-zinc-400 transition-all"
+                      className="h-10 w-10 rounded-full border border-border flex items-center justify-center text-zinc-500 hover:text-[#2B2520] hover:border-zinc-400 transition-all"
                     >
                       <Icon className="h-4 w-4" />
                     </a>
@@ -107,7 +107,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
                   { label: "Experience", value: agent.yearsExperience ? `${agent.yearsExperience}y` : "—" },
                 ].map((stat) => (
                   <div key={stat.label} className="p-4 rounded-xl bg-zinc-50 border border-border text-center">
-                    <p className="text-xl font-semibold text-[#1a1410] [letter-spacing:-0.02em]">{stat.value}</p>
+                    <p className="text-xl font-semibold text-[#2B2520] [letter-spacing:-0.02em]">{stat.value}</p>
                     <p className="text-xs text-zinc-500 mt-0.5">{stat.label}</p>
                   </div>
                 ))}
@@ -119,7 +119,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
           <div className="lg:col-span-2">
             {agent.bio && (
               <div className="mb-12">
-                <h2 className="text-xl font-semibold text-[#1a1410] mb-4">About</h2>
+                <h2 className="text-xl font-semibold text-[#2B2520] mb-4">About</h2>
                 <div className="space-y-4">
                   {agent.bio.split("\n").map((para, i) => (
                     <p key={i} className="text-zinc-600 leading-relaxed">{para}</p>
@@ -130,7 +130,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
 
             {agent.properties.length > 0 && (
               <div>
-                <h2 className="text-xl font-semibold text-[#1a1410] mb-6">
+                <h2 className="text-xl font-semibold text-[#2B2520] mb-6">
                   Active Listings ({agent.properties.length})
                 </h2>
                 <AnimateStagger className="grid grid-cols-1 sm:grid-cols-2 gap-5">

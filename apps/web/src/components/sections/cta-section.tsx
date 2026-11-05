@@ -8,14 +8,14 @@ import { ArrowRight } from "lucide-react";
 
 export function CtaSection() {
   return (
-    <section className="section-y bg-white">
+    <section className="section-y bg-surface">
       <div className="container-site">
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="relative overflow-hidden rounded-3xl bg-[#1a1410] min-h-[400px] lg:min-h-[480px] flex items-center"
+          className="relative overflow-hidden rounded-3xl bg-[#2B2520] min-h-[400px] lg:min-h-[480px] flex items-center"
         >
           {/* Background image */}
           <div className="absolute inset-0">
@@ -26,7 +26,7 @@ export function CtaSection() {
               sizes="100vw"
               className="object-cover opacity-40"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#1a1410] via-[#1a1410]/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#2B2520] via-[#2B2520]/80 to-transparent" />
           </div>
 
           <div className="relative z-10 p-10 lg:p-16 max-w-2xl">

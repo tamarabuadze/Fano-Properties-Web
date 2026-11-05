@@ -34,7 +34,7 @@ export function AgentsShowcaseSection({ agents }: AgentsShowcaseProps) {
           />
           <Link
             href="/agents"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#9a7957] hover:text-[#7e6244] hover:gap-3 transition-all group shrink-0"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#8C6A47] hover:text-[#6B5038] hover:gap-3 transition-all group shrink-0"
           >
             Meet all agents
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

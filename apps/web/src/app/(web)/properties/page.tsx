@@ -66,7 +66,7 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
     minBedrooms: isCommercial ? undefined : raw.minBedrooms,
   };
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div className="min-h-screen bg-surface pt-20">
       <PropertiesHeader />
       <div className="container-site py-10">
         <PropertiesCategoryTabs category={category} search={params.search} listingType={params.listingType} unitType={params.unitType} />

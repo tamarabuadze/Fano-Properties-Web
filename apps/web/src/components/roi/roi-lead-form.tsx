@@ -74,7 +74,7 @@ export function RoiLeadForm({ inputs, result, propertyId, propertyTitle }: RoiLe
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="rounded-2xl border border-border p-6 space-y-3">
       <div>
-        <h3 className="text-sm font-semibold text-[#1a1410]">Talk these numbers through with an advisor</h3>
+        <h3 className="text-sm font-semibold text-[#2B2520]">Talk these numbers through with an advisor</h3>
         <p className="text-xs text-zinc-500 mt-1">
           We&apos;ll send your figures to a Fano investment advisor, who will get back to you.
         </p>
@@ -97,7 +97,7 @@ export function RoiLeadForm({ inputs, result, propertyId, propertyTitle }: RoiLe
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full h-11 rounded-xl bg-[#9a7957] text-white text-sm font-medium hover:bg-[#7e6244] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full h-11 rounded-xl bg-[#8C6A47] text-white text-sm font-medium hover:bg-[#6B5038] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isSubmitting ? "Sending…" : "Request a free consultation"}
       </button>

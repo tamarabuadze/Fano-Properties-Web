@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import { Toaster } from "sonner";
 import { QueryProvider } from "@/components/shared/query-provider";
 import "./globals.css";
@@ -7,6 +7,14 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+// Headings use Montserrat, as in the Fano team app
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-montserrat",
   display: "swap",
 });
 
@@ -64,7 +72,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#1a1410",
+  themeColor: "#E6DFD5",
   width: "device-width",
   initialScale: 1,
 };
@@ -75,8 +83,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
-      <body className="min-h-screen bg-white text-black antialiased">
+    <html lang="en" className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
+      <body className="min-h-screen bg-sand text-black antialiased">
         <QueryProvider>
           {children}
           <Toaster position="bottom-right" richColors />

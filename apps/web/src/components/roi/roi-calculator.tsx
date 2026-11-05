@@ -56,7 +56,7 @@ export function RoiCalculator({
                 onClick={() => set("useMortgage")(opt.value)}
                 className={cn(
                   "px-5 h-9 rounded-full text-sm font-medium transition-colors",
-                  inputs.useMortgage === opt.value ? "bg-[#1a1410] text-white" : "text-zinc-600 hover:text-[#1a1410]"
+                  inputs.useMortgage === opt.value ? "bg-[#2B2520] text-white" : "text-zinc-600 hover:text-[#2B2520]"
                 )}
               >
                 {opt.label}
@@ -98,7 +98,7 @@ export function RoiCalculator({
           <button
             type="button"
             onClick={() => setShowAdvanced((v) => !v)}
-            className="w-full flex items-center justify-between px-5 py-4 text-sm font-medium text-[#1a1410]"
+            className="w-full flex items-center justify-between px-5 py-4 text-sm font-medium text-[#2B2520]"
             aria-expanded={showAdvanced}
           >
             Detailed assumptions
@@ -152,8 +152,8 @@ export function RoiCalculator({
 
       {/* ── Results ────────────────────────────────────────── */}
       <div className={cn("min-w-0 space-y-6", !compact && "lg:col-span-2")}>
-        <div className={cn("rounded-2xl bg-[#1a1410] text-white p-6", !compact && "lg:sticky lg:top-24")}>
-          <p className="text-xs font-medium uppercase tracking-widest text-[#c9a96e]">Your estimated returns</p>
+        <div className={cn("rounded-2xl bg-[#2B2520] text-white p-6", !compact && "lg:sticky lg:top-24")}>
+          <p className="text-xs font-medium uppercase tracking-widest text-[#E2A862]">Your estimated returns</p>
           <div className="grid grid-cols-2 gap-4 mt-5">
             <Metric label="Net rental yield" value={pctText(result.netYieldPct)} />
             <Metric label="Cash-on-cash return" value={pctText(result.cashOnCashPct)} />
@@ -230,7 +230,7 @@ export function RoiCalculator({
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h3 className="text-sm font-semibold text-[#1a1410] mb-3">{title}</h3>
+      <h3 className="text-sm font-semibold text-[#2B2520] mb-3">{title}</h3>
       {children}
     </div>
   );
@@ -325,7 +325,7 @@ function Metric({
       >
         {value}
       </p>
-      {sub && <p className="text-[11px] text-[#c9a96e] mt-0.5">{sub}</p>}
+      {sub && <p className="text-[11px] text-[#E2A862] mt-0.5">{sub}</p>}
     </div>
   );
 }
@@ -343,7 +343,7 @@ function Breakdown({
 }) {
   return (
     <div>
-      <p className="text-xs font-medium text-[#c9a96e] mb-2">{title}</p>
+      <p className="text-xs font-medium text-[#E2A862] mb-2">{title}</p>
       <dl className="space-y-1.5">
         {rows.map(([label, v]) => (
           <div key={label} className="flex justify-between gap-4 text-white/70">
@@ -364,7 +364,7 @@ function YearTable({ years }: { years: ReturnType<typeof calculateRoi>["years"] 
   return (
     <div className="rounded-2xl border border-border overflow-hidden">
       <div className="px-5 py-4 border-b border-border bg-zinc-50">
-        <h3 className="text-sm font-semibold text-[#1a1410]">Year-by-year projection</h3>
+        <h3 className="text-sm font-semibold text-[#2B2520]">Year-by-year projection</h3>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
@@ -382,7 +382,7 @@ function YearTable({ years }: { years: ReturnType<typeof calculateRoi>["years"] 
           <tbody className="divide-y divide-border">
             {years.map((y) => (
               <tr key={y.year} className="tabular-nums">
-                <td className="px-5 py-3 font-medium text-[#1a1410]">{y.year}</td>
+                <td className="px-5 py-3 font-medium text-[#2B2520]">{y.year}</td>
                 <td className="px-5 py-3 whitespace-nowrap">{aed(y.propertyValue)}</td>
                 <td className="px-5 py-3 whitespace-nowrap">{aed(y.rent)}</td>
                 <td className={cn("px-5 py-3 whitespace-nowrap", y.cashFlow < 0 && "text-red-600")}>{aed(y.cashFlow)}</td>

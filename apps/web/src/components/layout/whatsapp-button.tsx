@@ -6,7 +6,7 @@ export function WhatsAppButton() {
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
       className="fixed bottom-6 right-4 sm:right-6 z-50 flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full shadow-lg hover:scale-110 transition-all duration-200"
-      style={{ background: "#c9a96e" }}
+      style={{ background: "#E2A862" }}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

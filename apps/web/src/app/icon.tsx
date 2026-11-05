@@ -8,7 +8,7 @@ export default function Icon() {
     (
       <div
         style={{
-          background: "#1a1410",
+          background: "#2B2520",
           width: "100%",
           height: "100%",
           display: "flex",
@@ -25,7 +25,7 @@ export default function Icon() {
             left: 4,
             width: 12,
             height: 3,
-            background: "#c9a96e",
+            background: "#E2A862",
             borderRadius: 2,
             transform: "rotate(37deg)",
             transformOrigin: "right center",
@@ -39,7 +39,7 @@ export default function Icon() {
             right: 4,
             width: 12,
             height: 3,
-            background: "#c9a96e",
+            background: "#E2A862",
             borderRadius: 2,
             transform: "rotate(-37deg)",
             transformOrigin: "left center",
@@ -53,7 +53,7 @@ export default function Icon() {
             left: 7,
             width: 18,
             height: 14,
-            border: "2.5px solid #c9a96e",
+            border: "2.5px solid #E2A862",
             borderRadius: 1,
           }}
         />
@@ -65,7 +65,7 @@ export default function Icon() {
             left: 12,
             width: 8,
             height: 8,
-            border: "2px solid #c9a96e",
+            border: "2px solid #E2A862",
             borderRadius: 9999,
           }}
         />
@@ -77,7 +77,7 @@ export default function Icon() {
             left: 12,
             width: 8,
             height: 6,
-            background: "#1a1410",
+            background: "#2B2520",
           }}
         />
       </div>

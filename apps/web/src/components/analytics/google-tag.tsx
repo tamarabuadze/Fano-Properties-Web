@@ -73,11 +73,11 @@ ${ids.map((id) => `gtag('config',${JSON.stringify(id)});`).join("\n")}`}
         <div
           role="dialog"
           aria-label="Cookie consent"
-          className="fixed inset-x-4 bottom-4 sm:left-6 sm:right-auto sm:max-w-md z-[60] rounded-2xl bg-[#1a1410] text-white/80 shadow-2xl ring-1 ring-[#c9a96e]/30 p-5 text-sm"
+          className="fixed inset-x-4 bottom-4 sm:left-6 sm:right-auto sm:max-w-md z-[60] rounded-2xl bg-[#2B2520] text-white/80 shadow-2xl ring-1 ring-[#E2A862]/30 p-5 text-sm"
         >
           <p className="leading-relaxed">
             We use cookies to measure our ads and improve this site. See our{" "}
-            <Link href="/privacy-policy" className="text-[#c9a96e] underline underline-offset-4">
+            <Link href="/privacy-policy" className="text-[#E2A862] underline underline-offset-4">
               privacy policy
             </Link>
             .
@@ -86,7 +86,7 @@ ${ids.map((id) => `gtag('config',${JSON.stringify(id)});`).join("\n")}`}
             <button
               type="button"
               onClick={() => choose(true)}
-              className="h-10 px-5 rounded-full bg-[#c9a96e] text-[#1a1410] font-medium"
+              className="h-10 px-5 rounded-full bg-[#E2A862] text-[#2B2520] font-medium"
             >
               Accept
             </button>

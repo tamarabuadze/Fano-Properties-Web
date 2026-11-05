@@ -29,11 +29,11 @@ const notes = [
 
 export default function RoiCalculatorPage() {
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div className="min-h-screen bg-surface pt-20">
       <div className="border-b border-border bg-zinc-50 py-12">
         <div className="container-site">
           <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-3">Investor Tools</p>
-          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#1a1410]">
+          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#2B2520]">
             ROI Calculator
           </h1>
           <p className="text-zinc-500 mt-3 max-w-xl">
@@ -49,7 +49,7 @@ export default function RoiCalculatorPage() {
         <div className="mt-20 pt-12 border-t border-border grid md:grid-cols-2 gap-x-12 gap-y-8 max-w-5xl">
           {notes.map((n) => (
             <div key={n.q}>
-              <h2 className="font-semibold text-[#1a1410]">{n.q}</h2>
+              <h2 className="font-semibold text-[#2B2520]">{n.q}</h2>
               <p className="text-sm text-zinc-500 mt-2 leading-relaxed">{n.a}</p>
             </div>
           ))}

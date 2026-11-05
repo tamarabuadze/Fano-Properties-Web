@@ -12,6 +12,8 @@ const config: Config = {
         sans: ["var(--font-inter)", "Inter", "Arial", "sans-serif"],
       },
       colors: {
+        surface: "#F4EFEA",
+        sand: "#E6DFD5",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div className="min-h-screen bg-surface pt-20">
       <div className="grid lg:grid-cols-2 min-h-[calc(100vh-80px)]">
         {/* Left — form */}
         <div className="flex flex-col justify-center px-6 sm:px-12 lg:px-16 xl:px-24 py-16">
           <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-4">Contact Us</p>
-          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#1a1410] mb-4">
+          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#2B2520] mb-4">
             Get in Touch
           </h1>
           <p className="text-zinc-500 mb-10 leading-relaxed max-w-md">
@@ -35,7 +35,7 @@ export default function ContactPage() {
                   <Icon className="h-4 w-4 text-zinc-500" />
                 </div>
                 {href ? (
-                  <a href={href} data-track={href.startsWith("tel:") ? "phone_click" : undefined} className="hover:text-[#1a1410] underline-offset-4 hover:underline">
+                  <a href={href} data-track={href.startsWith("tel:") ? "phone_click" : undefined} className="hover:text-[#2B2520] underline-offset-4 hover:underline">
                     {text}
                   </a>
                 ) : (

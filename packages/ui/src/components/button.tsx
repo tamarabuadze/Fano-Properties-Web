@@ -10,20 +10,20 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-[#1a1410] text-white hover:bg-[#2a2118] active:scale-[0.98]",
+          "bg-[#2B2520] text-white hover:bg-[#3A322B] active:scale-[0.98]",
         outline:
-          "border border-[#1a1410] bg-transparent text-[#1a1410] hover:bg-[#1a1410] hover:text-white active:scale-[0.98]",
+          "border border-[#2B2520] bg-transparent text-[#2B2520] hover:bg-[#2B2520] hover:text-white active:scale-[0.98]",
         ghost:
-          "bg-transparent text-[#1a1410] hover:bg-zinc-100 active:scale-[0.98]",
+          "bg-transparent text-[#2B2520] hover:bg-zinc-100 active:scale-[0.98]",
         secondary:
-          "bg-zinc-100 text-[#1a1410] hover:bg-zinc-200 active:scale-[0.98]",
+          "bg-zinc-100 text-[#2B2520] hover:bg-zinc-200 active:scale-[0.98]",
         destructive:
           "bg-red-500 text-white hover:bg-red-600 active:scale-[0.98]",
-        link: "text-[#1a1410] underline-offset-4 hover:underline p-0 h-auto",
+        link: "text-[#2B2520] underline-offset-4 hover:underline p-0 h-auto",
         white:
-          "bg-white text-[#1a1410] hover:bg-zinc-100 active:scale-[0.98]",
+          "bg-surface text-[#2B2520] hover:bg-zinc-100 active:scale-[0.98]",
         "outline-white":
-          "border border-white bg-transparent text-white hover:bg-white hover:text-[#1a1410] active:scale-[0.98]",
+          "border border-white bg-transparent text-white hover:bg-surface hover:text-[#2B2520] active:scale-[0.98]",
       },
       size: {
         sm: "h-9 px-4 text-sm rounded-full",

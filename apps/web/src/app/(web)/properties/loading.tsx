@@ -1,6 +1,6 @@
 export default function PropertiesLoading() {
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div className="min-h-screen bg-surface pt-20">
       <div className="container-site py-12">
         {/* Header skeleton */}
         <div className="mb-8 space-y-3">
@@ -12,7 +12,7 @@ export default function PropertiesLoading() {
         <div className="flex gap-8">
           {/* Filter sidebar skeleton */}
           <aside className="hidden lg:block w-72 shrink-0">
-            <div className="rounded-2xl p-5 space-y-6" style={{ backgroundColor: "#1a1410" }}>
+            <div className="rounded-2xl p-5 space-y-6" style={{ backgroundColor: "#2B2520" }}>
               <div className="h-4 w-16 rounded bg-white/20 animate-pulse" />
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="space-y-2">

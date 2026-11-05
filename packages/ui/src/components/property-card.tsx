@@ -65,7 +65,7 @@ function PropertyCard({
     <Link
       href={`/properties/${slug}`}
       className={cn(
-        "group flex flex-col overflow-hidden rounded-2xl bg-white border border-border h-full",
+        "group flex flex-col overflow-hidden rounded-2xl bg-surface border border-border h-full",
         "transition-all duration-500 hover:shadow-xl hover:-translate-y-1",
         className
       )}
@@ -102,7 +102,7 @@ function PropertyCard({
 
       <div className="flex flex-col flex-1 p-5">
         <div className="mb-3">
-          <p className="text-2xl font-semibold tracking-tight [letter-spacing:-0.02em]" style={{ color: "#7e6244" }}>
+          <p className="text-2xl font-semibold tracking-tight [letter-spacing:-0.02em]" style={{ color: "#6B5038" }}>
             {formatPrice(price, currency)}
             {priceUnit === "per_sqft" && (
               <span className="text-sm font-normal text-text-secondary"> /sq ft</span>
@@ -113,11 +113,11 @@ function PropertyCard({
           </p>
         </div>
 
-        <h3 className="font-semibold mb-1.5 line-clamp-1 transition-colors" style={{ color: "#3d3020" }}>
+        <h3 className="font-semibold mb-1.5 line-clamp-1 transition-colors" style={{ color: "#2B2520" }}>
           {title}
         </h3>
 
-        <div className="flex items-center gap-1.5 mb-4 flex-1" style={{ color: "#9a7957" }}>
+        <div className="flex items-center gap-1.5 mb-4 flex-1" style={{ color: "#8C6A47" }}>
           <MapPin className="h-3.5 w-3.5 shrink-0" />
           <p className="text-sm line-clamp-1">
             {location}, {city}
@@ -126,7 +126,7 @@ function PropertyCard({
 
         <div className="h-px bg-border mb-4" />
 
-        <div className="flex items-center justify-between text-sm" style={{ color: "#9a7957" }}>
+        <div className="flex items-center justify-between text-sm" style={{ color: "#8C6A47" }}>
           {isCommercial ? (
             <div className="flex items-center gap-1.5">
               <Store className="h-4 w-4" />

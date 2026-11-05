@@ -68,11 +68,11 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
   const hasFilters = Object.entries(initialFilters).some(([k, v]) => k !== "category" && !(isCommercial && k === "listingType") && Boolean(v));
 
   return (
-    <div className="rounded-2xl p-5 sticky top-24 space-y-6" style={{ backgroundColor: "#1a1410" }}>
+    <div className="rounded-2xl p-5 sticky top-24 space-y-6" style={{ backgroundColor: "#2B2520" }}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <SlidersHorizontal className="h-4 w-4 text-[#c9a96e]" />
-          <span className="font-semibold text-sm text-[#c9a96e]">Filters</span>
+          <SlidersHorizontal className="h-4 w-4 text-[#E2A862]" />
+          <span className="font-semibold text-sm text-[#E2A862]">Filters</span>
         </div>
         {hasFilters && (
           <button
@@ -100,7 +100,7 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
                 updateFilters("search", (e.target as HTMLInputElement).value);
               }
             }}
-            className="w-full h-10 pl-9 pr-3 rounded-xl border border-white/15 bg-white/5 text-white placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-[#c9a96e]/30 focus:border-transparent"
+            className="w-full h-10 pl-9 pr-3 rounded-xl border border-white/15 bg-white/5 text-white placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-[#E2A862]/30 focus:border-transparent"
           />
         </div>
       </div>
@@ -119,8 +119,8 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
                 "h-9 px-3 rounded-xl text-sm font-medium border transition-all",
                 initialFilters.listingType === t.value ||
                   (!initialFilters.listingType && t.value === "")
-                  ? "bg-[#c9a96e] text-[#1a1410] border-[#c9a96e]"
-                  : "border-white/15 text-white/60 hover:border-[#c9a96e]/50 hover:text-white"
+                  ? "bg-[#E2A862] text-[#2B2520] border-[#E2A862]"
+                  : "border-white/15 text-white/60 hover:border-[#E2A862]/50 hover:text-white"
               )}
             >
               {t.label}
@@ -144,7 +144,7 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
                   "w-full text-left px-3 h-9 rounded-xl text-sm transition-all",
                   initialFilters.unitType === t.value ||
                     (!initialFilters.unitType && t.value === "")
-                    ? "bg-[#c9a96e]/20 font-medium text-[#c9a96e]"
+                    ? "bg-[#E2A862]/20 font-medium text-[#E2A862]"
                     : "text-white/60 hover:bg-white/10 hover:text-white"
                 )}
               >
@@ -169,7 +169,7 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
                 "w-full text-left px-3 h-9 rounded-xl text-sm transition-all",
                 initialFilters.propertyType === t.value ||
                   (!initialFilters.propertyType && t.value === "")
-                  ? "bg-[#c9a96e]/20 font-medium text-[#c9a96e]"
+                  ? "bg-[#E2A862]/20 font-medium text-[#E2A862]"
                   : "text-white/60 hover:bg-white/10 hover:text-white"
               )}
             >
@@ -193,8 +193,8 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
                 "h-9 px-4 rounded-xl text-sm font-medium border transition-all",
                 initialFilters.minBedrooms === b.value ||
                   (!initialFilters.minBedrooms && b.value === "")
-                  ? "bg-[#c9a96e] text-[#1a1410] border-[#c9a96e]"
-                  : "border-white/15 text-white/60 hover:border-[#c9a96e]/50 hover:text-white"
+                  ? "bg-[#E2A862] text-[#2B2520] border-[#E2A862]"
+                  : "border-white/15 text-white/60 hover:border-[#E2A862]/50 hover:text-white"
               )}
             >
               {b.label}
@@ -218,13 +218,13 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
           className={cn(
             "relative h-6 w-11 rounded-full transition-all duration-200",
             initialFilters.featured === "true"
-              ? "bg-[#c9a96e]"
+              ? "bg-[#E2A862]"
               : "bg-[#3a3028]"
           )}
         >
           <span
             className={cn(
-              "absolute top-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform duration-200",
+              "absolute top-0.5 h-4 w-4 rounded-full bg-surface shadow transition-transform duration-200",
               initialFilters.featured === "true" ? "translate-x-5" : "translate-x-0.5"
             )}
           />

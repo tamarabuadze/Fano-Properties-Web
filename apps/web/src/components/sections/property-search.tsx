@@ -39,14 +39,14 @@ export function PropertySearchSection() {
   }
 
   return (
-    <section className="bg-white py-0">
+    <section className="bg-surface py-0">
       <div className="container-site">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="-mt-8 relative z-10 bg-white rounded-2xl shadow-2xl border border-border p-6 lg:p-8"
+          className="-mt-8 relative z-10 bg-surface rounded-2xl shadow-2xl border border-border p-6 lg:p-8"
         >
           {/* Listing type tabs */}
           <div className="flex gap-1 p-1 bg-zinc-100 rounded-xl w-fit mb-6">
@@ -57,8 +57,8 @@ export function PropertySearchSection() {
                 className={cn(
                   "px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                   listingType === type
-                    ? "bg-[#1a1410] text-white shadow-sm"
-                    : "text-zinc-600 hover:text-[#1a1410]"
+                    ? "bg-[#2B2520] text-white shadow-sm"
+                    : "text-zinc-600 hover:text-[#2B2520]"
                 )}
               >
                 {type}
@@ -98,7 +98,7 @@ export function PropertySearchSection() {
               {/* Search button */}
               <button
                 type="submit"
-                className="h-14 px-8 rounded-xl bg-[#1a1410] text-white font-medium text-sm flex items-center gap-2 hover:bg-[#2a2118] transition-colors whitespace-nowrap"
+                className="h-14 px-8 rounded-xl bg-[#2B2520] text-white font-medium text-sm flex items-center gap-2 hover:bg-[#3A322B] transition-colors whitespace-nowrap"
               >
                 <Search className="h-4 w-4" />
                 Search

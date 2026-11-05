@@ -40,16 +40,20 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  // Scrolled/non-home: dark brown (matching footer), transparent on home hero
+  // Scrolled/non-home: frosted Calcite Sand glass like the Fano app; transparent on the home hero
   const isOpaque = scrolled || !isHome || mobileOpen;
 
   const navBg = isOpaque
-    ? "bg-[#1a1410]/95 backdrop-blur-md border-b border-white/10 shadow-sm"
+    ? "bg-surface/85 backdrop-blur-xl border-b border-titan/50 shadow-sm"
     : "bg-transparent border-b border-transparent";
 
-  // Links are beige/gold when opaque, white when transparent over hero
-  const linkColor = isOpaque ? "text-[#c9a96e]" : "text-white";
-  const hoverBg = isOpaque ? "hover:bg-white/10" : "hover:bg-white/10";
+  // Espresso links on the light bar, white over the hero photo
+  const linkColor = isOpaque ? "text-[#2B2520]" : "text-white";
+  const hoverBg = isOpaque ? "hover:bg-[#2B2520]/5" : "hover:bg-white/10";
+  // Bronze logo on light, sand logo over the photo (the PNG is recoloured with a CSS filter)
+  const logoFilter = isOpaque
+    ? "brightness(0) saturate(100%) invert(43%) sepia(24%) saturate(760%) hue-rotate(349deg) brightness(93%) contrast(88%)"
+    : "brightness(0) saturate(100%) invert(77%) sepia(16%) saturate(430%) hue-rotate(2deg) brightness(96%)";
 
   return (
     <>
@@ -69,7 +73,7 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
                 width={160}
                 height={52}
                 className="h-9 w-auto object-contain transition-all duration-300"
-                style={{ filter: "brightness(0) saturate(100%) invert(77%) sepia(16%) saturate(430%) hue-rotate(2deg) brightness(96%)" }}
+                style={{ filter: logoFilter }}
                 priority
               />
             </Link>
@@ -84,7 +88,7 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
                     "relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-200",
                     hoverBg,
                     pathname.startsWith(link.href)
-                      ? cn(linkColor, "bg-white/10")
+                      ? cn(linkColor, isOpaque ? "bg-[#E2A862]/20" : "bg-white/10")
                       : linkColor
                   )}
                 >
@@ -92,7 +96,7 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
                   {pathname.startsWith(link.href) && (
                     <motion.div
                       layoutId="nav-indicator"
-                      className="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-[#c9a96e]"
+                      className="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-[#E2A862]"
                       transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
@@ -104,10 +108,7 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
             <div className="flex items-center gap-3">
               <Link
                 href="/contact"
-                className="hidden lg:inline-flex items-center h-10 px-5 rounded-full text-sm font-medium transition-all duration-200 text-white"
-                style={{ backgroundColor: "#9a7957" }}
-                onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#7e6244")}
-                onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#9a7957")}
+                className="hidden lg:inline-flex items-center h-10 px-5 rounded-full text-sm font-medium transition-all duration-200 text-[#2B2520] bg-gradient-to-br from-[#ECBE80] via-[#E2A862] to-[#B9824A] hover:brightness-105 shadow-sm"
               >
                 Contact Us
               </Link>
@@ -116,7 +117,7 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
                 onClick={() => setMobileOpen((v) => !v)}
                 className={cn(
                   "lg:hidden h-10 w-10 rounded-full flex items-center justify-center transition-colors",
-                  isOpaque ? "text-[#c9a96e] hover:bg-white/10" : "text-white hover:bg-white/10"
+                  isOpaque ? "text-[#2B2520] hover:bg-[#2B2520]/5" : "text-white hover:bg-white/10"
                 )}
                 aria-label="Toggle menu"
               >
@@ -135,7 +136,7 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="fixed inset-0 z-40 bg-[#1a1410] pt-16 lg:hidden"
+            className="fixed inset-0 z-40 bg-[#2B2520] pt-16 lg:hidden"
           >
             <div className="container-site py-8 flex flex-col gap-1">
               {links.map((link, i) => (
@@ -150,8 +151,8 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
                     className={cn(
                       "flex items-center h-14 px-4 rounded-xl text-lg font-medium transition-colors",
                       pathname.startsWith(link.href)
-                        ? "bg-white/10 text-[#c9a96e]"
-                        : "text-[#c9a96e]/80 hover:bg-white/10 hover:text-[#c9a96e]"
+                        ? "bg-white/10 text-[#E2A862]"
+                        : "text-[#E2A862]/80 hover:bg-white/10 hover:text-[#E2A862]"
                     )}
                   >
                     {link.label}
@@ -167,7 +168,7 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
                 <Link
                   href="/contact"
                   className="flex items-center justify-center h-14 rounded-full text-white font-medium text-base transition-colors"
-                  style={{ backgroundColor: "#9a7957" }}
+                  style={{ backgroundColor: "#8C6A47" }}
                 >
                   Contact Us
                 </Link>

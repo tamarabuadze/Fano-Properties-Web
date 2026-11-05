@@ -19,9 +19,9 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div className="min-h-screen bg-surface pt-20">
       {/* Hero */}
-      <section className="relative h-80 lg:h-96 overflow-hidden bg-[#1a1410]">
+      <section className="relative h-80 lg:h-96 overflow-hidden bg-[#2B2520]">
         <Image
           src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?q=80&w=1973&auto=format"
           alt="About Fano"
@@ -57,7 +57,7 @@ export default function AboutPage() {
               </div>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 mt-8 h-12 px-6 rounded-full bg-[#1a1410] text-white font-medium hover:bg-[#2a2118] transition-colors"
+                className="inline-flex items-center gap-2 mt-8 h-12 px-6 rounded-full bg-[#2B2520] text-white font-medium hover:bg-[#3A322B] transition-colors"
               >
                 Work With Us
                 <ArrowRight className="h-4 w-4" />
@@ -90,11 +90,11 @@ export default function AboutPage() {
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((v) => (
-              <div key={v.title} className="bg-white rounded-2xl border border-border p-6">
+              <div key={v.title} className="bg-surface rounded-2xl border border-border p-6">
                 <div className="h-12 w-12 rounded-xl bg-zinc-50 border border-border flex items-center justify-center mb-4">
-                  <v.icon className="h-6 w-6 text-[#1a1410]" />
+                  <v.icon className="h-6 w-6 text-[#2B2520]" />
                 </div>
-                <h3 className="font-semibold text-[#1a1410] mb-2">{v.title}</h3>
+                <h3 className="font-semibold text-[#2B2520] mb-2">{v.title}</h3>
                 <p className="text-sm text-zinc-500 leading-relaxed">{v.description}</p>
               </div>
             ))}

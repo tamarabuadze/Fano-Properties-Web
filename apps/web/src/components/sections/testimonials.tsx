@@ -42,7 +42,7 @@ export function TestimonialsSection() {
   const t = testimonials[current]!;
 
   return (
-    <section className="section-y bg-white overflow-hidden">
+    <section className="section-y bg-surface overflow-hidden">
       <div className="container-site">
         <SectionHeader
           eyebrow="Testimonials"
@@ -63,7 +63,7 @@ export function TestimonialsSection() {
             >
               <Quote className="h-10 w-10 text-zinc-200 mx-auto mb-8" />
 
-              <blockquote className="text-xl lg:text-2xl font-medium text-[#1a1410] leading-relaxed [letter-spacing:-0.01em] mb-10 text-balance">
+              <blockquote className="text-xl lg:text-2xl font-medium text-[#2B2520] leading-relaxed [letter-spacing:-0.01em] mb-10 text-balance">
                 "{t.quote}"
               </blockquote>
 
@@ -78,7 +78,7 @@ export function TestimonialsSection() {
                   />
                 </div>
                 <div className="text-left">
-                  <p className="font-semibold text-[#1a1410] text-sm">{t.name}</p>
+                  <p className="font-semibold text-[#2B2520] text-sm">{t.name}</p>
                   <p className="text-zinc-500 text-xs">{t.role}</p>
                 </div>
               </div>
@@ -101,7 +101,7 @@ export function TestimonialsSection() {
                   key={i}
                   onClick={() => setCurrent(i)}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === current ? "w-8 bg-[#1a1410]" : "w-1.5 bg-zinc-200"
+                    i === current ? "w-8 bg-[#2B2520]" : "w-1.5 bg-zinc-200"
                   }`}
                   aria-label={`Go to testimonial ${i + 1}`}
                 />

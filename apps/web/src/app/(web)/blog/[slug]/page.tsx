@@ -52,7 +52,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
   };
 
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div className="min-h-screen bg-surface pt-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -61,7 +61,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
         {/* Back */}
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-[#1a1410] transition-colors mb-10"
+          className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-[#2B2520] transition-colors mb-10"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to Blog
@@ -78,7 +78,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
             </Link>
           )}
 
-          <h1 className="text-3xl lg:text-4xl font-semibold [letter-spacing:-0.025em] text-[#1a1410] mb-4 text-balance">
+          <h1 className="text-3xl lg:text-4xl font-semibold [letter-spacing:-0.025em] text-[#2B2520] mb-4 text-balance">
             {article.title}
           </h1>
 
@@ -116,7 +116,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
 
         {/* Content */}
         <div
-          className="prose prose-zinc max-w-none prose-headings:font-semibold prose-headings:[letter-spacing:-0.02em] prose-a:text-[#1a1410] prose-a:underline-offset-2 prose-img:rounded-2xl"
+          className="prose prose-zinc max-w-none prose-headings:font-semibold prose-headings:[letter-spacing:-0.02em] prose-a:text-[#2B2520] prose-a:underline-offset-2 prose-img:rounded-2xl"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
 

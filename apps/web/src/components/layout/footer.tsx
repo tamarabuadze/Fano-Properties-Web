@@ -25,7 +25,7 @@ const footerLinks = {
 
 export function Footer({ showAgents = true }: { showAgents?: boolean }) {
   return (
-    <footer className="bg-[#1a1410] text-white">
+    <footer className="bg-[#2B2520] text-white">
       {/* Large brand wordmark */}
       <div className="border-b border-gold-900/40 overflow-hidden">
         <div className="container-site py-16">
@@ -47,6 +47,8 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
                 width={140}
                 height={45}
                 className="h-9 w-auto object-contain"
+                /* Sand logo on espresso, as in the Fano app */
+                style={{ filter: "brightness(0) saturate(100%) invert(76%) sepia(14%) saturate(480%) hue-rotate(356deg) brightness(92%)" }}
               />
             </Link>
             <p className="text-sm text-white/50 leading-relaxed max-w-xs">

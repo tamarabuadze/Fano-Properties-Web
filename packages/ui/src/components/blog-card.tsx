@@ -85,7 +85,7 @@ function BlogCard({
     <Link
       href={`/blog/${slug}`}
       className={cn(
-        "group flex flex-col overflow-hidden rounded-2xl bg-white border border-border h-full",
+        "group flex flex-col overflow-hidden rounded-2xl bg-surface border border-border h-full",
         "transition-all duration-500 hover:shadow-xl hover:-translate-y-1",
         className
       )}
@@ -123,15 +123,15 @@ function BlogCard({
           {readTime && <span>{readTime} min read</span>}
         </div>
 
-        <h3 className="font-semibold mb-2 line-clamp-2 leading-snug transition-colors" style={{ color: "#3d3020" }}>
+        <h3 className="font-semibold mb-2 line-clamp-2 leading-snug transition-colors" style={{ color: "#2B2520" }}>
           {title}
         </h3>
 
-        <p className="text-sm line-clamp-3 leading-relaxed flex-1" style={{ color: "#7e6244" }}>
+        <p className="text-sm line-clamp-3 leading-relaxed flex-1" style={{ color: "#6B5038" }}>
           {excerpt}
         </p>
 
-        <div className="mt-4 flex items-center gap-1.5 text-sm font-medium" style={{ color: "#9a7957" }}>
+        <div className="mt-4 flex items-center gap-1.5 text-sm font-medium" style={{ color: "#8C6A47" }}>
           <span>Read more</span>
           <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
         </div>

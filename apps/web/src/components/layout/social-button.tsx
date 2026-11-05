@@ -35,7 +35,7 @@ export function SocialButton() {
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? "Close social links" : "Follow Fano Properties"}
         aria-expanded={open}
-        className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[#1a1410] text-[#c9a96e] shadow-lg ring-1 ring-[#c9a96e]/30 hover:scale-110 transition-all duration-200"
+        className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[#2B2520] text-[#E2A862] shadow-lg ring-1 ring-[#E2A862]/30 hover:scale-110 transition-all duration-200"
       >
         {open ? <X className="h-6 w-6" /> : <Share2 className="h-6 w-6" />}
       </button>

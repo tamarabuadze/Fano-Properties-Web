@@ -38,7 +38,7 @@ export function PropertyAgentCard({ agent }: { agent: Agent }) {
           )}
         </div>
         <div>
-          <p className="font-semibold text-[#1a1410]">
+          <p className="font-semibold text-[#2B2520]">
             {agent.firstName} {agent.lastName}
           </p>
           {agent.title && (
@@ -51,7 +51,7 @@ export function PropertyAgentCard({ agent }: { agent: Agent }) {
         {agent.phone && (
           <a
             href={`tel:${agent.phone}`}
-            className="flex items-center gap-3 w-full h-10 px-4 rounded-xl border border-border bg-white text-sm text-zinc-700 hover:bg-zinc-100 transition-colors"
+            className="flex items-center gap-3 w-full h-10 px-4 rounded-xl border border-border bg-surface text-sm text-zinc-700 hover:bg-zinc-100 transition-colors"
           >
             <Phone className="h-4 w-4 text-zinc-400" />
             {agent.phone}
@@ -59,14 +59,14 @@ export function PropertyAgentCard({ agent }: { agent: Agent }) {
         )}
         <a
           href={`mailto:${agent.email}`}
-          className="flex items-center gap-3 w-full h-10 px-4 rounded-xl border border-border bg-white text-sm text-zinc-700 hover:bg-zinc-100 transition-colors"
+          className="flex items-center gap-3 w-full h-10 px-4 rounded-xl border border-border bg-surface text-sm text-zinc-700 hover:bg-zinc-100 transition-colors"
         >
           <Mail className="h-4 w-4 text-zinc-400" />
           {agent.email}
         </a>
         <Link
           href={`/agents/${agent.slug}`}
-          className="flex items-center justify-center gap-2 w-full h-10 px-4 rounded-xl bg-[#1a1410] text-white text-sm font-medium hover:bg-[#2a2118] transition-colors"
+          className="flex items-center justify-center gap-2 w-full h-10 px-4 rounded-xl bg-[#2B2520] text-white text-sm font-medium hover:bg-[#3A322B] transition-colors"
         >
           <ExternalLink className="h-4 w-4" />
           View Profile
