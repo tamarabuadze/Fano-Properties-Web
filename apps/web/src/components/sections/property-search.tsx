@@ -109,13 +109,13 @@ export function PropertySearchSection() {
           {/* Quick links */}
           <div className="mt-5 flex flex-wrap gap-2">
             <span className="text-xs text-zinc-400">Popular:</span>
-            {["Dubai", "Abu Dhabi", "London", "Paris", "Amsterdam"].map((city) => (
+            {["Business Bay", "Downtown Dubai", "Sheikh Zayed Road", "Dubai Marina"].map((city) => (
               <button
                 key={city}
                 type="button"
                 onClick={() => {
                   setLocation(city);
-                  router.push(`/properties?search=${city}`);
+                  router.push(`/properties?search=${encodeURIComponent(city)}`);
                 }}
                 className="text-xs text-zinc-600 hover:text-black transition-colors underline underline-offset-2"
               >

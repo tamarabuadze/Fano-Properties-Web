@@ -5,9 +5,7 @@ import { FeaturedPropertiesSection } from "@/components/sections/featured-proper
 import { PropertyTypesSection } from "@/components/sections/property-types";
 import { WhyUsSection } from "@/components/sections/why-us";
 import { AgentsShowcaseSection } from "@/components/sections/agents-showcase";
-import { TestimonialsSection } from "@/components/sections/testimonials";
 import { LatestArticlesSection } from "@/components/sections/latest-articles";
-import { GoogleReviewsSection } from "@/components/sections/google-reviews";
 import { CtaSection } from "@/components/sections/cta-section";
 import { getFeaturedProperties } from "@/lib/queries/properties";
 import { getAgents } from "@/lib/queries/agents";
@@ -81,8 +79,6 @@ export default async function HomePage() {
       <PropertyTypesSection />
       <WhyUsSection />
       {agents.length > 0 && <AgentsShowcaseSection agents={agents as never} />}
-      <TestimonialsSection />
-      <GoogleReviewsSection />
       <LatestArticlesSection articles={articles as never} />
       <CtaSection />
     </>

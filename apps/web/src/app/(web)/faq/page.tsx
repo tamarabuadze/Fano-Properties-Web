@@ -3,48 +3,62 @@ import { FaqAccordion } from "./_components/faq-accordion";
 
 export const metadata: Metadata = {
   title: "FAQ",
-  description: "Frequently asked questions about buying, selling, and renting properties with Fano.",
+  description: "Answers about buying property in Dubai: freehold ownership for foreigners, DLD fees, off-plan payment plans, mortgages and the Golden Visa.",
   alternates: { canonical: "/faq" },
 };
 
 const faqs = [
   {
-    q: "How do I start the buying process?",
-    a: "Getting pre-approved for a mortgage is the first step. Once you have a budget in mind, our agents will work with you to identify properties that match your criteria and lifestyle.",
+    q: "Can foreigners buy property in Dubai?",
+    a: "Yes. Buyers of any nationality can own property outright (freehold) in Dubai's designated freehold areas, which include Business Bay, Downtown Dubai, Dubai Marina and Sheikh Zayed Road. You don't need to live in the UAE to buy.",
   },
   {
-    q: "What are your agent fees?",
-    a: "Our commission structure is transparent and competitive. Buyers typically pay no agent fees — sellers pay a standard commission that covers both sides of the transaction. We'll discuss all costs upfront.",
+    q: "What fees do I pay when buying?",
+    a: "The main government cost is the Dubai Land Department (DLD) transfer fee of 4% of the price, plus registration and trustee office fees. Agency fees and any bank fees depend on the deal, and we confirm all costs with you in writing before you commit.",
   },
   {
-    q: "How long does it typically take to buy a property?",
-    a: "From offer acceptance to closing, the process typically takes 30–60 days depending on financing, inspections, and title work. We'll guide you through every step.",
+    q: "How does buying off-plan work?",
+    a: "You buy a unit before it is built and pay in stages under the developer's payment plan, for example a deposit on booking, instalments during construction and the balance on handover. Payments go into a government-regulated escrow account for the project, and the sale is registered with the DLD.",
+  },
+  {
+    q: "How long does buying take?",
+    a: "A cash purchase of a ready property can usually be completed within a few weeks once the price is agreed. With a mortgage it takes longer, while the bank approves the loan and valuation. Off-plan purchases are reserved quickly, with handover on the developer's completion date.",
+  },
+  {
+    q: "Can I get a mortgage as a foreigner?",
+    a: "Yes. UAE banks lend to both residents and non-residents, usually with a smaller loan for non-residents. Loan limits are set by UAE Central Bank rules and the bank's own checks, and we can introduce you to mortgage advisors.",
+  },
+  {
+    q: "Does buying property qualify me for a UAE Golden Visa?",
+    a: "Property investors can apply for a 10-year Golden Visa when their property in Dubai is worth at least AED 2 million, subject to the government's conditions. Rules can change, so we check the current requirements for your case.",
+  },
+  {
+    q: "Do you work with buyers outside the UAE?",
+    a: "Yes. We work with investors from around the world and can handle viewings by video call, documents and the purchase steps remotely. Contact us on WhatsApp or by email to get started.",
   },
   {
     q: "Can I list my property with Fano?",
-    a: "Absolutely. Contact us for a free property valuation and we'll walk you through our listing process, marketing strategy, and pricing approach.",
-  },
-  {
-    q: "Do you work with international buyers?",
-    a: "Yes. We have experience working with international clients and can assist with cross-border transactions, financing referrals, and legal guidance.",
-  },
-  {
-    q: "What is the difference between a buyer's agent and a seller's agent?",
-    a: "A buyer's agent represents your interests as a purchaser, helping you find properties, negotiate, and navigate the transaction. A seller's agent (listing agent) represents the seller and is focused on marketing and selling the property.",
-  },
-  {
-    q: "How is property value determined?",
-    a: "We use a comparative market analysis (CMA) that evaluates recent sales of similar properties in the same area, current market conditions, the property's condition, and unique features.",
-  },
-  {
-    q: "Can I rent before I buy in a neighborhood?",
-    a: "We offer both rental and purchase listings. Renting first is a great strategy to experience a neighborhood before committing to purchase.",
+    a: "Yes. Contact us for a free valuation and we'll explain how we market your property and what we recommend for pricing.",
   },
 ];
 
 export default function FaqPage() {
   return (
     <div className="min-h-screen bg-surface pt-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          }),
+        }}
+      />
       <div className="border-b border-border bg-zinc-50 py-12">
         <div className="container-site">
           <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-3">Help Center</p>

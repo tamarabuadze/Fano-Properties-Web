@@ -14,7 +14,7 @@ const values = [
   { icon: Award, title: "Excellence", description: "We hold ourselves to the highest standards in every interaction and transaction." },
   { icon: Users, title: "Relationships", description: "Long-term client relationships built on trust, transparency, and results." },
   { icon: Building2, title: "Market Expertise", description: "Deep local knowledge across residential, commercial, and investment properties." },
-  { icon: Globe, title: "Global Reach", description: "Connecting buyers and sellers across borders with a truly global network." },
+  { icon: Globe, title: "Global Reach", description: "Helping investors from around the world buy property in Dubai, in person or remotely." },
 ];
 
 export default function AboutPage() {
@@ -52,7 +52,7 @@ export default function AboutPage() {
                   Since our founding, we've helped thousands of families find their perfect home, guided investors to high-performing assets, and supported sellers in achieving record prices.
                 </p>
                 <p className="text-zinc-600 leading-relaxed">
-                  Our team of certified agents brings decades of combined experience and an unwavering commitment to your success.
+                  From our office in Business Bay, our team guides buyers and investors through every step, from choosing a project to handover.
                 </p>
               </div>
               <Link

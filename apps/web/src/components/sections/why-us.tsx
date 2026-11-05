@@ -9,23 +9,23 @@ import { SectionHeader } from "@/components/shared/section-header";
 const features = [
   {
     icon: ShieldCheck,
-    title: "Trusted & Verified",
-    description: "Every listing is verified and every agent is licensed and background-checked.",
+    title: "Trusted & Transparent",
+    description: "Clear facts on every listing: price, size, payment plan and handover, straight from the developer.",
   },
   {
     icon: Clock,
     title: "Fast & Efficient",
-    description: "From first inquiry to closing, we streamline every step of the process.",
+    description: "From first enquiry to transfer at the Dubai Land Department, we handle every step with you.",
   },
   {
     icon: Award,
-    title: "Award-Winning Service",
-    description: "Recognized for excellence in luxury real estate for over a decade.",
+    title: "Off-Plan & Commercial Focus",
+    description: "Grade A offices and landmark off-plan towers in Business Bay, Downtown and on Sheikh Zayed Road.",
   },
   {
     icon: Users,
-    title: "Expert Agents",
-    description: "Work with dedicated experts who know the local market inside out.",
+    title: "Local Advisors",
+    description: "A Business Bay team that knows Dubai's developers, payment plans and the buying process.",
   },
 ];
 
