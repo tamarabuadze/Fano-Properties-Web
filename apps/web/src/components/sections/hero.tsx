@@ -1,17 +1,15 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Search } from "lucide-react";
 
-// Pexels: "Aerial Footage of Buildings in Dubai" — free to use
-const HERO_VIDEO =
-  "https://videos.pexels.com/video-files/1409899/1409899-hd_1920_1080_25fps.mp4";
-
-// Poster shown immediately as the LCP element; video fades in over it
-const HERO_POSTER =
-  "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2071&auto=format&fit=crop";
+// Downtown Dubai with the Burj Khalifa, supplied by Fano: the photo shows at once,
+// and on larger screens a time-lapse of the same view fades in over it
+const HERO_IMAGE = "/hero-dubai.webp";
+const HERO_VIDEO = "/hero-dubai.mp4";
 
 export function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -24,21 +22,23 @@ export function HeroSection() {
   });
   const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
 
-  // Lazy-load video after page is interactive so the poster image wins the LCP race
+  // Load the video only after the page has loaded, on screens 768px and wider,
+  // and not when the visitor asked for less motion or less data
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
-    // Respect prefers-reduced-motion — keep static poster
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    if (
+      !window.matchMedia("(min-width: 768px)").matches ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      conn?.saveData
+    ) return;
 
     const load = () => {
       video.src = HERO_VIDEO;
       video.load();
     };
-
     if (document.readyState === "complete") {
-      // Small delay to let the browser paint the poster first
       const t = setTimeout(load, 300);
       return () => clearTimeout(t);
     }
@@ -51,18 +51,17 @@ export function HeroSection() {
       ref={ref}
       className="relative h-[100svh] min-h-[700px] max-h-[1080px] overflow-hidden bg-[#2B2520]"
     >
-      {/* Background: poster + video fade */}
+      {/* Background photo, darkened on the left and bottom so the white text stays readable */}
       <div className="absolute inset-0" aria-hidden>
-        {/* Poster image — always present, serves as LCP */}
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
-          style={{
-            backgroundImage: `url(${HERO_POSTER})`,
-            opacity: videoReady ? 0 : 1,
-          }}
+        <Image
+          src={HERO_IMAGE}
+          alt=""
+          fill
+          priority
+          // Tall screens crop the sides, so they need an image about 16/9 of the screen height wide
+          sizes="(max-aspect-ratio: 16/9) 178vh, 100vw"
+          className="object-cover object-center"
         />
-
-        {/* Video — fades in once it can play */}
         <video
           ref={videoRef}
           className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000"
@@ -74,8 +73,8 @@ export function HeroSection() {
           preload="none"
           onCanPlay={() => setVideoReady(true)}
         />
-
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70" />
       </div>
 
       {/* Content */}
@@ -127,7 +126,7 @@ export function HeroSection() {
             >
               <Link
                 href="/properties"
-                className="inline-flex items-center gap-2 h-14 px-8 rounded-full bg-gold-400 text-white font-medium text-base hover:bg-gold-500 transition-colors"
+                className="inline-flex items-center gap-2 h-14 px-8 rounded-full bg-gradient-to-br from-[#ECBE80] via-[#E2A862] to-[#B9824A] text-[#2B2520] font-semibold text-base hover:brightness-105 transition"
               >
                 <Search className="h-4 w-4" />
                 Browse Properties
