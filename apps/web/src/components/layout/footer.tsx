@@ -98,14 +98,11 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
             </ul>
           </div>
 
-          {/* Link groups in glass cards, with champagne HD bullets */}
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:col-span-8 lg:gap-5">
+          {/* Link columns with champagne HD bullets */}
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-8 lg:gap-8">
             {groups.map(([heading, links]) => (
-              <div
-                key={heading}
-                className="rounded-2xl border border-[#DFCFB9]/25 bg-gradient-to-b from-[#DFCFB9]/[0.06] to-[#DFCFB9]/[0.015] p-5 shadow-[0_0_0_1px_rgba(255,255,255,.02)_inset,0_0_26px_-8px_rgba(223,207,185,.28)] transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(255,255,255,.04)_inset,0_0_36px_-6px_rgba(223,207,185,.4)] lg:p-6"
-              >
-                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#DFCFB9]">{heading}</p>
+              <div key={heading}>
+                <h4 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#DFCFB9]">{heading}</h4>
                 <ul className="space-y-3">
                   {links.map((link) => (
                     <li key={link.href}>
@@ -127,9 +124,9 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
         <div className="h-px bg-[#A99D8F]/20" />
         <div className="flex flex-col items-center gap-4 pt-7 pb-24 text-center text-xs text-[#A99D8F] sm:pb-8 lg:flex-row lg:justify-between lg:text-left">
           <p>© 2025 Fano Real Estate. All rights reserved.</p>
-          <p className="inline-flex items-center gap-2 rounded-full border border-[#DFCFB9]/40 bg-[#DFCFB9]/[0.05] px-4 py-1.5 text-[#A99D8F] shadow-[0_0_18px_-6px_rgba(223,207,185,.35)]">
-            <span aria-hidden className="font-bold text-[#DFCFB9]">✦</span>
-            Designed &amp; developed in-house by <span className="font-semibold text-[#DFCFB9]">Ali Raza</span>
+          <p className="inline-flex items-center gap-2 text-[#A99D8F]">
+            <span aria-hidden className="text-sm font-bold text-[#DFCFB9]">◈</span>
+            Designed &amp; developed in-house by <strong className="font-semibold text-[#DFCFB9]">Ali Raza</strong>
           </p>
         </div>
       </div>
