@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { MediaUpload } from "@fano/ui";
 import { createAgent, updateAgent } from "../_actions";
 
 const schema = z.object({
@@ -14,14 +15,17 @@ const schema = z.object({
   phone: z.string().optional(),
   title: z.string().optional(),
   bio: z.string().optional(),
-  avatar: z.string().url("Must be a valid URL").optional().or(z.literal("")),
+  avatar: z.string().refine((v) => v === "" || v.startsWith("/") || /^https?:\/\//.test(v), "Upload a photo or paste a link").optional(),
   specialization: z.string().optional(),
   licenseNumber: z.string().optional(),
   yearsExperience: z.number({ coerce: true }).int().min(0).optional(),
   linkedinUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
   instagramUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
   twitterUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
+  /** Comma-separated in the form, saved as a list */
+  languages: z.string().optional(),
   active: z.boolean().default(true),
+  showContact: z.boolean().default(true),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -41,19 +45,28 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       active: true,
+      showContact: true,
       ...defaultValues,
     },
   });
+  const avatar = watch("avatar");
 
   async function onSubmit(data: FormData) {
+    const payload = {
+      ...data,
+      avatar: data.avatar ?? "",
+      languages: (data.languages ?? "").split(",").map((l) => l.trim()).filter(Boolean),
+    };
     const result = agentId
-      ? await updateAgent(agentId, data)
-      : await createAgent(data);
+      ? await updateAgent(agentId, payload)
+      : await createAgent(payload);
 
     if (result.success) {
       toast.success(agentId ? "Agent updated" : "Agent created");
@@ -159,14 +172,15 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
 
       {/* Media */}
       <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
-        <h2 className="font-semibold text-foreground">Avatar</h2>
+        <h2 className="font-semibold text-foreground">Photo</h2>
         <div>
-          <label className={labelCls}>Avatar Image URL</label>
-          <input
-            {...register("avatar")}
-            type="url"
-            className={inputCls}
-            placeholder="https://…"
+          <label className={labelCls}>Profile Photo</label>
+          <MediaUpload
+            uploadUrl="/api/admin/upload"
+            single
+            value={avatar ? [avatar] : []}
+            onChange={(urls) => setValue("avatar", urls[0] ?? "", { shouldDirty: true, shouldValidate: true })}
+            hint="Square JPG, PNG or WEBP, up to 10 MB"
           />
           {errors.avatar && (
             <p className="text-xs text-red-500 mt-1">{errors.avatar.message}</p>
@@ -224,6 +238,13 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
             <p className="text-xs text-muted-foreground">Agent appears on the public website</p>
           </div>
           <input {...register("active")} type="checkbox" className="h-4 w-4 rounded" />
+        </div>
+        <div className="flex items-center justify-between mt-5 pt-5 border-t border-border">
+          <div>
+            <p className="text-sm font-medium text-foreground">Show email & phone on website</p>
+            <p className="text-xs text-muted-foreground">When off, visitors are pointed to the Fano office instead</p>
+          </div>
+          <input {...register("showContact")} type="checkbox" className="h-4 w-4 rounded" />
         </div>
       </section>
 

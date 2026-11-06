@@ -91,10 +91,16 @@ function AgentCard({
             <span>Call</span>
           </div>
         )}
-        <div className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl border transition-colors" style={{ borderColor: "#e6d8c4", color: "#8C6A47" }}>
-          <Mail className="h-3.5 w-3.5" />
-          <span>Email</span>
-        </div>
+        {email ? (
+          <div className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl border transition-colors" style={{ borderColor: "#e6d8c4", color: "#8C6A47" }}>
+            <Mail className="h-3.5 w-3.5" />
+            <span>Email</span>
+          </div>
+        ) : (
+          <div className="flex-1 flex items-center justify-center py-2 rounded-xl border transition-colors" style={{ borderColor: "#e6d8c4", color: "#8C6A47" }}>
+            <span>View profile</span>
+          </div>
+        )}
       </div>
     </Link>
   );

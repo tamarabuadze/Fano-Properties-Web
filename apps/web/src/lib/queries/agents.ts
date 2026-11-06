@@ -1,8 +1,13 @@
 import { prisma } from "@fano/db";
 import { cached, CACHE_TAGS } from "@/lib/cache";
 
+/** Removes email and phone from an agent who chose not to show them on the website */
+export function publicAgent<T extends { showContact: boolean; email: string; phone: string | null }>(agent: T): T {
+  return agent.showContact ? agent : { ...agent, email: "", phone: null };
+}
+
 async function getAgentsUncached(limit?: number) {
-  return prisma.agent.findMany({
+  const agents = await prisma.agent.findMany({
     where: { active: true },
     take: limit,
     orderBy: { createdAt: "asc" },
@@ -10,10 +15,11 @@ async function getAgentsUncached(limit?: number) {
       _count: { select: { properties: { where: { published: true } } } },
     },
   });
+  return agents.map(publicAgent);
 }
 
 async function getAgentBySlugUncached(slug: string) {
-  return prisma.agent.findUnique({
+  const agent = await prisma.agent.findUnique({
     where: { slug },
     include: {
       properties: {
@@ -24,6 +30,7 @@ async function getAgentBySlugUncached(slug: string) {
       _count: { select: { properties: true } },
     },
   });
+  return agent && publicAgent(agent);
 }
 
 export const getAgents = cached(getAgentsUncached, "getAgents", [CACHE_TAGS.agents, CACHE_TAGS.properties]);

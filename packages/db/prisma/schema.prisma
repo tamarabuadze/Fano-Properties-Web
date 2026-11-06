@@ -104,6 +104,8 @@ model Agent {
   facebookUrl       String?
   websiteUrl        String?
   active            Boolean   @default(true)
+  /// Show email and phone on the public website
+  showContact       Boolean   @default(true)
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
 

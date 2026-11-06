@@ -1,6 +1,7 @@
 import { prisma } from "@fano/db";
 import type { PropertyFilters } from "@fano/types";
 import { cached, CACHE_TAGS } from "@/lib/cache";
+import { publicAgent } from "@/lib/queries/agents";
 
 // Prisma returns Decimal objects for price/lat/lng which can't cross the
 // Server → Client Component boundary. Convert them to plain numbers here.
@@ -92,7 +93,9 @@ async function getPropertyBySlugUncached(slug: string) {
       agent: true,
     },
   });
-  return row ? serialize(row) : null;
+  if (!row) return null;
+  // Hidden agent contact details never reach the browser
+  return { ...serialize(row), agent: row.agent && publicAgent(row.agent) };
 }
 
 async function getRelatedPropertiesUncached(propertyId: string, propertyType: string, limit = 3) {

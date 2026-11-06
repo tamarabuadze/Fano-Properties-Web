@@ -52,7 +52,9 @@ export default async function EditAgentPage({
           linkedinUrl: agent.linkedinUrl ?? "",
           instagramUrl: agent.instagramUrl ?? "",
           twitterUrl: agent.twitterUrl ?? "",
+          languages: agent.languages.join(", "),
           active: agent.active,
+          showContact: agent.showContact,
         }}
       />
     </div>

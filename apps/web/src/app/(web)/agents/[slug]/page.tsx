@@ -64,6 +64,13 @@ export default async function AgentPage({ params }: AgentPageProps) {
               {agent.title && (
                 <p className="text-zinc-500 mt-1">{agent.title}</p>
               )}
+              {(agent.licenseNumber || agent.languages.length > 0 || agent.specialization) && (
+                <div className="mt-4 space-y-1 text-sm text-zinc-600">
+                  {agent.licenseNumber && <p>RERA BRN {agent.licenseNumber}</p>}
+                  {agent.specialization && <p>{agent.specialization}</p>}
+                  {agent.languages.length > 0 && <p>Speaks {agent.languages.join(", ")}</p>}
+                </div>
+              )}
 
               <div className="mt-6 space-y-3">
                 {agent.phone && (
@@ -75,13 +82,22 @@ export default async function AgentPage({ params }: AgentPageProps) {
                     {agent.phone}
                   </a>
                 )}
-                <a
-                  href={`mailto:${agent.email}`}
-                  className="flex items-center gap-3 text-sm text-zinc-700 hover:text-[#2B2520] transition-colors"
-                >
-                  <Mail className="h-4 w-4 text-zinc-400" />
-                  {agent.email}
-                </a>
+                {agent.email ? (
+                  <a
+                    href={`mailto:${agent.email}`}
+                    className="flex items-center gap-3 text-sm text-zinc-700 hover:text-[#2B2520] transition-colors"
+                  >
+                    <Mail className="h-4 w-4 text-zinc-400" />
+                    {agent.email}
+                  </a>
+                ) : (
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center justify-center w-full h-11 rounded-full bg-[#2B2520] text-[#F4EFEA] text-sm font-medium hover:bg-[#3A322B] transition-colors"
+                  >
+                    Contact {agent.firstName} through Fano
+                  </a>
+                )}
               </div>
 
               {socialLinks.length > 0 && (

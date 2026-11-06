@@ -14,14 +14,16 @@ const agentSchema = z.object({
   phone: z.string().optional(),
   title: z.string().optional(),
   bio: z.string().optional(),
-  avatar: z.string().url().optional().or(z.literal("")),
+  avatar: z.string().refine((v) => v === "" || v.startsWith("/") || /^https?:\/\//.test(v), "Upload a photo or paste a link").optional(),
   specialization: z.string().optional(),
   licenseNumber: z.string().optional(),
   yearsExperience: z.number({ coerce: true }).int().optional(),
   linkedinUrl: z.string().url().optional().or(z.literal("")),
   instagramUrl: z.string().url().optional().or(z.literal("")),
   twitterUrl: z.string().url().optional().or(z.literal("")),
+  languages: z.array(z.string().trim().min(1)).default([]),
   active: z.boolean().default(true),
+  showContact: z.boolean().default(true),
 });
 
 export async function createAgent(data: z.infer<typeof agentSchema>) {
