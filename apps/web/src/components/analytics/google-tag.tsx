@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Script from "next/script";
 import Link from "next/link";
 import { CONSENT_COUNTRIES, trackEvent } from "@/lib/analytics";
+import { captureAttribution } from "@/lib/attribution";
 
 const CONSENT_KEY = "fano-cookie-consent";
 const GRANTED = { ad_storage: "granted", ad_user_data: "granted", ad_personalization: "granted", analytics_storage: "granted" };
@@ -33,6 +34,10 @@ export function GoogleTag({ gaId, adsId, askConsent }: GoogleTagProps) {
     if (saved === "granted") window.gtag?.("consent", "update", GRANTED);
     else if (saved !== "denied") setShowBanner(true);
   }, [askConsent]);
+
+  useEffect(() => {
+    captureAttribution();
+  }, []);
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {

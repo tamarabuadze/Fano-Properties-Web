@@ -6,6 +6,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { formatPrice } from "@fano/utils";
 import { submitInquiry } from "@/lib/actions/inquiry";
+import { getAttribution } from "@/lib/attribution";
 import type { RoiInputs, RoiResult } from "@/lib/roi";
 import { trackLead } from "@/lib/analytics";
 
@@ -13,7 +14,13 @@ const schema = z.object({
   firstName: z.string().min(1, "Required"),
   lastName: z.string().min(1, "Required"),
   email: z.string().email("Invalid email"),
-  phone: z.string().optional(),
+  phone: z
+    .string()
+    .trim()
+    .refine((v) => {
+      const digits = v.replace(/\D/g, "");
+      return digits.length >= 7 && digits.length <= 15;
+    }, "Enter your mobile number, with country code if outside the UAE"),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -58,6 +65,8 @@ export function RoiLeadForm({ inputs, result, propertyId, propertyTitle }: RoiLe
       message: summarise(inputs, result, propertyTitle),
       propertyId,
       type: propertyId ? "property" : "general",
+      page: window.location.pathname,
+      attribution: getAttribution(),
     });
     if (res.success) {
       trackLead("roi_lead");
@@ -93,7 +102,10 @@ export function RoiLeadForm({ inputs, result, propertyId, propertyTitle }: RoiLe
         <input {...register("email")} type="email" placeholder="Email address" aria-label="Email address" className={inputCls} />
         {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
       </div>
-      <input {...register("phone")} type="tel" placeholder="Phone (optional)" aria-label="Phone" className={inputCls} />
+      <div>
+        <input {...register("phone")} type="tel" inputMode="tel" placeholder="Mobile number (with country code)" aria-label="Mobile number" className={inputCls} />
+        {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone.message}</p>}
+      </div>
       <button
         type="submit"
         disabled={isSubmitting}

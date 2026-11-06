@@ -6,13 +6,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
 import { submitInquiry } from "@/lib/actions/inquiry";
+import { getAttribution } from "@/lib/attribution";
 import { trackLead } from "@/lib/analytics";
 
 const schema = z.object({
   firstName: z.string().min(1, "Required"),
   lastName: z.string().min(1, "Required"),
   email: z.string().email("Invalid email"),
-  phone: z.string().optional(),
+  phone: z
+    .string()
+    .trim()
+    .refine((v) => {
+      const digits = v.replace(/\D/g, "");
+      return digits.length >= 7 && digits.length <= 15;
+    }, "Enter your mobile number, with country code if outside the UAE"),
   message: z.string().min(10, "Message too short"),
 });
 
@@ -37,7 +44,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
   });
 
   async function onSubmit(data: FormData) {
-    const result = await submitInquiry({ ...data, propertyId, type: "property" });
+    const result = await submitInquiry({ ...data, propertyId, type: "property", page: window.location.pathname, attribution: getAttribution() });
     if (result.success) {
       trackLead("property_inquiry", { property_title: propertyTitle });
       toast.success("Inquiry sent! We'll be in touch shortly.");
@@ -91,9 +98,11 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
           <input
             {...register("phone")}
             type="tel"
-            placeholder="Phone (optional)"
+            inputMode="tel"
+            placeholder="Mobile number (with country code)"
             className="w-full h-11 px-3.5 rounded-xl border border-border text-sm focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent placeholder:text-zinc-400 transition-all hover:border-zinc-300"
           />
+          {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone.message}</p>}
         </div>
 
         <div>

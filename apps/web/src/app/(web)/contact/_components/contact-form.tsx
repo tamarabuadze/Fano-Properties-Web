@@ -5,13 +5,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
 import { submitInquiry } from "@/lib/actions/inquiry";
+import { getAttribution } from "@/lib/attribution";
 import { trackLead } from "@/lib/analytics";
 
 const schema = z.object({
   firstName: z.string().min(1, "Required"),
   lastName: z.string().min(1, "Required"),
   email: z.string().email("Invalid email"),
-  phone: z.string().optional(),
+  phone: z
+    .string()
+    .trim()
+    .refine((v) => {
+      const digits = v.replace(/\D/g, "");
+      return digits.length >= 7 && digits.length <= 15;
+    }, "Enter your mobile number, with country code if outside the UAE"),
   message: z.string().min(10, "Message too short"),
 });
 
@@ -26,7 +33,7 @@ export function ContactForm() {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   async function onSubmit(data: FormData) {
-    const result = await submitInquiry({ ...data, type: "general" });
+    const result = await submitInquiry({ ...data, type: "general", page: window.location.pathname, attribution: getAttribution() });
     if (result.success) {
       trackLead("contact");
       toast.success("Message sent! We'll be in touch shortly.");
@@ -58,7 +65,10 @@ export function ContactForm() {
       </div>
 
       <div>
-        <input {...register("phone")} type="tel" placeholder="Phone (optional)" className={inputCls} />
+        <div>
+          <input {...register("phone")} type="tel" inputMode="tel" placeholder="Mobile number (with country code)" className={inputCls} />
+          {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone.message}</p>}
+        </div>
       </div>
 
       <div>
