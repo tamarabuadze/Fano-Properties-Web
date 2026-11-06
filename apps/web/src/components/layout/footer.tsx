@@ -102,12 +102,12 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-8 lg:gap-8">
             {groups.map(([heading, links]) => (
               <div key={heading}>
-                <h4 className="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#DFCFB9]">{heading}</h4>
+                <h4 className="mb-5 text-xs font-semibold uppercase tracking-[2px] text-[#DFCFB9]">{heading}</h4>
                 <ul className="space-y-3">
                   {links.map((link) => (
                     <li key={link.href}>
                       <Link href={link.href} className="group inline-flex items-center gap-2.5 text-sm text-[#A99D8F] transition-colors hover:text-[#DFCFB9]">
-                        <span aria-hidden className="text-[11px] font-bold text-[#DFCFB9] transition-transform group-hover:scale-125">•</span>
+                        <span aria-hidden className="-mt-0.5 text-lg leading-none text-[#DFCFB9] [text-shadow:0_0_5px_rgba(223,207,185,0.4)] transition-transform group-hover:scale-125">•</span>
                         {link.label}
                       </Link>
                     </li>
@@ -122,11 +122,11 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
       {/* Bottom line: subtle divider, copyright and the credit badge */}
       <div className="container-site relative">
         <div className="h-px bg-[#A99D8F]/20" />
-        <div className="flex flex-col items-center gap-4 pt-7 pb-24 text-center text-xs text-[#A99D8F] sm:pb-8 lg:flex-row lg:justify-between lg:text-left">
-          <p>© 2025 Fano Real Estate. All rights reserved.</p>
-          <p className="inline-flex items-center gap-2 text-[#A99D8F]">
-            <span aria-hidden className="text-sm font-bold text-[#DFCFB9]">◈</span>
-            Designed &amp; developed in-house by <strong className="font-semibold text-[#DFCFB9]">Ali Raza</strong>
+        <div className="flex flex-col items-center gap-4 pt-7 pb-24 text-center text-xs text-[#A99D8F] sm:pb-8 sm:pr-20 lg:flex-row lg:justify-between lg:text-left">
+          <p className="text-[13px]">© 2025 Fano Real Estate. All rights reserved.</p>
+          <p className="group inline-flex items-center gap-2 rounded-full border border-[#DFCFB9]/20 bg-[#DFCFB9]/5 px-4 py-2 text-[13px] text-[#A99D8F] transition-all duration-300 hover:border-[#DFCFB9] hover:bg-[#DFCFB9]/10 hover:text-[#DFCFB9]">
+            <span aria-hidden className="text-base text-[#DFCFB9] [text-shadow:0_0_8px_rgba(223,207,185,0.4)]">◈</span>
+            Designed &amp; developed in-house by <strong className="font-semibold tracking-[0.5px] text-[#DFCFB9]">Ali Raza</strong>
           </p>
         </div>
       </div>
