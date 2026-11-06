@@ -39,7 +39,7 @@ export default async function AgentsPage() {
             <p className="text-xl">Our team is being assembled. Check back soon.</p>
           </div>
         ) : (
-          <AnimateStagger className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-6">
+          <AnimateStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {agents.map((agent) => (
               <AgentCard
                 key={agent.id}
@@ -50,6 +50,8 @@ export default async function AgentsPage() {
                 avatar={agent.avatar}
                 title={agent.title}
                 specialization={agent.specialization}
+                licenseNumber={agent.licenseNumber}
+                languages={agent.languages}
                 phone={agent.phone}
                 email={agent.email}
                 totalListings={(agent as never as { _count: { properties: number } })._count?.properties}
