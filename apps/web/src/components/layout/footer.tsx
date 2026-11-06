@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { FanoLogo, LOGO_COLORS } from "@/components/shared/fano-logo";
 import { Mail, MessageCircle, Phone } from "lucide-react";
 import { SOCIAL_LINKS } from "@/lib/social-links";
 
@@ -51,15 +51,7 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
           {/* Brand */}
           <div className="lg:col-span-4">
             <Link href="/" className="inline-flex items-center">
-              <Image
-                src="/logo-white.png"
-                alt="Fano Properties"
-                width={160}
-                height={52}
-                className="h-10 w-auto object-contain"
-                /* Champagne gold logo */
-                style={{ filter: "brightness(0) saturate(100%) invert(91%) sepia(9%) saturate(512%) hue-rotate(345deg) brightness(93%)" }}
-              />
+              <FanoLogo color={LOGO_COLORS.champagne} className="h-12" />
             </Link>
             <p className="mt-5 max-w-xs text-base leading-relaxed text-[#A99D8F]">
               Premium real estate for discerning buyers, sellers, and investors.

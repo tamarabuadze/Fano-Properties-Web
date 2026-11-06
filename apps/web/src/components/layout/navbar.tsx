@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { FanoLogo, LOGO_COLORS } from "@/components/shared/fano-logo";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -50,10 +50,8 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
   // Espresso links on the light bar, white over the hero photo
   const linkColor = isOpaque ? "text-[#2B2520]" : "text-white";
   const hoverBg = isOpaque ? "hover:bg-[#2B2520]/5" : "hover:bg-white/10";
-  // Bronze logo on light, sand logo over the photo (the PNG is recoloured with a CSS filter)
-  const logoFilter = isOpaque
-    ? "brightness(0) saturate(100%) invert(43%) sepia(24%) saturate(760%) hue-rotate(349deg) brightness(93%) contrast(88%)"
-    : "brightness(0) saturate(100%) invert(77%) sepia(16%) saturate(430%) hue-rotate(2deg) brightness(96%)";
+  // Bronze logo on the light bar, sand logo over the photo
+  const logoColor = isOpaque ? LOGO_COLORS.bronze : LOGO_COLORS.sand;
 
   return (
     <>
@@ -65,16 +63,14 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
       >
         <div className="container-site">
           <div className="flex h-16 lg:h-20 items-center justify-between gap-8">
-            {/* Logo — always beige/gold brand color */}
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/logo-dark.png"
-                alt="Fano Properties"
-                width={160}
-                height={52}
-                className="h-9 w-auto object-contain transition-all duration-300"
-                style={{ filter: logoFilter }}
-                priority
+            {/* Logo: sharp vector, bronze on light and sand over the photo */}
+            <Link href="/" className="flex items-center" aria-label="Fano Properties home">
+              <FanoLogo
+                color={logoColor}
+                className={cn(
+                  "h-11 lg:h-[3.25rem] transition-colors duration-300",
+                  !isOpaque && "drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]"
+                )}
               />
             </Link>
 
