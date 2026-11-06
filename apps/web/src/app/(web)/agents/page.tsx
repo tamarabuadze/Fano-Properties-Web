@@ -6,7 +6,7 @@ import { AnimateStagger } from "@/components/shared/animate-stagger";
 export async function generateMetadata(): Promise<Metadata> {
   const hasAgents = (await getAgents(1).catch(() => [])).length > 0;
   return {
-    title: "The Fano Properties Team",
+    title: "Your Real Estate Insiders",
     description: "Discover the dedicated experts behind your next successful property investment in Dubai.",
     alternates: { canonical: "/agents" },
     // An empty team page stays out of search results
@@ -25,7 +25,7 @@ export default async function AgentsPage() {
         <div className="container-site">
           <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-3">The Team</p>
           <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#2B2520]">
-            The Fano Properties Team
+            Your Real Estate Insiders
           </h1>
           <p className="text-zinc-500 mt-3 max-w-xl">
             Discover the dedicated experts behind your next successful property investment.

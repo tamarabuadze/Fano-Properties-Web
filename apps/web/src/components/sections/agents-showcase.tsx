@@ -31,7 +31,7 @@ export function AgentsShowcaseSection({ agents }: AgentsShowcaseProps) {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
           <SectionHeader
             eyebrow="Meet the team"
-            title="The Fano Properties Team"
+            title="Your Real Estate Insiders"
             description="Discover the dedicated experts behind your next successful property investment."
           />
           <Link
