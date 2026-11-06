@@ -117,17 +117,6 @@ export default async function AgentPage({ params }: AgentPageProps) {
                 </div>
               )}
 
-              <div className="mt-8 grid grid-cols-2 gap-3">
-                {[
-                  { label: "Listings", value: agent._count.properties },
-                  { label: "Experience", value: agent.yearsExperience ? `${agent.yearsExperience}y` : "—" },
-                ].map((stat) => (
-                  <div key={stat.label} className="p-4 rounded-xl bg-zinc-50 border border-border text-center">
-                    <p className="text-xl font-semibold text-[#2B2520] [letter-spacing:-0.02em]">{stat.value}</p>
-                    <p className="text-xs text-zinc-500 mt-0.5">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
 

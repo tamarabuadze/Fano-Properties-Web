@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Phone, Mail } from "lucide-react";
+import { ArrowRight, Phone, Mail } from "lucide-react";
 import { cn } from "@fano/utils";
 
 export interface AgentCardProps {
@@ -74,13 +74,6 @@ function AgentCard({
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-[#2B2520]/85 via-[#2B2520]/10 to-transparent" />
 
-        {licenseNumber && (
-          <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-[#F4EFEA]/90 backdrop-blur px-3 py-1 text-[11px] font-semibold tracking-wide text-[#2B2520]">
-            <BadgeCheck className="h-3.5 w-3.5 text-[#8C6A47]" />
-            RERA BRN {licenseNumber}
-          </span>
-        )}
-
         <div className="absolute inset-x-0 bottom-0 p-5">
           <h3 className="font-display text-xl font-semibold leading-tight text-[#F4EFEA] [letter-spacing:-0.01em]">
             {firstName} {lastName}
@@ -91,7 +84,22 @@ function AgentCard({
 
       {/* Details */}
       <div className="flex flex-1 flex-col p-5">
-        {specialization && <p className="text-sm text-[#4A413A]">{specialization}</p>}
+        {(licenseNumber || specialization) && (
+          <ul className="space-y-1.5 text-sm text-[#4A413A]">
+            {licenseNumber && (
+              <li className="flex items-center gap-2.5">
+                <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#E2A862] shadow-[0_0_6px_rgba(226,168,98,.7)]" />
+                <span className="font-semibold text-[#2B2520]">RERA BRN {licenseNumber}</span>
+              </li>
+            )}
+            {specialization && (
+              <li className="flex items-center gap-2.5">
+                <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#E2A862] shadow-[0_0_6px_rgba(226,168,98,.7)]" />
+                {specialization}
+              </li>
+            )}
+          </ul>
+        )}
 
         {languages.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
