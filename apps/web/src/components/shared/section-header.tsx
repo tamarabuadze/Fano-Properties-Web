@@ -29,16 +29,17 @@ export function SectionHeader({
       {eyebrow && (
         <p
           className={cn(
-            "text-xs font-medium uppercase tracking-widest",
-            light ? "text-white/60" : "text-gold-600"
+            "inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em]",
+            light ? "text-[#ECBE80]" : "text-[#8C6A47]"
           )}
         >
+          <span className="h-px w-8 bg-gradient-to-r from-[#E2A862] to-[#E2A862]/0" aria-hidden />
           {eyebrow}
         </p>
       )}
       <h2
         className={cn(
-          "font-semibold leading-tight text-balance",
+          "font-display font-semibold leading-tight text-balance",
           "[letter-spacing:-0.025em]",
           "text-3xl sm:text-4xl lg:text-[2.75rem]",
           light ? "text-white" : "text-[#2B2520]"

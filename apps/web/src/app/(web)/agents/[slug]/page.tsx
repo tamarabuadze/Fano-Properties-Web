@@ -93,7 +93,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
                 ) : (
                   <a
                     href="/contact"
-                    className="inline-flex items-center justify-center w-full h-11 rounded-full bg-[#2B2520] text-[#F4EFEA] text-sm font-medium hover:bg-[#3A322B] transition-colors"
+                    className="inline-flex items-center justify-center w-full h-11 rounded-full bg-gradient-to-b from-[#3A322B] to-[#2B2520] text-[#F4EFEA] shadow-[0_10px_24px_-10px_rgba(43,37,32,.6)] hover:-translate-y-px hover:shadow-[0_16px_30px_-12px_rgba(43,37,32,.7)] text-[#F4EFEA] text-sm font-medium transition-colors"
                   >
                     Contact {agent.firstName} through Fano
                   </a>

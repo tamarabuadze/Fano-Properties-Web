@@ -68,7 +68,7 @@ export function PropertyAgentCard({ agent }: { agent: Agent }) {
         )}
         <Link
           href={`/agents/${agent.slug}`}
-          className="flex items-center justify-center gap-2 w-full h-10 px-4 rounded-xl bg-[#2B2520] text-white text-sm font-medium hover:bg-[#3A322B] transition-colors"
+          className="flex items-center justify-center gap-2 w-full h-10 px-4 rounded-xl bg-gradient-to-b from-[#3A322B] to-[#2B2520] text-[#F4EFEA] shadow-[0_10px_24px_-10px_rgba(43,37,32,.6)] hover:-translate-y-px hover:shadow-[0_16px_30px_-12px_rgba(43,37,32,.7)] text-sm font-medium transition-colors"
         >
           <ExternalLink className="h-4 w-4" />
           View Profile

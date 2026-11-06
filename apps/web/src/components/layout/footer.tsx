@@ -146,7 +146,7 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
           <path d="M-40 140 C 160 80, 280 72, 480 90" fill="none" stroke="url(#fano-footer-line)" strokeWidth="1" opacity=".35" />
         </svg>
         <div className="container-site relative flex flex-col items-center gap-3 pt-10 pb-24 text-center text-xs text-[#C5BAAB] sm:pb-8 lg:flex-row lg:justify-between lg:text-left">
-          <p>© {new Date().getFullYear()} Fano Real Estate. All rights reserved.</p>
+          <p>© 2025 Fano Real Estate. All rights reserved.</p>
           <p className="text-sm text-[#F4EFEA]">
             Designed &amp; developed in-house by <span className="font-semibold text-[#E2A862]">Ali Raza</span>
             <span className="text-[#C5BAAB]"> · Fano Properties</span>

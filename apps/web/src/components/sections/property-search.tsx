@@ -98,7 +98,7 @@ export function PropertySearchSection() {
               {/* Search button */}
               <button
                 type="submit"
-                className="h-14 px-8 rounded-xl bg-[#2B2520] text-white font-medium text-sm flex items-center gap-2 hover:bg-[#3A322B] transition-colors whitespace-nowrap"
+                className="h-14 px-8 rounded-xl bg-gradient-to-b from-[#3A322B] to-[#2B2520] text-[#F4EFEA] shadow-[0_10px_24px_-10px_rgba(43,37,32,.6)] hover:-translate-y-px hover:shadow-[0_16px_30px_-12px_rgba(43,37,32,.7)] font-medium text-sm flex items-center gap-2 transition-colors whitespace-nowrap"
               >
                 <Search className="h-4 w-4" />
                 Search

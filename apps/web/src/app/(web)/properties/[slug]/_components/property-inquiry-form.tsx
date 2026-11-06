@@ -55,7 +55,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
   }
 
   return (
-    <div className="rounded-2xl border border-border p-6 bg-surface">
+    <div className="rounded-2xl border border-border p-6 bg-surface shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)]">
       <h3 className="font-semibold text-[#2B2520] text-lg mb-5">Request Information</h3>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -120,7 +120,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full h-12 rounded-xl bg-[#2B2520] text-white font-medium text-sm hover:bg-[#3A322B] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full h-12 rounded-xl bg-gradient-to-b from-[#3A322B] to-[#2B2520] text-[#F4EFEA] shadow-[0_10px_24px_-10px_rgba(43,37,32,.6)] hover:-translate-y-px hover:shadow-[0_16px_30px_-12px_rgba(43,37,32,.7)] font-medium text-sm transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {isSubmitting ? "Sending…" : "Send Inquiry"}
         </button>

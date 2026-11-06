@@ -65,8 +65,9 @@ function PropertyCard({
     <Link
       href={`/properties/${slug}`}
       className={cn(
-        "group flex flex-col overflow-hidden rounded-2xl bg-surface border border-border h-full",
-        "transition-all duration-500 hover:shadow-xl hover:-translate-y-1",
+        "group flex flex-col overflow-hidden rounded-3xl h-full border border-[#C5BAAB]/50",
+        "bg-gradient-to-b from-[#FAF7F3] to-[#F4EFEA] shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)]",
+        "transition-all duration-500 hover:-translate-y-1 hover:border-[#E2A862]/60 hover:shadow-[0_24px_48px_-18px_rgba(43,37,32,.35),0_0_0_1px_rgba(226,168,98,.25)]",
         className
       )}
     >
@@ -102,7 +103,7 @@ function PropertyCard({
 
       <div className="flex flex-col flex-1 p-5">
         <div className="mb-3">
-          <p className="text-2xl font-semibold tracking-tight [letter-spacing:-0.02em]" style={{ color: "#6B5038" }}>
+          <p className="font-display text-2xl font-semibold tracking-tight [letter-spacing:-0.02em]" style={{ color: "#6B5038" }}>
             {formatPrice(price, currency)}
             {priceUnit === "per_sqft" && (
               <span className="text-sm font-normal text-text-secondary"> /sq ft</span>
@@ -113,7 +114,7 @@ function PropertyCard({
           </p>
         </div>
 
-        <h3 className="font-semibold mb-1.5 line-clamp-1 transition-colors" style={{ color: "#2B2520" }}>
+        <h3 className="font-display font-semibold mb-1.5 line-clamp-1 transition-colors group-hover:text-[#8C6A47]" style={{ color: "#2B2520" }}>
           {title}
         </h3>
 

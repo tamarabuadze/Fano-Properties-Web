@@ -57,7 +57,7 @@ export default function AboutPage() {
               </div>
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 mt-8 h-12 px-6 rounded-full bg-[#2B2520] text-white font-medium hover:bg-[#3A322B] transition-colors"
+                className="inline-flex items-center gap-2 mt-8 h-12 px-6 rounded-full bg-gradient-to-b from-[#3A322B] to-[#2B2520] text-[#F4EFEA] shadow-[0_10px_24px_-10px_rgba(43,37,32,.6)] hover:-translate-y-px hover:shadow-[0_16px_30px_-12px_rgba(43,37,32,.7)] font-medium transition-colors"
               >
                 Work With Us
                 <ArrowRight className="h-4 w-4" />
@@ -90,7 +90,7 @@ export default function AboutPage() {
           />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((v) => (
-              <div key={v.title} className="bg-surface rounded-2xl border border-border p-6">
+              <div key={v.title} className="bg-surface shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)] rounded-2xl border border-border p-6">
                 <div className="h-12 w-12 rounded-xl bg-zinc-50 border border-border flex items-center justify-center mb-4">
                   <v.icon className="h-6 w-6 text-[#2B2520]" />
                 </div>

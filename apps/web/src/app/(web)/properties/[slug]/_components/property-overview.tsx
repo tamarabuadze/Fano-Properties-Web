@@ -39,10 +39,10 @@ export function PropertyOverview({ property }: { property: Property }) {
             {isCommercial && property.unitType ? `Commercial · ${unitTypeLabel(property.unitType)}` : property.propertyType}
           </span>
           <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium capitalize ${
-            property.status === "available"
-              ? "bg-emerald-50 text-emerald-700"
-              : "bg-amber-50 text-amber-700"
-          }`}>
+ property.status === "available"
+ ? "bg-emerald-50 text-emerald-700"
+ : "bg-amber-50 text-amber-700"
+ }`}>
             {PROPERTY_STATUS_LABELS[property.status] ?? property.status}
           </span>
         </div>

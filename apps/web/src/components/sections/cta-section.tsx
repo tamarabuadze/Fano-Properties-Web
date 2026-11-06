@@ -43,7 +43,7 @@ export function CtaSection() {
             <div className="flex flex-wrap gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 h-13 px-7 rounded-full bg-gold-400 text-white font-medium hover:bg-gold-500 transition-colors"
+                className="inline-flex items-center gap-2 h-13 px-7 rounded-full bg-gradient-to-br from-[#ECBE80] via-[#E2A862] to-[#B9824A] text-[#2B2520] font-semibold shadow-[0_10px_24px_-10px_rgba(185,130,74,.7)] hover:-translate-y-px hover:brightness-105 transition-colors"
               >
                 Get in Touch
                 <ArrowRight className="h-4 w-4" />

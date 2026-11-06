@@ -64,6 +64,15 @@
   img, video {
     @apply max-w-full;
   }
+
+  /* Amber focus ring on form fields, as in the Fano app */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none;
+    border-color: #E2A862 !important;
+    box-shadow: 0 0 0 4px rgba(226, 168, 98, 0.22) !important;
+  }
 }
 
 @layer utilities {
