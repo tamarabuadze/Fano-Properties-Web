@@ -135,6 +135,15 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
               placeholder="Luxury Residences"
             />
           </div>
+          <div className="sm:col-span-2">
+            <label className={labelCls}>Languages</label>
+            <input
+              {...register("languages")}
+              className={inputCls}
+              placeholder="English, Arabic, Hindi"
+            />
+            <p className="text-xs text-muted-foreground mt-1">Separate languages with commas</p>
+          </div>
         </div>
 
         <div>
