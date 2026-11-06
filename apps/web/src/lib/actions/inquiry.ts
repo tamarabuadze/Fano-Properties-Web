@@ -4,6 +4,7 @@ import { prisma } from "@fano/db";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { after } from "next/server";
+import { headers } from "next/headers";
 import { sendLeadToFanoApp } from "@/lib/fano-app";
 
 const inquirySchema = z.object({
@@ -42,7 +43,9 @@ export async function submitInquiry(data: InquiryFormData) {
 
     revalidatePath("/admin/inquiries");
 
-    // Copy it to the Fano team app's Lead inbox once the visitor has their answer
+    // Copy it to the Fano team app's Lead inbox once the visitor has their answer.
+    // The app sees the website server's location, so pass the visitor's country from Cloudflare.
+    const country = (await headers()).get("cf-ipcountry")?.toUpperCase();
     if (inquiry.phone) {
       after(async () => {
         const property = inquiry.propertyId
@@ -52,7 +55,8 @@ export async function submitInquiry(data: InquiryFormData) {
           name: `${inquiry.firstName} ${inquiry.lastName}`.trim(),
           phone: inquiry.phone!,
           email: inquiry.email,
-          message: inquiry.message,
+          message: country && country !== "XX" ? `${inquiry.message}
+Visitor country: ${country}` : inquiry.message,
           project: property?.title ?? "fanoproperties.com",
           purpose: inquiry.type === "property" ? "Property enquiry" : "General enquiry",
           page,
