@@ -38,12 +38,12 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
   );
 
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-b from-[#2B2520] via-[#26201C] to-[#1C1714] text-[#F4EFEA]">
-      {/* Warm glow behind the cards */}
+    <footer className="relative overflow-hidden bg-[#24201A] text-[#A99D8F]">
+      {/* Faint champagne glow behind the link cards */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-32 left-1/2 h-[480px] w-[900px] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
-        style={{ background: "radial-gradient(ellipse, #E2A862 0%, transparent 65%)" }}
+        className="pointer-events-none absolute -top-32 left-1/2 h-[480px] w-[900px] -translate-x-1/2 rounded-full opacity-[0.12] blur-3xl"
+        style={{ background: "radial-gradient(ellipse, #DFCFB9 0%, transparent 65%)" }}
       />
 
       <div className="container-site relative pt-16 pb-12 lg:pt-20">
@@ -57,14 +57,14 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
                 width={160}
                 height={52}
                 className="h-10 w-auto object-contain"
-                /* Sand logo on espresso, as in the Fano app */
-                style={{ filter: "brightness(0) saturate(100%) invert(76%) sepia(14%) saturate(480%) hue-rotate(356deg) brightness(92%)" }}
+                /* Champagne gold logo */
+                style={{ filter: "brightness(0) saturate(100%) invert(91%) sepia(9%) saturate(512%) hue-rotate(345deg) brightness(93%)" }}
               />
             </Link>
-            <p className="mt-5 max-w-xs text-base font-medium leading-relaxed text-[#F4EFEA]">
+            <p className="mt-5 max-w-xs text-base leading-relaxed text-[#A99D8F]">
               Premium real estate for discerning buyers, sellers, and investors.
             </p>
-            <p className="mt-2 font-serif text-base italic text-[#E2A862]">Your Trusted Real Estate Partner</p>
+            <p className="mt-2 font-serif text-base italic text-[#DFCFB9]">Your Trusted Real Estate Partner</p>
 
             <div className="mt-6 flex flex-wrap gap-2.5">
               {SOCIAL_LINKS.map(({ icon: Icon, href, label }) => (
@@ -75,7 +75,7 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
                   rel="noopener noreferrer"
                   aria-label={label}
                   title={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[#E2A862]/35 bg-[#F4EFEA]/5 text-[#E8D9C4] shadow-[0_0_14px_-4px_rgba(226,168,98,.45)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#E2A862] hover:text-[#2B2520]"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[#DFCFB9]/30 bg-[#DFCFB9]/[0.04] text-[#DFCFB9] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#DFCFB9] hover:text-[#24201A]"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -88,9 +88,9 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
                   <a
                     href={href}
                     {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className="inline-flex items-center gap-2.5 text-sm text-[#E6DFD5]/80 transition-colors hover:text-[#E2A862]"
+                    className="inline-flex items-center gap-2.5 text-sm text-[#A99D8F] transition-colors hover:text-[#DFCFB9]"
                   >
-                    <Icon className="h-4 w-4 text-[#E2A862]" />
+                    <Icon className="h-4 w-4 text-[#DFCFB9]" />
                     {text}
                   </a>
                 </li>
@@ -98,18 +98,19 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
             </ul>
           </div>
 
-          {/* Link groups in glowing glass cards */}
+          {/* Link groups in glass cards, with champagne HD bullets */}
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:col-span-8 lg:gap-5">
             {groups.map(([heading, links]) => (
               <div
                 key={heading}
-                className="rounded-2xl border border-[#E2A862]/40 bg-gradient-to-b from-[#F4EFEA]/[0.07] to-[#F4EFEA]/[0.02] p-5 backdrop-blur-sm shadow-[0_0_0_1px_rgba(255,255,255,.03)_inset,0_0_28px_-6px_rgba(226,168,98,.45)] transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(255,255,255,.05)_inset,0_0_40px_-4px_rgba(226,168,98,.6)] lg:p-6"
+                className="rounded-2xl border border-[#DFCFB9]/25 bg-gradient-to-b from-[#DFCFB9]/[0.06] to-[#DFCFB9]/[0.015] p-5 shadow-[0_0_0_1px_rgba(255,255,255,.02)_inset,0_0_26px_-8px_rgba(223,207,185,.28)] transition-shadow duration-300 hover:shadow-[0_0_0_1px_rgba(255,255,255,.04)_inset,0_0_36px_-6px_rgba(223,207,185,.4)] lg:p-6"
               >
-                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-[#E2A862]">{heading}</p>
+                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#DFCFB9]">{heading}</p>
                 <ul className="space-y-3">
                   {links.map((link) => (
                     <li key={link.href}>
-                      <Link href={link.href} className="text-sm text-[#F4EFEA]/85 transition-colors hover:text-[#E2A862]">
+                      <Link href={link.href} className="group inline-flex items-center gap-2.5 text-sm text-[#A99D8F] transition-colors hover:text-[#DFCFB9]">
+                        <span aria-hidden className="text-[11px] font-bold text-[#DFCFB9] transition-transform group-hover:scale-125">•</span>
                         {link.label}
                       </Link>
                     </li>
@@ -121,35 +122,14 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
         </div>
       </div>
 
-      {/* Bottom bar with glowing curved light lines */}
-      <div className="relative">
-        <svg
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-full w-full"
-          viewBox="0 0 1440 140"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient id="fano-footer-line" x1="0" x2="1">
-              <stop offset="0" stopColor="#E2A862" stopOpacity="0" />
-              <stop offset=".25" stopColor="#ECBE80" stopOpacity=".9" />
-              <stop offset=".6" stopColor="#E2A862" stopOpacity=".55" />
-              <stop offset="1" stopColor="#E2A862" stopOpacity="0" />
-            </linearGradient>
-            <filter id="fano-footer-glow" x="-10%" y="-200%" width="120%" height="500%">
-              <feGaussianBlur stdDeviation="3" />
-            </filter>
-          </defs>
-          <path d="M0 40 C 360 0, 720 0, 1440 30" fill="none" stroke="url(#fano-footer-line)" strokeWidth="6" filter="url(#fano-footer-glow)" opacity=".5" />
-          <path d="M0 40 C 360 0, 720 0, 1440 30" fill="none" stroke="url(#fano-footer-line)" strokeWidth="1.2" />
-          <path d="M-40 130 C 180 60, 300 50, 520 70" fill="none" stroke="url(#fano-footer-line)" strokeWidth="1" opacity=".55" />
-          <path d="M-40 140 C 160 80, 280 72, 480 90" fill="none" stroke="url(#fano-footer-line)" strokeWidth="1" opacity=".35" />
-        </svg>
-        <div className="container-site relative flex flex-col items-center gap-3 pt-10 pb-24 text-center text-xs text-[#C5BAAB] sm:pb-8 lg:flex-row lg:justify-between lg:text-left">
+      {/* Bottom line: subtle divider, copyright and the credit badge */}
+      <div className="container-site relative">
+        <div className="h-px bg-[#A99D8F]/20" />
+        <div className="flex flex-col items-center gap-4 pt-7 pb-24 text-center text-xs text-[#A99D8F] sm:pb-8 lg:flex-row lg:justify-between lg:text-left">
           <p>© 2025 Fano Real Estate. All rights reserved.</p>
-          <p className="text-sm text-[#F4EFEA]">
-            Designed &amp; developed in-house by <span className="font-semibold text-[#E2A862]">Ali Raza</span>
-            <span className="text-[#C5BAAB]"> · Fano Properties</span>
+          <p className="inline-flex items-center gap-2 rounded-full border border-[#DFCFB9]/40 bg-[#DFCFB9]/[0.05] px-4 py-1.5 text-[#A99D8F] shadow-[0_0_18px_-6px_rgba(223,207,185,.35)]">
+            <span aria-hidden className="font-bold text-[#DFCFB9]">✦</span>
+            Designed &amp; developed in-house by <span className="font-semibold text-[#DFCFB9]">Ali Raza</span>
           </p>
         </div>
       </div>
