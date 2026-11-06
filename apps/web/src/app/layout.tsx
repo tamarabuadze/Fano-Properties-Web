@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Montserrat } from "next/font/google";
+import { Inter, Montserrat, Source_Serif_4 } from "next/font/google";
 import { Toaster } from "sonner";
 import { QueryProvider } from "@/components/shared/query-provider";
 import "./globals.css";
@@ -7,6 +7,15 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+// The tagline uses Source Serif italic, as in the Fano team app
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["italic"],
+  variable: "--font-serif",
   display: "swap",
 });
 
@@ -83,7 +92,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${montserrat.variable} ${sourceSerif.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-sand text-black antialiased">
         <QueryProvider>
           {children}

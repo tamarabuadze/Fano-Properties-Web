@@ -49,7 +49,7 @@ export default function AboutPage() {
               />
               <div className="mt-8 space-y-4">
                 <p className="text-zinc-600 leading-relaxed">
-                  Since our founding, we've helped thousands of families find their perfect home, guided investors to high-performing assets, and supported sellers in achieving record prices.
+                  We help buyers and investors find the right property in Dubai, from off-plan offices in Business Bay to homes across the city, with clear facts, honest advice and support at every step through to handover.
                 </p>
                 <p className="text-zinc-600 leading-relaxed">
                   From our office in Business Bay, our team guides buyers and investors through every step, from choosing a project to handover.

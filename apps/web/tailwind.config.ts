@@ -10,6 +10,7 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "Arial", "sans-serif"],
         display: ["var(--font-montserrat)", "Montserrat", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Source Serif 4", "Georgia", "serif"],
       },
       colors: {
         /* Fano "Calcite Sand" theme, same as the Fano team app */
