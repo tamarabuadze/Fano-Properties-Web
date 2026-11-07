@@ -37,7 +37,7 @@ const types = [
 
 export function PropertyTypesSection() {
   return (
-    <section className="section-y bg-zinc-50">
+    <section className="section-y section-tint">
       <div className="container-site">
         <SectionHeader
           eyebrow="Browse by type"

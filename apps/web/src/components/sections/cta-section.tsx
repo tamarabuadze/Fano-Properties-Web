@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 
 export function CtaSection() {
   return (
-    <section className="section-y bg-surface">
+    <section className="section-y">
       <div className="container-site">
         <motion.div
           initial={{ opacity: 0, y: 32 }}

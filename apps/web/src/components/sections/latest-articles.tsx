@@ -22,7 +22,7 @@ interface LatestArticlesProps {
 
 export function LatestArticlesSection({ articles }: LatestArticlesProps) {
   return (
-    <section className="section-y bg-zinc-50">
+    <section className="section-y section-tint">
       <div className="container-site">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
           <SectionHeader

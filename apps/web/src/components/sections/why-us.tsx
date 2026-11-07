@@ -31,7 +31,7 @@ const features = [
 
 export function WhyUsSection() {
   return (
-    <section className="section-y bg-surface overflow-x-clip">
+    <section className="section-y overflow-x-clip">
       <div className="container-site">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-24 items-center">
           {/* Image side */}
@@ -80,7 +80,7 @@ export function WhyUsSection() {
                   transition={{ delay: 0.1 * i, duration: 0.4 }}
                   className="flex gap-4"
                 >
-                  <div className="h-10 w-10 rounded-xl bg-zinc-50 border border-border flex items-center justify-center shrink-0">
+                  <div className="h-10 w-10 rounded-xl bg-[#F6E7D2] border border-[#EFD3AE] flex items-center justify-center shrink-0">
                     <f.icon className="h-5 w-5 text-[#8C6A47]" />
                   </div>
                   <div>

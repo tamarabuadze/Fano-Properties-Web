@@ -14,7 +14,7 @@ interface Agent {
 
 export function PropertyAgentCard({ agent }: { agent: Agent }) {
   return (
-    <div className="rounded-2xl border border-border p-6 bg-zinc-50">
+    <div className="rounded-2xl border border-border p-6 bg-surface shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)]">
       <p className="text-xs font-medium uppercase tracking-wider text-zinc-400 mb-4">
         Listing Agent
       </p>

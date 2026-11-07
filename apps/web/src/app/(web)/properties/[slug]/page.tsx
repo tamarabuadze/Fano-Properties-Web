@@ -90,7 +90,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-surface pt-20">
+    <div className="min-h-screen pt-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

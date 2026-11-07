@@ -1,6 +1,6 @@
 export default function BlogLoading() {
   return (
-    <div className="min-h-screen bg-surface pt-20">
+    <div className="min-h-screen pt-20">
       <div className="container-site py-12">
         <div className="mb-10 space-y-3">
           <div className="h-3 w-20 rounded bg-gray-200 animate-pulse" />

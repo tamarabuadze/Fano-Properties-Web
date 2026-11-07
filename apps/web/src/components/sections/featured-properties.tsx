@@ -30,7 +30,7 @@ interface FeaturedPropertiesProps {
 
 export function FeaturedPropertiesSection({ properties }: FeaturedPropertiesProps) {
   return (
-    <section className="section-y bg-surface">
+    <section className="section-y">
       <div className="container-site">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
           <SectionHeader

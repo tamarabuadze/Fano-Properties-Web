@@ -1,6 +1,6 @@
 export default function PropertiesLoading() {
   return (
-    <div className="min-h-screen bg-surface pt-20">
+    <div className="min-h-screen pt-20">
       <div className="container-site py-12">
         {/* Header skeleton */}
         <div className="mb-8 space-y-3">

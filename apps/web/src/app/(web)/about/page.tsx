@@ -19,7 +19,7 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-surface pt-20">
+    <div className="min-h-screen pt-20">
       {/* Hero */}
       <section className="relative h-80 lg:h-96 overflow-hidden bg-[#2B2520]">
         <Image
@@ -80,7 +80,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="section-y bg-zinc-50">
+      <section className="section-y section-tint">
         <div className="container-site">
           <SectionHeader
             eyebrow="What We Stand For"
@@ -91,7 +91,7 @@ export default function AboutPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((v) => (
               <div key={v.title} className="bg-surface shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)] rounded-2xl border border-border p-6">
-                <div className="h-12 w-12 rounded-xl bg-zinc-50 border border-border flex items-center justify-center mb-4">
+                <div className="h-12 w-12 rounded-xl bg-[#F6E7D2] border border-[#EFD3AE] flex items-center justify-center mb-4">
                   <v.icon className="h-6 w-6 text-[#2B2520]" />
                 </div>
                 <h3 className="font-semibold text-[#2B2520] mb-2">{v.title}</h3>

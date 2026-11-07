@@ -11,11 +11,11 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-surface pt-20">
+    <div className="min-h-screen pt-20">
       <div className="grid lg:grid-cols-2 min-h-[calc(100vh-80px)]">
         {/* Left — form */}
         <div className="flex flex-col justify-center px-6 sm:px-12 lg:px-16 xl:px-24 py-16">
-          <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-4">Contact Us</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#8C6A47] mb-4">Contact Us</p>
           <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#2B2520] mb-4">
             Get in Touch
           </h1>
@@ -31,8 +31,8 @@ export default function ContactPage() {
               { icon: Clock, text: "Mon–Fri 9am–6pm, Sat 10am–4pm" },
             ].map(({ icon: Icon, text, href }: { icon: typeof Phone; text: string; href?: string }) => (
               <div key={text} className="flex items-center gap-4 text-sm text-zinc-600">
-                <div className="h-9 w-9 rounded-xl bg-zinc-100 flex items-center justify-center shrink-0">
-                  <Icon className="h-4 w-4 text-zinc-500" />
+                <div className="h-9 w-9 rounded-xl bg-[#F6E7D2] border border-[#EFD3AE] flex items-center justify-center shrink-0">
+                  <Icon className="h-4 w-4 text-[#8C6A47]" />
                 </div>
                 {href ? (
                   <a href={href} data-track={href.startsWith("tel:") ? "phone_click" : undefined} className="hover:text-[#2B2520] underline-offset-4 hover:underline">

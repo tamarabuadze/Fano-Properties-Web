@@ -25,7 +25,7 @@ export function PropertiesCategoryTabs({ category, search, listingType, unitType
 
   return (
     <div className="flex flex-wrap items-center gap-3 mb-8">
-    <div className="inline-flex rounded-full border border-border p-1 bg-zinc-50" role="tablist" aria-label="Property category">
+    <div className="inline-flex rounded-full border border-border p-1 bg-surface shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)]" role="tablist" aria-label="Property category">
       {[
         { label: "All", value: "all" as const },
         { label: "Residential", value: "residential" as const },
@@ -48,7 +48,7 @@ export function PropertiesCategoryTabs({ category, search, listingType, unitType
     </div>
 
     {commercial && (
-      <div className="inline-flex rounded-full border border-border p-1 bg-zinc-50" role="tablist" aria-label="Buy or lease">
+      <div className="inline-flex rounded-full border border-border p-1 bg-surface shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)]" role="tablist" aria-label="Buy or lease">
         {[
           { label: "Buy", value: "sale" },
           { label: "Lease", value: "lease" },

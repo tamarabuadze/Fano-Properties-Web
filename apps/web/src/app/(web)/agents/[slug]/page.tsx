@@ -33,7 +33,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
   ].filter((l) => l.href);
 
   return (
-    <div className="min-h-screen bg-surface pt-20">
+    <div className="min-h-screen pt-20">
       <div className="container-site py-16">
         <div className="grid lg:grid-cols-3 gap-12 mb-16">
           {/* Agent profile */}

@@ -22,7 +22,7 @@ export default async function WebLayout({ children }: { children: React.ReactNod
   return (
     <>
       <Navbar showAgents={showAgents} />
-      <main>{children}</main>
+      <main className="fano-web">{children}</main>
       <Footer showAgents={showAgents} />
       <SocialButton />
       <RoiButton />

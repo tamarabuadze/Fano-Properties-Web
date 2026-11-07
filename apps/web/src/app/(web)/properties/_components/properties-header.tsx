@@ -1,6 +1,6 @@
 export function PropertiesHeader() {
   return (
-    <div className="border-b border-border bg-zinc-50 py-12">
+    <div className="page-band py-12">
       <div className="container-site">
         <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-3">
           All Listings

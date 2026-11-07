@@ -45,7 +45,7 @@ export function RoiCalculator({
         </Section>
 
         <Section title="Financing">
-          <div className="inline-flex rounded-full border border-border p-1 bg-zinc-50">
+          <div className="inline-flex rounded-full border border-border p-1 bg-surface shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)]">
             {[
               { label: "Mortgage", value: true },
               { label: "Cash", value: false },

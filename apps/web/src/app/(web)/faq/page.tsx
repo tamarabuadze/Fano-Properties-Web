@@ -44,7 +44,7 @@ const faqs = [
 
 export default function FaqPage() {
   return (
-    <div className="min-h-screen bg-surface pt-20">
+    <div className="min-h-screen pt-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -59,7 +59,7 @@ export default function FaqPage() {
           }),
         }}
       />
-      <div className="border-b border-border bg-zinc-50 py-12">
+      <div className="page-band py-12">
         <div className="container-site">
           <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-3">Help Center</p>
           <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#2B2520]">
