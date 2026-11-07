@@ -143,7 +143,7 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
           <p className="text-[13px]">© 2025 Fano Real Estate. All rights reserved.</p>
           <p className="group inline-flex items-center gap-2 rounded-full border border-[#DFCFB9]/20 bg-[#DFCFB9]/5 px-4 py-2 text-[13px] text-[#A99D8F] transition-all duration-300 hover:border-[#DFCFB9] hover:bg-[#DFCFB9]/10 hover:text-[#DFCFB9]">
             <span aria-hidden className="text-base text-[#DFCFB9] [text-shadow:0_0_8px_rgba(223,207,185,0.4)]">◈</span>
-            Designed &amp; developed in-house by <strong className="font-semibold tracking-[0.5px] text-[#DFCFB9]">Ali Raza</strong>
+            Designed &amp; developed by Fano Properties developer <strong className="font-semibold tracking-[0.5px] text-[#DFCFB9]">Ali Raza</strong>
           </p>
         </div>
       </div>
