@@ -5,9 +5,7 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Search } from "lucide-react";
 
-// Pexels: "Aerial Footage of Buildings in Dubai" — free to use
-const HERO_VIDEO =
-  "https://videos.pexels.com/video-files/1409899/1409899-hd_1920_1080_25fps.mp4";
+const HERO_VIDEO = "/media/770e7ca3-8d03-48a5-93d1-0167f57336a9.mp4";
 
 // Poster shown immediately as the LCP element; video fades in over it
 const HERO_POSTER =
