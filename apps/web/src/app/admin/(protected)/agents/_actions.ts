@@ -9,8 +9,8 @@ import { requireAdmin } from "@/lib/admin-auth";
 
 const agentSchema = z.object({
   firstName: z.string().min(1),
-  lastName: z.string().min(1),
-  email: z.string().email(),
+  lastName: z.string().optional().or(z.literal("")),
+  email: z.string().email().optional().or(z.literal("")),
   phone: z.string().optional(),
   title: z.string().optional(),
   bio: z.string().optional(),

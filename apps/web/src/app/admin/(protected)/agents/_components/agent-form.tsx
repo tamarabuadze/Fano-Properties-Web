@@ -10,8 +10,8 @@ import { createAgent, updateAgent } from "../_actions";
 
 const schema = z.object({
   firstName: z.string().min(1, "Required"),
-  lastName: z.string().min(1, "Required"),
-  email: z.string().email("Invalid email"),
+  lastName: z.string().optional().or(z.literal("")),
+  email: z.string().email("Invalid email").optional().or(z.literal("")),
   phone: z.string().optional(),
   title: z.string().optional(),
   bio: z.string().optional(),
