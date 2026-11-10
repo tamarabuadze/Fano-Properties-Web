@@ -71,9 +71,8 @@ export async function updateAgent(id: string, data: Partial<z.infer<typeof agent
     revalidatePath("/admin/agents");
     revalidateTag(CACHE_TAGS.agents);
     return { success: true };
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : String(e);
-    return { success: false, error: `Failed to update agent: ${msg.substring(0, 200)}` };
+  } catch {
+    return { success: false, error: "Failed to update agent." };
   }
 }
 
