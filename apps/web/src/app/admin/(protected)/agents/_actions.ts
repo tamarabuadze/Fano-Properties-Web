@@ -32,11 +32,13 @@ export async function createAgent(data: z.infer<typeof agentSchema>) {
   if (!parsed.success) return { success: false, error: parsed.error.errors[0]?.message ?? "Invalid data" };
 
   try {
-    const slug = generateSlug(`${parsed.data.firstName} ${parsed.data.lastName}`);
+    const slug = generateSlug(`${parsed.data.firstName} ${parsed.data.lastName ?? ""}`);
     const agent = await prisma.agent.create({
       data: {
         ...parsed.data,
         slug,
+        lastName: parsed.data.lastName || null,
+        email: parsed.data.email || null,
         avatar: parsed.data.avatar || null,
         linkedinUrl: parsed.data.linkedinUrl || null,
         instagramUrl: parsed.data.instagramUrl || null,
