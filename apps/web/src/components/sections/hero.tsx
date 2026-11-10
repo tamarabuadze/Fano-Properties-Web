@@ -9,7 +9,7 @@ import { ArrowRight, Search } from "lucide-react";
 // Downtown Dubai with the Burj Khalifa, supplied by Fano: the photo shows at once,
 // and on larger screens a time-lapse of the same view fades in over it
 const HERO_IMAGE = "/hero-dubai.webp";
-const HERO_VIDEO = "/hero-dubai.mp4";
+const HERO_VIDEO = "/media/770e7ca3-8d03-48a5-93d1-0167f57336a9.mp4";
 
 export function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
