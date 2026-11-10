@@ -56,7 +56,18 @@ export async function createAgent(data: z.infer<typeof agentSchema>) {
 export async function updateAgent(id: string, data: Partial<z.infer<typeof agentSchema>>) {
   await requireAdmin();
   try {
-    await prisma.agent.update({ where: { id }, data });
+    await prisma.agent.update({
+      where: { id },
+      data: {
+        ...data,
+        ...(data.email !== undefined ? { email: data.email || null } : {}),
+        ...(data.lastName !== undefined ? { lastName: data.lastName || null } : {}),
+        ...(data.avatar !== undefined ? { avatar: data.avatar || null } : {}),
+        ...(data.linkedinUrl !== undefined ? { linkedinUrl: data.linkedinUrl || null } : {}),
+        ...(data.instagramUrl !== undefined ? { instagramUrl: data.instagramUrl || null } : {}),
+        ...(data.twitterUrl !== undefined ? { twitterUrl: data.twitterUrl || null } : {}),
+      },
+    });
     revalidatePath("/admin/agents");
     revalidateTag(CACHE_TAGS.agents);
     return { success: true };
