@@ -41,7 +41,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-interface Agent { id: string; firstName: string; lastName: string; }
+interface Agent { id: string; firstName: string; lastName: string | null; }
 
 interface PropertyFormProps {
   agents: Agent[];

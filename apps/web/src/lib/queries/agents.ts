@@ -2,8 +2,9 @@ import { prisma } from "@fano/db";
 import { cached, CACHE_TAGS } from "@/lib/cache";
 
 /** Removes email and phone from an agent who chose not to show them on the website */
-export function publicAgent<T extends { showContact: boolean; email: string; phone: string | null }>(agent: T): T {
-  return agent.showContact ? agent : { ...agent, email: "", phone: null };
+export function publicAgent<T extends { showContact: boolean; email: string | null; phone: string | null }>(agent: T): T {
+  if (!agent.showContact) return { ...agent, email: null, phone: null } as T;
+  return agent;
 }
 
 async function getAgentsUncached(limit?: number) {

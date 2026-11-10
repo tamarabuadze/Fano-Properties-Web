@@ -19,7 +19,7 @@ interface Property {
   status: string;
   published: boolean;
   featured: boolean;
-  agent?: { firstName: string; lastName: string } | null;
+  agent?: { firstName: string; lastName: string | null } | null;
   createdAt: Date;
 }
 

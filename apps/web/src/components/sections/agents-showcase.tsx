@@ -8,7 +8,7 @@ import { AnimateStagger } from "@/components/shared/animate-stagger";
 interface Agent {
   id: string;
   firstName: string;
-  lastName: string;
+  lastName: string | null;
   slug: string;
   avatar?: string | null;
   title?: string | null;
@@ -16,7 +16,7 @@ interface Agent {
   licenseNumber?: string | null;
   languages?: string[];
   phone?: string | null;
-  email: string;
+  email: string | null;
   _count?: { properties: number };
 }
 

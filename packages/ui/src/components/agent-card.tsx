@@ -9,7 +9,7 @@ import { cn } from "@fano/utils";
 export interface AgentCardProps {
   id: string;
   firstName: string;
-  lastName: string;
+  lastName: string | null;
   slug: string;
   avatar?: string | null;
   title?: string | null;
@@ -17,7 +17,7 @@ export interface AgentCardProps {
   licenseNumber?: string | null;
   languages?: string[];
   phone?: string | null;
-  email: string;
+  email: string | null;
   totalListings?: number;
   className?: string;
 }
@@ -68,7 +68,7 @@ function AgentCard({
           <div className="flex h-full w-full items-center justify-center">
             <span className="font-display text-5xl font-semibold text-[#8C6A47]/60">
               {firstName[0]}
-              {lastName[0]}
+              {lastName?.[0]}
             </span>
           </div>
         )}

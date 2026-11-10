@@ -9,9 +9,9 @@ import { deleteAgent, toggleAgentActive } from "../_actions";
 interface Agent {
   id: string;
   firstName: string;
-  lastName: string;
+  lastName: string | null;
   slug: string;
-  email: string;
+  email: string | null;
   title?: string | null;
   avatar?: string | null;
   active: boolean;
@@ -62,7 +62,7 @@ export function AgentsTable({ agents }: { agents: Agent[] }) {
                         <Image src={a.avatar} alt="" fill sizes="32px" className="object-cover" />
                       ) : (
                         <div className="h-full w-full flex items-center justify-center text-xs font-medium text-muted-foreground">
-                          {a.firstName[0]}{a.lastName[0]}
+                          {a.firstName[0]}{a.lastName?.[0]}
                         </div>
                       )}
                     </div>

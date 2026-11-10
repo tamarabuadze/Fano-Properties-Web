@@ -52,7 +52,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
                 ) : (
                   <div className="flex h-full w-full items-center justify-center">
                     <span className="text-6xl font-semibold text-zinc-300">
-                      {agent.firstName[0]}{agent.lastName[0]}
+                      {agent.firstName[0]}{agent.lastName?.[0]}
                     </span>
                   </div>
                 )}

@@ -15,7 +15,7 @@ interface Inquiry {
   phone?: string | null;
   message: string;
   property?: { title: string; slug: string } | null;
-  agent?: { firstName: string; lastName: string } | null;
+  agent?: { firstName: string; lastName: string | null } | null;
   createdAt: Date;
 }
 

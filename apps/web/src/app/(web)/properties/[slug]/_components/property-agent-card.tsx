@@ -4,12 +4,12 @@ import { Phone, Mail, ExternalLink } from "lucide-react";
 
 interface Agent {
   firstName: string;
-  lastName: string;
+  lastName: string | null;
   slug: string;
   avatar?: string | null;
   title?: string | null;
   phone?: string | null;
-  email: string;
+  email: string | null;
 }
 
 export function PropertyAgentCard({ agent }: { agent: Agent }) {
@@ -32,7 +32,7 @@ export function PropertyAgentCard({ agent }: { agent: Agent }) {
           ) : (
             <div className="h-full w-full flex items-center justify-center">
               <span className="text-xl font-semibold text-zinc-400">
-                {agent.firstName[0]}{agent.lastName[0]}
+                {agent.firstName[0]}{agent.lastName?.[0]}
               </span>
             </div>
           )}
