@@ -1,6 +1,7 @@
 [build]
 builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile.admin"
+watchPatterns = ["apps/admin/**", "scripts/**", "Dockerfile.admin", "packages/**"]
 
 [deploy]
 startCommand = "sh scripts/start-admin.sh"
