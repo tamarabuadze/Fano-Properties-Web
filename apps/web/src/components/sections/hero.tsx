@@ -1,250 +1,114 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ChevronDown, Search } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Pause, Play } from "lucide-react";
 
-const HERO_IMAGE = "/hero-dubai.jpg";
-const HERO_VIDEO = "/hero-dubai.mp4";
-
-// Splits text into words, each revealed with a clip-path / overflow-hidden mask
-function RevealWords({
-  text,
-  delay = 0,
-  className,
-}: {
-  text: string;
-  delay?: number;
-  className?: string;
-}) {
-  return (
-    <span className={className}>
-      {text.split(" ").map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden leading-[1.1]">
-          <motion.span
-            className="inline-block"
-            initial={{ y: "108%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{
-              duration: 0.85,
-              delay: delay + i * 0.1,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            {word}
-          </motion.span>
-          {i < text.split(" ").length - 1 ? " " : ""}
-        </span>
-      ))}
-    </span>
-  );
-}
+const HERO_VIDEO = "/media/770e7ca3-8d03-48a5-93d1-0167f57336a9.mp4";
 
 export function HeroSection() {
-  const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoReady, setVideoReady] = useState(false);
+  const [paused, setPaused] = useState(false);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  // Content fades + lifts as hero scrolls out
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.38], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.38], [0, -48]);
-
-  // Load video only on wide screens after page interactive, respecting user prefs
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    if (
-      !window.matchMedia("(min-width: 768px)").matches ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-      conn?.saveData
-    )
-      return;
-
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const desktop = window.matchMedia("(min-width: 768px)");
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    let timer: ReturnType<typeof setTimeout>;
     const load = () => {
-      video.src = HERO_VIDEO;
-      video.load();
+      if (!desktop.matches || reducedMotion.matches || connection?.saveData) return;
+      timer = setTimeout(() => {
+        video.src = HERO_VIDEO;
+        video.load();
+        void video.play().catch(() => setVideoReady(false));
+      }, 250);
     };
-    if (document.readyState === "complete") {
-      const t = setTimeout(load, 300);
-      return () => clearTimeout(t);
-    }
-    window.addEventListener("load", load, { once: true });
-    return () => window.removeEventListener("load", load);
+    const respectMotion = () => {
+      if (reducedMotion.matches) {
+        video.pause(); setPaused(true); setVideoReady(false);
+      }
+    };
+    if (document.readyState === "complete") load();
+    else window.addEventListener("load", load, { once: true });
+    reducedMotion.addEventListener("change", respectMotion);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("load", load);
+      reducedMotion.removeEventListener("change", respectMotion);
+      video.pause();
+    };
   }, []);
 
+  async function togglePlayback() {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      try { await video.play(); setPaused(false); } catch { setVideoReady(false); }
+    } else { video.pause(); setPaused(true); }
+  }
+
   return (
-    <section
-      ref={ref}
-      className="relative h-[100svh] min-h-[700px] max-h-[1080px] overflow-hidden bg-[#2B2520]"
-    >
-      {/* ── Background layer ─────────────────────────────────── */}
-      <div className="absolute inset-0" aria-hidden>
-        {/* Ken Burns: gentle slow zoom-out on page load */}
-        <motion.div
-          className="absolute inset-0"
-          initial={{ scale: 1.08 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 12, ease: "easeOut" }}
-        >
-          <Image
-            src={HERO_IMAGE}
-            alt=""
-            fill
-            priority
-            sizes="(max-aspect-ratio: 16/9) 178vh, 100vw"
-            className="object-cover object-center"
-          />
-        </motion.div>
-
-        {/* Video fades in over poster once it can play */}
-        <video
-          ref={videoRef}
-          className="absolute inset-0 h-full w-full object-cover"
-          style={{ opacity: videoReady ? 1 : 0, transition: "opacity 1.6s ease-in-out" }}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-          onCanPlay={() => setVideoReady(true)}
-        />
+    <section className="cinema-hero relative isolate overflow-hidden bg-[#2B2520] text-[#F4EFEA]" aria-label="Discover Fano Properties in Dubai">
+      <div className="absolute inset-0 -z-10" aria-hidden="true">
+        <Image src="/hero-dubai.webp" alt="" fill priority unoptimized
+          sizes="(max-width: 767px) 160vw, 100vw" className="cinema-hero-image object-cover" />
+        <video ref={videoRef} autoPlay muted loop playsInline preload="none" tabIndex={-1}
+          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1800ms]"
+          style={{ opacity: videoReady ? 1 : 0 }}
+          onPlaying={() => { setVideoReady(true); setPaused(false); }}
+          onError={() => setVideoReady(false)} />
+        <div className="cinema-hero-shade absolute inset-0" />
+        <div className="cinema-grain absolute inset-0" />
       </div>
-
-      {/* ── Cinematic overlay stack ───────────────────────────── */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        {/* Left-to-right gradient: text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/10" />
-        {/* Top/bottom vignette */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/85" />
-        {/* Corner vignette */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 130% 100% at 50% 50%, transparent 38%, rgba(0,0,0,0.7) 100%)",
-          }}
-        />
-      </div>
-
-      {/* ── Content (fades + rises on scroll) ───────────────── */}
-      <motion.div
-        style={{ opacity: contentOpacity, y: contentY }}
-        className="relative z-10 h-full flex flex-col justify-end pb-10 lg:pb-20 xl:pb-24"
-      >
-        <div className="container-site">
-          <div className="max-w-4xl">
-
-            {/* Eyebrow — expanding line + label */}
-            <div className="flex items-center gap-3 mb-7 overflow-hidden">
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                style={{ originX: 0 }}
-                className="h-px w-10 bg-gradient-to-r from-[#E2A862] to-[#ECBE80] shrink-0"
-              />
-              <motion.p
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="text-[#E2A862] text-[11px] font-semibold uppercase tracking-[0.22em]"
-              >
-                Premium Real Estate · Dubai
-              </motion.p>
-            </div>
-
-            {/* Headline — word-by-word reveal */}
-            <h1 className="font-semibold heading-display text-[clamp(42px,6.5vw,88px)] mb-7 leading-[1.04]">
-              <div className="mb-1">
-                <RevealWords text="Real Estate." delay={0.3} className="text-white" />
-              </div>
-              <div>
-                <RevealWords text="Real Relationships." delay={0.52} className="text-white/55" />
-              </div>
-            </h1>
-
-            {/* Subline */}
-            <motion.p
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.05, ease: [0.22, 1, 0.36, 1] }}
-              className="text-white/60 text-lg max-w-xl mb-10 leading-relaxed"
-            >
-              We help you find more than a property — we find your next chapter.
-              Buy, sell or rent with confidence.
-            </motion.p>
-
-            {/* CTA row */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-wrap gap-4"
-            >
-              {/* Primary — gold button with glow */}
-              <motion.div
-                whileHover={{ scale: 1.04, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 350, damping: 22 }}
-              >
-                <Link
-                  href="/properties"
-                  className="inline-flex items-center gap-2.5 h-14 px-8 rounded-full bg-gradient-to-br from-[#ECBE80] via-[#E2A862] to-[#B9824A] text-[#2B2520] font-semibold text-base shadow-[0_8px_28px_-6px_rgba(185,130,74,.75)] hover:shadow-[0_14px_40px_-6px_rgba(185,130,74,.95)] transition-shadow duration-300"
-                >
-                  <Search className="h-4 w-4" />
-                  Browse Properties
-                </Link>
-              </motion.div>
-
-              {/* Secondary — glass button */}
-              <motion.div
-                whileHover={{ scale: 1.04, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 350, damping: 22 }}
-              >
-                <Link
-                  href="/contact"
-                  className="group inline-flex items-center gap-2.5 h-14 px-8 rounded-full border border-white/35 bg-white/10 text-white font-medium text-base hover:bg-white/20 hover:border-white/55 backdrop-blur-sm transition-all duration-300"
-                >
-                  Talk to an Agent
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-              </motion.div>
-            </motion.div>
-
-          </div>
+      <div className="cinema-hero-content container-site relative z-10">
+        <div className="cinema-enter mb-7 flex items-center gap-4 text-[10px] font-medium uppercase tracking-[0.28em] text-[#F6E7D2] sm:text-xs">
+          <span className="h-px w-10 bg-[#E2A862]" aria-hidden="true" />
+          Dubai real estate, thoughtfully selected
         </div>
-      </motion.div>
-
-      {/* ── Animated scroll chevron ───────────────────────────── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.9, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1"
-        aria-hidden
-      >
-        <motion.div
-          animate={{ y: [0, 7, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ChevronDown className="h-6 w-6 text-white/40" />
-        </motion.div>
-      </motion.div>
-
-      {/* ── Scroll-progress bar ───────────────────────────────── */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#E2A862] via-[#ECBE80] to-[#B9824A] z-20 origin-left"
-        style={{ scaleX: scrollYProgress }}
-      />
+        <h1 className="cinema-enter cinema-enter-1 max-w-5xl text-[clamp(42px,6.7vw,96px)] font-medium leading-[1.04] tracking-[-0.045em]">
+          Real Estate.<br />
+          <span className="cinema-serif mt-2 inline-block text-[#F6E7D2]">Real Relationships.</span>
+        </h1>
+        <div className="cinema-enter cinema-enter-2 mt-8 grid gap-8 lg:grid-cols-[1fr_320px] lg:items-end lg:gap-16 xl:gap-24">
+          <div>
+            <p className="max-w-lg text-[15px] leading-[1.8] text-[#F4EFEA]/85 sm:text-base">
+              Remarkable homes. Ambitious workspaces. A personal approach to finding your place in Dubai.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/properties" className="cinema-button cinema-button-gold">
+                Explore properties <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <Link href="/contact" className="cinema-button cinema-button-glass">
+                Meet your advisor <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+          <Link href="/properties?category=commercial&listingType=sale" className="group hidden border-l border-[#F6E7D2]/30 pl-7 pr-16 lg:block">
+            <span className="text-[10px] uppercase tracking-[0.24em] text-[#F6E7D2]/70">For your next ambition</span>
+            <span className="mt-3 flex items-center justify-between gap-4 text-xl font-medium">
+              Offices for sale <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" aria-hidden="true" />
+            </span>
+            <span className="mt-2 block text-xs leading-relaxed text-[#F4EFEA]/70">Explore Dubai&apos;s commercial collection</span>
+          </Link>
+        </div>
+      </div>
+      <div className="cinema-hero-bottom container-site relative z-10 flex items-center justify-between gap-5 border-t border-[#F6E7D2]/20 py-6">
+        <a href="#discover" className="group inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-[#F4EFEA]/80">
+          <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-1" aria-hidden="true" /> Discover the collection
+        </a>
+        <div className="flex items-center gap-5">
+          <span className="hidden text-[10px] uppercase tracking-[0.22em] text-[#F4EFEA]/65 sm:block">A new perspective on Dubai</span>
+          {videoReady && <button type="button" onClick={togglePlayback}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#F6E7D2]/40 bg-[#2B2520]/20 transition hover:bg-[#2B2520]/60"
+            aria-label={paused ? "Play background film" : "Pause background film"}>
+            {paused ? <Play className="h-3.5 w-3.5" aria-hidden="true" /> : <Pause className="h-3.5 w-3.5" aria-hidden="true" />}
+          </button>}
+        </div>
+      </div>
     </section>
   );
 }

@@ -30,13 +30,13 @@ interface FeaturedPropertiesProps {
 
 export function FeaturedPropertiesSection({ properties }: FeaturedPropertiesProps) {
   return (
-    <section className="section-y">
+    <section className="section-y" id="discover">
       <div className="container-site">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
           <SectionHeader
-            eyebrow="Handpicked"
-            title="Featured Properties"
-            description="A curated selection of premium homes and investment opportunities."
+            eyebrow="Selected by Fano"
+            title="Spaces with distinction."
+            description="Explore our featured properties, with the details that matter and an advisor to guide your next step."
           />
           <Link
             href="/properties?featured=true"
@@ -52,7 +52,7 @@ export function FeaturedPropertiesSection({ properties }: FeaturedPropertiesProp
             <p className="text-lg">No featured properties yet.</p>
           </div>
         ) : (
-          <AnimateStagger className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          <AnimateStagger className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-10">
             {properties.map((property) => (
               <PropertyCard
                 key={property.id}

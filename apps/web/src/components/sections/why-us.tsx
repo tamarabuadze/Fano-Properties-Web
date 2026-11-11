@@ -42,13 +42,15 @@ export function WhyUsSection() {
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="relative"
           >
-            <div className="relative h-[280px] sm:h-[380px] lg:h-[520px] rounded-3xl overflow-hidden bg-zinc-100">
+            <div className="relative h-[320px] sm:h-[440px] lg:h-[620px] rounded-[4px] overflow-hidden bg-[#D9CFC2]">
               <Image
-                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format"
-                alt="Why choose Fano"
+                src="/hero-dubai.webp"
+                unoptimized
+                alt="The Burj Khalifa and Downtown Dubai skyline"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
+                quality={90}
                 placeholder="blur"
                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAAECAADAAQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQQG/8QAHBAAAgMAAwEAAAAAAAAAAAAAAQIDBAASITH/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJXi1KrXLpKhbIxWkQMVIOhGR3Qf/9k="
               />
@@ -65,8 +67,8 @@ export function WhyUsSection() {
           >
             <SectionHeader
               eyebrow="Why Choose Us"
-              title="Your Vision, Our Mission"
-              description="We don't just sell properties — we build relationships that last a lifetime. Our approach is personal, professional, and performance-driven."
+              title="A city of possibility. A team on your side."
+              description="Local knowledge. Clear conversations. Personal guidance from your first enquiry to your next move."
               className="mb-10"
             />
 
