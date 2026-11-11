@@ -14,6 +14,7 @@ export interface FanoAppLead {
   purpose?: string;
   page?: string;
   attribution?: Attribution;
+  inquiryId?: string;
 }
 
 export async function sendLeadToFanoApp(lead: FanoAppLead): Promise<boolean> {
@@ -35,18 +36,26 @@ export async function sendLeadToFanoApp(lead: FanoAppLead): Promise<boolean> {
         website: "",
         project: lead.project ?? "fanoproperties.com",
         page: lead.page ?? "",
+        inquiryId: lead.inquiryId ?? "",
         // Sent from the server after the visitor filled the form, so well past the app's too-fast check
         ms: 10000,
         c: a.c ?? "",
-        utm_source: a.utm_source ?? (a.gclid ? "google" : a.fbclid ? "facebook" : ""),
-        utm_medium: a.utm_medium ?? (a.gclid || a.fbclid ? "cpc" : ""),
+        gclid: a.gclid ?? "",
+        gbraid: a.gbraid ?? "",
+        wbraid: a.wbraid ?? "",
+        utm_source: a.utm_source ?? (a.gclid || a.gbraid || a.wbraid ? "google" : a.fbclid ? "facebook" : ""),
+        utm_medium: a.utm_medium ?? (a.gclid || a.gbraid || a.wbraid || a.fbclid ? "cpc" : ""),
         utm_campaign: a.utm_campaign ?? "",
         ref: a.ref ?? "",
       }),
       signal: AbortSignal.timeout(8000),
     });
-    if (!res.ok) console.warn("[fano-app-lead] not accepted", res.status);
-    return res.ok;
+    if (!res.ok) {
+      console.warn("[fano-app-lead] not accepted", res.status);
+      return false;
+    }
+    const result: { ok?: boolean; accepted?: boolean } = await res.json();
+    return result.ok === true && result.accepted !== false;
   } catch (e) {
     console.warn("[fano-app-lead] failed", e instanceof Error ? e.message : e);
     return false;
