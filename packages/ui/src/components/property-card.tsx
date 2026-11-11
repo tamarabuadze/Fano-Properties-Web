@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BedDouble, Bath, Maximize2, MapPin, Store } from "lucide-react";
+import { BedDouble, Bath, Maximize2, MapPin, Store, ArrowRight } from "lucide-react";
 import { cn, isOptimizedImageHost, unitTypeLabel } from "@fano/utils";
 import { Badge } from "./badge";
 
@@ -77,14 +77,27 @@ function PropertyCard({
           unoptimized={!isOptimizedImageHost(coverImage)}
           alt={title}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 50vw, 420px"
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 420px"
           quality={85}
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           placeholder="blur"
           blurDataURL={BLUR_PLACEHOLDER}
           priority={priority}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        {/* Shimmer sweep on hover */}
+        <div
+          className="absolute inset-0 pointer-events-none translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-700 ease-in-out"
+          style={{
+            background:
+              "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%)",
+          }}
+        />
+        {/* Dark overlay + "View Property" label */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-5">
+          <span className="inline-flex items-center gap-1.5 text-white text-sm font-semibold tracking-wide">
+            View Property <ArrowRight className="h-3.5 w-3.5" />
+          </span>
+        </div>
         <div className="absolute top-3 left-3 flex gap-2">
           <Badge variant={listingType as "sale" | "rent" | "lease"} size="sm">
             For {listingType}
