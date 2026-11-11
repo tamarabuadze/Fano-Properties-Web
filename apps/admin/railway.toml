@@ -5,7 +5,7 @@ watchPatterns = ["apps/admin/**", "scripts/**", "Dockerfile.admin", "packages/**
 
 [deploy]
 startCommand = "sh scripts/start-admin.sh"
-healthcheckPath = "/"
+healthcheckPath = "/api/health"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10
