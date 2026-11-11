@@ -34,7 +34,7 @@ export async function submitInquiry(data: InquiryFormData) {
 
   const { page, attribution, ...inquiry } = parsed.data;
   try {
-    await prisma.inquiry.create({
+    const savedInquiry = await prisma.inquiry.create({
       data: {
         ...inquiry,
         type: inquiry.type ?? "general",
@@ -52,6 +52,7 @@ export async function submitInquiry(data: InquiryFormData) {
           ? await prisma.property.findUnique({ where: { id: inquiry.propertyId }, select: { title: true } }).catch(() => null)
           : null;
         await sendLeadToFanoApp({
+          inquiryId: savedInquiry.id,
           name: `${inquiry.firstName} ${inquiry.lastName}`.trim(),
           phone: inquiry.phone!,
           email: inquiry.email,
