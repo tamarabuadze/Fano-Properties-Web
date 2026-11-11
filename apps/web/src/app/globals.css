@@ -180,3 +180,78 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #9ca3af;
 }
+
+/* Cinematic public-site treatment. Existing Fano palette and font families retained. */
+.cinema-serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+.cinema-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+}
+.cinema-hero {
+  display: flex;
+  min-height: 760px;
+  min-height: max(760px, 100svh);
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.cinema-hero-content { padding-top: 180px; padding-bottom: 68px; }
+.cinema-hero-bottom { min-height: 84px; }
+.cinema-hero-image { object-position: 55% 50%; }
+.cinema-hero-shade {
+  background: linear-gradient(90deg, rgba(43,37,32,.72), rgba(43,37,32,.25) 70%),
+    linear-gradient(180deg, rgba(43,37,32,.25), transparent 28%, rgba(43,37,32,.18) 50%, rgba(43,37,32,.92));
+}
+.cinema-grain {
+  pointer-events: none;
+  opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.5' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.cinema-enter { animation: cinema-rise 1.1s cubic-bezier(.2,.65,.25,1) both; }
+.cinema-enter-1 { animation-delay: .12s; }
+.cinema-enter-2 { animation-delay: .28s; }
+@keyframes cinema-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.cinema-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 22px;
+  min-height: 54px; padding: 0 26px; border-radius: 999px;
+  font-size: 12px; font-weight: 600; letter-spacing: .02em;
+  transition: background .3s, transform .3s, box-shadow .3s;
+}
+.cinema-button:hover { transform: translateY(-2px); }
+.cinema-button-gold { background: linear-gradient(120deg,#F6E7D2,#E2A862 80%); color:#2B2520; box-shadow:0 8px 30px rgba(43,37,32,.12); }
+.cinema-button-gold:hover { box-shadow:0 10px 36px rgba(226,168,98,.22); }
+.cinema-button-glass { border:1px solid rgba(246,231,210,.45); background:rgba(43,37,32,.12); color:#F4EFEA; backdrop-filter:blur(8px); }
+.cinema-button-glass:hover { background:rgba(246,231,210,.12); }
+.cinema-arrow { display:flex; height:40px; width:40px; align-items:center; justify-content:center; border:1px solid rgba(246,231,210,.45); border-radius:50%; backdrop-filter:blur(8px); transition:background .3s,transform .3s; }
+.group:hover .cinema-arrow { background:rgba(246,231,210,.2); transform:rotate(45deg); }
+.cinema-collection-grid { display:grid; grid-template-columns:1.1fr 1fr; grid-template-rows:260px 260px; gap:20px; }
+.cinema-collection { position:relative; display:block; overflow:hidden; border-radius:3px; background:#3A322B; }
+.cinema-collection-office { grid-row:span 2; }
+.fano-web .cinema-property-card { border-radius:5px; box-shadow:0 5px 20px -12px rgba(43,37,32,.2); }
+.fano-web .cinema-property-card:hover { box-shadow:0 20px 42px -20px rgba(43,37,32,.3); }
+.fano-web .cinema-property-card h3 { min-height:2.8em; line-height:1.4; }
+.fano-web .page-band { padding-bottom:6px; }
+.fano-web :is(a,button):focus-visible,
+header :is(a,button):focus-visible { outline:2px solid #E2A862; outline-offset:5px; }
+#discover { scroll-margin-top:100px; }
+@media (min-width:1600px) { .cinema-hero-content { padding-bottom:100px; } }
+@media (max-width:767px) {
+  .cinema-hero { min-height:760px; min-height:max(700px,95svh); }
+  .cinema-hero-content { padding-top:150px; padding-bottom:46px; }
+  .cinema-hero-bottom { min-height:76px; }
+  .cinema-hero-shade { background:linear-gradient(180deg,rgba(43,37,32,.4),rgba(43,37,32,.25) 20%,rgba(43,37,32,.92) 95%); }
+  .cinema-collection-grid { grid-template-columns:1fr; grid-template-rows:430px 310px 310px; gap:16px; }
+  .cinema-collection-office { grid-row:auto; }
+}
+@media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  .fano-web *, .fano-web *::before, .fano-web *::after { animation-duration:.01ms !important; animation-delay:0ms !important; transition-duration:.01ms !important; }
+  .cinema-enter { opacity:1; transform:none; }
+  .fano-web .group:hover img, .fano-web .cinema-button:hover { transform:none; }
+}
