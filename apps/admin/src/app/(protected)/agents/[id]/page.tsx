@@ -40,8 +40,8 @@ export default async function EditAgentPage({
         agentId={agent.id}
         defaultValues={{
           firstName: agent.firstName,
-          lastName: agent.lastName,
-          email: agent.email,
+          lastName: agent.lastName ?? undefined,
+          email: agent.email ?? undefined,
           phone: agent.phone ?? undefined,
           title: agent.title ?? undefined,
           bio: agent.bio ?? undefined,
