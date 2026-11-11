@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, Pause, Play } from "lucide-react";
 
-const HERO_VIDEO = "/media/770e7ca3-8d03-48a5-93d1-0167f57336a9.mp4";
+const HERO_VIDEO = "/hero-dubai.mp4";
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -54,7 +54,7 @@ export function HeroSection() {
   return (
     <section className="cinema-hero relative isolate overflow-hidden bg-[#2B2520] text-[#F4EFEA]" aria-label="Discover Fano Properties in Dubai">
       <div className="absolute inset-0 -z-10" aria-hidden="true">
-        <Image src="/hero-dubai.webp" alt="" fill priority unoptimized
+        <Image src="/hero-dubai.jpg" alt="" fill priority unoptimized
           sizes="(max-width: 767px) 160vw, 100vw" className="cinema-hero-image object-cover" />
         <video ref={videoRef} autoPlay muted loop playsInline preload="none" tabIndex={-1}
           className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1800ms]"

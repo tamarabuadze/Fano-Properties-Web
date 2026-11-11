@@ -44,7 +44,7 @@ export function WhyUsSection() {
           >
             <div className="relative h-[320px] sm:h-[440px] lg:h-[620px] rounded-[4px] overflow-hidden bg-[#D9CFC2]">
               <Image
-                src="/hero-dubai.webp"
+                src="/hero-dubai.jpg"
                 unoptimized
                 alt="The Burj Khalifa and Downtown Dubai skyline"
                 fill
