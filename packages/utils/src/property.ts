@@ -43,9 +43,13 @@ export function isVideoUrl(url?: string | null): boolean {
 
 export function isOptimizedImageHost(src?: string | null): boolean {
   if (!src) return false;
+  // Volume uploads stream correctly from /media, but Next's internal image fetch
+  // cannot resolve that route reliably on Railway. Serve these originals directly.
+  if (/^\/media\//i.test(src)) return false;
   if (src.startsWith("/")) return true;
   try {
-    const { hostname } = new URL(src);
+    const { hostname, pathname } = new URL(src);
+    if (/^(www\.)?fanoproperties\.com$/i.test(hostname) && /^\/media\//i.test(pathname)) return false;
     return OPTIMIZED_IMAGE_HOSTS.some((host) => host.test(hostname));
   } catch {
     return false;
