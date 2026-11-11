@@ -24,6 +24,7 @@ function CountUp({ target, suffix, active }: { target: number; suffix: string; a
 
   useEffect(() => {
     if (!active) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setCount(target); return; }
     let start = 0;
     const duration = 1800;
     const step = 16;
@@ -60,16 +61,17 @@ export function CtaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="relative overflow-hidden rounded-3xl bg-[#2B2520] min-h-[480px] lg:min-h-[560px] flex flex-col justify-between"
+          className="relative overflow-hidden rounded-[4px] bg-[#2B2520] min-h-[480px] lg:min-h-[560px] flex flex-col justify-between"
         >
           {/* Background image */}
           <div className="absolute inset-0">
             <Image
-              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2075&auto=format"
+              src="/property-conversation.webp"
+              unoptimized
               alt="Luxury property"
               fill
               sizes="100vw"
-              className="object-cover opacity-30"
+              className="object-cover opacity-55"
             />
             {/* Left + bottom gradient */}
             <div className="absolute inset-0 bg-gradient-to-r from-[#2B2520] via-[#2B2520]/75 to-transparent" />
@@ -85,7 +87,7 @@ export function CtaSection() {
           </div>
 
           {/* Main content */}
-          <div className="relative z-10 p-10 lg:p-16 max-w-2xl">
+          <div className="relative z-10 px-7 py-12 sm:p-12 lg:p-20 max-w-3xl">
             {/* Animated eyebrow */}
             <div className="flex items-center gap-3 mb-5">
               <motion.div
@@ -114,7 +116,7 @@ export function CtaSection() {
               transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="text-white font-semibold text-3xl lg:text-5xl [letter-spacing:-0.025em] leading-tight mb-6 text-balance"
             >
-              Ready to Find Your Perfect Property?
+              Your next chapter.<br /><span className="cinema-serif text-[#F6E7D2]">Let&apos;s find it together.</span>
             </motion.h2>
 
             <motion.p
@@ -141,7 +143,7 @@ export function CtaSection() {
               >
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 h-13 px-7 rounded-full bg-gradient-to-br from-[#ECBE80] via-[#E2A862] to-[#B9824A] text-[#2B2520] font-semibold shadow-[0_10px_24px_-10px_rgba(185,130,74,.8)] hover:shadow-[0_14px_32px_-8px_rgba(185,130,74,1)] transition-shadow duration-300"
+                  className="inline-flex items-center gap-2 h-14 px-7 rounded-full bg-gradient-to-br from-[#ECBE80] via-[#E2A862] to-[#B9824A] text-[#2B2520] font-semibold shadow-[0_10px_24px_-10px_rgba(185,130,74,.8)] hover:shadow-[0_14px_32px_-8px_rgba(185,130,74,1)] transition-shadow duration-300"
                 >
                   Get in Touch
                   <ArrowRight className="h-4 w-4" />
@@ -154,7 +156,7 @@ export function CtaSection() {
               >
                 <Link
                   href="/properties"
-                  className="inline-flex items-center gap-2 h-13 px-7 rounded-full border border-white/30 bg-white/8 text-white font-medium hover:bg-white/15 hover:border-white/50 backdrop-blur-sm transition-all duration-300"
+                  className="inline-flex items-center gap-2 h-14 px-7 rounded-full border border-white/30 bg-white/8 text-white font-medium hover:bg-white/15 hover:border-white/50 backdrop-blur-sm transition-all duration-300"
                 >
                   Browse Listings
                 </Link>
@@ -163,7 +165,7 @@ export function CtaSection() {
           </div>
 
           {/* Stats strip */}
-          <div ref={statsRef} className="relative z-10 border-t border-white/10 mx-10 lg:mx-16 mb-10 lg:mb-16 pt-8 grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div ref={statsRef} className="relative z-10 border-t border-white/10 mx-7 sm:mx-12 lg:mx-20 mb-10 lg:mb-16 pt-8 grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {STATS.map((stat, i) => (
               <motion.div
                 key={stat.label}

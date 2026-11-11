@@ -65,7 +65,7 @@ function PropertyCard({
     <Link
       href={`/properties/${slug}`}
       className={cn(
-        "group flex flex-col overflow-hidden rounded-3xl h-full border border-[#C5BAAB]/50",
+        "cinema-property-card group flex flex-col overflow-hidden rounded-3xl h-full border border-[#C5BAAB]/50",
         "bg-gradient-to-b from-[#FAF7F3] to-[#F4EFEA] shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)]",
         "transition-all duration-500 hover:-translate-y-1 hover:border-[#E2A862]/60 hover:shadow-[0_24px_48px_-18px_rgba(43,37,32,.35),0_0_0_1px_rgba(226,168,98,.25)]",
         className
@@ -77,7 +77,8 @@ function PropertyCard({
           unoptimized={!isOptimizedImageHost(coverImage)}
           alt={title}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 420px"
+          quality={85}
           className="object-cover transition-transform duration-700 group-hover:scale-105"
           placeholder="blur"
           blurDataURL={BLUR_PLACEHOLDER}
@@ -127,7 +128,7 @@ function PropertyCard({
           </p>
         </div>
 
-        <h3 className="font-display font-semibold mb-1.5 line-clamp-1 transition-colors group-hover:text-[#8C6A47]" style={{ color: "#2B2520" }}>
+        <h3 className="font-display font-semibold mb-1.5 line-clamp-2 transition-colors group-hover:text-[#8C6A47]" style={{ color: "#2B2520" }}>
           {title}
         </h3>
 

@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   transpilePackages: ["@fano/ui", "@fano/utils", "@fano/types"],
   images: {
+    qualities: [75, 85, 90],
     remotePatterns: [
       {
         protocol: "https",
