@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/sections/hero";
-import { PropertySearchSection } from "@/components/sections/property-search";
 import { FeaturedPropertiesSection } from "@/components/sections/featured-properties";
 import { PropertyTypesSection } from "@/components/sections/property-types";
 import { WhyUsSection } from "@/components/sections/why-us";
 import { AgentsShowcaseSection } from "@/components/sections/agents-showcase";
 import { LatestArticlesSection } from "@/components/sections/latest-articles";
 import { CtaSection } from "@/components/sections/cta-section";
+import { StatsSection } from "@/components/sections/stats-section";
 import { getFeaturedProperties } from "@/lib/queries/properties";
 import { getAgents } from "@/lib/queries/agents";
 import { getLatestArticles } from "@/lib/queries/blog";
@@ -74,8 +74,8 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <HeroSection />
-      <PropertySearchSection />
       <FeaturedPropertiesSection properties={properties as never} />
+      <StatsSection />
       <PropertyTypesSection />
       <WhyUsSection />
       {agents.length > 0 && <AgentsShowcaseSection agents={agents as never} />}

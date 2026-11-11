@@ -32,17 +32,21 @@ export function FeaturedPropertiesSection({ properties }: FeaturedPropertiesProp
   return (
     <section className="section-y">
       <div className="container-site">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
-          <SectionHeader
-            eyebrow="Handpicked"
-            title="Featured Properties"
-            description="A curated selection of premium homes and investment opportunities."
-          />
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <div className="h-px w-6 bg-[#E2A862]" />
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[#E2A862]">New to Market</span>
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-semibold text-[#2B2520] leading-tight">
+              Be the first.
+            </h2>
+          </div>
           <Link
-            href="/properties?featured=true"
+            href="/properties"
             className="inline-flex items-center gap-2 text-sm font-medium text-[#8C6A47] hover:text-[#6B5038] hover:gap-3 transition-all group shrink-0"
           >
-            View all listings
+            See everything on the market
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>

@@ -3,11 +3,22 @@
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ChevronDown, Search } from "lucide-react";
+import { ChevronDown, Search } from "lucide-react";
+import { cn } from "@fano/utils";
 
 const HERO_IMAGE = "/hero-dubai.jpg";
 const HERO_VIDEO = "/hero-dubai.mp4";
+
+const POPULAR_AREAS = [
+  "Business Bay",
+  "Downtown Dubai",
+  "Dubai Marina",
+  "Palm Jumeirah",
+  "JVC",
+  "DIFC",
+];
 
 // Splits text into words, each revealed with a clip-path / overflow-hidden mask
 function RevealWords({
@@ -35,7 +46,7 @@ function RevealWords({
           >
             {word}
           </motion.span>
-          {i < text.split(" ").length - 1 ? " " : ""}
+          {i < text.split(" ").length - 1 ? " " : ""}
         </span>
       ))}
     </span>
@@ -46,6 +57,9 @@ export function HeroSection() {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoReady, setVideoReady] = useState(false);
+  const router = useRouter();
+  const [listingType, setListingType] = useState<"Buy" | "Rent">("Buy");
+  const [location, setLocation] = useState("");
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -79,6 +93,14 @@ export function HeroSection() {
     window.addEventListener("load", load, { once: true });
     return () => window.removeEventListener("load", load);
   }, []);
+
+  function handleSearch(e: React.FormEvent) {
+    e.preventDefault();
+    const params = new URLSearchParams();
+    if (listingType === "Rent") params.set("listingType", "rent");
+    if (location.trim()) params.set("search", location.trim());
+    router.push(`/properties?${params.toString()}`);
+  }
 
   return (
     <section
@@ -121,15 +143,15 @@ export function HeroSection() {
       {/* ── Cinematic overlay stack ───────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden>
         {/* Left-to-right gradient: text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-black/10" />
         {/* Top/bottom vignette */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/90" />
         {/* Corner vignette */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 130% 100% at 50% 50%, transparent 38%, rgba(0,0,0,0.7) 100%)",
+              "radial-gradient(ellipse 130% 100% at 50% 50%, transparent 38%, rgba(0,0,0,0.6) 100%)",
           }}
         />
       </div>
@@ -137,13 +159,13 @@ export function HeroSection() {
       {/* ── Content (fades + rises on scroll) ───────────────── */}
       <motion.div
         style={{ opacity: contentOpacity, y: contentY }}
-        className="relative z-10 h-full flex flex-col justify-end pb-10 lg:pb-20 xl:pb-24"
+        className="relative z-10 h-full flex flex-col justify-end pb-10 lg:pb-16"
       >
         <div className="container-site">
-          <div className="max-w-4xl">
+          <div className="max-w-3xl">
 
             {/* Eyebrow — expanding line + label */}
-            <div className="flex items-center gap-3 mb-7 overflow-hidden">
+            <div className="flex items-center gap-3 mb-6 overflow-hidden">
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
@@ -162,7 +184,7 @@ export function HeroSection() {
             </div>
 
             {/* Headline — word-by-word reveal */}
-            <h1 className="font-semibold heading-display text-[clamp(42px,6.5vw,88px)] mb-7 leading-[1.04]">
+            <h1 className="font-semibold heading-display text-[clamp(38px,5.5vw,76px)] mb-5 leading-[1.04]">
               <div className="mb-1">
                 <RevealWords text="Real Estate." delay={0.3} className="text-white" />
               </div>
@@ -175,49 +197,74 @@ export function HeroSection() {
             <motion.p
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1.05, ease: [0.22, 1, 0.36, 1] }}
-              className="text-white/60 text-lg max-w-xl mb-10 leading-relaxed"
+              transition={{ duration: 0.8, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
+              className="text-white/55 text-base max-w-lg mb-8 leading-relaxed"
             >
               We help you find more than a property — we find your next chapter.
-              Buy, sell or rent with confidence.
             </motion.p>
 
-            {/* CTA row */}
+            {/* ── Integrated Search Bar (McCone-style) ─────────── */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-wrap gap-4"
+              transition={{ duration: 0.7, delay: 1.15, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Primary — gold button with glow */}
-              <motion.div
-                whileHover={{ scale: 1.04, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 350, damping: 22 }}
-              >
-                <Link
-                  href="/properties"
-                  className="inline-flex items-center gap-2.5 h-14 px-8 rounded-full bg-gradient-to-br from-[#ECBE80] via-[#E2A862] to-[#B9824A] text-[#2B2520] font-semibold text-base shadow-[0_8px_28px_-6px_rgba(185,130,74,.75)] hover:shadow-[0_14px_40px_-6px_rgba(185,130,74,.95)] transition-shadow duration-300"
+              {/* Buy / Rent tabs */}
+              <div className="flex gap-0 mb-3">
+                {(["Buy", "Rent"] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setListingType(tab)}
+                    className={cn(
+                      "px-6 py-2 text-sm font-semibold rounded-t-lg transition-all duration-200",
+                      listingType === tab
+                        ? "bg-white text-[#2B2520]"
+                        : "bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm"
+                    )}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+
+              {/* Search input row */}
+              <form onSubmit={handleSearch} className="flex gap-0">
+                <input
+                  type="text"
+                  placeholder="Search a community or building..."
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  className="flex-1 h-13 px-5 py-3.5 bg-white text-[#2B2520] placeholder:text-zinc-400 text-sm focus:outline-none rounded-l-lg min-w-0"
+                />
+                <button
+                  type="submit"
+                  className="h-13 px-7 py-3.5 bg-gradient-to-br from-[#ECBE80] via-[#E2A862] to-[#B9824A] text-[#2B2520] font-semibold text-sm flex items-center gap-2 rounded-r-lg hover:brightness-105 transition-all whitespace-nowrap shadow-[0_4px_20px_-6px_rgba(185,130,74,.8)]"
                 >
                   <Search className="h-4 w-4" />
-                  Browse Properties
-                </Link>
-              </motion.div>
+                  Search
+                </button>
+              </form>
 
-              {/* Secondary — glass button */}
-              <motion.div
-                whileHover={{ scale: 1.04, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 350, damping: 22 }}
-              >
-                <Link
-                  href="/contact"
-                  className="group inline-flex items-center gap-2.5 h-14 px-8 rounded-full border border-white/35 bg-white/10 text-white font-medium text-base hover:bg-white/20 hover:border-white/55 backdrop-blur-sm transition-all duration-300"
-                >
-                  Talk to an Agent
-                  <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Link>
-              </motion.div>
+              {/* Popular area chips */}
+              <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                <span className="text-xs text-white/40 font-medium">Popular:</span>
+                {POPULAR_AREAS.map((area) => (
+                  <button
+                    key={area}
+                    type="button"
+                    onClick={() => {
+                      setLocation(area);
+                      const params = new URLSearchParams();
+                      if (listingType === "Rent") params.set("listingType", "rent");
+                      params.set("search", area);
+                      router.push(`/properties?${params.toString()}`);
+                    }}
+                    className="text-xs text-white/60 hover:text-white transition-colors"
+                  >
+                    {area}
+                  </button>
+                ))}
+              </div>
             </motion.div>
 
           </div>
@@ -236,7 +283,7 @@ export function HeroSection() {
           animate={{ y: [0, 7, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="h-6 w-6 text-white/40" />
+          <ChevronDown className="h-6 w-6 text-white/35" />
         </motion.div>
       </motion.div>
 
