@@ -6,8 +6,8 @@ import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ChevronDown, Search } from "lucide-react";
 
-const HERO_IMAGE = "/hero-dubai.webp";
-const HERO_VIDEO = "/media/770e7ca3-8d03-48a5-93d1-0167f57336a9.mp4";
+const HERO_IMAGE = "/hero-dubai.jpg";
+const HERO_VIDEO = "/hero-dubai.mp4";
 
 // Splits text into words, each revealed with a clip-path / overflow-hidden mask
 function RevealWords({
