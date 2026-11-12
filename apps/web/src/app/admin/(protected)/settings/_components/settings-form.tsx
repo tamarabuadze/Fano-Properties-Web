@@ -27,7 +27,7 @@ interface SettingsFormProps {
 }
 
 const inputCls =
-  "w-full h-10 px-3.5 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-transparent transition-all hover:border-zinc-300";
+  "w-full h-10 px-3.5 rounded-[3px] border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-[#E2A862]/25 focus:border-[#E2A862] transition-all hover:border-[#C5BAAB]";
 const labelCls =
   "block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wider";
 
@@ -57,14 +57,14 @@ export function SettingsForm({ defaultValues }: SettingsFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit, reportInvalid())} noValidate className="space-y-8">
       {/* Site Info */}
-      <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
-        <h2 className="font-semibold text-foreground">Site Information</h2>
+      <section className="bg-card rounded-[4px] border border-border p-6 space-y-5">
+        <h2 className="font-display text-xl font-normal text-foreground">Site Information</h2>
 
         <div>
           <label className={labelCls}>Site Name</label>
           <input {...register("siteName")} className={inputCls} placeholder="Fano Real Estate" />
           {errors.siteName && (
-            <p className="text-xs text-red-500 mt-1">{errors.siteName.message}</p>
+            <p className="text-xs text-[#B0453A] mt-1">{errors.siteName.message}</p>
           )}
         </div>
 
@@ -88,8 +88,8 @@ export function SettingsForm({ defaultValues }: SettingsFormProps) {
       </section>
 
       {/* Contact */}
-      <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
-        <h2 className="font-semibold text-foreground">Contact Details</h2>
+      <section className="bg-card rounded-[4px] border border-border p-6 space-y-5">
+        <h2 className="font-display text-xl font-normal text-foreground">Contact Details</h2>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -101,7 +101,7 @@ export function SettingsForm({ defaultValues }: SettingsFormProps) {
               placeholder="hello@fano.com"
             />
             {errors.contactEmail && (
-              <p className="text-xs text-red-500 mt-1">{errors.contactEmail.message}</p>
+              <p className="text-xs text-[#B0453A] mt-1">{errors.contactEmail.message}</p>
             )}
           </div>
           <div>
@@ -119,15 +119,15 @@ export function SettingsForm({ defaultValues }: SettingsFormProps) {
           <textarea
             {...register("contactAddress")}
             rows={2}
-            className="w-full px-3.5 py-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-transparent transition-all hover:border-zinc-300 resize-none"
+            className="w-full px-3.5 py-3 rounded-[3px] border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-[#E2A862]/25 focus:border-[#E2A862] transition-all hover:border-[#C5BAAB] resize-none"
             placeholder="123 Main Street, Suite 100, New York, NY 10001"
           />
         </div>
       </section>
 
       {/* Social */}
-      <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
-        <h2 className="font-semibold text-foreground">Social Media</h2>
+      <section className="bg-card rounded-[4px] border border-border p-6 space-y-5">
+        <h2 className="font-display text-xl font-normal text-foreground">Social Media</h2>
 
         {[
           { name: "facebookUrl" as const, label: "Facebook URL", placeholder: "https://facebook.com/…" },
@@ -139,7 +139,7 @@ export function SettingsForm({ defaultValues }: SettingsFormProps) {
             <label className={labelCls}>{label}</label>
             <input {...register(name)} type="text" className={inputCls} placeholder={placeholder} />
             {errors[name] && (
-              <p className="text-xs text-red-500 mt-1">{errors[name]?.message}</p>
+              <p className="text-xs text-[#B0453A] mt-1">{errors[name]?.message}</p>
             )}
           </div>
         ))}
@@ -149,7 +149,7 @@ export function SettingsForm({ defaultValues }: SettingsFormProps) {
         <button
           type="submit"
           disabled={isSubmitting || !isDirty}
-          className="h-11 px-6 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
+          className="btn-gold disabled:opacity-50"
         >
           {isSubmitting ? "Saving…" : "Save Settings"}
         </button>

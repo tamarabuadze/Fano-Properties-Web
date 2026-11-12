@@ -22,19 +22,19 @@ export const dynamic = "force-dynamic";
 export default function AgentsPage() {
   return (
     <div className="min-h-screen pt-20">
-      <div className="page-band py-12">
+      <div className="page-band py-14 lg:py-20">
         <div className="container-site">
-          <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-3">The Team</p>
-          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#2B2520]">
-            Your Real Estate Insiders
+          <p className="eyebrow mb-5">The team</p>
+          <h1 className="font-display text-[clamp(40px,5.5vw,72px)] font-normal leading-[1.02] tracking-[-0.01em] text-[#2B2520] text-balance">
+            Your real estate insiders
           </h1>
-          <p className="text-zinc-500 mt-3 max-w-xl">
+          <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-[#2B2520]/70">
             Discover the dedicated experts behind your next successful property investment.
           </p>
         </div>
       </div>
 
-      <div className="container-site section-y-sm">
+      <div className="container-site section-y">
         <Suspense fallback={<AgentsSkeleton />}>
           <AgentsGrid />
         </Suspense>
@@ -48,14 +48,14 @@ async function AgentsGrid() {
 
   if (agents.length === 0) {
     return (
-      <div className="py-24 text-center text-zinc-400">
-        <p className="text-xl">Our team is being assembled. Check back soon.</p>
+      <div className="py-24 text-center">
+        <p className="font-display text-2xl font-normal text-[#2B2520]/60">Our team is being assembled. Check back soon.</p>
       </div>
     );
   }
 
   return (
-    <AnimateStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <AnimateStagger className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {agents.map((agent) => (
         <AgentCard
           key={agent.id}
@@ -79,14 +79,12 @@ async function AgentsGrid() {
 
 function AgentsSkeleton() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {Array.from({ length: 8 }).map((_, i) => (
-        <div key={i} className="rounded-2xl border border-border p-6 space-y-4">
-          <div className="h-20 w-20 rounded-full bg-[#E6DFD5] animate-pulse mx-auto" />
-          <div className="space-y-2">
-            <div className="h-5 w-32 rounded bg-[#E6DFD5] animate-pulse mx-auto" />
-            <div className="h-4 w-24 rounded bg-[#E6DFD5] animate-pulse mx-auto" />
-          </div>
+        <div key={i} className="animate-pulse">
+          <div className="aspect-[4/5] rounded-[4px] bg-[#E6DFD5]" />
+          <div className="mt-5 h-5 w-2/3 rounded-[2px] bg-[#E6DFD5]" />
+          <div className="mt-3 h-3 w-1/2 rounded-[2px] bg-[#E6DFD5]/70" />
         </div>
       ))}
     </div>

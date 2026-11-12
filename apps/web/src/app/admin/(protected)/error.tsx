@@ -16,11 +16,11 @@ export default function AdminError({
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4 p-8 text-center">
-      <div className="h-12 w-12 rounded-full bg-red-50 border border-red-100 flex items-center justify-center">
-        <AlertTriangle className="h-5 w-5 text-red-500" />
+      <div className="h-12 w-12 rounded-full bg-[#F6E3DF] border border-[#E9C6BF] flex items-center justify-center">
+        <AlertTriangle className="h-5 w-5 text-[#B0453A]" />
       </div>
       <div>
-        <h2 className="font-semibold text-foreground mb-1">Something went wrong</h2>
+        <h2 className="font-display text-2xl font-normal text-foreground mb-1">Something went wrong</h2>
         <p className="text-sm text-muted-foreground max-w-sm">
           {error.message || "An unexpected error occurred loading this page."}
         </p>
@@ -30,7 +30,7 @@ export default function AdminError({
       </div>
       <button
         onClick={reset}
-        className="h-9 px-5 rounded-xl bg-[#1a1410] text-white text-sm font-medium hover:bg-[#2a2118] transition-colors"
+        className="btn-gold"
       >
         Try again
       </button>

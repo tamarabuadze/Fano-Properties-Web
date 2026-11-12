@@ -22,19 +22,19 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   return (
     <div className="min-h-screen pt-20">
-      <div className="page-band py-12">
+      <div className="page-band py-14 lg:py-20">
         <div className="container-site">
-          <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-3">Insights</p>
-          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#2B2520]">
-            Blog & Market Updates
+          <p className="eyebrow mb-5">Insights</p>
+          <h1 className="font-display text-[clamp(40px,5.5vw,72px)] font-normal leading-[1.02] tracking-[-0.01em] text-[#2B2520] text-balance">
+            Blog &amp; market updates
           </h1>
-          <p className="text-zinc-500 mt-3 max-w-xl">
+          <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-[#2B2520]/70">
             Expert insights, buying guides, and the latest real estate market news.
           </p>
         </div>
       </div>
 
-      <div className="container-site py-12">
+      <div className="container-site py-12 lg:py-16">
         <BlogCategories categories={categories} activeSlug={params.category} />
 
         <Suspense fallback={<BlogSkeleton />}>
@@ -47,9 +47,13 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
 function BlogSkeleton() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+    <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
       {Array.from({ length: 6 }).map((_, i) => (
-        <div key={i} className="rounded-2xl bg-zinc-100 animate-pulse h-72" />
+        <div key={i} className="animate-pulse">
+          <div className="aspect-[16/10] rounded-[4px] bg-[#E6DFD5]" />
+          <div className="mt-5 h-5 w-3/4 rounded-[2px] bg-[#E6DFD5]" />
+          <div className="mt-3 h-3 w-1/2 rounded-[2px] bg-[#E6DFD5]/70" />
+        </div>
       ))}
     </div>
   );

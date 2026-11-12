@@ -37,7 +37,7 @@ interface AgentFormProps {
 }
 
 const inputCls =
-  "w-full h-10 px-3.5 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-transparent transition-all hover:border-zinc-300";
+  "w-full h-10 px-3.5 rounded-[3px] border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-[#E2A862]/25 focus:border-[#E2A862] transition-all hover:border-[#C5BAAB]";
 const labelCls =
   "block text-xs font-medium text-muted-foreground mb-1.5 uppercase tracking-wider";
 
@@ -80,22 +80,22 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit, reportInvalid({ linkedinUrl: "LinkedIn URL", instagramUrl: "Instagram URL", twitterUrl: "Twitter / X URL", avatar: "Profile photo" }))} noValidate className="space-y-8">
       {/* Personal Info */}
-      <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
-        <h2 className="font-semibold text-foreground">Personal Information</h2>
+      <section className="bg-card rounded-[4px] border border-border p-6 space-y-5">
+        <h2 className="font-display text-xl font-normal text-foreground">Personal Information</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>First Name</label>
             <input {...register("firstName")} className={inputCls} placeholder="John" />
             {errors.firstName && (
-              <p className="text-xs text-red-500 mt-1">{errors.firstName.message}</p>
+              <p className="text-xs text-[#B0453A] mt-1">{errors.firstName.message}</p>
             )}
           </div>
           <div>
             <label className={labelCls}>Last Name</label>
             <input {...register("lastName")} className={inputCls} placeholder="Smith" />
             {errors.lastName && (
-              <p className="text-xs text-red-500 mt-1">{errors.lastName.message}</p>
+              <p className="text-xs text-[#B0453A] mt-1">{errors.lastName.message}</p>
             )}
           </div>
         </div>
@@ -110,7 +110,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
               placeholder="john@example.com"
             />
             {errors.email && (
-              <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>
+              <p className="text-xs text-[#B0453A] mt-1">{errors.email.message}</p>
             )}
           </div>
           <div>
@@ -152,15 +152,15 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
           <textarea
             {...register("bio")}
             rows={4}
-            className="w-full px-3.5 py-3 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-transparent transition-all hover:border-zinc-300 resize-none"
+            className="w-full px-3.5 py-3 rounded-[3px] border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-[#E2A862]/25 focus:border-[#E2A862] transition-all hover:border-[#C5BAAB] resize-none"
             placeholder="A short biography about the agent…"
           />
         </div>
       </section>
 
       {/* Professional Details */}
-      <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
-        <h2 className="font-semibold text-foreground">Professional Details</h2>
+      <section className="bg-card rounded-[4px] border border-border p-6 space-y-5">
+        <h2 className="font-display text-xl font-normal text-foreground">Professional Details</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -181,8 +181,8 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
       </section>
 
       {/* Media */}
-      <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
-        <h2 className="font-semibold text-foreground">Photo</h2>
+      <section className="bg-card rounded-[4px] border border-border p-6 space-y-5">
+        <h2 className="font-display text-xl font-normal text-foreground">Photo</h2>
         <div>
           <label className={labelCls}>Profile Photo</label>
           <MediaUpload
@@ -193,14 +193,14 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
             hint="Square JPG, PNG or WEBP, up to 10 MB"
           />
           {errors.avatar && (
-            <p className="text-xs text-red-500 mt-1">{errors.avatar.message}</p>
+            <p className="text-xs text-[#B0453A] mt-1">{errors.avatar.message}</p>
           )}
         </div>
       </section>
 
       {/* Social Links */}
-      <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
-        <h2 className="font-semibold text-foreground">Social Links</h2>
+      <section className="bg-card rounded-[4px] border border-border p-6 space-y-5">
+        <h2 className="font-display text-xl font-normal text-foreground">Social Links</h2>
 
         <div>
           <label className={labelCls}>LinkedIn URL</label>
@@ -211,7 +211,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
             placeholder="https://linkedin.com/in/…"
           />
           {errors.linkedinUrl && (
-            <p className="text-xs text-red-500 mt-1">{errors.linkedinUrl.message}</p>
+            <p className="text-xs text-[#B0453A] mt-1">{errors.linkedinUrl.message}</p>
           )}
         </div>
         <div>
@@ -223,7 +223,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
             placeholder="https://instagram.com/…"
           />
           {errors.instagramUrl && (
-            <p className="text-xs text-red-500 mt-1">{errors.instagramUrl.message}</p>
+            <p className="text-xs text-[#B0453A] mt-1">{errors.instagramUrl.message}</p>
           )}
         </div>
         <div>
@@ -235,13 +235,13 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
             placeholder="https://twitter.com/…"
           />
           {errors.twitterUrl && (
-            <p className="text-xs text-red-500 mt-1">{errors.twitterUrl.message}</p>
+            <p className="text-xs text-[#B0453A] mt-1">{errors.twitterUrl.message}</p>
           )}
         </div>
       </section>
 
       {/* Status */}
-      <section className="bg-card rounded-2xl border border-border p-6">
+      <section className="bg-card rounded-[4px] border border-border p-6">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium text-foreground">Active</p>
@@ -262,14 +262,14 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="h-11 px-6 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-opacity disabled:opacity-50"
+          className="btn-gold disabled:opacity-50"
         >
           {isSubmitting ? "Saving…" : agentId ? "Update Agent" : "Create Agent"}
         </button>
         <button
           type="button"
           onClick={() => router.push("/admin/agents")}
-          className="h-11 px-6 rounded-xl border border-border text-muted-foreground font-medium text-sm hover:text-foreground transition-colors"
+          className="btn-gold-outline"
         >
           Cancel
         </button>

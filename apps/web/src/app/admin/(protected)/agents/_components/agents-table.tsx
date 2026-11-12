@@ -33,11 +33,11 @@ export function AgentsTable({ agents }: { agents: Agent[] }) {
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-card overflow-hidden">
+    <div className="rounded-[4px] border border-border bg-card overflow-hidden">
       <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-border bg-secondary/40">
+          <tr className="border-b border-border">
             <th className="text-left px-4 py-3 font-medium text-muted-foreground">Agent</th>
             <th className="text-left px-4 py-3 font-medium text-muted-foreground">Email</th>
             <th className="text-left px-4 py-3 font-medium text-muted-foreground">Listings</th>
@@ -80,7 +80,7 @@ export function AgentsTable({ agents }: { agents: Agent[] }) {
                 </td>
                 <td className="px-4 py-3">
                   <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                    a.active ? "bg-green-50 text-green-700" : "bg-zinc-100 text-zinc-500"
+                    a.active ? "bg-[#F6E7D2] text-[#6B5038]" : "bg-secondary text-muted-foreground"
                   }`}>
                     {a.active ? "Active" : "Inactive"}
                   </span>
@@ -90,17 +90,17 @@ export function AgentsTable({ agents }: { agents: Agent[] }) {
                     <button
                       onClick={() => handleToggle(a.id, a.active)}
                       aria-label={a.active ? "Deactivate" : "Activate"}
-                      className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
+                      className="h-8 w-8 rounded-full flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
                     >
-                      {a.active ? <ToggleRight className="h-4 w-4 text-green-600" /> : <ToggleLeft className="h-4 w-4" />}
+                      {a.active ? <ToggleRight className="h-4 w-4 text-[#8C6A47]" /> : <ToggleLeft className="h-4 w-4" />}
                     </button>
-                    <Link href={`/admin/agents/${a.id}`} aria-label="Edit" className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors">
+                    <Link href={`/admin/agents/${a.id}`} aria-label="Edit" className="h-8 w-8 rounded-full flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors">
                       <Edit className="h-4 w-4" />
                     </Link>
                     <button
                       onClick={() => handleDelete(a.id)}
                       aria-label="Delete"
-                      className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-red-50 hover:text-red-600 transition-colors"
+                      className="h-8 w-8 rounded-full flex items-center justify-center text-muted-foreground hover:bg-[#F6E3DF] hover:text-[#B0453A] transition-colors"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>

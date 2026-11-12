@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Clock, Calendar } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { getBlogArticleBySlug } from "@/lib/queries/blog";
 import { formatDate } from "@fano/utils";
 
@@ -51,58 +51,53 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
     publisher: { "@id": `${SITE_URL}/#organization` },
   };
 
+  const meta = [
+    article.category?.name,
+    article.publishedAt ? formatDate(article.publishedAt) : null,
+    article.readTime ? `${article.readTime} min read` : null,
+  ].filter(Boolean);
+
   return (
     <div className="min-h-screen pt-20">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="container-site max-w-3xl py-12">
+      <div className="container-site max-w-3xl py-12 lg:py-16">
         {/* Back */}
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-[#2B2520] transition-colors mb-10"
+          className="mb-12 inline-flex items-center gap-2 text-[12px] tracking-[0.08em] text-[#2B2520]/55 transition-colors hover:text-[#2B2520]"
         >
-          <ArrowLeft className="h-4 w-4" />
-          Back to Blog
+          <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+          Back to blog
         </Link>
 
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-10">
           {article.category && (
             <Link
               href={`/blog?category=${article.category.slug}`}
-              className="inline-flex items-center h-7 px-3 rounded-full bg-zinc-100 text-zinc-600 text-xs font-medium hover:bg-zinc-200 transition-colors mb-4"
+              className="eyebrow mb-5 transition-colors hover:text-[#2B2520]"
             >
               {article.category.name}
             </Link>
           )}
 
-          <h1 className="text-3xl lg:text-4xl font-semibold [letter-spacing:-0.025em] text-[#2B2520] mb-4 text-balance">
+          <h1 className="font-display text-[clamp(36px,5vw,60px)] font-normal leading-[1.05] tracking-[-0.01em] text-[#2B2520] text-balance">
             {article.title}
           </h1>
 
-          <p className="text-lg text-zinc-500 leading-relaxed mb-6">{article.excerpt}</p>
+          <p className="mt-6 text-[17px] leading-[1.75] text-[#2B2520]/70">{article.excerpt}</p>
 
-          <div className="flex items-center gap-5 text-sm text-zinc-400">
-            {article.publishedAt && (
-              <div className="flex items-center gap-1.5">
-                <Calendar className="h-4 w-4" />
-                <span>{formatDate(article.publishedAt)}</span>
-              </div>
-            )}
-            {article.readTime && (
-              <div className="flex items-center gap-1.5">
-                <Clock className="h-4 w-4" />
-                <span>{article.readTime} min read</span>
-              </div>
-            )}
-          </div>
+          <p className="mt-6 border-t border-[#C5BAAB]/40 pt-4 font-label text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8C6A47]">
+            {meta.join("  ·  ")}
+          </p>
         </div>
 
         {/* Cover image */}
         {article.coverImage && (
-          <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-100 mb-10">
+          <div className="relative mb-12 aspect-[16/9] overflow-hidden rounded-[4px] bg-[#E6DFD5]">
             <Image
               src={article.coverImage}
               alt={article.title}
@@ -116,20 +111,20 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
 
         {/* Content */}
         <div
-          className="prose prose-zinc max-w-none prose-headings:font-semibold prose-headings:[letter-spacing:-0.02em] prose-a:text-[#2B2520] prose-a:underline-offset-2 prose-img:rounded-2xl"
+          className="prose max-w-none prose-headings:font-display prose-headings:font-normal prose-headings:tracking-[-0.01em] prose-headings:text-[#2B2520] prose-p:text-[15px] prose-p:leading-[1.85] prose-p:text-[#2B2520]/80 prose-li:text-[#2B2520]/80 prose-strong:text-[#2B2520] prose-a:text-[#8C6A47] prose-a:underline-offset-4 prose-blockquote:border-l-[#E2A862] prose-blockquote:font-display prose-blockquote:text-[20px] prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-[#2B2520] prose-img:rounded-[4px] prose-hr:border-[#C5BAAB]/40"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
 
         {/* Tags */}
         {article.tags.length > 0 && (
-          <div className="mt-12 pt-8 border-t border-border">
+          <div className="mt-14 border-t border-[#C5BAAB]/40 pt-8">
             <div className="flex flex-wrap gap-2">
               {article.tags.map(({ tag }) => (
                 <span
                   key={tag.id}
-                  className="inline-flex items-center h-8 px-3 rounded-full bg-zinc-100 text-zinc-600 text-xs font-medium"
+                  className="inline-flex h-8 items-center rounded-full border border-[#C5BAAB]/70 px-3 font-label text-[10px] font-semibold uppercase tracking-[0.14em] text-[#2B2520]/70"
                 >
-                  #{tag.name}
+                  {tag.name}
                 </span>
               ))}
             </div>

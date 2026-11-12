@@ -3,9 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { BedDouble, Bath, Maximize2, MapPin, Store, ArrowRight } from "lucide-react";
 import { cn, isOptimizedImageHost, unitTypeLabel, formatPlace, splitListingTitle } from "@fano/utils";
-import { Badge } from "./badge";
 
 // Tiny warm-beige JPEG used as blur placeholder before real image loads
 const BLUR_PLACEHOLDER =
@@ -33,47 +31,25 @@ export interface PropertyCardProps {
 }
 
 function formatPrice(price: number, currency = "AED"): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency,
-    maximumFractionDigits: 0,
-  }).format(price);
+  return new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 }).format(price);
 }
 
+// A gallery-style card: the photograph, then a serif name, the place, the price
+// and a quiet line of facts. No box, no border; a hairline separates text from image.
 function PropertyCard({
-  title,
-  slug,
-  propertyType,
-  unitType,
-  priceUnit,
-  listingType,
-  price,
-  currency = "AED",
-  location,
-  city,
-  bedrooms,
-  bathrooms,
-  sqft,
-  coverImage,
-  featured,
-  className,
-  priority = false,
+  title, slug, propertyType, unitType, priceUnit, listingType, price, currency = "AED",
+  location, city, bedrooms, bathrooms, sqft, coverImage, featured, className, priority = false,
 }: PropertyCardProps) {
   const isCommercial = propertyType === "commercial";
   const { headline, details } = splitListingTitle(title);
   const place = formatPlace(location, city);
+  const facts = isCommercial
+    ? [unitTypeLabel(unitType), sqft > 0 ? `${sqft.toLocaleString("en-US")} sq ft` : null]
+    : [`${bedrooms} bed`, `${bathrooms} bath`, sqft > 0 ? `${sqft.toLocaleString("en-US")} sq ft` : null];
 
   return (
-    <Link
-      href={`/properties/${slug}`}
-      className={cn(
-        "cinema-property-card group flex flex-col overflow-hidden rounded-3xl h-full border border-[#C5BAAB]/50",
-        "bg-gradient-to-b from-[#FAF7F3] to-[#F4EFEA] shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)]",
-        "transition-all duration-500 hover:-translate-y-1 hover:border-[#E2A862]/60 hover:shadow-[0_24px_48px_-18px_rgba(43,37,32,.35),0_0_0_1px_rgba(226,168,98,.25)]",
-        className
-      )}
-    >
-      <div className="relative aspect-[4/3] overflow-hidden bg-zinc-100 shrink-0">
+    <Link href={`/properties/${slug}`} className={cn("cinema-property-card group block h-full", className)}>
+      <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-[#E6DFD5]">
         <Image
           src={coverImage}
           unoptimized={!isOptimizedImageHost(coverImage)}
@@ -81,95 +57,36 @@ function PropertyCard({
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 420px"
           quality={85}
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
           placeholder="blur"
           blurDataURL={BLUR_PLACEHOLDER}
           priority={priority}
         />
-        {/* Shimmer sweep on hover */}
-        <div
-          className="absolute inset-0 pointer-events-none translate-x-[-100%] group-hover:translate-x-[200%] transition-transform duration-700 ease-in-out"
-          style={{
-            background:
-              "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%)",
-          }}
-        />
-        {/* Dark overlay + "View Property" label */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-5">
-          <span className="inline-flex items-center gap-1.5 text-white text-sm font-semibold tracking-wide">
-            View Property <ArrowRight className="h-3.5 w-3.5" />
-          </span>
-        </div>
-        <div className="absolute top-3 left-3 flex gap-2">
-          <Badge variant={listingType as "sale" | "rent" | "lease"} size="sm">
+        <div className="absolute left-3 top-3 flex gap-2">
+          <span className="rounded-full bg-[#F4EFEA]/92 px-2.5 py-1 font-label text-[10px] font-semibold uppercase tracking-[0.16em] text-[#2B2520] backdrop-blur-sm">
             For {listingType}
-          </Badge>
-          {featured && (
-            <Badge variant="default" size="sm" className="bg-white/90 text-black backdrop-blur-sm">
-              Featured
-            </Badge>
-          )}
-        </div>
-        <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-2.5 py-1">
-          <span className="text-xs font-medium capitalize text-black">
-            {isCommercial ? unitTypeLabel(unitType) : propertyType}
           </span>
+          {featured && (
+            <span className="rounded-full bg-[#2B2520]/85 px-2.5 py-1 font-label text-[10px] font-semibold uppercase tracking-[0.16em] text-[#F4EFEA] backdrop-blur-sm">
+              Featured
+            </span>
+          )}
         </div>
       </div>
 
-      <div className="flex flex-col flex-1 p-5">
-        <div className="mb-3">
-          <p className="font-display text-2xl font-semibold tracking-tight [letter-spacing:-0.02em]" style={{ color: "#6B5038" }}>
-            {formatPrice(price, currency)}
-            {priceUnit === "per_sqft" && (
-              <span className="text-sm font-normal text-text-secondary"> /sq ft</span>
-            )}
-            {listingType === "rent" && (
-              <span className="text-sm font-normal text-text-secondary">/mo</span>
-            )}
-          </p>
-        </div>
-
-        <h3 className="font-display font-semibold mb-1 line-clamp-2 transition-colors group-hover:text-[#8C6A47]" style={{ color: "#2B2520" }}>
+      <div className="pt-5">
+        <h3 className="font-display text-[24px] font-normal leading-tight text-[#2B2520] transition-colors group-hover:text-[#8C6A47]">
           {headline}
         </h3>
-        {details.length > 0 && (
-          <p className="text-xs line-clamp-1 mb-1.5" style={{ color: "#A39886" }}>
-            {details.join(" · ")}
+        {details.length > 0 && <p className="mt-1 text-[12px] text-[#A39886]">{details.join(" · ")}</p>}
+        <p className="mt-1.5 text-[13px] text-[#2B2520]/65">{place}</p>
+        <div className="mt-4 flex items-baseline justify-between gap-4 border-t border-[#C5BAAB]/40 pt-3">
+          <p className="text-[15px] font-medium tracking-[0.01em] text-[#2B2520]">
+            {formatPrice(price, currency)}
+            {priceUnit === "per_sqft" && <span className="text-[12px] font-normal text-[#2B2520]/55"> /sq ft</span>}
+            {listingType === "rent" && <span className="text-[12px] font-normal text-[#2B2520]/55"> /mo</span>}
           </p>
-        )}
-
-        <div className="flex items-center gap-1.5 mb-4 flex-1" style={{ color: "#8C6A47" }}>
-          <MapPin className="h-3.5 w-3.5 shrink-0" />
-          <p className="text-sm line-clamp-1">{place}</p>
-        </div>
-
-        <div className="h-px bg-border mb-4" />
-
-        <div className="flex items-center justify-between text-sm" style={{ color: "#8C6A47" }}>
-          {isCommercial ? (
-            <div className="flex items-center gap-1.5">
-              <Store className="h-4 w-4" />
-              <span>{unitTypeLabel(unitType)}</span>
-            </div>
-          ) : (
-            <>
-              <div className="flex items-center gap-1.5">
-                <BedDouble className="h-4 w-4" />
-                <span>{bedrooms} Beds</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Bath className="h-4 w-4" />
-                <span>{bathrooms} Baths</span>
-              </div>
-            </>
-          )}
-          {sqft > 0 && (
-            <div className="flex items-center gap-1.5">
-              <Maximize2 className="h-4 w-4" />
-              <span>{sqft.toLocaleString("en-US")} sqft</span>
-            </div>
-          )}
+          <p className="text-[12px] text-[#2B2520]/55">{facts.filter(Boolean).join(" · ")}</p>
         </div>
       </div>
     </Link>

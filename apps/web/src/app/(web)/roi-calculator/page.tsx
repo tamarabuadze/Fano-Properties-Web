@@ -30,13 +30,13 @@ const notes = [
 export default function RoiCalculatorPage() {
   return (
     <div className="min-h-screen pt-20">
-      <div className="page-band py-12">
+      <div className="page-band py-14 lg:py-20">
         <div className="container-site">
-          <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-3">Investor Tools</p>
-          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#2B2520]">
-            ROI Calculator
+          <p className="eyebrow mb-5">Investor tools</p>
+          <h1 className="font-display text-[clamp(40px,5.5vw,72px)] font-normal leading-[1.02] tracking-[-0.01em] text-[#2B2520]">
+            ROI calculator
           </h1>
-          <p className="text-zinc-500 mt-3 max-w-xl">
+          <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-[#2B2520]/70">
             See what a Dubai property could earn you: rental yield, monthly cash flow and long-term return, with DLD
             fees, mortgage costs and service charges built in.
           </p>
@@ -46,13 +46,16 @@ export default function RoiCalculatorPage() {
       <div className="container-site py-12 lg:py-16">
         <RoiCalculator variant="full" />
 
-        <div className="mt-20 pt-12 border-t border-border grid md:grid-cols-2 gap-x-12 gap-y-8 max-w-5xl">
-          {notes.map((n) => (
-            <div key={n.q}>
-              <h2 className="font-semibold text-[#2B2520]">{n.q}</h2>
-              <p className="text-sm text-zinc-500 mt-2 leading-relaxed">{n.a}</p>
-            </div>
-          ))}
+        <div className="mt-24 border-t border-[#C5BAAB]/40 pt-14">
+          <p className="eyebrow mb-10">How the numbers work</p>
+          <div className="grid max-w-5xl gap-x-16 gap-y-12 md:grid-cols-2">
+            {notes.map((n) => (
+              <div key={n.q}>
+                <h2 className="font-display text-[22px] font-normal leading-tight text-[#2B2520]">{n.q}</h2>
+                <p className="mt-3 text-[14px] leading-[1.8] text-[#2B2520]/70">{n.a}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

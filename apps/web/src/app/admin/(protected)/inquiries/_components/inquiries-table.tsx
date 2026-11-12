@@ -27,10 +27,10 @@ interface InquiriesTableProps {
 }
 
 const statusColors: Record<string, string> = {
-  new: "bg-amber-50 text-amber-700",
-  contacted: "bg-blue-50 text-blue-700",
+  new: "bg-[#F6E7D2] text-[#8C6A47]",
+  contacted: "bg-[#E6DFD5] text-[#2B2520]",
   in_progress: "bg-purple-50 text-purple-700",
-  closed: "bg-green-50 text-green-700",
+  closed: "bg-[#F6E7D2] text-[#6B5038]",
 };
 
 export function InquiriesTable({ inquiries, total, page, pageSize }: InquiriesTableProps) {
@@ -42,11 +42,11 @@ export function InquiriesTable({ inquiries, total, page, pageSize }: InquiriesTa
 
   return (
     <div>
-      <div className="rounded-2xl border border-border bg-card overflow-hidden">
+      <div className="rounded-[4px] border border-border bg-card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-border bg-secondary/40">
+              <tr className="border-b border-border">
                 <th className="text-left px-4 py-3 font-medium text-muted-foreground">Contact</th>
                 <th className="text-left px-4 py-3 font-medium text-muted-foreground">Type</th>
                 <th className="text-left px-4 py-3 font-medium text-muted-foreground">Related To</th>

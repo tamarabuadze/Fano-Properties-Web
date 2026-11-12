@@ -12,12 +12,12 @@ export function AdminHeader({ user, onMenuClick }: AdminHeaderProps) {
   const display = user.name ?? user.email ?? "Admin";
 
   return (
-    <header className="h-16 flex items-center justify-between px-4 lg:px-6 border-b border-border bg-card shrink-0">
+    <header className="h-16 flex items-center justify-between px-4 lg:px-6 border-b border-border bg-background shrink-0">
       {/* Hamburger — mobile only */}
       <button
         onClick={onMenuClick}
         aria-label="Open navigation"
-        className="lg:hidden h-9 w-9 rounded-xl flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
+        className="lg:hidden h-9 w-9 rounded-full flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
       >
         <Menu className="h-5 w-5" />
       </button>
@@ -47,7 +47,7 @@ export function AdminHeader({ user, onMenuClick }: AdminHeaderProps) {
 
         <button
           onClick={() => signOut({ redirectTo: "/admin/login" })}
-          className="flex items-center gap-2 px-3 h-9 rounded-xl text-sm text-muted-foreground hover:bg-secondary hover:text-foreground transition-all"
+          className="flex items-center gap-2 px-3 h-9 rounded-full text-sm text-muted-foreground hover:bg-secondary hover:text-foreground transition-all"
         >
           <LogOut className="h-4 w-4" />
           <span className="hidden sm:inline">Sign out</span>

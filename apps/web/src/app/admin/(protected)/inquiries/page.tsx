@@ -35,9 +35,9 @@ export default async function InquiriesPage({
   return (
     <div className="p-6 lg:p-8 space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-foreground [letter-spacing:-0.02em]">Inquiries</h1>
+        <h1 className="font-display text-[32px] font-normal leading-tight text-foreground">Inquiries</h1>
         <p className="text-muted-foreground text-sm mt-1">
-          {total} total · <span className="text-amber-600 font-medium">{newCount} new</span>
+          {total} total · <span className="text-[#8C6A47] font-medium">{newCount} new</span>
         </p>
       </div>
 

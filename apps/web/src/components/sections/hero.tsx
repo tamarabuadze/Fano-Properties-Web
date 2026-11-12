@@ -3,14 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDown, ArrowRight, ArrowUpRight, Pause, Play } from "lucide-react";
+import { Pause, Play } from "lucide-react";
 
-// Aerial of the Burj Al Arab rendered as a slow, eased push-in that returns to
-// its start, so the loop has no visible jump; graded to the Calcite Sand palette.
-// Poster is its first frame.
+// Aerial of the Burj Al Arab: a slow, eased push-in that returns to its start, graded
+// to the Calcite Sand palette. Poster is its first frame.
 const HERO_VIDEO = "/hero-aerial.mp4";
 const HERO_POSTER = "/hero-aerial.jpg";
 
+// Split hero on the bone page: the film sits left in a tall frame, the serif
+// headline, a short champagne rule and the invitation sit right.
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoReady, setVideoReady] = useState(false);
@@ -20,11 +21,10 @@ export function HeroSection() {
     const video = videoRef.current;
     if (!video) return;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const desktop = window.matchMedia("(min-width: 768px)");
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
     let timer: ReturnType<typeof setTimeout>;
     const load = () => {
-      if (!desktop.matches || reducedMotion.matches || connection?.saveData) return;
+      if (reducedMotion.matches || connection?.saveData) return;
       timer = setTimeout(() => {
         video.src = HERO_VIDEO;
         video.load();
@@ -56,61 +56,42 @@ export function HeroSection() {
   }
 
   return (
-    <section className="cinema-hero relative isolate overflow-hidden bg-[#2B2520] text-[#F4EFEA]" aria-label="Discover Fano Properties in Dubai">
-      <div className="absolute inset-0 -z-10" aria-hidden="true">
-        <Image src={HERO_POSTER} alt="" fill priority unoptimized
-          sizes="(max-width: 767px) 160vw, 100vw" className="cinema-hero-image object-cover" />
-        <video ref={videoRef} autoPlay muted loop playsInline preload="none" tabIndex={-1} poster={HERO_POSTER}
-          className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1800ms]"
-          style={{ opacity: videoReady ? 1 : 0 }}
-          onPlaying={() => { setVideoReady(true); setPaused(false); }}
-          onError={() => setVideoReady(false)} />
-        <div className="cinema-hero-shade absolute inset-0" />
-        <div className="cinema-grain absolute inset-0" />
-      </div>
-      <div className="cinema-hero-content container-site relative z-10">
-        <div className="cinema-enter mb-7 flex items-center gap-4 text-[10px] font-medium uppercase tracking-[0.28em] text-[#F6E7D2] sm:text-xs">
-          <span className="h-px w-10 bg-[#E2A862]" aria-hidden="true" />
-          Dubai real estate, thoughtfully selected
-        </div>
-        <h1 className="cinema-enter cinema-enter-1 max-w-5xl text-[clamp(42px,6.7vw,96px)] font-medium leading-[1.04] tracking-[-0.045em]">
-          Real Estate.<br />
-          <span className="cinema-serif mt-2 inline-block text-[#F6E7D2]">Real Relationships.</span>
-        </h1>
-        <div className="cinema-enter cinema-enter-2 mt-8 grid gap-8 lg:grid-cols-[1fr_320px] lg:items-end lg:gap-16 xl:gap-24">
-          <div>
-            <p className="max-w-lg text-[15px] leading-[1.8] text-[#F4EFEA]/85 sm:text-base">
-              Remarkable homes. Ambitious workspaces. A personal approach to finding your place in Dubai.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/properties" className="cinema-button cinema-button-gold">
-                Explore properties <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-              <Link href="/contact" className="cinema-button cinema-button-glass">
-                Meet your advisor <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-            </div>
+    <section className="pt-16 lg:pt-20" aria-label="Discover Fano Properties in Dubai">
+      <div className="container-site grid items-center gap-10 py-10 lg:grid-cols-12 lg:gap-14 lg:py-16 xl:py-20">
+        {/* Film */}
+        <div className="cinema-enter relative lg:col-span-6">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-[#E6DFD5] lg:aspect-[5/6]">
+            <Image src={HERO_POSTER} alt="" fill priority unoptimized sizes="(max-width: 1023px) 100vw, 50vw" className="object-cover" />
+            <video ref={videoRef} autoPlay muted loop playsInline preload="none" tabIndex={-1} poster={HERO_POSTER}
+              className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1800ms]"
+              style={{ opacity: videoReady ? 1 : 0 }}
+              onPlaying={() => { setVideoReady(true); setPaused(false); }}
+              onError={() => setVideoReady(false)} />
+            {videoReady && (
+              <button type="button" onClick={togglePlayback}
+                className="absolute bottom-4 right-4 flex h-9 w-9 items-center justify-center rounded-full border border-white/50 bg-[#2B2520]/35 text-white backdrop-blur-sm transition hover:bg-[#2B2520]/60"
+                aria-label={paused ? "Play background film" : "Pause background film"}>
+                {paused ? <Play className="h-3.5 w-3.5" aria-hidden="true" /> : <Pause className="h-3.5 w-3.5" aria-hidden="true" />}
+              </button>
+            )}
           </div>
-          <Link href="/properties?category=commercial&listingType=sale" className="group hidden border-l border-[#F6E7D2]/30 pl-7 pr-16 lg:block">
-            <span className="text-[10px] uppercase tracking-[0.24em] text-[#F6E7D2]/70">For your next ambition</span>
-            <span className="mt-3 flex items-center justify-between gap-4 text-xl font-medium">
-              Offices for sale <ArrowUpRight className="h-5 w-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" aria-hidden="true" />
-            </span>
-            <span className="mt-2 block text-xs leading-relaxed text-[#F4EFEA]/70">Explore Dubai&apos;s commercial collection</span>
-          </Link>
         </div>
-      </div>
-      <div className="cinema-hero-bottom container-site relative z-10 flex items-center justify-between gap-5 border-t border-[#F6E7D2]/20 py-6">
-        <a href="#discover" className="group inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-[#F4EFEA]/80">
-          <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-1" aria-hidden="true" /> Discover the collection
-        </a>
-        <div className="flex items-center gap-5">
-          <span className="hidden text-[10px] uppercase tracking-[0.22em] text-[#F4EFEA]/65 sm:block">A new perspective on Dubai</span>
-          {videoReady && <button type="button" onClick={togglePlayback}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-[#F6E7D2]/40 bg-[#2B2520]/20 transition hover:bg-[#2B2520]/60"
-            aria-label={paused ? "Play background film" : "Pause background film"}>
-            {paused ? <Play className="h-3.5 w-3.5" aria-hidden="true" /> : <Pause className="h-3.5 w-3.5" aria-hidden="true" />}
-          </button>}
+
+        {/* Words */}
+        <div className="lg:col-span-6 lg:pl-4 xl:pl-10">
+          <p className="eyebrow cinema-enter">Dubai real estate, thoughtfully selected</p>
+          <h1 className="cinema-enter cinema-enter-1 mt-6 font-display text-[clamp(44px,6.2vw,88px)] font-normal leading-[1.02] tracking-[-0.01em] text-[#2B2520]">
+            Real Estate.<br />
+            <span className="italic text-[#8C6A47]">Real Relationships.</span>
+          </h1>
+          <div className="rule-gold cinema-enter cinema-enter-2 mt-9" aria-hidden="true" />
+          <p className="cinema-enter cinema-enter-2 mt-7 max-w-md text-[15px] leading-[1.85] text-[#2B2520]/75">
+            Remarkable homes and ambitious workspaces, presented with the care they deserve. A Business Bay team that delivers precise, considered results in every transaction.
+          </p>
+          <div className="cinema-enter cinema-enter-2 mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
+            <Link href="/properties" className="link-rule">View our inventory</Link>
+            <Link href="/contact" className="btn-pill-outline">Speak to an advisor</Link>
+          </div>
         </div>
       </div>
     </section>

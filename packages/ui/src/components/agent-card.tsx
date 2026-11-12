@@ -3,7 +3,6 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Phone, Mail } from "lucide-react";
 import { cn } from "@fano/utils";
 
 export interface AgentCardProps {
@@ -25,8 +24,8 @@ export interface AgentCardProps {
 const BLUR_PLACEHOLDER =
   "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAAECAADAAQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQQG/8QAHBAAAgMAAwEAAAAAAAAAAAAAAQIDBAASITH/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJXi1KrXLpKhbIxWkQMVIOhGR3Qf/9k=";
 
-// Team card in the Fano "Calcite Sand" look: a large portrait with the name over a soft
-// espresso fade, then BRN, focus area and languages on warm bone, and an amber call to action
+// A gallery-style team card: the portrait, then a serif name, the role and a quiet
+// line of facts under a hairline. No box, no shadow; the photograph carries the card.
 function AgentCard({
   firstName,
   lastName,
@@ -41,101 +40,55 @@ function AgentCard({
   totalListings,
   className,
 }: AgentCardProps) {
+  const facts = [
+    licenseNumber ? `BRN ${licenseNumber}` : null,
+    totalListings ? `${totalListings} listing${totalListings === 1 ? "" : "s"}` : null,
+  ].filter(Boolean);
+
   return (
-    <Link
-      href={`/agents/${slug}`}
-      className={cn(
-        "group flex flex-col h-full overflow-hidden rounded-3xl border border-[#C5BAAB]/50",
-        "bg-gradient-to-b from-[#FAF7F3] to-[#F4EFEA] shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-12px_rgba(43,37,32,.18)]",
-        "transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_48px_-18px_rgba(43,37,32,.35)]",
-        className
-      )}
-    >
-      {/* Portrait */}
-      <div className="relative aspect-[4/5] overflow-hidden bg-[#E6DFD5]">
+    <Link href={`/agents/${slug}`} className={cn("group flex h-full flex-col", className)}>
+      <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-[#E6DFD5]">
         {avatar ? (
           <Image
             src={avatar}
-            alt={`${firstName} ${lastName}`}
+            alt={`${firstName} ${lastName ?? ""}`.trim()}
             fill
             quality={90}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-            className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            className="object-cover object-top transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
             placeholder="blur"
             blurDataURL={BLUR_PLACEHOLDER}
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <span className="font-display text-5xl font-semibold text-[#8C6A47]/60">
+            <span className="font-display text-5xl font-normal text-[#8C6A47]/60">
               {firstName[0]}
               {lastName?.[0]}
             </span>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#2B2520]/85 via-[#2B2520]/10 to-transparent" />
-
-        <div className="absolute inset-x-0 bottom-0 p-5">
-          <h3 className="font-display text-xl font-semibold leading-tight text-[#F4EFEA] [letter-spacing:-0.01em]">
-            {firstName} {lastName}
-          </h3>
-          {title && <p className="mt-1 text-sm font-medium text-[#ECBE80]">{title}</p>}
-        </div>
       </div>
 
-      {/* Details */}
-      <div className="flex flex-1 flex-col p-5">
-        {(licenseNumber || specialization) && (
-          <ul className="space-y-1.5 text-sm text-[#4A413A]">
-            {licenseNumber && (
-              <li className="flex items-center gap-2.5">
-                <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#E2A862] shadow-[0_0_6px_rgba(226,168,98,.7)]" />
-                <span className="font-semibold text-[#2B2520]">RERA BRN {licenseNumber}</span>
-              </li>
-            )}
-            {specialization && (
-              <li className="flex items-center gap-2.5">
-                <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#E2A862] shadow-[0_0_6px_rgba(226,168,98,.7)]" />
-                {specialization}
-              </li>
-            )}
-          </ul>
-        )}
+      <div className="flex flex-1 flex-col pt-5">
+        <h3 className="font-display text-[24px] font-normal leading-tight text-[#2B2520] transition-colors group-hover:text-[#8C6A47]">
+          {firstName} {lastName}
+        </h3>
+        {title && <p className="mt-1 text-[13px] text-[#2B2520]/65">{title}</p>}
+        {specialization && <p className="mt-1 text-[12px] text-[#A39886]">{specialization}</p>}
 
         {languages.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-1.5">
-            {languages.map((lang) => (
-              <span
-                key={lang}
-                className="rounded-full border border-[#D9CFC2] bg-[#EFE8DF] px-2.5 py-0.5 text-[11px] font-medium text-[#62574D]"
-              >
-                {lang}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {!!totalListings && (
-          <p className="mt-3 text-xs font-medium text-[#8C6A47]">
-            {totalListings} active listing{totalListings === 1 ? "" : "s"}
+          <p className="mt-3 font-label text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8C6A47]">
+            {languages.join(" · ")}
           </p>
         )}
 
-        <div className="mt-auto pt-5 flex gap-2">
-          {phone && (
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#D9CFC2] text-[#8C6A47]" aria-label="Call">
-              <Phone className="h-4 w-4" />
-            </span>
-          )}
-          {email && (
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#D9CFC2] text-[#8C6A47]" aria-label="Email">
-              <Mail className="h-4 w-4" />
-            </span>
-          )}
-          <span className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full bg-gradient-to-br from-[#ECBE80] via-[#E2A862] to-[#B9824A] text-sm font-semibold text-[#2B2520] transition group-hover:brightness-105">
+        <div className="mt-auto flex items-center justify-between gap-4 border-t border-[#C5BAAB]/40 pt-3">
+          <p className="text-[12px] text-[#2B2520]/55">{facts.join(" · ")}</p>
+          <span className="inline-flex items-center gap-3 text-[12px] font-medium text-[#2B2520] after:h-px after:w-6 after:bg-[#2B2520] after:transition-all after:duration-300 group-hover:after:w-10">
             View profile
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </span>
         </div>
+        {(phone || email) && <span className="sr-only">{[phone, email].filter(Boolean).join(", ")}</span>}
       </div>
     </Link>
   );

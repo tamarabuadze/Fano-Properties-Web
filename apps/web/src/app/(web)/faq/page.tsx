@@ -59,19 +59,19 @@ export default function FaqPage() {
           }),
         }}
       />
-      <div className="page-band py-12">
+      <div className="page-band py-14 lg:py-20">
         <div className="container-site">
-          <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-3">Help Center</p>
-          <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-[#2B2520]">
-            Frequently Asked Questions
+          <p className="eyebrow mb-5">Help centre</p>
+          <h1 className="font-display text-[clamp(40px,5.5vw,72px)] font-normal leading-[1.02] tracking-[-0.01em] text-[#2B2520] text-balance">
+            Frequently asked questions
           </h1>
-          <p className="text-zinc-500 mt-3 max-w-xl">
+          <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-[#2B2520]/70">
             Everything you need to know about working with Fano Properties.
           </p>
         </div>
       </div>
 
-      <div className="container-site max-w-3xl py-16">
+      <div className="container-site max-w-3xl py-14 lg:py-20">
         <FaqAccordion faqs={faqs} />
       </div>
     </div>
