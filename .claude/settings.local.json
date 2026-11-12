@@ -10,7 +10,19 @@
       "Bash(git push *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git merge *)"
+      "Bash(git merge *)",
+      "Bash(git fetch *)",
+      "Bash(git checkout *)",
+      "Bash(cd \"C:/Users/itmar/OneDrive/Documents/GitHub/Fano-Properties-Web/.claude/worktrees/website-design-upgrade-a06d66/apps/web/src\" && cat components/layout/social-button.tsx | head -60; echo \"--- agents query\"; grep -n \"export\" lib/queries/agents.ts; echo \"--- articles\"; grep -n \"export\" lib/queries/blog.ts lib/queries/articles.ts 2>/dev/null; echo \"--- ui exports\"; cat ../../../packages/ui/src/index.ts; echo \"--- public web files using sand/bone bg classes count\"; grep -rlE \"F4EFEA|FBF8F4|E6DFD5\" \"app/\\(web\\)\" components packages 2>/dev/null | wc -l)",
+      "Bash(gh pr *)",
+      "Bash(pnpm exec *)",
+      "Bash(node -e ' *)",
+      "Bash(rm -rf \"app/design\" components/luxury/design-switch.tsx lib/site-theme.ts components/sections components/layout/navbar.tsx components/layout/footer.tsx components/layout/whatsapp-button.tsx components/layout/roi-button.tsx components/layout/social-button.tsx)",
+      "Bash(git -c core.safecrlf=false commit -q -F -)",
+      "Bash(node \"C:/Users/itmar/AppData/Local/Temp/claude/79c817929a96b5ec/d31888b7-c9e0-4688-88ed-228fccb27c7b/scratchpad/scan-images.cjs\")",
+      "Bash(node \"C:/Users/itmar/AppData/Local/Temp/claude/79c817929a96b5ec/d31888b7-c9e0-4688-88ed-228fccb27c7b/scratchpad/scan-rove.cjs\")",
+      "Bash(node \"C:/Users/itmar/AppData/Local/Temp/claude/79c817929a96b5ec/d31888b7-c9e0-4688-88ed-228fccb27c7b/scratchpad/scan-blog.cjs\")",
+      "Bash(pnpm add *)"
     ]
   }
 }
