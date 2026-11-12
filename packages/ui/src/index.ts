@@ -14,3 +14,4 @@ export * from "./components/blog-card";
 export * from "./components/section-header";
 export * from "./components/container";
 export * from "./components/animate-in";
+export * from "./components/safe-image";

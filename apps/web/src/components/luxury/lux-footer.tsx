@@ -37,7 +37,7 @@ export function LuxFooter({ showAgents = true }: { showAgents?: boolean }) {
           <p><a href="mailto:info@fanoproperties.com" className="transition-colors hover:text-lx-gold">info@fanoproperties.com</a></p>
         </div>
 
-        <nav className="grid grid-cols-2 gap-x-8 text-[13px] leading-[2] text-lx-text/70 lg:col-span-3" aria-label="Footer">
+        <nav className="grid grid-cols-2 gap-x-8 gap-y-3 font-label text-[11px] font-bold uppercase tracking-[0.18em] text-lx-text/70 lg:col-span-3" aria-label="Footer">
           {links.map((link) => (
             <Link key={link.href} href={link.href} className="transition-colors hover:text-lx-gold">
               {link.label}
@@ -45,10 +45,10 @@ export function LuxFooter({ showAgents = true }: { showAgents?: boolean }) {
           ))}
         </nav>
 
-        <div className="text-[13px] leading-[2] text-lx-text/70 lg:col-span-2">
+        <div className="flex flex-col gap-y-3 font-label text-[11px] font-bold uppercase tracking-[0.18em] text-lx-text/70 lg:col-span-2">
           {SOCIAL_LINKS.map(({ href, label }) => (
             <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="block transition-colors hover:text-lx-gold">
-              {label.toLowerCase()}
+              {label}
             </a>
           ))}
         </div>

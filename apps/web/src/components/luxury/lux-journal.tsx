@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SafeImage } from "@fano/ui";
 import Link from "next/link";
 import { isOptimizedImageHost } from "@fano/utils";
 import { Reveal } from "./reveal";
@@ -42,7 +42,7 @@ export function LuxJournal({ articles }: { articles: Article[] }) {
               <Link href={`/blog/${a.slug}`} className="group block">
                 {a.coverImage && (
                   <div className="relative aspect-[16/10] overflow-hidden rounded-[4px] bg-lx-raised">
-                    <Image
+                    <SafeImage
                       src={a.coverImage}
                       unoptimized={!isOptimizedImageHost(a.coverImage)}
                       alt=""

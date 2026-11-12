@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { cn, isOptimizedImageHost, unitTypeLabel, formatPlace, splitListingTitle } from "@fano/utils";
+import { SafeImage } from "./safe-image";
 
 // Tiny navy JPEG used as blur placeholder before the real image loads
 const BLUR_PLACEHOLDER =
@@ -56,7 +56,7 @@ function PropertyCard({
   return (
     <Link href={`/properties/${slug}`} className={cn("group block h-full", className)}>
       <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-lx-raised">
-        <Image
+        <SafeImage
           src={coverImage}
           unoptimized={!isOptimizedImageHost(coverImage)}
           alt={title}

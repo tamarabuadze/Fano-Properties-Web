@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SafeImage } from "@fano/ui";
 import Link from "next/link";
 import { isOptimizedImageHost } from "@fano/utils";
 import { Reveal } from "./reveal";
@@ -24,7 +24,7 @@ export function LuxTeam({ advisor }: { advisor?: Advisor | null }) {
       <div className="container-site grid items-center gap-12 lg:grid-cols-12 lg:gap-20">
         <Reveal className="lg:col-span-5">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-lx-raised">
-            <Image
+            <SafeImage
               src={photo}
               unoptimized={!isOptimizedImageHost(photo)}
               alt={name ?? "Dubai skyline"}
