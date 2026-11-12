@@ -5,7 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, Pause, Play } from "lucide-react";
 
-const HERO_VIDEO = "/hero-dubai.mp4";
+// The Fano office film: graded warm to the Calcite Sand palette and cut as a
+// palindrome so it loops without a visible jump. Poster is its first frame.
+const HERO_VIDEO = "/hero-office.mp4";
+const HERO_POSTER = "/hero-office.jpg";
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -54,9 +57,9 @@ export function HeroSection() {
   return (
     <section className="cinema-hero relative isolate overflow-hidden bg-[#2B2520] text-[#F4EFEA]" aria-label="Discover Fano Properties in Dubai">
       <div className="absolute inset-0 -z-10" aria-hidden="true">
-        <Image src="/hero-dubai.jpg" alt="" fill priority unoptimized
+        <Image src={HERO_POSTER} alt="" fill priority unoptimized
           sizes="(max-width: 767px) 160vw, 100vw" className="cinema-hero-image object-cover" />
-        <video ref={videoRef} autoPlay muted loop playsInline preload="none" tabIndex={-1}
+        <video ref={videoRef} autoPlay muted loop playsInline preload="none" tabIndex={-1} poster={HERO_POSTER}
           className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1800ms]"
           style={{ opacity: videoReady ? 1 : 0 }}
           onPlaying={() => { setVideoReady(true); setPaused(false); }}

@@ -48,7 +48,7 @@ interface PropertyFormProps {
   defaultValues?: Partial<FormData>;
   propertyId?: string;
   defaultGallery?: string[];
-  /** False until file storage is set up on the server: falls back to an image link */
+  /** False until file storage is set up on the server: shows a warning, links still work */
   uploadsEnabled?: boolean;
 }
 
@@ -59,6 +59,7 @@ const labelCls = "block text-xs font-medium text-muted-foreground mb-1.5 upperca
 export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery = [], uploadsEnabled = true }: PropertyFormProps) {
   const router = useRouter();
   const [gallery, setGallery] = useState<string[]>(defaultGallery);
+  const [galleryLink, setGalleryLink] = useState("");
   const {
     register,
     handleSubmit,
@@ -286,40 +287,71 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
         </div>
       </section>
 
-      {/* Media */}
+      {/* Media: files first; a link is the fallback, never the only option */}
       <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
         <h2 className="font-semibold text-foreground">Media</h2>
+        {!uploadsEnabled && (
+          <p className="rounded-xl border border-amber-200 bg-amber-50 px-3.5 py-2.5 text-xs text-amber-800">
+            File storage isn&apos;t configured on this server yet (attach a Railway Volume or set the Supabase keys).
+            Uploads will fail until then — paste image links as a workaround.
+          </p>
+        )}
+
         <div>
-          <label className={labelCls}>{uploadsEnabled ? "Cover Image" : "Cover Image Link"}</label>
-          {uploadsEnabled ? (
-            <MediaUpload
-              uploadUrl="/api/admin/upload"
-              single
-              value={coverImage ? [coverImage] : []}
-              onChange={(urls) => setValue("coverImage", urls[0] ?? "", { shouldDirty: true, shouldValidate: true })}
-              hint="JPG, PNG or WEBP, up to 10 MB"
+          <label className={labelCls}>Cover Image</label>
+          <MediaUpload
+            uploadUrl="/api/admin/upload"
+            single
+            value={coverImage ? [coverImage] : []}
+            onChange={(urls) => setValue("coverImage", urls[0] ?? "", { shouldDirty: true, shouldValidate: true })}
+            hint="JPG, JPEG, PNG or WEBP, up to 10 MB"
+          />
+          <details className="mt-2 group">
+            <summary className="cursor-pointer text-xs text-muted-foreground hover:text-foreground">Or paste an image link</summary>
+            <input
+              {...register("coverImage")}
+              type="url"
+              className={cn(inputCls, "mt-2")}
+              placeholder="https://…/photo.jpg"
             />
-          ) : (
-            <>
-              <input {...register("coverImage")} type="url" className={inputCls} placeholder="https://…/photo.jpg" />
-              <p className="text-xs text-muted-foreground mt-1">Paste a direct link to an image file. File uploads turn on once storage is set up.</p>
-            </>
-          )}
+          </details>
           {errors.coverImage && <p className="text-xs text-red-500 mt-1">{errors.coverImage.message}</p>}
         </div>
 
-        {uploadsEnabled && (
-          <div>
-            <label className={labelCls}>Gallery Photos &amp; Videos</label>
-            <MediaUpload
-              uploadUrl="/api/admin/upload"
-              allowVideo
-              value={gallery}
-              onChange={setGallery}
-              hint="JPG, PNG or WEBP up to 10 MB, MP4 up to 50 MB"
-            />
-          </div>
-        )}
+        <div>
+          <label className={labelCls}>Gallery Photos &amp; Videos</label>
+          <MediaUpload
+            uploadUrl="/api/admin/upload"
+            allowVideo
+            value={gallery}
+            onChange={setGallery}
+            hint="JPG, JPEG, PNG or WEBP up to 10 MB · MP4 video up to 50 MB"
+          />
+          <details className="mt-2">
+            <summary className="cursor-pointer text-xs text-muted-foreground hover:text-foreground">Or add a photo / video link</summary>
+            <div className="mt-2 flex gap-2">
+              <input
+                type="url"
+                value={galleryLink}
+                onChange={(e) => setGalleryLink(e.target.value)}
+                className={inputCls}
+                placeholder="https://…/photo.jpg or …/tour.mp4"
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  const url = galleryLink.trim();
+                  if (!url) return;
+                  setGallery((g) => (g.includes(url) ? g : [...g, url]));
+                  setGalleryLink("");
+                }}
+                className="h-10 shrink-0 rounded-xl border border-border px-4 text-sm font-medium text-foreground hover:bg-secondary/60"
+              >
+                Add
+              </button>
+            </div>
+          </details>
+        </div>
       </section>
 
       {/* Publish Settings */}
