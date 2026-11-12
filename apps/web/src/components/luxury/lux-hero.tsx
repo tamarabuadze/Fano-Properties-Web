@@ -66,10 +66,13 @@ export function LuxHero() {
       <div className="container-site relative z-10 grid pb-20 pt-40 lg:grid-cols-12 lg:pb-28">
         <div className="lg:col-span-8 xl:col-span-7">
           <p className="lx-rise font-sans text-[12px] font-medium uppercase tracking-[2.5px] text-[#E8D5B0]">Dubai&rsquo;s finest addresses, by introduction</p>
-          <h1 className="lx-rise lx-rise-1 mt-3 font-display text-[clamp(40px,5vw,64px)] font-medium leading-[1.05] tracking-[-0.5px] text-white">
-            Real Estate.<br />
-            <em className="font-normal italic">Real Relationships.</em>
+          <h1 className="lx-rise lx-rise-1 mt-3 font-display font-bold uppercase leading-none text-white">
+            <span className="block text-[clamp(44px,5.6vw,72px)] tracking-[0.02em]">Fano</span>
+            <span className="mt-2 block text-[clamp(18px,2.2vw,28px)] tracking-[0.32em] text-[#E8D5B0]">Properties</span>
           </h1>
+          <p className="lx-rise lx-rise-1 mt-4 font-display text-[clamp(18px,1.9vw,24px)] font-normal italic leading-snug text-lx-pale">
+            Real Estate. Real Relationships.
+          </p>
           <p className="lx-rise lx-rise-2 mt-4 max-w-[420px] text-[16px] leading-[1.6] text-[#E5E5E5]">
             A Business Bay advisory for the homes and office floors that are sold before they are listed.
           </p>
