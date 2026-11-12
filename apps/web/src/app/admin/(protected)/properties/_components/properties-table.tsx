@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Edit, Eye, Trash2, Star, Globe, EyeOff } from "lucide-react";
+import { Edit, Trash2, Star, Globe, EyeOff } from "lucide-react";
 import { cn, unitTypeLabel } from "@fano/utils";
 import { toast } from "sonner";
 import { deleteProperty, togglePropertyPublished, togglePropertyFeatured } from "../_actions";

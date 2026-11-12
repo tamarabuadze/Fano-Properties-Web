@@ -8,16 +8,17 @@ export const CACHE_TAGS = { properties: "properties", agents: "agents", blog: "b
 const DATE = "__date";
 
 // The cache stores JSON, which would turn Dates into strings: mark them and bring them back
+// JSON.stringify(undefined) is undefined, which JSON.parse rejects: store null instead
 function pack<T>(value: T): unknown {
-  return JSON.parse(
-    JSON.stringify(value, function (this: Record<string, unknown>, key, v) {
-      const raw = this[key];
-      return raw instanceof Date ? { [DATE]: raw.toISOString() } : v;
-    })
-  );
+  const json = JSON.stringify(value, function (this: Record<string, unknown>, key, v) {
+    const raw = this[key];
+    return raw instanceof Date ? { [DATE]: raw.toISOString() } : v;
+  });
+  return json === undefined ? null : JSON.parse(json);
 }
 
 function unpack<T>(value: unknown): T {
+  if (value === undefined || value === null) return value as T;
   return JSON.parse(JSON.stringify(value), (_key, v) =>
     v && typeof v === "object" && DATE in v ? new Date(v[DATE]) : v
   ) as T;

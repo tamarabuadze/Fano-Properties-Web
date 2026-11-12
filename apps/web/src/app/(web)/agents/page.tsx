@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { AgentCard } from "@fano/ui";
 import { getAgents } from "@/lib/queries/agents";
 import { AnimateStagger } from "@/components/shared/animate-stagger";
@@ -16,9 +17,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export const dynamic = "force-dynamic";
 
-export default async function AgentsPage() {
-  const agents = await getAgents().catch(() => []);
-
+// The grid streams in behind its own skeleton. A segment-level loading.tsx would
+// also wrap /agents/[slug], which turns that page's 404s into 200s.
+export default function AgentsPage() {
   return (
     <div className="min-h-screen pt-20">
       <div className="page-band py-12">
@@ -34,32 +35,60 @@ export default async function AgentsPage() {
       </div>
 
       <div className="container-site section-y-sm">
-        {agents.length === 0 ? (
-          <div className="py-24 text-center text-zinc-400">
-            <p className="text-xl">Our team is being assembled. Check back soon.</p>
-          </div>
-        ) : (
-          <AnimateStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {agents.map((agent) => (
-              <AgentCard
-                key={agent.id}
-                id={agent.id}
-                firstName={agent.firstName}
-                lastName={agent.lastName}
-                slug={agent.slug}
-                avatar={agent.avatar}
-                title={agent.title}
-                specialization={agent.specialization}
-                licenseNumber={agent.licenseNumber}
-                languages={agent.languages}
-                phone={agent.phone}
-                email={agent.email}
-                totalListings={(agent as never as { _count: { properties: number } })._count?.properties}
-              />
-            ))}
-          </AnimateStagger>
-        )}
+        <Suspense fallback={<AgentsSkeleton />}>
+          <AgentsGrid />
+        </Suspense>
       </div>
+    </div>
+  );
+}
+
+async function AgentsGrid() {
+  const agents = await getAgents().catch(() => []);
+
+  if (agents.length === 0) {
+    return (
+      <div className="py-24 text-center text-zinc-400">
+        <p className="text-xl">Our team is being assembled. Check back soon.</p>
+      </div>
+    );
+  }
+
+  return (
+    <AnimateStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {agents.map((agent) => (
+        <AgentCard
+          key={agent.id}
+          id={agent.id}
+          firstName={agent.firstName}
+          lastName={agent.lastName}
+          slug={agent.slug}
+          avatar={agent.avatar}
+          title={agent.title}
+          specialization={agent.specialization}
+          licenseNumber={agent.licenseNumber}
+          languages={agent.languages}
+          phone={agent.phone}
+          email={agent.email}
+          totalListings={(agent as never as { _count: { properties: number } })._count?.properties}
+        />
+      ))}
+    </AnimateStagger>
+  );
+}
+
+function AgentsSkeleton() {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <div key={i} className="rounded-2xl border border-border p-6 space-y-4">
+          <div className="h-20 w-20 rounded-full bg-[#E6DFD5] animate-pulse mx-auto" />
+          <div className="space-y-2">
+            <div className="h-5 w-32 rounded bg-[#E6DFD5] animate-pulse mx-auto" />
+            <div className="h-4 w-24 rounded bg-[#E6DFD5] animate-pulse mx-auto" />
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

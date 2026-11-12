@@ -6,7 +6,7 @@
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
     "start": "next start --hostname 0.0.0.0 --port \"${PORT:-3000}\"",
-    "lint": "next lint",
+    "lint": "eslint src",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
@@ -40,6 +40,7 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^22.13.9",
     "@types/react": "^19.0.10",
