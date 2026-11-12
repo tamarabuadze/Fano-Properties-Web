@@ -18,7 +18,7 @@ export function LuxResidences({ properties }: { properties: Listing[] }) {
               Selected <span className="italic text-lx-pale">residences.</span>
             </h2>
           </div>
-          <Link href="/properties" className="lx-link shrink-0">View the collection</Link>
+          <Link href="/properties" className="btn-gold shrink-0">View the collection</Link>
         </Reveal>
 
         {!first ? (

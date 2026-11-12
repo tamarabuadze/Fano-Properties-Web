@@ -74,7 +74,7 @@ export function LuxHero() {
             A Business Bay advisory for the homes and office floors that are sold before they are listed.
           </p>
           <div className="lx-rise lx-rise-3 mt-10 flex flex-wrap items-center gap-x-10 gap-y-4">
-            <Link href="/properties" className="lx-link">View the collection</Link>
+            <Link href="/properties" className="btn-gold">View the collection</Link>
             <Link href="/contact" className="lx-link lx-link-quiet">Speak to an advisor</Link>
           </div>
         </div>

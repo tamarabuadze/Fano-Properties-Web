@@ -33,7 +33,7 @@ export function LuxJournal({ articles }: { articles: Article[] }) {
               The <span className="italic text-lx-pale">journal.</span>
             </h2>
           </div>
-          <Link href="/blog" className="lx-link shrink-0">All articles</Link>
+          <Link href="/blog" className="btn-gold shrink-0">All articles</Link>
         </Reveal>
 
         <div className="grid gap-12 md:grid-cols-2 md:gap-10">

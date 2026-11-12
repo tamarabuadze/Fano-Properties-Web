@@ -90,7 +90,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
             </nav>
 
             <div className="flex items-center gap-3">
-              <Link href="/contact" className="lx-link hidden lg:inline-flex">Enquire</Link>
+              <Link href="/contact" className="btn-gold hidden lg:inline-flex">Enquire</Link>
               <button
                 onClick={() => setMobileOpen((v) => !v)}
                 className="flex h-10 w-10 items-center justify-center rounded-full text-lx-text transition-colors hover:bg-lx-text/10 lg:hidden"
@@ -136,7 +136,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
                   </motion.div>
                 ))}
               </nav>
-              <Link href="/contact" className="lx-link mt-12">Enquire</Link>
+              <Link href="/contact" className="btn-gold mt-12 w-full">Enquire</Link>
               <p className="lx-eyebrow mt-auto pt-10">Churchill Tower · Business Bay · Dubai</p>
             </div>
           </motion.div>

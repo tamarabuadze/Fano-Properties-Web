@@ -19,7 +19,7 @@ export function LuxClosing() {
           <p className="text-[15px] leading-[1.8] text-lx-text/70">
             Selling or leasing in Dubai? Share the details and an advisor will come back to you with a considered view.
           </p>
-          <Link href="/contact" className="lx-link mt-8">List with Fano</Link>
+          <Link href="/contact" className="btn-gold mt-8">List with Fano</Link>
         </div>
       </Reveal>
     </section>

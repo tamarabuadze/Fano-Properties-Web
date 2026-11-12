@@ -13,7 +13,7 @@ export function LuxIntroduction() {
             <span className="italic text-lx-pale"> Tell us what you are looking for.</span>
           </h2>
         </div>
-        <Link href="/contact" className="lx-link shrink-0">Request an introduction</Link>
+        <Link href="/contact" className="btn-gold shrink-0">Request an introduction</Link>
       </Reveal>
     </section>
   );

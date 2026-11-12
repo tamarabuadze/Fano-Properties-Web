@@ -52,13 +52,13 @@ export function LuxTeam({ advisor }: { advisor?: Advisor | null }) {
               {advisor.title && <p className="mt-1 font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-lx-muted">{advisor.title}</p>}
               <div className="mt-5 flex flex-wrap gap-x-10 gap-y-3">
                 {advisor.phone && <a href={`tel:${advisor.phone.replace(/\s+/g, "")}`} className="lx-link lx-link-quiet">{advisor.phone}</a>}
-                <Link href={`/agents/${advisor.slug}`} className="lx-link">Meet {advisor.firstName}</Link>
+                <Link href={`/agents/${advisor.slug}`} className="btn-gold">Meet {advisor.firstName}</Link>
               </div>
             </div>
           ) : (
             <div className="mt-10 flex flex-wrap gap-x-10 gap-y-3 border-t border-lx-line pt-8">
               <a href="tel:+97145644635" className="lx-link lx-link-quiet">04 564 4635</a>
-              <Link href="/about" className="lx-link">About Fano</Link>
+              <Link href="/about" className="btn-gold">About Fano</Link>
             </div>
           )}
         </Reveal>
