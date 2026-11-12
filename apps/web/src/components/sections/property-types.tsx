@@ -3,7 +3,14 @@ import Image from "next/image";
 
 // Three tall photo cards with a serif title and a few plain lines beneath, as the
 // reference presents its services
-const collections = [
+const collections: {
+  title: string;
+  detail: string;
+  points: string[];
+  href: string;
+  image: string;
+  position?: string;
+}[] = [
   {
     title: "Offices & commercial",
     detail: "Grade A workspace in Business Bay, Downtown and along Sheikh Zayed Road.",
@@ -17,6 +24,8 @@ const collections = [
     points: ["Downtown, Marina and the Palm", "Ready and off-plan", "Furnished rentals"],
     href: "/properties?propertyType=apartment",
     image: "/collection-apartments.webp",
+    // wide interior shot: keep the sofa, artwork and window in the tall crop
+    position: "70% 50%",
   },
   {
     title: "Villas",
@@ -49,6 +58,7 @@ export function PropertyTypesSection() {
                   unoptimized
                   sizes="(max-width: 767px) 100vw, 33vw"
                   className="object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
+                  style={{ objectPosition: item.position ?? "50% 50%" }}
                 />
               </div>
               <h3 className="mt-6 font-display text-[26px] font-normal leading-tight text-[#2B2520] transition-colors group-hover:text-[#8C6A47]">
