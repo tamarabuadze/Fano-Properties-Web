@@ -22,7 +22,9 @@
       "Bash(node \"C:/Users/itmar/AppData/Local/Temp/claude/79c817929a96b5ec/d31888b7-c9e0-4688-88ed-228fccb27c7b/scratchpad/scan-images.cjs\")",
       "Bash(node \"C:/Users/itmar/AppData/Local/Temp/claude/79c817929a96b5ec/d31888b7-c9e0-4688-88ed-228fccb27c7b/scratchpad/scan-rove.cjs\")",
       "Bash(node \"C:/Users/itmar/AppData/Local/Temp/claude/79c817929a96b5ec/d31888b7-c9e0-4688-88ed-228fccb27c7b/scratchpad/scan-blog.cjs\")",
-      "Bash(pnpm add *)"
+      "Bash(pnpm add *)",
+      "Bash(node -e 'const b=require\\(\"fs\"\\).readFileSync\\(String.raw`C:\\\\Users\\\\itmar\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\79c817929a96b5ec\\\\d31888b7-c9e0-4688-88ed-228fccb27c7b\\\\images\\\\7.webp`\\); console.log\\(\"bytes\",b.length,\"webp\",b.subarray\\(0,4\\).toString\\(\"latin1\"\\)===\"RIFF\"\\)')",
+      "Bash(cp \"C:/Users/itmar/AppData/Local/Temp/claude/79c817929a96b5ec/d31888b7-c9e0-4688-88ed-228fccb27c7b/images/7.webp\" apps/web/public/collection-villas.webp)"
     ]
   }
 }
