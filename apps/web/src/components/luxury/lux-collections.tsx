@@ -22,7 +22,8 @@ const collections = [
     detail: "Family homes and beachfront estates with room to make them yours.",
     href: "/properties?propertyType=villa",
     image: "/collection-villas.webp",
-    position: "50% 50%",
+    // wide aerial of the community: keep the pool and gardens at the heart of the tall crop
+    position: "38% 45%",
   },
 ];
 
