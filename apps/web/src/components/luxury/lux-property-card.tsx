@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { SafeImage } from "@fano/ui";
 import Link from "next/link";
 import { cn, isOptimizedImageHost, unitTypeLabel, formatPlace, splitListingTitle } from "@fano/utils";
 
@@ -44,7 +44,7 @@ export function LuxPropertyCard({
   return (
     <Link href={`/properties/${slug}`} className={cn("group block", className)}>
       <div className={cn("relative overflow-hidden rounded-[4px] bg-lx-raised", feature ? "aspect-[4/3] lg:aspect-[16/11]" : "aspect-[4/3]")}>
-        <Image
+        <SafeImage
           src={coverImage}
           unoptimized={!isOptimizedImageHost(coverImage)}
           alt={title}

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getBlogArticleBySlug } from "@/lib/queries/blog";
 import { formatDate } from "@fano/utils";
+import { articleBodyToHtml } from "@/lib/markdown";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
@@ -112,7 +113,7 @@ export default async function BlogArticlePage({ params }: BlogArticlePageProps) 
         {/* Content */}
         <div
           className="prose prose-invert max-w-none prose-headings:font-display prose-headings:font-normal prose-headings:tracking-[-0.01em] prose-headings:text-lx-text prose-p:text-[15px] prose-p:leading-[1.85] prose-p:text-lx-text/80 prose-li:text-lx-text/80 prose-strong:text-lx-text prose-a:text-lx-gold prose-a:underline-offset-4 prose-blockquote:border-l-[#E2A862] prose-blockquote:font-display prose-blockquote:text-[20px] prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-lx-text prose-img:rounded-[4px] prose-hr:border-lx-line"
-          dangerouslySetInnerHTML={{ __html: article.content }}
+          dangerouslySetInnerHTML={{ __html: articleBodyToHtml(article.content) }}
         />
 
         {/* Tags */}
