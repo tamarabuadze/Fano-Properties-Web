@@ -11,7 +11,12 @@ const articleSchema = z.object({
   title: z.string().min(1),
   excerpt: z.string().min(1),
   content: z.string().min(1),
-  coverImage: z.string().url().optional().or(z.literal("")),
+  // Uploaded covers are site-relative /media/… paths; pasted ones are absolute URLs
+  coverImage: z
+    .string()
+    .trim()
+    .refine((v) => v === "" || v.startsWith("/") || /^https?:\/\/\S+$/i.test(v))
+    .optional(),
   published: z.boolean().default(false),
   readTime: z.number({ coerce: true }).int().optional(),
   categoryId: z.string().optional(),
