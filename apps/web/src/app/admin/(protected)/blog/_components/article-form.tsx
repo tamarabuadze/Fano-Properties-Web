@@ -6,6 +6,7 @@ import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { MediaUpload } from "@fano/ui";
+import { reportInvalid } from "@/lib/admin-form";
 import { createArticle, updateArticle } from "../_actions";
 
 // Uploads come back as site-relative /media/… paths; pasted links are absolute URLs
@@ -76,7 +77,7 @@ export function ArticleForm({ categories, defaultValues, articleId }: ArticleFor
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+    <form onSubmit={handleSubmit(onSubmit, reportInvalid({ coverImage: "Cover image", readTime: "Read time" }))} noValidate className="space-y-8">
       {/* Content */}
       <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
         <h2 className="font-semibold text-foreground">Article Content</h2>
