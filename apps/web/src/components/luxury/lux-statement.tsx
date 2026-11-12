@@ -6,8 +6,8 @@ import { Reveal } from "./reveal";
 export function LuxStatement() {
   return (
     <section className="relative isolate overflow-hidden bg-lx-page">
-      <FanoMark className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[150%] w-auto -translate-x-1/2 -translate-y-1/2 opacity-[0.06]" />
-      <Reveal className="container-site flex flex-col items-center py-28 text-center lg:py-40">
+      <FanoMark className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[78%] w-auto -translate-x-1/2 -translate-y-1/2 opacity-[0.07]" />
+      <Reveal className="container-site flex flex-col items-center py-24 text-center lg:py-32">
         <h2 className="font-display text-[clamp(26px,3vw,38px)] font-normal leading-[1.15] tracking-[-0.01em] text-lx-text">
           Real Estate. <span className="italic text-lx-pale">Real Relationships.</span>
         </h2>
