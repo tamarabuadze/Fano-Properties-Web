@@ -5,10 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowRight, ArrowUpRight, Pause, Play } from "lucide-react";
 
-// The Fano office film: graded warm to the Calcite Sand palette and cut as a
-// palindrome so it loops without a visible jump. Poster is its first frame.
-const HERO_VIDEO = "/hero-office.mp4";
-const HERO_POSTER = "/hero-office.jpg";
+// Aerial of the Burj Al Arab rendered as a slow, eased push-in that returns to
+// its start, so the loop has no visible jump; graded to the Calcite Sand palette.
+// Poster is its first frame.
+const HERO_VIDEO = "/hero-aerial.mp4";
+const HERO_POSTER = "/hero-aerial.jpg";
 
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
