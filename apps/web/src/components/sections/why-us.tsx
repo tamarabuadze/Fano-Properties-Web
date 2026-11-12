@@ -33,7 +33,7 @@ export function WhyUsSection() {
   return (
     <section className="section-y overflow-x-clip">
       <div className="container-site">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-24 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
           {/* Image side */}
           <motion.div
             initial={{ opacity: 0, x: -32 }}
@@ -54,8 +54,25 @@ export function WhyUsSection() {
                 placeholder="blur"
                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAAECAADAAQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQQG/8QAHBAAAgMAAwEAAAAAAAAAAAAAAQIDBAASITH/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJXi1KrXLpKhbIxWkQMVIOhGR3Qf/9k="
               />
+              {/* Bottom vignette */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#2B2520]/40 via-transparent to-transparent" />
             </div>
 
+            {/* Floating accent card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, y: 10 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="absolute -bottom-5 -right-4 hidden sm:block"
+            >
+              <div className="rounded-[4px] bg-[#2B2520] px-6 py-5 shadow-[0_16px_40px_-12px_rgba(43,37,32,.55)]">
+                <p className="cinema-eyebrow text-[#E2A862] mb-2">Our commitment</p>
+                <p className="font-serif italic text-[#F4EFEA] text-lg leading-tight">
+                  Personal guidance,<br />every step.
+                </p>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Content side */}
@@ -72,22 +89,32 @@ export function WhyUsSection() {
               className="mb-10"
             />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {features.map((f, i) => (
                 <motion.div
                   key={f.title}
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.1 * i, duration: 0.4 }}
-                  className="flex gap-4"
+                  transition={{ delay: 0.08 * i, duration: 0.45 }}
+                  className="relative flex gap-4 rounded-2xl bg-gradient-to-br from-[#F4EFEA] to-[#EDE7DE] border border-[#D9CFC2]/60 p-5 overflow-hidden"
                 >
-                  <div className="h-10 w-10 rounded-xl bg-[#F6E7D2] border border-[#EFD3AE] flex items-center justify-center shrink-0">
-                    <f.icon className="h-5 w-5 text-[#8C6A47]" />
+                  {/* Decorative number */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute right-3 bottom-1 font-display font-semibold text-[72px] leading-none select-none pointer-events-none"
+                    style={{ color: "rgba(197,186,171,0.22)" }}
+                  >
+                    0{i + 1}
+                  </span>
+
+                  <div className="relative h-11 w-11 rounded-xl bg-gradient-to-br from-[#ECBE80] to-[#C98F4F] flex items-center justify-center shrink-0 shadow-sm">
+                    <f.icon className="h-5 w-5 text-[#2B2520]" />
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-[#2B2520] text-sm mb-1">{f.title}</h3>
-                    <p className="text-sm text-[#6B5038]/70 leading-relaxed">{f.description}</p>
+
+                  <div className="relative">
+                    <h3 className="font-semibold text-[#2B2520] text-sm mb-1.5">{f.title}</h3>
+                    <p className="text-sm text-[#6B5038]/75 leading-relaxed">{f.description}</p>
                   </div>
                 </motion.div>
               ))}

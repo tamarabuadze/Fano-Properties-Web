@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Featured Properties — Fano Properties, Dubai</title>
+  <meta name="description" content="A curated collection of Dubai's finest homes and workspaces, selected by Fano Properties in Business Bay." />
+
+  <!-- Fano brand fonts: Montserrat (display), Inter (body), Source Serif 4 (serif accents) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Inter:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@1,8..60,400&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind via CDN (no build step). Swap for a compiled stylesheet once the design settles. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Montserrat', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+          },
+          // Calcite Sand palette, as on fanoproperties.com
+          colors: {
+            espresso:  '#2B2520',
+            cocoa:     '#6B5038',
+            bronze:    '#8C6A47',
+            champagne: '#E2A862',
+            cream:     '#F6E7D2',
+            sand:      '#E6DFD5',
+            bone:      '#F4EFEA',
+            titan:     '#C5BAAB',
+            linen:     '#FAF7F3',
+          },
+          boxShadow: {
+            card: '0 1px 0 rgba(255,255,255,.7) inset, 0 10px 30px -14px rgba(43,37,32,.22)',
+            'card-hover': '0 24px 48px -18px rgba(43,37,32,.35), 0 0 0 1px rgba(226,168,98,.25)',
+            search: '0 24px 64px -20px rgba(43,37,32,.45), 0 4px 16px -6px rgba(43,37,32,.14)',
+          },
+          transitionTimingFunction: { cinematic: 'cubic-bezier(.25,.46,.45,.94)' },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* ---- Crisp rendering: sharp type, true 1px hairlines, retina images ---- */
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      font-synthesis: none;              /* never fake bold/italic — load the real weights */
+      font-feature-settings: "kern" 1, "liga" 1;
+    }
+    svg { shape-rendering: geometricPrecision; text-rendering: geometricPrecision; }
+    img { image-rendering: auto; }
+    /* Only images scale on hover; text and buttons move but never scale, so they stay sharp */
+    .img-zoom { will-change: transform; backface-visibility: hidden; transform: translateZ(0); }
+
+    /* Slim, brand-coloured scrollbar */
+    html { scrollbar-width: thin; scrollbar-color: #C5BAAB #F4EFEA; }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: #F4EFEA; }
+    ::-webkit-scrollbar-thumb { background: #C5BAAB; border-radius: 999px; border: 2px solid #F4EFEA; }
+    ::-webkit-scrollbar-thumb:hover { background: #8C6A47; }
+
+    /* Form controls: remove the soft native look so inputs match the hairline style */
+    input, textarea, select, button { font: inherit; letter-spacing: inherit; }
+    input::placeholder, textarea::placeholder { opacity: 1; }
+
+    /* Eyebrow: the small tracked label with a gold rule, used above every heading */
+    .eyebrow { display: flex; align-items: center; gap: 14px; font-size: 10px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 32px; height: 1px; background: #E2A862; flex: none; }
+
+    /* Serif accent, same as the live site's .cinema-serif */
+    .serif-accent { font-family: "Source Serif 4", Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.02em; }
+
+    /* Scroll-reveal */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s cubic-bezier(.25,.46,.45,.94), transform .8s cubic-bezier(.25,.46,.45,.94); }
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    /* Nav gains a hairline shadow once the page scrolls */
+    .nav-scrolled { box-shadow: 0 1px 0 rgba(197,186,171,.6), 0 10px 30px -18px rgba(43,37,32,.25); }
+
+    /* Gold gradient button, same recipe as the live site */
+    .btn-gold { background: linear-gradient(120deg, #F6E7D2, #E2A862 80%); color: #2B2520; box-shadow: 0 8px 30px rgba(43,37,32,.12); }
+    .btn-gold:hover { box-shadow: 0 10px 36px rgba(226,168,98,.28); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-bone font-sans text-espresso antialiased">
+
+  <!-- =====================================================================
+       NAVIGATION — light bar, logo left, links right (McCone structure)
+       ===================================================================== -->
+  <header id="nav" class="fixed inset-x-0 top-0 z-50 border-b border-titan/40 bg-bone/95 backdrop-blur-xl transition-shadow duration-500">
+    <div class="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-5 lg:h-20 lg:px-8">
+
+      <!-- Fano logo: the house-and-keyhole mark with Montserrat wordmark, bronze on light -->
+      <a href="#" aria-label="Fano Properties home" class="block">
+        <svg viewBox="0 0 300 92" role="img" aria-label="Fano Properties" class="h-10 w-auto text-bronze lg:h-11">
+          <g transform="translate(-6,-6) scale(1.07)" fill="currentColor">
+            <path d="M9 89.4V31L42 10L76.6 31V89.4H37V70H47V80H66.6V37L42 22L19 37V89.4Z"/>
+            <path fill-rule="evenodd" d="M42.6 33.9a13.5 13.5 0 1 1 0 27a13.5 13.5 0 1 1 0-27zM42.6 41a6.4 6.4 0 1 0 0 12.8a6.4 6.4 0 1 0 0-12.8z"/>
+          </g>
+          <text x="96" y="58" fill="currentColor" font-family="Montserrat, system-ui, sans-serif" font-weight="600" font-size="52" letter-spacing="7">FANO</text>
+          <text x="98" y="86" fill="currentColor" font-family="Montserrat, system-ui, sans-serif" font-weight="600" font-size="19.5" letter-spacing="5.6">PROPERTIES</text>
+        </svg>
+      </a>
+
+      <!-- Desktop links -->
+      <nav class="hidden items-center gap-7 lg:flex" aria-label="Main">
+        <a href="#featured" class="text-[13px] font-medium text-espresso/85 transition-colors hover:text-espresso">Buy</a>
+        <a href="#featured" class="text-[13px] font-medium text-espresso/85 transition-colors hover:text-espresso">Rent</a>
+        <a href="#featured" class="text-[13px] font-medium text-espresso/85 transition-colors hover:text-espresso">Off-plan</a>
+        <a href="#featured" class="text-[13px] font-medium text-espresso/85 transition-colors hover:text-espresso">Commercial</a>
+        <a href="#advisors" class="text-[13px] font-medium text-espresso/85 transition-colors hover:text-espresso">Advisors</a>
+        <a href="#" class="text-[13px] font-medium text-espresso/85 transition-colors hover:text-espresso">Insights</a>
+        <a href="#help" class="ml-3 inline-flex h-10 items-center rounded-full bg-espresso px-5 text-[13px] font-medium text-bone transition-colors hover:bg-cocoa">Contact us</a>
+      </nav>
+
+      <!-- Mobile toggle -->
+      <button id="menu-toggle" class="flex h-10 w-10 items-center justify-center rounded-full text-espresso lg:hidden" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path id="menu-icon" d="M3 7h18M3 12h18M3 17h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="pointer-events-none fixed inset-0 z-40 flex flex-col bg-espresso px-6 pt-24 text-bone opacity-0 transition-opacity duration-400 lg:hidden" aria-hidden="true">
+    <nav class="flex flex-col divide-y divide-bone/10" aria-label="Mobile">
+      <a href="#featured" class="py-4 font-display text-[22px] font-medium text-cream">Buy</a>
+      <a href="#featured" class="py-4 font-display text-[22px] font-medium text-cream">Rent</a>
+      <a href="#featured" class="py-4 font-display text-[22px] font-medium text-cream">Off-plan</a>
+      <a href="#featured" class="py-4 font-display text-[22px] font-medium text-cream">Commercial</a>
+      <a href="#advisors" class="py-4 font-display text-[22px] font-medium text-cream">Advisors</a>
+      <a href="#" class="py-4 font-display text-[22px] font-medium text-cream">Insights</a>
+    </nav>
+    <a href="#help" class="btn-gold mt-8 inline-flex h-12 items-center justify-center rounded-full text-[12px] font-semibold tracking-[0.08em]">CONTACT US</a>
+    <p class="mt-auto pb-10 text-[11px] tracking-[0.2em] text-bone/50">CHURCHILL TOWER · BUSINESS BAY · DUBAI</p>
+  </div>
+
+  <!-- =====================================================================
+       HERO — photography, a modest serif headline, and the search card
+       ===================================================================== -->
+  <section class="relative overflow-hidden bg-espresso pt-16 lg:pt-20" aria-label="Find your property">
+    <!-- srcset serves a 2× file to retina screens so the photo stays sharp -->
+    <img
+      src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=82"
+      srcset="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=82 1920w, https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=3200&q=80 3200w"
+      sizes="100vw"
+      alt="Dubai skyline at dusk with the Burj Khalifa"
+      class="absolute inset-0 h-full w-full object-cover object-[60%_45%]"
+      fetchpriority="high"
+    />
+    <!-- Overlay: espresso from the left and the base, so headline and search read cleanly -->
+    <div class="absolute inset-0 bg-gradient-to-r from-espresso/80 via-espresso/35 to-espresso/15" aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-espresso/85 via-transparent to-espresso/20" aria-hidden="true"></div>
+
+    <div class="relative mx-auto max-w-[1320px] px-5 pb-24 pt-24 lg:px-8 lg:pb-32 lg:pt-36">
+      <div class="max-w-2xl text-bone">
+        <p class="eyebrow reveal text-cream">Dubai real estate, thoughtfully selected</p>
+        <h1 class="reveal mt-5 font-display text-[clamp(32px,4.4vw,56px)] font-medium leading-[1.08] tracking-[-0.03em]" style="transition-delay:.1s">
+          Real Estate.
+          <span class="serif-accent block text-[1.14em] text-cream">Real Relationships.</span>
+        </h1>
+        <p class="reveal mt-5 max-w-lg text-[15px] leading-[1.8] text-bone/80" style="transition-delay:.2s">
+          Remarkable homes. Ambitious workspaces. A personal approach to finding your place in Dubai — from a Business Bay team that knows the city.
+        </p>
+      </div>
+
+      <!-- Search card, as on the live site and McCone: listing toggle, search field, button, popular areas -->
+      <form class="reveal mt-10 max-w-3xl rounded-[8px] border border-titan/60 bg-linen p-4 shadow-search sm:p-5" style="transition-delay:.3s" onsubmit="event.preventDefault()">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div class="flex shrink-0 gap-1 rounded-full border border-titan bg-bone p-1" role="group" aria-label="Listing type">
+            <button type="button" class="listing-tab rounded-full bg-espresso px-5 py-2 text-[12px] font-medium text-bone" aria-pressed="true">Buy</button>
+            <button type="button" class="listing-tab rounded-full px-5 py-2 text-[12px] font-medium text-cocoa/80 transition-colors hover:text-espresso" aria-pressed="false">Rent</button>
+          </div>
+          <label class="relative flex-1">
+            <span class="sr-only">Search a community or building</span>
+            <svg class="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-titan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <input type="text" placeholder="Search a community or building…" class="h-12 w-full rounded-full border border-titan bg-white/70 pl-11 pr-4 text-[14px] text-espresso placeholder:text-titan focus:border-champagne focus:outline-none focus:ring-2 focus:ring-champagne/30" />
+          </label>
+          <button type="submit" class="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-espresso px-7 text-[13px] font-medium text-bone transition-all hover:-translate-y-0.5 hover:bg-cocoa">
+            Search
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+          </button>
+        </div>
+        <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1.5 border-t border-titan/50 pt-4 text-[12px]">
+          <span class="mr-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-titan">Popular</span>
+          <a href="#" class="rounded-full border border-transparent px-3 py-1 text-cocoa transition-all hover:border-champagne/40 hover:bg-champagne/10 hover:text-espresso">Business Bay</a>
+          <a href="#" class="rounded-full border border-transparent px-3 py-1 text-cocoa transition-all hover:border-champagne/40 hover:bg-champagne/10 hover:text-espresso">Downtown Dubai</a>
+          <a href="#" class="rounded-full border border-transparent px-3 py-1 text-cocoa transition-all hover:border-champagne/40 hover:bg-champagne/10 hover:text-espresso">Sheikh Zayed Road</a>
+          <a href="#" class="rounded-full border border-transparent px-3 py-1 text-cocoa transition-all hover:border-champagne/40 hover:bg-champagne/10 hover:text-espresso">Palm Jumeirah</a>
+          <a href="#" class="rounded-full border border-transparent px-3 py-1 text-cocoa transition-all hover:border-champagne/40 hover:bg-champagne/10 hover:text-espresso">Dubai Marina</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       FEATURED — "Just listed" style header, filter chips, 3-up card grid
+       ===================================================================== -->
+  <section id="featured" class="mx-auto max-w-[1320px] px-5 pb-20 pt-20 lg:px-8 lg:pb-28 lg:pt-28">
+    <div class="reveal flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <p class="eyebrow text-bronze">Selected by Fano</p>
+        <h2 class="mt-4 font-display text-[clamp(30px,3.6vw,46px)] font-medium leading-[1.1] tracking-[-0.03em]">
+          Spaces with distinction.
+        </h2>
+        <p class="mt-3 max-w-lg text-[15px] leading-[1.8] text-cocoa/80">
+          Six residences and workspaces our advisors would show first — each verified with the developer and priced in full.
+        </p>
+      </div>
+      <a href="#" class="group inline-flex items-center gap-2 text-[13px] font-medium text-bronze transition-all hover:gap-3 hover:text-cocoa">
+        View all listings
+        <svg class="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+      </a>
+    </div>
+
+    <!-- Filter chips: hairline row, no boxes -->
+    <div class="reveal mt-10 flex flex-wrap items-center justify-between gap-4 border-y border-titan/50 py-4">
+      <div class="flex flex-wrap gap-2" role="group" aria-label="Category">
+        <button class="filter-chip rounded-full bg-espresso px-4 py-1.5 text-[12px] font-medium text-bone" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-chip rounded-full px-4 py-1.5 text-[12px] font-medium text-cocoa/80 transition-colors hover:text-espresso" data-filter="residential" aria-pressed="false">Residential</button>
+        <button class="filter-chip rounded-full px-4 py-1.5 text-[12px] font-medium text-cocoa/80 transition-colors hover:text-espresso" data-filter="commercial" aria-pressed="false">Commercial</button>
+      </div>
+      <p class="text-[13px] text-cocoa/70"><span id="result-count" class="font-semibold text-espresso">6</span> properties</p>
+    </div>
+
+    <!-- Card grid: 1 / 2 / 3 columns -->
+    <div id="property-grid" class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
+
+      <!-- Card: price leads (McCone), then title, place and specs. Soft shadow, gold ring and
+           slow image scale on hover; same recipe as the live site's property card. -->
+      <article class="reveal" data-category="residential">
+        <a href="#" class="group flex h-full flex-col overflow-hidden rounded-3xl border border-titan/50 bg-gradient-to-b from-linen to-bone shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-champagne/60 hover:shadow-card-hover">
+          <div class="relative aspect-[4/3] overflow-hidden bg-sand">
+            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=82" srcset="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=82 800w, https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=82 1200w, https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1800&q=80 1800w" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 420px" alt="Villa with an illuminated pool at dusk" loading="lazy" class="img-zoom h-full w-full object-cover transition-transform duration-700 ease-cinematic group-hover:scale-105" />
+            <span class="absolute left-3 top-3 rounded-full bg-espresso/85 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-bone backdrop-blur-sm">For sale</span>
+            <span class="absolute right-3 top-3 rounded-lg bg-bone/90 px-2.5 py-1 text-[11px] font-medium text-espresso backdrop-blur-sm">Villa</span>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <p class="font-display text-[22px] font-semibold tracking-[-0.02em] text-cocoa">AED 18,500,000</p>
+            <h3 class="mt-1.5 font-display text-[15px] font-semibold leading-snug transition-colors group-hover:text-bronze">Serenia Residences, Palm Jumeirah</h3>
+            <p class="mt-1 text-[13px] text-bronze">Palm Jumeirah, Dubai</p>
+            <div class="mt-4 flex items-center gap-4 border-t border-titan/50 pt-4 text-[12.5px] text-bronze">
+              <span>4 beds</span><span class="text-titan">·</span><span>5 baths</span><span class="text-titan">·</span><span>5,210 sqft</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="reveal" data-category="commercial" style="transition-delay:.06s">
+        <a href="#" class="group flex h-full flex-col overflow-hidden rounded-3xl border border-titan/50 bg-gradient-to-b from-linen to-bone shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-champagne/60 hover:shadow-card-hover">
+          <div class="relative aspect-[4/3] overflow-hidden bg-sand">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=82" srcset="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=82 800w, https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=82 1200w, https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1800&q=80 1800w" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 420px" alt="Bright modern office interior with glass meeting rooms" loading="lazy" class="img-zoom h-full w-full object-cover transition-transform duration-700 ease-cinematic group-hover:scale-105" />
+            <span class="absolute left-3 top-3 rounded-full bg-espresso/85 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-bone backdrop-blur-sm">For sale</span>
+            <span class="absolute right-3 top-3 rounded-lg bg-bone/90 px-2.5 py-1 text-[11px] font-medium text-espresso backdrop-blur-sm">Offices</span>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <p class="font-display text-[22px] font-semibold tracking-[-0.02em] text-cocoa">AED 4,770 <span class="text-[13px] font-normal text-bronze">/sq ft</span></p>
+            <h3 class="mt-1.5 font-display text-[15px] font-semibold leading-snug transition-colors group-hover:text-bronze">Sol Luxe by Sol Properties</h3>
+            <p class="mt-1 text-[13px] text-bronze">Sheikh Zayed Road, Dubai</p>
+            <div class="mt-4 flex items-center gap-4 border-t border-titan/50 pt-4 text-[12.5px] text-bronze">
+              <span>Grade A offices</span><span class="text-titan">·</span><span>from 1,109 sqft</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="reveal" data-category="residential" style="transition-delay:.12s">
+        <a href="#" class="group flex h-full flex-col overflow-hidden rounded-3xl border border-titan/50 bg-gradient-to-b from-linen to-bone shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-champagne/60 hover:shadow-card-hover">
+          <div class="relative aspect-[4/3] overflow-hidden bg-sand">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=82" srcset="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=82 800w, https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=82 1200w, https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=80 1800w" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 420px" alt="Minimal living room with floor-to-ceiling windows" loading="lazy" class="img-zoom h-full w-full object-cover transition-transform duration-700 ease-cinematic group-hover:scale-105" />
+            <span class="absolute left-3 top-3 rounded-full bg-espresso/85 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-bone backdrop-blur-sm">For sale</span>
+            <span class="absolute right-3 top-3 rounded-lg bg-bone/90 px-2.5 py-1 text-[11px] font-medium text-espresso backdrop-blur-sm">Apartment</span>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <p class="font-display text-[22px] font-semibold tracking-[-0.02em] text-cocoa">AED 9,200,000</p>
+            <h3 class="mt-1.5 font-display text-[15px] font-semibold leading-snug transition-colors group-hover:text-bronze">Sky Residence, Burj views</h3>
+            <p class="mt-1 text-[13px] text-bronze">Downtown Dubai</p>
+            <div class="mt-4 flex items-center gap-4 border-t border-titan/50 pt-4 text-[12.5px] text-bronze">
+              <span>3 beds</span><span class="text-titan">·</span><span>4 baths</span><span class="text-titan">·</span><span>2,480 sqft</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="reveal" data-category="residential">
+        <a href="#" class="group flex h-full flex-col overflow-hidden rounded-3xl border border-titan/50 bg-gradient-to-b from-linen to-bone shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-champagne/60 hover:shadow-card-hover">
+          <div class="relative aspect-[4/3] overflow-hidden bg-sand">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=82" srcset="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=82 800w, https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=82 1200w, https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1800&q=80 1800w" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 420px" alt="Contemporary villa exterior with pool at twilight" loading="lazy" class="img-zoom h-full w-full object-cover transition-transform duration-700 ease-cinematic group-hover:scale-105" />
+            <span class="absolute left-3 top-3 rounded-full bg-espresso/85 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-bone backdrop-blur-sm">For sale</span>
+            <span class="absolute right-3 top-3 rounded-lg bg-bone/90 px-2.5 py-1 text-[11px] font-medium text-espresso backdrop-blur-sm">Villa</span>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <p class="font-display text-[22px] font-semibold tracking-[-0.02em] text-cocoa">AED 38,000,000</p>
+            <h3 class="mt-1.5 font-display text-[15px] font-semibold leading-snug transition-colors group-hover:text-bronze">Jumeirah Bay Island Villa</h3>
+            <p class="mt-1 text-[13px] text-bronze">Bulgari Resort &amp; Residences, Jumeirah Bay</p>
+            <div class="mt-4 flex items-center gap-4 border-t border-titan/50 pt-4 text-[12.5px] text-bronze">
+              <span>7 beds</span><span class="text-titan">·</span><span>9 baths</span><span class="text-titan">·</span><span>14,500 sqft</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="reveal" data-category="residential" style="transition-delay:.06s">
+        <a href="#" class="group flex h-full flex-col overflow-hidden rounded-3xl border border-titan/50 bg-gradient-to-b from-linen to-bone shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-champagne/60 hover:shadow-card-hover">
+          <div class="relative aspect-[4/3] overflow-hidden bg-sand">
+            <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=82" srcset="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=82 800w, https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=82 1200w, https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=80 1800w" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 420px" alt="Elegant neutral living room with soft daylight" loading="lazy" class="img-zoom h-full w-full object-cover transition-transform duration-700 ease-cinematic group-hover:scale-105" />
+            <span class="absolute left-3 top-3 rounded-full bg-bronze/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-bone backdrop-blur-sm">For rent</span>
+            <span class="absolute right-3 top-3 rounded-lg bg-bone/90 px-2.5 py-1 text-[11px] font-medium text-espresso backdrop-blur-sm">Penthouse</span>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <p class="font-display text-[22px] font-semibold tracking-[-0.02em] text-cocoa">AED 650,000 <span class="text-[13px] font-normal text-bronze">/yr</span></p>
+            <h3 class="mt-1.5 font-display text-[15px] font-semibold leading-snug transition-colors group-hover:text-bronze">Marina Gate Penthouse, furnished</h3>
+            <p class="mt-1 text-[13px] text-bronze">Dubai Marina</p>
+            <div class="mt-4 flex items-center gap-4 border-t border-titan/50 pt-4 text-[12.5px] text-bronze">
+              <span>4 beds</span><span class="text-titan">·</span><span>5 baths</span><span class="text-titan">·</span><span>4,100 sqft</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="reveal" data-category="commercial" style="transition-delay:.12s">
+        <a href="#" class="group flex h-full flex-col overflow-hidden rounded-3xl border border-titan/50 bg-gradient-to-b from-linen to-bone shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-champagne/60 hover:shadow-card-hover">
+          <div class="relative aspect-[4/3] overflow-hidden bg-sand">
+            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=82" srcset="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=82 800w, https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=82 1200w, https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=80 1800w" sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 420px" alt="Warm, calm office lounge with timber and plants" loading="lazy" class="img-zoom h-full w-full object-cover transition-transform duration-700 ease-cinematic group-hover:scale-105" />
+            <span class="absolute left-3 top-3 rounded-full bg-espresso/85 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-bone backdrop-blur-sm">Off-plan</span>
+            <span class="absolute right-3 top-3 rounded-lg bg-bone/90 px-2.5 py-1 text-[11px] font-medium text-espresso backdrop-blur-sm">Offices</span>
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <p class="font-display text-[22px] font-semibold tracking-[-0.02em] text-cocoa">AED 14,437,350</p>
+            <h3 class="mt-1.5 font-display text-[15px] font-semibold leading-snug transition-colors group-hover:text-bronze">HQ by Rove, full-floor offices</h3>
+            <p class="mt-1 text-[13px] text-bronze">Marasi Drive, Business Bay</p>
+            <div class="mt-4 flex items-center gap-4 border-t border-titan/50 pt-4 text-[12.5px] text-bronze">
+              <span>Q2 2029 handover</span><span class="text-titan">·</span><span>50/50 plan</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       WHY FANO — three hairline columns (no numbers, no claims we can't verify)
+       ===================================================================== -->
+  <section class="bg-sand/60">
+    <div class="mx-auto max-w-[1320px] px-5 py-16 lg:px-8 lg:py-20">
+      <div class="reveal grid gap-10 md:grid-cols-3 md:gap-8">
+        <div class="border-l border-champagne/70 pl-5">
+          <h3 class="font-display text-[15px] font-semibold">Trusted &amp; transparent</h3>
+          <p class="mt-2 text-[14px] leading-[1.75] text-cocoa/80">Clear facts on every listing — price, size, payment plan and handover — straight from the developer.</p>
+        </div>
+        <div class="border-l border-champagne/70 pl-5">
+          <h3 class="font-display text-[15px] font-semibold">Off-plan &amp; commercial focus</h3>
+          <p class="mt-2 text-[14px] leading-[1.75] text-cocoa/80">Grade A offices and landmark towers in Business Bay, Downtown and along Sheikh Zayed Road.</p>
+        </div>
+        <div class="border-l border-champagne/70 pl-5">
+          <h3 class="font-display text-[15px] font-semibold">With you to handover</h3>
+          <p class="mt-2 text-[14px] leading-[1.75] text-cocoa/80">From the first enquiry to transfer at the Dubai Land Department, one advisor handles every step with you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       ADVISORS — split section, text left, photo right (McCone "Join the team")
+       ===================================================================== -->
+  <section id="advisors" class="mx-auto max-w-[1320px] px-5 py-20 lg:px-8 lg:py-28">
+    <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+      <div class="reveal">
+        <p class="eyebrow text-bronze">Your advisors</p>
+        <h2 class="mt-4 font-display text-[clamp(30px,3.6vw,46px)] font-medium leading-[1.1] tracking-[-0.03em]">
+          Local knowledge.
+          <span class="serif-accent block text-[1.1em] text-bronze">Clear conversations.</span>
+        </h2>
+        <p class="mt-5 max-w-md text-[15px] leading-[1.8] text-cocoa/80">
+          A Business Bay team that knows Dubai's developers, payment plans and the buying process — and stays with you from the first enquiry to the handover keys.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#help" class="btn-gold inline-flex h-12 items-center gap-3 rounded-full px-6 text-[12px] font-semibold tracking-[0.06em] transition-transform hover:-translate-y-0.5">
+            Meet your advisor
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+          </a>
+          <a href="#" class="inline-flex h-12 items-center rounded-full border border-titan px-6 text-[12px] font-semibold tracking-[0.06em] text-espresso transition-colors hover:border-espresso">List your property</a>
+        </div>
+      </div>
+      <div class="reveal relative" style="transition-delay:.15s">
+        <div class="aspect-[4/3] overflow-hidden rounded-3xl bg-sand shadow-card">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1400&q=82" srcset="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=1400&q=82 1400w, https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=2400&q=80 2400w" sizes="(max-width: 1023px) 100vw, 640px" alt="A Fano advisor in the Business Bay office" loading="lazy" class="h-full w-full object-cover" />
+        </div>
+        <!-- Floating quote card, as on the live site's Why Us section -->
+        <div class="absolute -bottom-5 -left-3 hidden rounded-xl bg-espresso px-5 py-4 shadow-[0_16px_40px_-12px_rgba(43,37,32,.55)] sm:block lg:-left-6">
+          <p class="eyebrow text-champagne">Our commitment</p>
+          <p class="serif-accent mt-2 text-[18px] leading-tight text-bone">Personal guidance,<br />every step.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       HOW CAN WE HELP — espresso contact panel (McCone's closing section)
+       ===================================================================== -->
+  <section id="help" class="bg-espresso text-bone">
+    <div class="mx-auto max-w-[1320px] px-5 py-20 lg:px-8 lg:py-28">
+      <div class="grid gap-12 lg:grid-cols-12 lg:items-start">
+        <div class="reveal lg:col-span-5">
+          <p class="eyebrow text-champagne">Begin the conversation</p>
+          <h2 class="mt-4 font-display text-[clamp(30px,3.6vw,46px)] font-medium leading-[1.1] tracking-[-0.03em]">
+            How can we help?
+          </h2>
+          <p class="mt-5 max-w-md text-[15px] leading-[1.8] text-bone/75">
+            Buying, selling or leasing in Dubai? Tell us what you're looking for and an advisor will come back to you within two hours.
+          </p>
+          <ul class="mt-8 space-y-3 text-[14px]">
+            <li><a href="https://wa.me/971525719164" class="inline-flex items-center gap-3 text-bone/85 transition-colors hover:text-champagne"><span class="flex h-9 w-9 items-center justify-center rounded-full border border-cream/30 text-champagne">W</span>+971 52 571 9164 on WhatsApp</a></li>
+            <li><a href="tel:+97145644635" class="inline-flex items-center gap-3 text-bone/85 transition-colors hover:text-champagne"><span class="flex h-9 w-9 items-center justify-center rounded-full border border-cream/30 text-champagne">T</span>04 564 4635</a></li>
+            <li><a href="mailto:info@fanoproperties.com" class="inline-flex items-center gap-3 text-bone/85 transition-colors hover:text-champagne"><span class="flex h-9 w-9 items-center justify-center rounded-full border border-cream/30 text-champagne">@</span>info@fanoproperties.com</a></li>
+          </ul>
+        </div>
+
+        <!-- Enquiry form on a slightly lighter espresso card -->
+        <form class="reveal rounded-3xl border border-cream/15 bg-white/[0.04] p-6 lg:col-span-7 lg:p-8" style="transition-delay:.12s" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Thank you — we will be in touch';">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="block"><span class="sr-only">First name</span><input type="text" placeholder="First name" required class="h-12 w-full rounded-xl border border-cream/20 bg-white/5 px-4 text-[14px] text-bone placeholder:text-bone/40 focus:border-champagne focus:outline-none" /></label>
+            <label class="block"><span class="sr-only">Last name</span><input type="text" placeholder="Last name" class="h-12 w-full rounded-xl border border-cream/20 bg-white/5 px-4 text-[14px] text-bone placeholder:text-bone/40 focus:border-champagne focus:outline-none" /></label>
+            <label class="block"><span class="sr-only">Email</span><input type="email" placeholder="Email address" required class="h-12 w-full rounded-xl border border-cream/20 bg-white/5 px-4 text-[14px] text-bone placeholder:text-bone/40 focus:border-champagne focus:outline-none" /></label>
+            <label class="block"><span class="sr-only">Mobile</span><input type="tel" placeholder="Mobile number (with country code)" class="h-12 w-full rounded-xl border border-cream/20 bg-white/5 px-4 text-[14px] text-bone placeholder:text-bone/40 focus:border-champagne focus:outline-none" /></label>
+            <label class="block sm:col-span-2"><span class="sr-only">Message</span><textarea rows="4" placeholder="Tell us how we can help…" class="w-full rounded-xl border border-cream/20 bg-white/5 px-4 py-3 text-[14px] text-bone placeholder:text-bone/40 focus:border-champagne focus:outline-none"></textarea></label>
+          </div>
+          <button type="submit" class="btn-gold mt-5 inline-flex h-12 w-full items-center justify-center rounded-full text-[12px] font-semibold tracking-[0.08em] sm:w-auto sm:px-8">SEND ENQUIRY</button>
+          <p class="mt-3 text-[12px] text-bone/50">No commitment required. We typically respond within 2 hours.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       FOOTER — light, quiet, logo in bronze
+       ===================================================================== -->
+  <footer class="bg-bone">
+    <div class="mx-auto flex max-w-[1320px] flex-col gap-10 px-5 py-14 lg:flex-row lg:items-end lg:justify-between lg:px-8">
+      <div>
+        <svg viewBox="0 0 300 92" role="img" aria-label="Fano Properties" class="h-10 w-auto text-bronze">
+          <g transform="translate(-6,-6) scale(1.07)" fill="currentColor">
+            <path d="M9 89.4V31L42 10L76.6 31V89.4H37V70H47V80H66.6V37L42 22L19 37V89.4Z"/>
+            <path fill-rule="evenodd" d="M42.6 33.9a13.5 13.5 0 1 1 0 27a13.5 13.5 0 1 1 0-27zM42.6 41a6.4 6.4 0 1 0 0 12.8a6.4 6.4 0 1 0 0-12.8z"/>
+          </g>
+          <text x="96" y="58" fill="currentColor" font-family="Montserrat, system-ui, sans-serif" font-weight="600" font-size="52" letter-spacing="7">FANO</text>
+          <text x="98" y="86" fill="currentColor" font-family="Montserrat, system-ui, sans-serif" font-weight="600" font-size="19.5" letter-spacing="5.6">PROPERTIES</text>
+        </svg>
+        <p class="mt-4 max-w-xs text-[13px] leading-relaxed text-cocoa/80">3404, 34th Floor, Churchill Tower, Business Bay, Dubai</p>
+        <p class="serif-accent mt-2 text-[15px] text-bronze">Your trusted real estate partner</p>
+      </div>
+      <nav class="flex flex-wrap gap-x-8 gap-y-3 text-[13px] font-medium text-cocoa/80" aria-label="Footer">
+        <a href="#" class="transition-colors hover:text-espresso">Instagram</a>
+        <a href="#" class="transition-colors hover:text-espresso">LinkedIn</a>
+        <a href="#" class="transition-colors hover:text-espresso">Privacy</a>
+        <a href="#" class="transition-colors hover:text-espresso">RERA 49852</a>
+      </nav>
+    </div>
+    <div class="mx-auto max-w-[1320px] border-t border-titan/50 px-5 py-5 text-[12px] text-cocoa/70 lg:px-8">© 2026 Fano Real Estate. All rights reserved.</div>
+  </footer>
+
+  <!-- Floating "Talk to an expert" pill (McCone), in Fano colours -->
+  <a href="https://wa.me/971525719164" target="_blank" rel="noopener noreferrer" class="fixed bottom-5 right-4 z-40 inline-flex items-center gap-3 rounded-full border border-titan/60 bg-linen/95 py-2 pl-2 pr-4 shadow-search backdrop-blur transition-transform hover:-translate-y-0.5 lg:bottom-6 lg:right-6">
+    <span class="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-cream to-champagne text-[11px] font-bold text-espresso">F</span>
+    <span class="leading-tight">
+      <span class="block text-[12.5px] font-semibold text-espresso">Talk to an advisor</span>
+      <span class="block text-[11px] text-cocoa/70">WhatsApp · replies within 2h</span>
+    </span>
+  </a>
+
+  <!-- =====================================================================
+       Behaviour — plain JS, no dependencies
+       ===================================================================== -->
+  <script>
+    // Hairline shadow under the nav once the page scrolls
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('nav-scrolled', window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Mobile menu
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const setMenu = (open) => {
+      menu.classList.toggle('opacity-0', !open);
+      menu.classList.toggle('pointer-events-none', !open);
+      menu.setAttribute('aria-hidden', String(!open));
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      menuIcon.setAttribute('d', open ? 'M5 5l14 14M19 5L5 19' : 'M3 7h18M3 12h18M3 17h18');
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    toggle.addEventListener('click', () => setMenu(menu.classList.contains('opacity-0')));
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+
+    // Scroll reveal, once
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // Buy / Rent toggle in the search card
+    document.querySelectorAll('.listing-tab').forEach((tab, _, all) => tab.addEventListener('click', () => {
+      all.forEach((t) => {
+        const active = t === tab;
+        t.setAttribute('aria-pressed', String(active));
+        t.classList.toggle('bg-espresso', active);
+        t.classList.toggle('text-bone', active);
+        t.classList.toggle('text-cocoa/80', !active);
+      });
+    }));
+
+    // Filter chips (client-side demo; wire to your listings API in production)
+    const chips = document.querySelectorAll('.filter-chip');
+    const cards = document.querySelectorAll('#property-grid article');
+    const count = document.getElementById('result-count');
+    chips.forEach((chip) => chip.addEventListener('click', () => {
+      const filter = chip.dataset.filter;
+      chips.forEach((c) => {
+        const active = c === chip;
+        c.setAttribute('aria-pressed', String(active));
+        c.classList.toggle('bg-espresso', active);
+        c.classList.toggle('text-bone', active);
+        c.classList.toggle('text-cocoa/80', !active);
+      });
+      let shown = 0;
+      cards.forEach((card) => {
+        const show = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden', !show);
+        if (show) shown++;
+      });
+      count.textContent = shown;
+    }));
+  </script>
+</body>
+</html>

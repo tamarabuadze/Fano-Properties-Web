@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { PropertiesGrid } from "./_components/properties-grid";
-import { PropertiesFilters } from "./_components/properties-filters";
+import { PropertiesFiltersPanel } from "./_components/properties-filters-panel";
 import { PropertiesHeader } from "./_components/properties-header";
 import { PropertiesCategoryTabs } from "./_components/properties-category-tabs";
 
@@ -70,10 +70,8 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
       <PropertiesHeader />
       <div className="container-site py-10">
         <PropertiesCategoryTabs category={category} search={params.search} listingType={params.listingType} unitType={params.unitType} />
-        <div className="flex flex-col lg:flex-row gap-8">
-          <aside className="w-full lg:w-72 shrink-0">
-            <PropertiesFilters initialFilters={params} />
-          </aside>
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+          <PropertiesFiltersPanel initialFilters={params} />
           <main className="flex-1 min-w-0">
             <Suspense fallback={<PropertiesGridSkeleton />}>
               <PropertiesGrid filters={params} />

@@ -5,7 +5,8 @@ import { Share2, X } from "lucide-react";
 import { cn } from "@fano/utils";
 import { SOCIAL_LINKS } from "@/lib/social-links";
 
-// Floating button stacked above the ROI and WhatsApp buttons.
+// Floating button stacked above the ROI and WhatsApp buttons on desktop only
+// (phones keep just WhatsApp; the footer carries these links).
 // Tapping it fans out Fano's social and portal profiles.
 export function SocialButton() {
   const [open, setOpen] = useState(false);
@@ -28,7 +29,7 @@ export function SocialButton() {
   return (
     <div
       ref={ref}
-      className="fixed bottom-[9rem] sm:bottom-[10.5rem] right-4 sm:right-6 z-50 flex flex-col-reverse items-center gap-3"
+      className="fano-fab fixed bottom-[10.5rem] right-6 z-50 hidden lg:flex flex-col-reverse items-center gap-3"
     >
       <button
         type="button"

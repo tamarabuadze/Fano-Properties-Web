@@ -9,7 +9,7 @@ import { PropertyInquiryForm } from "./_components/property-inquiry-form";
 import { RelatedProperties } from "./_components/related-properties";
 import { PropertyAgentCard } from "./_components/property-agent-card";
 import { RoiCalculator } from "@/components/roi/roi-calculator";
-import { totalPrice } from "@fano/utils";
+import { totalPrice, splitListingTitle } from "@fano/utils";
 
 interface PropertyPageProps {
   params: Promise<{ slug: string }>;
@@ -58,6 +58,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
   ];
 
   const fullPrice = totalPrice(Number(property.price), property.priceUnit, property.sqft);
+  const displayTitle = splitListingTitle(property.title).headline;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -117,7 +118,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
                   price={fullPrice}
                   sizeSqft={property.sqft}
                   propertyId={property.id}
-                  propertyTitle={property.title}
+                  propertyTitle={displayTitle}
                 />
               </section>
             )}
@@ -126,7 +127,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
           {/* Sticky sidebar */}
           <div className="space-y-6">
             <div className="sticky top-24 space-y-6">
-              <PropertyInquiryForm propertyId={property.id} propertyTitle={property.title} />
+              <PropertyInquiryForm propertyId={property.id} propertyTitle={displayTitle} />
               {property.agent && (
                 <PropertyAgentCard agent={property.agent as never} />
               )}

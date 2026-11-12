@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BedDouble, Bath, Maximize2, MapPin, Store, ArrowRight } from "lucide-react";
-import { cn, isOptimizedImageHost, unitTypeLabel } from "@fano/utils";
+import { cn, isOptimizedImageHost, unitTypeLabel, formatPlace, splitListingTitle } from "@fano/utils";
 import { Badge } from "./badge";
 
 // Tiny warm-beige JPEG used as blur placeholder before real image loads
@@ -60,6 +60,8 @@ function PropertyCard({
   priority = false,
 }: PropertyCardProps) {
   const isCommercial = propertyType === "commercial";
+  const { headline, details } = splitListingTitle(title);
+  const place = formatPlace(location, city);
 
   return (
     <Link
@@ -128,15 +130,18 @@ function PropertyCard({
           </p>
         </div>
 
-        <h3 className="font-display font-semibold mb-1.5 line-clamp-2 transition-colors group-hover:text-[#8C6A47]" style={{ color: "#2B2520" }}>
-          {title}
+        <h3 className="font-display font-semibold mb-1 line-clamp-2 transition-colors group-hover:text-[#8C6A47]" style={{ color: "#2B2520" }}>
+          {headline}
         </h3>
+        {details.length > 0 && (
+          <p className="text-xs line-clamp-1 mb-1.5" style={{ color: "#A39886" }}>
+            {details.join(" · ")}
+          </p>
+        )}
 
         <div className="flex items-center gap-1.5 mb-4 flex-1" style={{ color: "#8C6A47" }}>
           <MapPin className="h-3.5 w-3.5 shrink-0" />
-          <p className="text-sm line-clamp-1">
-            {location}, {city}
-          </p>
+          <p className="text-sm line-clamp-1">{place}</p>
         </div>
 
         <div className="h-px bg-border mb-4" />
@@ -159,10 +164,12 @@ function PropertyCard({
               </div>
             </>
           )}
-          <div className="flex items-center gap-1.5">
-            <Maximize2 className="h-4 w-4" />
-            <span>{sqft.toLocaleString("en-US")} sqft</span>
-          </div>
+          {sqft > 0 && (
+            <div className="flex items-center gap-1.5">
+              <Maximize2 className="h-4 w-4" />
+              <span>{sqft.toLocaleString("en-US")} sqft</span>
+            </div>
+          )}
         </div>
       </div>
     </Link>
