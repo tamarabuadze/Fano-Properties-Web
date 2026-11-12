@@ -12,6 +12,15 @@ import { getFeaturedProperties } from "@/lib/queries/properties";
 import { getAgents } from "@/lib/queries/agents";
 import { getLatestArticles } from "@/lib/queries/blog";
 import { SOCIAL_LINKS } from "@/lib/social-links";
+import { getSiteTheme, isDarkTheme } from "@/lib/site-theme";
+import { LuxHero } from "@/components/luxury/lux-hero";
+import { LuxStatement } from "@/components/luxury/lux-statement";
+import { LuxResidences } from "@/components/luxury/lux-residences";
+import { LuxCollections } from "@/components/luxury/lux-collections";
+import { LuxIntroduction } from "@/components/luxury/lux-introduction";
+import { LuxTeam } from "@/components/luxury/lux-team";
+import { LuxJournal } from "@/components/luxury/lux-journal";
+import { LuxClosing } from "@/components/luxury/lux-closing";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
@@ -62,18 +71,40 @@ const jsonLd = {
 };
 
 export default async function HomePage() {
-  const [properties, agents, articles] = await Promise.all([
+  const [properties, agents, articles, theme] = await Promise.all([
     getFeaturedProperties(6).catch(() => []),
     getAgents(5).catch(() => []),
     getLatestArticles(3).catch(() => []),
+    getSiteTheme(),
   ]);
+
+  const jsonLdScript = (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+
+  // Luxury dark homepage (navy or espresso), previewed via /design/<theme>
+  if (isDarkTheme(theme)) {
+    return (
+      <>
+        {jsonLdScript}
+        <LuxHero />
+        <LuxStatement />
+        <LuxResidences properties={properties as never} />
+        <LuxCollections />
+        <LuxIntroduction />
+        <LuxTeam advisor={(agents as never[])[0] as never} />
+        <LuxJournal articles={articles as never} />
+        <LuxClosing />
+      </>
+    );
+  }
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      {jsonLdScript}
       <HeroSection />
       <PropertySearchSection />
       <FeaturedPropertiesSection properties={properties as never} />

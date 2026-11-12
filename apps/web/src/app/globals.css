@@ -260,6 +260,98 @@
   .animate-delay-400 { animation-delay: 400ms; }
 }
 
+/* ─── Luxury dark homepage: two palettes behind one set of tokens ───── */
+.lx-root[data-theme="navy"] {
+  --lx-page: #0B1220;
+  --lx-surface: #121A2B;
+  --lx-raised: #1B2438;
+  --lx-text: #F4EFEA;
+  --lx-muted: #A39886;
+  --lx-line: rgba(226, 168, 98, 0.22);
+}
+.lx-root[data-theme="espresso"] {
+  --lx-page: #14110F;
+  --lx-surface: #1E1A17;
+  --lx-raised: #2B2520;
+  --lx-text: #F4EFEA;
+  --lx-muted: #A39886;
+  --lx-line: rgba(226, 168, 98, 0.22);
+}
+.lx-root {
+  background: var(--lx-page);
+  color: var(--lx-text);
+  min-height: 100vh;
+}
+.lx-root ::selection { background: #E2A862; color: #14110F; }
+
+/* Small tracked label with a short gold rule, on dark */
+.lx-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-montserrat), Montserrat, system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #E2A862;
+}
+.lx-eyebrow::before { content: ""; width: 32px; height: 1px; background: #E2A862; flex: none; }
+
+/* Section numeral: "01" in gold with a short rule */
+.lx-numeral {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-montserrat), Montserrat, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #E2A862;
+}
+.lx-numeral::after { content: ""; width: 24px; height: 1px; background: rgba(226, 168, 98, 0.5); }
+
+/* Text link with a gold rule that grows on hover: the only call to action on dark */
+.lx-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-montserrat), Montserrat, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #F4EFEA;
+  transition: color 0.3s;
+}
+.lx-link::after { content: ""; width: 36px; height: 1px; background: #E2A862; transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.lx-link:hover { color: #E2A862; }
+.lx-link:hover::after { width: 64px; }
+.lx-link-quiet { color: rgba(244, 239, 234, 0.6); }
+.lx-link-quiet::after { background: rgba(226, 168, 98, 0.5); }
+
+/* Hairline where a border used to be */
+.lx-hairline { border-color: var(--lx-line); }
+
+/* Entrance: a quiet rise, once */
+.lx-rise { animation: lx-rise 1.1s cubic-bezier(0.2, 0.65, 0.25, 1) both; }
+.lx-rise-1 { animation-delay: 0.15s; }
+.lx-rise-2 { animation-delay: 0.3s; }
+.lx-rise-3 { animation-delay: 0.45s; }
+@keyframes lx-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Scroll cue: a thin line that breathes */
+.lx-scroll-line { animation: lx-scroll 2.4s ease-in-out infinite; transform-origin: top; }
+@keyframes lx-scroll { 0% { transform: scaleY(0); opacity: 0; } 30% { opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+
+.lx-root ::-webkit-scrollbar-thumb { background: #8C6A47; }
+.lx-root ::-webkit-scrollbar-thumb:hover { background: #E2A862; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-rise { animation: none; opacity: 1; transform: none; }
+  .lx-scroll-line { animation: none; opacity: 0.6; transform: none; }
+}
+
 /* ─── Admin theme: the same beige system as the public site ───── */
 .admin-root {
   --background: 30 28% 94%;        /* #F4EFEA Warm Bone */

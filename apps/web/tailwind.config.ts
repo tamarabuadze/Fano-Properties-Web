@@ -15,6 +15,18 @@ const config: Config = {
         label: ["var(--font-montserrat)", "Montserrat", "system-ui", "sans-serif"],
       },
       colors: {
+        /* Luxury dark homepage tokens: resolved per theme in globals.css ([data-theme]) */
+        lx: {
+          page: "var(--lx-page)",
+          surface: "var(--lx-surface)",
+          raised: "var(--lx-raised)",
+          text: "var(--lx-text)",
+          muted: "var(--lx-muted)",
+          line: "var(--lx-line)",
+          gold: "#E2A862",
+          bronze: "#8C6A47",
+          pale: "#F6E7D2",
+        },
         /* Fano "Calcite Sand" theme, same as the Fano team app */
         sand: "#E6DFD5",      /* Calcite Sand: page background */
         surface: "#F4EFEA",   /* Warm Bone: cards, panels */
