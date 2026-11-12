@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
-import { HeroSection } from "@/components/sections/hero";
-import { PropertySearchSection } from "@/components/sections/property-search";
-import { FeaturedPropertiesSection } from "@/components/sections/featured-properties";
-import { PropertyTypesSection } from "@/components/sections/property-types";
-import { WhyUsSection } from "@/components/sections/why-us";
-import { InvitationBand } from "@/components/sections/invitation-band";
-import { AgentsShowcaseSection } from "@/components/sections/agents-showcase";
-import { LatestArticlesSection } from "@/components/sections/latest-articles";
-import { CtaSection } from "@/components/sections/cta-section";
 import { getFeaturedProperties } from "@/lib/queries/properties";
 import { getAgents } from "@/lib/queries/agents";
 import { getLatestArticles } from "@/lib/queries/blog";
 import { SOCIAL_LINKS } from "@/lib/social-links";
+import { LuxHero } from "@/components/luxury/lux-hero";
+import { LuxStatement } from "@/components/luxury/lux-statement";
+import { LuxResidences } from "@/components/luxury/lux-residences";
+import { LuxCollections } from "@/components/luxury/lux-collections";
+import { LuxIntroduction } from "@/components/luxury/lux-introduction";
+import { LuxTeam } from "@/components/luxury/lux-team";
+import { LuxJournal } from "@/components/luxury/lux-journal";
+import { LuxClosing } from "@/components/luxury/lux-closing";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
@@ -63,26 +62,29 @@ const jsonLd = {
 
 export default async function HomePage() {
   const [properties, agents, articles] = await Promise.all([
-    getFeaturedProperties(6).catch(() => []),
-    getAgents(5).catch(() => []),
-    getLatestArticles(3).catch(() => []),
+    getFeaturedProperties(3).catch(() => []),
+    getAgents(1).catch(() => []),
+    getLatestArticles(2).catch(() => []),
   ]);
+
+  const jsonLdScript = (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <HeroSection />
-      <PropertySearchSection />
-      <FeaturedPropertiesSection properties={properties as never} />
-      <WhyUsSection />
-      <InvitationBand />
-      <PropertyTypesSection />
-      {agents.length > 0 && <AgentsShowcaseSection agents={agents as never} />}
-      <LatestArticlesSection articles={articles as never} />
-      <CtaSection />
+      {jsonLdScript}
+      <LuxHero />
+      <LuxStatement />
+      <LuxResidences properties={properties as never} />
+      <LuxCollections />
+      <LuxIntroduction />
+      <LuxTeam advisor={(agents as never[])[0] as never} />
+      <LuxJournal articles={articles as never} />
+      <LuxClosing />
     </>
   );
 }

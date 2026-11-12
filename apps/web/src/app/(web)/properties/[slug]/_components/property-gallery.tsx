@@ -30,7 +30,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
       <div className="grid h-[52vh] max-h-[600px] grid-cols-4 grid-rows-2 gap-2 overflow-hidden rounded-[4px]">
         {/* Main image */}
         <button
-          className="group relative col-span-2 row-span-2 overflow-hidden bg-[#E6DFD5]"
+          className="group relative col-span-2 row-span-2 overflow-hidden bg-lx-raised"
           onClick={() => openLightbox(0)}
           aria-label="Open photo 1"
         >
@@ -51,7 +51,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
         {images.slice(1, 5).map((img, i) => (
           <button
             key={i}
-            className="group relative overflow-hidden bg-[#E6DFD5]"
+            className="group relative overflow-hidden bg-lx-raised"
             onClick={() => openLightbox(i + 1)}
             aria-label={`Open photo ${i + 2}`}
           >
@@ -59,7 +59,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
               <>
                 <video src={img} muted playsInline preload="metadata" className="absolute inset-0 h-full w-full object-cover" />
                 <span className="absolute inset-0 flex items-center justify-center">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#2B2520]/70 text-[#F4EFEA]">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-lx-page/70 text-lx-text">
                     <Play className="h-5 w-5" />
                   </span>
                 </span>
@@ -75,7 +75,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
               />
             )}
             {i === 3 && images.length > 5 && (
-              <div className="absolute inset-0 flex items-center justify-center gap-2 bg-[#2B2520]/55 text-[#F4EFEA]">
+              <div className="absolute inset-0 flex items-center justify-center gap-2 bg-lx-page/60 text-lx-text">
                 <Grid3X3 className="h-5 w-5" aria-hidden="true" />
                 <span className="font-label text-[11px] font-semibold uppercase tracking-[0.16em]">+{images.length - 5} more</span>
               </div>
@@ -85,7 +85,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
 
         {/* Fill empty cells */}
         {Array.from({ length: Math.max(0, 4 - (images.length - 1)) }).map((_, i) => (
-          <div key={`empty-${i}`} className="bg-[#E6DFD5]" />
+          <div key={`empty-${i}`} className="bg-lx-raised" />
         ))}
       </div>
       </div>
@@ -97,13 +97,13 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#211C18]/95"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-lx-page/95"
             onClick={() => setLightboxOpen(false)}
           >
             <button
               onClick={() => setLightboxOpen(false)}
               aria-label="Close gallery"
-              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-[#F4EFEA]/25 text-[#F4EFEA] transition-colors hover:bg-[#F4EFEA]/10"
+              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-lx-text/25 text-lx-text transition-colors hover:bg-lx-text/10"
             >
               <X className="h-5 w-5" />
             </button>
@@ -111,7 +111,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
             <button
               onClick={(e) => { e.stopPropagation(); prev(); }}
               aria-label="Previous photo"
-              className="absolute left-4 flex h-12 w-12 items-center justify-center rounded-full border border-[#F4EFEA]/25 text-[#F4EFEA] transition-colors hover:bg-[#F4EFEA]/10"
+              className="absolute left-4 flex h-12 w-12 items-center justify-center rounded-full border border-lx-text/25 text-lx-text transition-colors hover:bg-lx-text/10"
             >
               <ChevronLeft className="h-6 w-6" />
             </button>
@@ -144,7 +144,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
                 </motion.div>
               </AnimatePresence>
 
-              <p className="mt-4 text-center font-label text-[11px] tracking-[0.2em] text-[#F4EFEA]/55">
+              <p className="mt-4 text-center font-label text-[11px] tracking-[0.2em] text-lx-text/55">
                 {activeIndex + 1} / {images.length}
               </p>
             </div>
@@ -152,7 +152,7 @@ export function PropertyGallery({ images, title }: PropertyGalleryProps) {
             <button
               onClick={(e) => { e.stopPropagation(); next(); }}
               aria-label="Next photo"
-              className="absolute right-4 flex h-12 w-12 items-center justify-center rounded-full border border-[#F4EFEA]/25 text-[#F4EFEA] transition-colors hover:bg-[#F4EFEA]/10"
+              className="absolute right-4 flex h-12 w-12 items-center justify-center rounded-full border border-lx-text/25 text-lx-text transition-colors hover:bg-lx-text/10"
             >
               <ChevronRight className="h-6 w-6" />
             </button>

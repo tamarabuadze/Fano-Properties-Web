@@ -32,11 +32,11 @@ export default function RoiCalculatorPage() {
     <div className="min-h-screen pt-20">
       <div className="page-band py-14 lg:py-20">
         <div className="container-site">
-          <p className="eyebrow mb-5">Investor tools</p>
-          <h1 className="font-display text-[clamp(40px,5.5vw,72px)] font-normal leading-[1.02] tracking-[-0.01em] text-[#2B2520]">
+          <p className="lx-eyebrow mb-5">Investor tools</p>
+          <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
             ROI calculator
           </h1>
-          <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-[#2B2520]/70">
+          <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-lx-text/70">
             See what a Dubai property could earn you: rental yield, monthly cash flow and long-term return, with DLD
             fees, mortgage costs and service charges built in.
           </p>
@@ -46,13 +46,13 @@ export default function RoiCalculatorPage() {
       <div className="container-site py-12 lg:py-16">
         <RoiCalculator variant="full" />
 
-        <div className="mt-24 border-t border-[#C5BAAB]/40 pt-14">
-          <p className="eyebrow mb-10">How the numbers work</p>
+        <div className="mt-24 border-t border-lx-line pt-14">
+          <p className="lx-eyebrow mb-10">How the numbers work</p>
           <div className="grid max-w-5xl gap-x-16 gap-y-12 md:grid-cols-2">
             {notes.map((n) => (
               <div key={n.q}>
-                <h2 className="font-display text-[22px] font-normal leading-tight text-[#2B2520]">{n.q}</h2>
-                <p className="mt-3 text-[14px] leading-[1.8] text-[#2B2520]/70">{n.a}</p>
+                <h2 className="font-display text-[22px] font-normal leading-tight text-lx-text">{n.q}</h2>
+                <p className="mt-3 text-[14px] leading-[1.8] text-lx-text/70">{n.a}</p>
               </div>
             ))}
           </div>

@@ -12,11 +12,11 @@ export function FaqAccordion({ faqs }: { faqs: FaqItem[] }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="border-t border-[#C5BAAB]/40">
+    <div className="border-t border-lx-line">
       {faqs.map((faq, i) => {
         const isOpen = open === i;
         return (
-          <div key={i} className="border-b border-[#C5BAAB]/40">
+          <div key={i} className="border-b border-lx-line">
             <button
               onClick={() => setOpen(isOpen ? null : i)}
               aria-expanded={isOpen}
@@ -24,7 +24,7 @@ export function FaqAccordion({ faqs }: { faqs: FaqItem[] }) {
             >
               <span className={cn(
                 "font-display text-[clamp(20px,2.2vw,26px)] font-normal leading-snug transition-colors",
-                isOpen ? "text-[#2B2520]" : "text-[#2B2520]/80"
+                isOpen ? "text-lx-text" : "text-lx-text/80"
               )}>
                 {faq.q}
               </span>
@@ -32,7 +32,7 @@ export function FaqAccordion({ faqs }: { faqs: FaqItem[] }) {
                 aria-hidden="true"
                 className={cn(
                   "flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors",
-                  isOpen ? "border-[#2B2520] bg-[#2B2520] text-[#F4EFEA]" : "border-[#C5BAAB]/70 text-[#8C6A47]"
+                  isOpen ? "border-lx-gold bg-lx-gold text-lx-page" : "border-lx-line text-lx-gold"
                 )}
               >
                 {isOpen ? <Minus className="h-4 w-4" strokeWidth={1.5} /> : <Plus className="h-4 w-4" strokeWidth={1.5} />}
@@ -48,7 +48,7 @@ export function FaqAccordion({ faqs }: { faqs: FaqItem[] }) {
                   transition={{ duration: 0.25, ease: "easeOut" }}
                   className="overflow-hidden"
                 >
-                  <p className="max-w-2xl pb-7 text-[15px] leading-[1.85] text-[#2B2520]/75">
+                  <p className="max-w-2xl pb-7 text-[15px] leading-[1.85] text-lx-text/75">
                     {faq.a}
                   </p>
                 </motion.div>

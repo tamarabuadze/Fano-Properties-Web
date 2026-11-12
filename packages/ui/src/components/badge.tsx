@@ -2,20 +2,21 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@fano/utils";
 
-// Small tracked labels on the beige palette: espresso solid, bone, or a hairline outline
+// Small tracked labels built on the theme tokens, so they read correctly on the
+// navy public site and the beige admin alike. Gold variants are the one fixed accent.
 const badgeVariants = cva(
   "inline-flex items-center rounded-full font-label font-semibold uppercase tracking-[0.16em] transition-colors",
   {
     variants: {
       variant: {
-        default: "bg-[#2B2520] text-[#F4EFEA]",
-        secondary: "bg-[#E6DFD5] text-[#2B2520]",
-        outline: "border border-[#C5BAAB]/70 text-[#2B2520]",
-        success: "border border-[#8C6A47]/40 text-[#8C6A47]",
-        warning: "border border-[#E2A862] text-[#8C6A47]",
-        destructive: "border border-red-300 text-red-700",
-        sale: "bg-[#2B2520] text-[#F4EFEA]",
-        rent: "bg-[#3A322B] text-[#F4EFEA]",
+        default: "bg-primary text-primary-foreground",
+        secondary: "bg-secondary text-secondary-foreground",
+        outline: "border border-border text-foreground",
+        success: "border border-[#8C6A47]/50 text-[#8C6A47]",
+        warning: "border border-[#E2A862] text-[#E2A862]",
+        destructive: "border border-[#B0453A]/60 text-[#B0453A]",
+        sale: "bg-primary text-primary-foreground",
+        rent: "border border-[#E2A862]/60 text-foreground",
         lease: "bg-[#8C6A47] text-[#F4EFEA]",
       },
       size: {

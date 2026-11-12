@@ -260,6 +260,114 @@
   .animate-delay-400 { animation-delay: 400ms; }
 }
 
+/* ─── Public site: navy with champagne gold, one set of tokens ───── */
+.lx-root {
+  --lx-page: #0B1220;
+  --lx-surface: #121A2B;
+  --lx-raised: #1B2438;
+  --lx-text: #F4EFEA;
+  --lx-muted: #A39886;
+  --lx-line: rgba(226, 168, 98, 0.22);
+  background: var(--lx-page);
+  color: var(--lx-text);
+  min-height: 100vh;
+}
+/* The page colour reaches the viewport edges and overscroll too */
+html:has(> body > .lx-root), html:has(.lx-root) body { background: #0B1220; }
+.lx-root ::selection { background: #E2A862; color: #0B1220; }
+
+/* Secondary button on dark: bone text until the gold fill arrives */
+.lx-root .btn-gold-outline, .lx-root .btn-pill-outline { color: #F4EFEA; border-color: rgba(226, 168, 98, 0.55); }
+.lx-root .btn-gold-outline:hover, .lx-root .btn-pill-outline:hover { color: #0B1220; }
+/* The old text link, if any page still uses it, reads in bone */
+.lx-root .link-rule { color: #F4EFEA; }
+.lx-root .link-rule::after { background: #E2A862; }
+.lx-root .eyebrow { color: #E2A862; }
+.lx-root .page-band { background: var(--lx-page); border-bottom-color: var(--lx-line); }
+.lx-root .section-tint { background: var(--lx-surface); }
+
+/* Form fields on dark: a raised navy box with a gold hairline */
+.lx-root input:where(:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"])),
+.lx-root textarea,
+.lx-root select {
+  background-color: var(--lx-surface);
+  border-color: var(--lx-line);
+  color: var(--lx-text);
+  box-shadow: none;
+  color-scheme: dark;
+}
+.lx-root input::placeholder, .lx-root textarea::placeholder { color: #7A6E62; }
+.lx-root select option { background: #121A2B; color: #F4EFEA; }
+.lx-root input[type="checkbox"], .lx-root input[type="radio"] { accent-color: #E2A862; }
+
+/* Small tracked label with a short gold rule, on dark */
+.lx-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-montserrat), Montserrat, system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #E2A862;
+}
+.lx-eyebrow::before { content: ""; width: 32px; height: 1px; background: #E2A862; flex: none; }
+
+/* Section numeral: "01" in gold with a short rule */
+.lx-numeral {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-montserrat), Montserrat, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #E2A862;
+}
+.lx-numeral::after { content: ""; width: 24px; height: 1px; background: rgba(226, 168, 98, 0.5); }
+
+/* Text link with a gold rule that grows on hover: the only call to action on dark */
+.lx-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-montserrat), Montserrat, system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #F4EFEA;
+  transition: color 0.3s;
+}
+.lx-link::after { content: ""; width: 36px; height: 1px; background: #E2A862; transition: width 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.lx-link:hover { color: #E2A862; }
+.lx-link:hover::after { width: 64px; }
+.lx-link-quiet { color: rgba(244, 239, 234, 0.6); }
+.lx-link-quiet::after { background: rgba(226, 168, 98, 0.5); }
+
+/* Hairline where a border used to be */
+.lx-hairline { border-color: var(--lx-line); }
+
+/* Entrance: a quiet rise, once */
+.lx-rise { animation: lx-rise 1.1s cubic-bezier(0.2, 0.65, 0.25, 1) both; }
+.lx-rise-1 { animation-delay: 0.15s; }
+.lx-rise-2 { animation-delay: 0.3s; }
+.lx-rise-3 { animation-delay: 0.45s; }
+@keyframes lx-rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Scroll cue: a thin line that breathes */
+.lx-scroll-line { animation: lx-scroll 2.4s ease-in-out infinite; transform-origin: top; }
+@keyframes lx-scroll { 0% { transform: scaleY(0); opacity: 0; } 30% { opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+
+.lx-root ::-webkit-scrollbar-thumb { background: #8C6A47; }
+.lx-root ::-webkit-scrollbar-thumb:hover { background: #E2A862; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lx-rise { animation: none; opacity: 1; transform: none; }
+  .lx-scroll-line { animation: none; opacity: 0.6; transform: none; }
+}
+
 /* ─── Admin theme: the same beige system as the public site ───── */
 .admin-root {
   --background: 30 28% 94%;        /* #F4EFEA Warm Bone */

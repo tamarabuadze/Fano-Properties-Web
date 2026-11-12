@@ -50,7 +50,7 @@ function BlogCard({
         href={`/blog/${slug}`}
         className={cn("group flex items-start gap-5", className)}
       >
-        <div className="relative h-20 w-24 shrink-0 overflow-hidden rounded-[4px] bg-[#E6DFD5]">
+        <div className="relative h-20 w-24 shrink-0 overflow-hidden rounded-[4px] bg-lx-raised">
           {coverImage && (
             <Image
               src={coverImage}
@@ -66,11 +66,11 @@ function BlogCard({
         </div>
         <div className="min-w-0 flex-1">
           {meta && (
-            <p className="mb-1.5 font-label text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8C6A47]">
+            <p className="mb-1.5 font-label text-[10px] font-semibold uppercase tracking-[0.18em] text-lx-gold">
               {meta}
             </p>
           )}
-          <h3 className="line-clamp-2 font-display text-[19px] font-normal leading-snug text-[#2B2520] transition-colors group-hover:text-[#8C6A47]">
+          <h3 className="line-clamp-2 font-display text-[19px] font-normal leading-snug text-lx-text transition-colors group-hover:text-lx-gold">
             {title}
           </h3>
         </div>
@@ -80,7 +80,7 @@ function BlogCard({
 
   return (
     <Link href={`/blog/${slug}`} className={cn("group flex h-full flex-col", className)}>
-      <div className="relative aspect-[16/10] shrink-0 overflow-hidden rounded-[4px] bg-[#E6DFD5]">
+      <div className="relative aspect-[16/10] shrink-0 overflow-hidden rounded-[4px] bg-lx-raised">
         {coverImage ? (
           <Image
             src={coverImage}
@@ -94,29 +94,29 @@ function BlogCard({
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <span className="font-display text-4xl font-normal italic text-[#8C6A47]/50">Fano</span>
+            <span className="font-display text-4xl font-normal italic text-lx-gold/50">Fano</span>
           </div>
         )}
       </div>
 
       <div className="flex flex-1 flex-col pt-5">
         {meta && (
-          <p className="mb-3 font-label text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8C6A47]">
+          <p className="mb-3 font-label text-[10px] font-semibold uppercase tracking-[0.18em] text-lx-gold">
             {meta}
           </p>
         )}
 
-        <h3 className="line-clamp-2 font-display text-[24px] font-normal leading-tight text-[#2B2520] transition-colors group-hover:text-[#8C6A47]">
+        <h3 className="line-clamp-2 font-display text-[24px] font-normal leading-tight text-lx-text transition-colors group-hover:text-lx-gold">
           {title}
         </h3>
 
-        <p className="mt-3 line-clamp-3 flex-1 text-[14px] leading-[1.8] text-[#2B2520]/65">{excerpt}</p>
+        <p className="mt-3 line-clamp-3 flex-1 text-[14px] leading-[1.8] text-lx-text/65">{excerpt}</p>
 
-        <div className="mt-5 flex items-center justify-between gap-4 border-t border-[#C5BAAB]/40 pt-3">
-          <span className="inline-flex items-center gap-3 text-[12px] font-medium text-[#2B2520] after:h-px after:w-6 after:bg-[#2B2520] after:transition-all after:duration-300 group-hover:after:w-10">
+        <div className="mt-5 flex items-center justify-between gap-4 border-t border-lx-line pt-3">
+          <span className="inline-flex items-center gap-3 text-[12px] font-medium text-lx-text after:h-px after:w-6 after:bg-lx-gold after:transition-all after:duration-300 group-hover:after:w-10">
             Read article
           </span>
-          {readTime && <span className="text-[12px] text-[#2B2520]/55">{readTime} min read</span>}
+          {readTime && <span className="text-[12px] text-lx-text/55">{readTime} min read</span>}
         </div>
       </div>
     </Link>

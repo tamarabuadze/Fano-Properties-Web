@@ -10,15 +10,17 @@ interface SectionHeaderProps {
   light?: boolean;
 }
 
-// Eyebrow label, a large light serif title, and a short paragraph
+// Eyebrow label, a large light serif title, and a short paragraph, on the navy page.
+// `light` is kept for callers; the default already renders for dark.
 export function SectionHeader({
   eyebrow,
   title,
   description,
   align = "left",
   className,
-  light = false,
+  light,
 }: SectionHeaderProps) {
+  void light;
   return (
     <div
       className={cn(
@@ -27,18 +29,17 @@ export function SectionHeader({
         className
       )}
     >
-      {eyebrow && <p className={cn("eyebrow", light && "text-[#E2A862]")}>{eyebrow}</p>}
+      {eyebrow && <p className="lx-eyebrow">{eyebrow}</p>}
       <h2
         className={cn(
           "font-display font-normal leading-[1.05] tracking-[-0.01em] text-balance",
-          "text-[clamp(34px,4.4vw,58px)]",
-          light ? "text-[#F4EFEA]" : "text-[#2B2520]"
+          "text-[clamp(32px,3.8vw,50px)] text-lx-text"
         )}
       >
         {title}
       </h2>
       {description && (
-        <p className={cn("max-w-lg text-[15px] leading-[1.85]", light ? "text-[#F4EFEA]/70" : "text-[#2B2520]/70")}>
+        <p className="max-w-lg text-[15px] leading-[1.85] text-lx-text/70">
           {description}
         </p>
       )}

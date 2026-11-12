@@ -91,7 +91,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
   };
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen bg-lx-page pt-20 lg:pt-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -109,9 +109,9 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
             )}
             {property.listingType === "sale" && fullPrice > 0 && (
               <section id="roi" className="scroll-mt-28">
-                <p className="eyebrow mb-3">Investor tools</p>
-                <h2 className="font-display text-[28px] font-normal leading-tight text-[#2B2520]">Investment calculator</h2>
-                <p className="mb-8 mt-3 max-w-lg text-[14px] leading-[1.8] text-[#2B2520]/65">
+                <p className="lx-eyebrow mb-4">Investor tools</p>
+                <h2 className="font-display text-[28px] font-normal leading-tight text-lx-text">Investment calculator</h2>
+                <p className="mb-8 mt-3 max-w-lg text-[14px] leading-[1.8] text-lx-text/65">
                   Estimate the rental yield and return on this property. Adjust any figure to match your plans.
                 </p>
                 <RoiCalculator
@@ -138,7 +138,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
 
         {/* Related */}
         {related.length > 0 && (
-          <div className="mt-24 border-t border-[#C5BAAB]/40 pt-16">
+          <div className="mt-24 border-t border-lx-line pt-16">
             <RelatedProperties properties={related as never} />
           </div>
         )}
