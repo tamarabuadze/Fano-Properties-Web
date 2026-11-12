@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
-import { HeroSection } from "@/components/sections/hero";
-import { PropertySearchSection } from "@/components/sections/property-search";
-import { FeaturedPropertiesSection } from "@/components/sections/featured-properties";
-import { PropertyTypesSection } from "@/components/sections/property-types";
-import { WhyUsSection } from "@/components/sections/why-us";
-import { InvitationBand } from "@/components/sections/invitation-band";
-import { AgentsShowcaseSection } from "@/components/sections/agents-showcase";
-import { LatestArticlesSection } from "@/components/sections/latest-articles";
-import { CtaSection } from "@/components/sections/cta-section";
 import { getFeaturedProperties } from "@/lib/queries/properties";
 import { getAgents } from "@/lib/queries/agents";
 import { getLatestArticles } from "@/lib/queries/blog";
 import { SOCIAL_LINKS } from "@/lib/social-links";
-import { getSiteTheme, isDarkTheme } from "@/lib/site-theme";
 import { LuxHero } from "@/components/luxury/lux-hero";
 import { LuxStatement } from "@/components/luxury/lux-statement";
 import { LuxResidences } from "@/components/luxury/lux-residences";
@@ -71,11 +61,10 @@ const jsonLd = {
 };
 
 export default async function HomePage() {
-  const [properties, agents, articles, theme] = await Promise.all([
-    getFeaturedProperties(6).catch(() => []),
-    getAgents(5).catch(() => []),
-    getLatestArticles(3).catch(() => []),
-    getSiteTheme(),
+  const [properties, agents, articles] = await Promise.all([
+    getFeaturedProperties(3).catch(() => []),
+    getAgents(1).catch(() => []),
+    getLatestArticles(2).catch(() => []),
   ]);
 
   const jsonLdScript = (
@@ -85,35 +74,17 @@ export default async function HomePage() {
     />
   );
 
-  // Luxury dark homepage (navy or espresso), previewed via /design/<theme>
-  if (isDarkTheme(theme)) {
-    return (
-      <>
-        {jsonLdScript}
-        <LuxHero />
-        <LuxStatement />
-        <LuxResidences properties={properties as never} />
-        <LuxCollections />
-        <LuxIntroduction />
-        <LuxTeam advisor={(agents as never[])[0] as never} />
-        <LuxJournal articles={articles as never} />
-        <LuxClosing />
-      </>
-    );
-  }
-
   return (
     <>
       {jsonLdScript}
-      <HeroSection />
-      <PropertySearchSection />
-      <FeaturedPropertiesSection properties={properties as never} />
-      <WhyUsSection />
-      <InvitationBand />
-      <PropertyTypesSection />
-      {agents.length > 0 && <AgentsShowcaseSection agents={agents as never} />}
-      <LatestArticlesSection articles={articles as never} />
-      <CtaSection />
+      <LuxHero />
+      <LuxStatement />
+      <LuxResidences properties={properties as never} />
+      <LuxCollections />
+      <LuxIntroduction />
+      <LuxTeam advisor={(agents as never[])[0] as never} />
+      <LuxJournal articles={articles as never} />
+      <LuxClosing />
     </>
   );
 }

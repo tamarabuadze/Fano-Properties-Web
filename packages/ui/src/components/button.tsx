@@ -4,28 +4,30 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@fano/utils";
 
+// Built on the theme tokens so the same button reads on the navy site and the beige
+// admin. "gold" is the glossy champagne pill used for primary actions everywhere.
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 select-none",
   {
     variants: {
       variant: {
         default:
-          "bg-gradient-to-b from-[#3A322B] to-[#2B2520] text-[#F4EFEA] shadow-[0_10px_24px_-10px_rgba(43,37,32,.6)] hover:-translate-y-px hover:shadow-[0_16px_30px_-12px_rgba(43,37,32,.7)] active:scale-[0.98]",
+          "bg-primary text-primary-foreground hover:-translate-y-px hover:opacity-95 active:scale-[0.98]",
         gold:
-          "bg-gradient-to-br from-[#ECBE80] via-[#E2A862] to-[#B9824A] text-[#2B2520] font-semibold shadow-[0_10px_24px_-10px_rgba(185,130,74,.7)] hover:-translate-y-px hover:brightness-105 active:scale-[0.98]",
+          "border border-[#B07C3A] bg-gradient-to-b from-[#F7D597] via-[#EEC076] to-[#D8984C] text-[#2B2520] font-label text-[12px] font-semibold uppercase tracking-[0.12em] shadow-[inset_0_1px_0_rgba(255,255,255,.6),0_2px_4px_rgba(0,0,0,.18)] hover:-translate-y-px hover:brightness-105 active:scale-[0.98]",
         outline:
-          "border border-[#C5BAAB] bg-[#F4EFEA]/60 text-[#2B2520] hover:border-[#E2A862] hover:bg-[#F6E7D2] active:scale-[0.98]",
+          "border border-[#E2A862]/60 bg-transparent text-foreground hover:border-[#E2A862] hover:bg-[#E2A862]/10 active:scale-[0.98]",
         ghost:
-          "bg-transparent text-[#2B2520] hover:bg-zinc-100 active:scale-[0.98]",
+          "bg-transparent text-foreground hover:bg-foreground/5 active:scale-[0.98]",
         secondary:
-          "bg-[#EFE8DF] text-[#2B2520] border border-[#D9CFC2] hover:bg-[#F6E7D2] hover:border-[#E2A862] active:scale-[0.98]",
+          "bg-secondary text-secondary-foreground border border-border hover:border-[#E2A862] active:scale-[0.98]",
         destructive:
-          "bg-red-500 text-white hover:bg-red-600 active:scale-[0.98]",
-        link: "text-[#2B2520] underline-offset-4 hover:underline p-0 h-auto",
+          "bg-[#B0453A] text-[#F4EFEA] hover:bg-[#9A3B31] active:scale-[0.98]",
+        link: "text-foreground underline-offset-4 hover:underline p-0 h-auto",
         white:
-          "bg-surface text-[#2B2520] hover:bg-zinc-100 active:scale-[0.98]",
+          "bg-background text-foreground hover:opacity-90 active:scale-[0.98]",
         "outline-white":
-          "border border-white bg-transparent text-white hover:bg-surface hover:text-[#2B2520] active:scale-[0.98]",
+          "border border-[#F4EFEA]/60 bg-transparent text-[#F4EFEA] hover:bg-[#F4EFEA] hover:text-[#0B1220] active:scale-[0.98]",
       },
       size: {
         sm: "h-9 px-4 text-sm rounded-full",

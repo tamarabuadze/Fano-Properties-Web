@@ -11,16 +11,16 @@ export default function PrivacyPolicyPage() {
     <div className="min-h-screen pt-20">
       <div className="page-band py-14 lg:py-20">
         <div className="container-site">
-          <p className="eyebrow mb-5">Legal</p>
-          <h1 className="font-display text-[clamp(40px,5.5vw,72px)] font-normal leading-[1.02] tracking-[-0.01em] text-[#2B2520]">
+          <p className="lx-eyebrow mb-5">Legal</p>
+          <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
             Privacy policy
           </h1>
-          <p className="mt-5 text-[13px] tracking-[0.04em] text-[#2B2520]/55">Last updated: November 4, 2026</p>
+          <p className="mt-5 text-[13px] tracking-[0.04em] text-lx-text/55">Last updated: November 4, 2026</p>
         </div>
       </div>
 
       <div className="container-site max-w-3xl py-14 lg:py-20">
-        <div className="prose max-w-none prose-headings:font-display prose-headings:font-normal prose-headings:tracking-[-0.01em] prose-headings:text-[#2B2520] prose-h2:text-[28px] prose-h2:mt-12 prose-h2:mb-4 prose-p:text-[15px] prose-p:leading-[1.85] prose-p:text-[#2B2520]/80 prose-strong:text-[#2B2520] prose-a:text-[#8C6A47]">
+        <div className="prose prose-invert max-w-none prose-headings:font-display prose-headings:font-normal prose-headings:tracking-[-0.01em] prose-headings:text-lx-text prose-h2:text-[28px] prose-h2:mt-12 prose-h2:mb-4 prose-p:text-[15px] prose-p:leading-[1.85] prose-p:text-lx-text/80 prose-strong:text-lx-text prose-a:text-lx-gold">
           <h2>Information We Collect</h2>
           <p>
             We collect information you provide directly to us, such as when you submit an inquiry, use our ROI calculator, or communicate with our team. This may include your name, email address, phone number, and property preferences.

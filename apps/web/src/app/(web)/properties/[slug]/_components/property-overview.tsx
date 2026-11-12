@@ -54,63 +54,63 @@ export function PropertyOverview({ property }: { property: Property }) {
       {/* Header */}
       <div className="mb-10">
         <div className="mb-5 flex flex-wrap items-center gap-2">
-          <span className={`inline-flex items-center rounded-full bg-[#2B2520] px-3 py-1 capitalize text-[#F4EFEA] ${labelClass}`}>
+          <span className={`inline-flex items-center rounded-full bg-lx-gold px-3 py-1 capitalize text-lx-page ${labelClass}`}>
             For {property.listingType}
           </span>
-          <span className={`inline-flex items-center rounded-full border border-[#C5BAAB]/70 px-3 py-1 capitalize text-[#2B2520] ${labelClass}`}>
+          <span className={`inline-flex items-center rounded-full border border-lx-line px-3 py-1 capitalize text-lx-text ${labelClass}`}>
             {isCommercial && property.unitType ? `Commercial · ${unitTypeLabel(property.unitType)}` : property.propertyType}
           </span>
           <span
             className={`inline-flex items-center rounded-full border px-3 py-1 capitalize ${labelClass} ${
-              available ? "border-[#8C6A47]/40 text-[#8C6A47]" : "border-[#E2A862] text-[#8C6A47]"
+              available ? "border-lx-gold/50 text-lx-gold" : "border-lx-gold text-lx-pale"
             }`}
           >
             {PROPERTY_STATUS_LABELS[property.status] ?? property.status}
           </span>
         </div>
 
-        <h1 className="font-display text-[clamp(34px,4.5vw,56px)] font-normal leading-[1.05] tracking-[-0.01em] text-[#2B2520] text-balance">
+        <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text text-balance">
           {headline}
         </h1>
         {details.length > 0 && (
-          <p className="mt-3 font-display text-lg italic text-[#8C6A47]">{details.join(" · ")}</p>
+          <p className="mt-3 font-display text-lg italic text-lx-pale">{details.join(" · ")}</p>
         )}
 
-        <div className="mt-4 flex items-center gap-2 text-[#2B2520]/65">
+        <div className="mt-4 flex items-center gap-2 text-lx-text/65">
           <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
           <p className="text-[15px]">{address}</p>
         </div>
 
-        <p className="mt-8 font-display text-[clamp(28px,3.4vw,40px)] font-normal leading-none text-[#2B2520]">
+        <p className="mt-8 font-display text-[clamp(28px,3.4vw,40px)] font-normal leading-none text-lx-text">
           {formatPrice(price, property.currency)}
           {property.priceUnit === "per_sqft" && (
-            <span className="text-lg text-[#2B2520]/55"> /sq ft</span>
+            <span className="text-lg text-lx-muted"> /sq ft</span>
           )}
           {property.listingType === "rent" && (
-            <span className="text-lg text-[#2B2520]/55"> /month</span>
+            <span className="text-lg text-lx-muted"> /month</span>
           )}
         </p>
       </div>
 
       {/* Stats: a hairline row of serif figures */}
-      <dl className="mb-12 flex flex-wrap border-y border-[#C5BAAB]/40">
+      <dl className="mb-12 flex flex-wrap border-y border-lx-line">
         {stats.map((s, i) => (
-          <div key={s.label} className={`flex-1 py-5 ${i > 0 ? "border-l border-[#C5BAAB]/40 pl-6" : ""} ${i < stats.length - 1 ? "pr-6" : ""}`}>
-            <dd className="font-display text-[28px] font-normal leading-none text-[#2B2520]">{s.value}</dd>
-            <dt className={`mt-2 text-[#2B2520]/55 ${labelClass}`}>{s.label}</dt>
+          <div key={s.label} className={`flex-1 py-5 ${i > 0 ? "border-l border-lx-line pl-6" : ""} ${i < stats.length - 1 ? "pr-6" : ""}`}>
+            <dd className="font-display text-[28px] font-normal leading-none text-lx-text">{s.value}</dd>
+            <dt className={`mt-2 text-lx-muted ${labelClass}`}>{s.label}</dt>
           </div>
         ))}
       </dl>
 
       {/* Description */}
       <div className="mb-10">
-        <p className="eyebrow mb-5">About this property</p>
-        <div className="max-w-none text-[15px] leading-[1.85] text-[#2B2520]/80">
+        <p className="lx-eyebrow mb-5">About this property</p>
+        <div className="max-w-none text-[15px] leading-[1.85] text-lx-text/75">
           {blocks.map((block, i) =>
             block.type === "heading" ? (
               <h3
                 key={i}
-                className="mb-3 mt-8 font-display text-[22px] font-normal leading-tight text-[#2B2520] first:mt-0"
+                className="mb-3 mt-8 font-display text-[22px] font-normal leading-tight text-lx-text first:mt-0"
               >
                 {block.text}
               </h3>
@@ -120,7 +120,7 @@ export function PropertyOverview({ property }: { property: Property }) {
                   <li key={j} className="relative pl-6">
                     <span
                       aria-hidden="true"
-                      className="absolute left-0 top-[0.85em] h-px w-3.5 bg-[#E2A862]"
+                      className="absolute left-0 top-[0.85em] h-px w-3.5 bg-lx-gold"
                     />
                     {item}
                   </li>
@@ -136,7 +136,7 @@ export function PropertyOverview({ property }: { property: Property }) {
       </div>
 
       {/* Meta */}
-      <div className="flex flex-wrap gap-x-8 gap-y-2 border-t border-[#C5BAAB]/40 pt-5 text-[12px] text-[#2B2520]/55">
+      <div className="flex flex-wrap gap-x-8 gap-y-2 border-t border-lx-line pt-5 text-[12px] text-lx-muted">
         <div className="flex items-center gap-2">
           <Calendar className="h-3.5 w-3.5" aria-hidden="true" />
           <span>Listed {formatDate(property.createdAt)}</span>

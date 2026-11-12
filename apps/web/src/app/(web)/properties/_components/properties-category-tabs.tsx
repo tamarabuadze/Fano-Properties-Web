@@ -10,7 +10,7 @@ interface PropertiesCategoryTabsProps {
   unitType?: string;
 }
 
-// Hairline pill groups: the active tab is solid espresso, the rest plain text
+// Hairline pill groups: the active tab is solid gold, the rest quiet bone text
 export function PropertiesCategoryTabs({ category, search, listingType, unitType }: PropertiesCategoryTabsProps) {
   const commercial = category === "commercial";
   const href = (toCategory: Category, toListingType?: string) => {
@@ -26,13 +26,13 @@ export function PropertiesCategoryTabs({ category, search, listingType, unitType
 
   const tabClass = (active: boolean) =>
     cn(
-      "inline-flex h-10 items-center rounded-full px-5 text-[13px] transition-colors",
-      active ? "bg-[#2B2520] text-[#F4EFEA]" : "text-[#2B2520]/65 hover:text-[#2B2520]"
+      "inline-flex h-10 items-center rounded-full px-5 font-label text-[11px] font-bold uppercase tracking-[0.16em] transition-colors",
+      active ? "bg-lx-gold text-lx-page" : "text-lx-text/60 hover:text-lx-text"
     );
 
   return (
     <div className="mb-10 flex flex-wrap items-center gap-3">
-      <div className="inline-flex gap-1 rounded-full border border-[#C5BAAB]/60 p-1" role="tablist" aria-label="Property category">
+      <div className="inline-flex gap-1 rounded-full border border-lx-line p-1" role="tablist" aria-label="Property category">
         {[
           { label: "All", value: "all" as const },
           { label: "Residential", value: "residential" as const },
@@ -52,7 +52,7 @@ export function PropertiesCategoryTabs({ category, search, listingType, unitType
       </div>
 
       {commercial && (
-        <div className="inline-flex gap-1 rounded-full border border-[#C5BAAB]/60 p-1" role="tablist" aria-label="Buy or lease">
+        <div className="inline-flex gap-1 rounded-full border border-lx-line p-1" role="tablist" aria-label="Buy or lease">
           {[
             { label: "Buy", value: "sale" },
             { label: "Lease", value: "lease" },

@@ -37,21 +37,21 @@ export async function PropertiesGrid({ filters }: PropertiesGridProps) {
   if (result.data.length === 0) {
     return (
       <div className="py-24 text-center">
-        <p className="font-display text-[32px] font-normal leading-tight text-[#2B2520]">No properties found</p>
-        <p className="mt-3 text-[14px] text-[#2B2520]/60">Try adjusting your filters or search terms.</p>
+        <p className="font-display text-[32px] font-normal leading-tight text-lx-text">No properties found</p>
+        <p className="mt-3 text-[14px] text-lx-text/60">Try adjusting your filters or search terms.</p>
       </div>
     );
   }
 
   return (
     <div>
-      <div className="mb-8 flex items-center justify-between border-b border-[#C5BAAB]/40 pb-4">
-        <p className="eyebrow">
+      <div className="mb-8 flex items-center justify-between border-b border-lx-line pb-4">
+        <p className="lx-eyebrow">
           {result.total} {result.total === 1 ? "property" : "properties"}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
         {result.data.map((property) => (
           <PropertyCard
             key={property.id}
@@ -76,8 +76,8 @@ export async function PropertiesGrid({ filters }: PropertiesGridProps) {
       </div>
 
       {result.totalPages > 1 && (
-        <div className="mt-14 flex justify-center border-t border-[#C5BAAB]/40 pt-6">
-          <p className="text-[12px] tracking-[0.1em] text-[#2B2520]/55">
+        <div className="mt-14 flex justify-center border-t border-lx-line pt-6">
+          <p className="font-label text-[10px] uppercase tracking-[0.2em] text-lx-muted">
             Page {result.page} of {result.totalPages}
           </p>
         </div>

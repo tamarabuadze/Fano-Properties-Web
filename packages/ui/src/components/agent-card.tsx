@@ -47,7 +47,7 @@ function AgentCard({
 
   return (
     <Link href={`/agents/${slug}`} className={cn("group flex h-full flex-col", className)}>
-      <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-[#E6DFD5]">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-lx-raised">
         {avatar ? (
           <Image
             src={avatar}
@@ -61,7 +61,7 @@ function AgentCard({
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
-            <span className="font-display text-5xl font-normal text-[#8C6A47]/60">
+            <span className="font-display text-5xl font-normal text-lx-gold/60">
               {firstName[0]}
               {lastName?.[0]}
             </span>
@@ -70,21 +70,21 @@ function AgentCard({
       </div>
 
       <div className="flex flex-1 flex-col pt-5">
-        <h3 className="font-display text-[24px] font-normal leading-tight text-[#2B2520] transition-colors group-hover:text-[#8C6A47]">
+        <h3 className="font-display text-[24px] font-normal leading-tight text-lx-text transition-colors group-hover:text-lx-gold">
           {firstName} {lastName}
         </h3>
-        {title && <p className="mt-1 text-[13px] text-[#2B2520]/65">{title}</p>}
-        {specialization && <p className="mt-1 text-[12px] text-[#A39886]">{specialization}</p>}
+        {title && <p className="mt-1 text-[13px] text-lx-text/65">{title}</p>}
+        {specialization && <p className="mt-1 text-[12px] text-lx-muted">{specialization}</p>}
 
         {languages.length > 0 && (
-          <p className="mt-3 font-label text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8C6A47]">
+          <p className="mt-3 font-label text-[10px] font-semibold uppercase tracking-[0.18em] text-lx-gold">
             {languages.join(" · ")}
           </p>
         )}
 
-        <div className="mt-auto flex items-center justify-between gap-4 border-t border-[#C5BAAB]/40 pt-3">
-          <p className="text-[12px] text-[#2B2520]/55">{facts.join(" · ")}</p>
-          <span className="inline-flex items-center gap-3 text-[12px] font-medium text-[#2B2520] after:h-px after:w-6 after:bg-[#2B2520] after:transition-all after:duration-300 group-hover:after:w-10">
+        <div className="mt-auto flex items-center justify-between gap-4 border-t border-lx-line pt-3">
+          <p className="text-[12px] text-lx-text/55">{facts.join(" · ")}</p>
+          <span className="inline-flex items-center gap-3 text-[12px] font-medium text-lx-text after:h-px after:w-6 after:bg-lx-gold after:transition-all after:duration-300 group-hover:after:w-10">
             View profile
           </span>
         </div>

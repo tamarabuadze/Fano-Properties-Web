@@ -61,11 +61,11 @@ export default function FaqPage() {
       />
       <div className="page-band py-14 lg:py-20">
         <div className="container-site">
-          <p className="eyebrow mb-5">Help centre</p>
-          <h1 className="font-display text-[clamp(40px,5.5vw,72px)] font-normal leading-[1.02] tracking-[-0.01em] text-[#2B2520] text-balance">
+          <p className="lx-eyebrow mb-5">Help centre</p>
+          <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text text-balance">
             Frequently asked questions
           </h1>
-          <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-[#2B2520]/70">
+          <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-lx-text/70">
             Everything you need to know about working with Fano Properties.
           </p>
         </div>

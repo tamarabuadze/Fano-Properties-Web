@@ -30,9 +30,9 @@ interface PropertyInquiryFormProps {
   propertyTitle: string;
 }
 
-// Hairline-underlined fields on a linen panel, closed by an espresso pill
+// Hairline-underlined fields on a charcoal panel, closed by the glossy gold pill
 const inputCls =
-  "w-full h-11 border-0 border-b border-[#C5BAAB]/60 bg-transparent px-0 text-[14px] text-[#2B2520] placeholder:text-[#A39886] focus:border-[#E2A862] focus:outline-none focus:ring-0 transition-colors";
+  "w-full h-11 rounded-none !border-0 !border-b !border-lx-line !bg-transparent px-0 text-[14px] text-lx-text placeholder:text-lx-muted focus:!border-lx-gold focus:outline-none focus:ring-0 transition-colors";
 
 export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInquiryFormProps) {
   const {
@@ -59,9 +59,9 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
   }
 
   return (
-    <div className="rounded-[4px] bg-[#FBF8F4] p-6">
-      <p className="eyebrow mb-3">Enquire</p>
-      <h3 className="mb-6 font-display text-[26px] font-normal leading-tight text-[#2B2520]">Request information</h3>
+    <div className="rounded-[4px] border border-lx-line bg-lx-surface p-6">
+      <p className="lx-eyebrow mb-4">Enquire</p>
+      <h3 className="mb-6 font-display text-[24px] font-normal leading-tight text-lx-text">Request information</h3>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         <div className="grid grid-cols-2 gap-5">
@@ -73,7 +73,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
               className={inputCls}
             />
             {errors.firstName && (
-              <p className="mt-1 text-xs text-red-600">{errors.firstName.message}</p>
+              <p className="mt-1 text-xs text-[#E08A7E]">{errors.firstName.message}</p>
             )}
           </div>
           <div>
@@ -84,7 +84,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
               className={inputCls}
             />
             {errors.lastName && (
-              <p className="mt-1 text-xs text-red-600">{errors.lastName.message}</p>
+              <p className="mt-1 text-xs text-[#E08A7E]">{errors.lastName.message}</p>
             )}
           </div>
         </div>
@@ -98,7 +98,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
             className={inputCls}
           />
           {errors.email && (
-            <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>
+            <p className="mt-1 text-xs text-[#E08A7E]">{errors.email.message}</p>
           )}
         </div>
 
@@ -111,7 +111,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
             aria-label="Mobile number"
             className={inputCls}
           />
-          {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone.message}</p>}
+          {errors.phone && <p className="mt-1 text-xs text-[#E08A7E]">{errors.phone.message}</p>}
         </div>
 
         <div>
@@ -120,22 +120,22 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
             rows={4}
             placeholder="Your message"
             aria-label="Your message"
-            className="w-full resize-none border-0 border-b border-[#C5BAAB]/60 bg-transparent px-0 py-2 text-[14px] leading-relaxed text-[#2B2520] placeholder:text-[#A39886] focus:border-[#E2A862] focus:outline-none focus:ring-0 transition-colors"
+            className="w-full resize-none rounded-none !border-0 !border-b !border-lx-line !bg-transparent px-0 py-2 text-[14px] leading-relaxed text-lx-text placeholder:text-lx-muted focus:!border-lx-gold focus:outline-none focus:ring-0 transition-colors"
           />
           {errors.message && (
-            <p className="mt-1 text-xs text-red-600">{errors.message.message}</p>
+            <p className="mt-1 text-xs text-[#E08A7E]">{errors.message.message}</p>
           )}
         </div>
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="btn-pill w-full disabled:cursor-not-allowed disabled:opacity-60"
+          className="btn-gold w-full disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSubmitting ? "Sending…" : "Send inquiry"}
         </button>
 
-        <p className="text-center text-[12px] text-[#2B2520]/50">
+        <p className="text-center text-[12px] text-lx-text/50">
           No commitment required. We typically respond within 2 hours.
         </p>
       </form>

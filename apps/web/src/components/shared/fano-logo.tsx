@@ -17,6 +17,19 @@ interface FanoLogoProps {
   className?: string;
 }
 
+// The house mark on its own, for large faint watermarks behind a section.
+// Decorative: hidden from assistive technology.
+export function FanoMark({ color = "#E2A862", className }: FanoLogoProps) {
+  return (
+    <svg viewBox="4 4 80 90" aria-hidden="true" focusable="false" className={className} style={{ color }}>
+      <g fill="currentColor">
+        <path d={MARK_D} />
+        <path fillRule="evenodd" d={RING_D} />
+      </g>
+    </svg>
+  );
+}
+
 export function FanoLogo({ color = LOGO_COLORS.bronze, className }: FanoLogoProps) {
   return (
     <svg

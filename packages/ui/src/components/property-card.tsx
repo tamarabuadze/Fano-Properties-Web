@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn, isOptimizedImageHost, unitTypeLabel, formatPlace, splitListingTitle } from "@fano/utils";
 
-// Tiny warm-beige JPEG used as blur placeholder before real image loads
+// Tiny navy JPEG used as blur placeholder before the real image loads
 const BLUR_PLACEHOLDER =
   "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAAECAADAAQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQQG/8QAHBAAAgMAAwEAAAAAAAAAAAAAAQIDBAASITH/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJXi1KrXLpKhbIxWkQMVIOhGR3Qf/9k=";
 
@@ -30,26 +30,32 @@ export interface PropertyCardProps {
   priority?: boolean;
 }
 
-function formatPrice(price: number, currency = "AED"): string {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 }).format(price);
+function formatMoney(price: number, currency = "AED"): string {
+  return new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(price) + (currency === "AED" ? "" : ` ${currency}`);
 }
 
-// A gallery-style card: the photograph, then a serif name, the place, the price
-// and a quiet line of facts. No box, no border; a hairline separates text from image.
+// Photograph, then serif name, tracked place line and one quiet line of facts;
+// the price sits alone in serif. No box, no border. Hover: slow push-in, slight dim.
 function PropertyCard({
   title, slug, propertyType, unitType, priceUnit, listingType, price, currency = "AED",
-  location, city, bedrooms, bathrooms, sqft, coverImage, featured, className, priority = false,
+  location, city, bedrooms, bathrooms, sqft, coverImage, className, priority = false,
 }: PropertyCardProps) {
   const isCommercial = propertyType === "commercial";
-  const { headline, details } = splitListingTitle(title);
+  const { headline } = splitListingTitle(title);
   const place = formatPlace(location, city);
-  const facts = isCommercial
+  const facts = (isCommercial
     ? [unitTypeLabel(unitType), sqft > 0 ? `${sqft.toLocaleString("en-US")} sq ft` : null]
-    : [`${bedrooms} bed`, `${bathrooms} bath`, sqft > 0 ? `${sqft.toLocaleString("en-US")} sq ft` : null];
+    : [
+        bedrooms > 0 ? `${bedrooms} bedroom${bedrooms === 1 ? "" : "s"}` : null,
+        sqft > 0 ? `${sqft.toLocaleString("en-US")} sq ft` : null,
+        bathrooms > 0 ? `${bathrooms} bath` : null,
+      ]
+  ).filter(Boolean) as string[];
+  const label = listingType === "rent" ? "To let" : listingType === "lease" ? "To lease" : null;
 
   return (
-    <Link href={`/properties/${slug}`} className={cn("cinema-property-card group block h-full", className)}>
-      <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-[#E6DFD5]">
+    <Link href={`/properties/${slug}`} className={cn("group block h-full", className)}>
+      <div className="relative aspect-[4/3] overflow-hidden rounded-[4px] bg-lx-raised">
         <Image
           src={coverImage}
           unoptimized={!isOptimizedImageHost(coverImage)}
@@ -57,36 +63,31 @@ function PropertyCard({
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 420px"
           quality={85}
-          className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+          className="object-cover transition-[transform,opacity] duration-[1400ms] ease-out group-hover:scale-[1.04] group-hover:opacity-90"
           placeholder="blur"
           blurDataURL={BLUR_PLACEHOLDER}
           priority={priority}
         />
-        <div className="absolute left-3 top-3 flex gap-2">
-          <span className="rounded-full bg-[#F4EFEA]/92 px-2.5 py-1 font-label text-[10px] font-semibold uppercase tracking-[0.16em] text-[#2B2520] backdrop-blur-sm">
-            For {listingType}
+        {label && (
+          <span className="absolute left-4 top-4 rounded-full border border-lx-gold/60 bg-lx-page/60 px-3 py-1 font-label text-[9px] font-semibold uppercase tracking-[0.2em] text-lx-pale backdrop-blur-sm">
+            {label}
           </span>
-          {featured && (
-            <span className="rounded-full bg-[#2B2520]/85 px-2.5 py-1 font-label text-[10px] font-semibold uppercase tracking-[0.16em] text-[#F4EFEA] backdrop-blur-sm">
-              Featured
-            </span>
-          )}
-        </div>
+        )}
       </div>
 
-      <div className="pt-5">
-        <h3 className="font-display text-[24px] font-normal leading-tight text-[#2B2520] transition-colors group-hover:text-[#8C6A47]">
+      <div className="pt-6">
+        <h3 className="truncate font-display text-[22px] font-normal leading-tight text-lx-text transition-colors group-hover:text-lx-gold">
           {headline}
         </h3>
-        {details.length > 0 && <p className="mt-1 text-[12px] text-[#A39886]">{details.join(" · ")}</p>}
-        <p className="mt-1.5 text-[13px] text-[#2B2520]/65">{place}</p>
-        <div className="mt-4 flex items-baseline justify-between gap-4 border-t border-[#C5BAAB]/40 pt-3">
-          <p className="text-[15px] font-medium tracking-[0.01em] text-[#2B2520]">
-            {formatPrice(price, currency)}
-            {priceUnit === "per_sqft" && <span className="text-[12px] font-normal text-[#2B2520]/55"> /sq ft</span>}
-            {listingType === "rent" && <span className="text-[12px] font-normal text-[#2B2520]/55"> /mo</span>}
+        <p className="mt-2 truncate font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-lx-muted">{place}</p>
+        <div className="mt-5 flex items-baseline justify-between gap-4 border-t border-lx-line pt-4">
+          <p className="font-display text-[19px] leading-none text-lx-text">
+            <span className="mr-2 font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-lx-muted">{currency}</span>
+            {formatMoney(price, currency)}
+            {priceUnit === "per_sqft" && <span className="ml-1 text-[12px] text-lx-muted">/sq ft</span>}
+            {listingType === "rent" && <span className="ml-1 text-[12px] text-lx-muted">/mo</span>}
           </p>
-          <p className="text-[12px] text-[#2B2520]/55">{facts.filter(Boolean).join(" · ")}</p>
+          {facts.length > 0 && <p className="truncate text-right text-[12px] text-lx-text/55">{facts.join(" · ")}</p>}
         </div>
       </div>
     </Link>

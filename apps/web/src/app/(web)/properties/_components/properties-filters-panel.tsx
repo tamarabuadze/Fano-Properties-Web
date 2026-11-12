@@ -48,12 +48,12 @@ export function PropertiesFiltersPanel({ initialFilters }: PropertiesFiltersPane
           onClick={() => setOpen(true)}
           aria-haspopup="dialog"
           aria-expanded={open}
-          className="btn-pill-outline"
+          className="btn-gold-outline"
         >
           <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
           Filters
           {activeCount > 0 && (
-            <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#2B2520] px-1.5 text-[11px] font-medium text-[#F4EFEA]">
+            <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-lx-gold px-1.5 text-[11px] font-semibold text-lx-page">
               {activeCount}
             </span>
           )}
@@ -70,25 +70,25 @@ export function PropertiesFiltersPanel({ initialFilters }: PropertiesFiltersPane
             type="button"
             aria-label="Close filters"
             onClick={() => setOpen(false)}
-            className="absolute inset-0 bg-[#2B2520]/50"
+            className="absolute inset-0 bg-lx-page/70"
           />
           <div
             role="dialog"
             aria-modal="true"
             aria-label="Filter properties"
             className={cn(
-              "absolute inset-x-0 bottom-0 flex max-h-[88dvh] flex-col rounded-t-[12px] bg-[#FBF8F4] transition-transform duration-300 ease-[cubic-bezier(.25,.46,.45,.94)]",
+              "absolute inset-x-0 bottom-0 flex max-h-[88dvh] flex-col rounded-t-[12px] border-t border-lx-line bg-lx-surface transition-transform duration-300 ease-[cubic-bezier(.25,.46,.45,.94)]",
               open ? "translate-y-0" : "translate-y-full"
             )}
           >
-            <div className="flex items-center justify-between border-b border-[#C5BAAB]/40 px-5 pb-4 pt-5">
-              <span aria-hidden="true" className="absolute left-1/2 top-2 h-1 w-10 -translate-x-1/2 rounded-full bg-[#C5BAAB]/60" />
-              <span className="eyebrow">Refine your search</span>
+            <div className="flex items-center justify-between border-b border-lx-line px-5 pb-4 pt-5">
+              <span aria-hidden="true" className="absolute left-1/2 top-2 h-1 w-10 -translate-x-1/2 rounded-full bg-lx-gold/40" />
+              <span className="lx-eyebrow">Refine your search</span>
               <button
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label="Close filters"
-                className="flex h-9 w-9 items-center justify-center rounded-full text-[#2B2520]/60 transition-colors hover:bg-[#E6DFD5] hover:text-[#2B2520]"
+                className="flex h-9 w-9 items-center justify-center rounded-full text-lx-text/60 transition-colors hover:bg-lx-raised hover:text-lx-text"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -98,11 +98,11 @@ export function PropertiesFiltersPanel({ initialFilters }: PropertiesFiltersPane
               <PropertiesFilters initialFilters={initialFilters} />
             </div>
 
-            <div className="border-t border-[#C5BAAB]/40 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4">
+            <div className="border-t border-lx-line px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4">
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="btn-pill w-full"
+                className="btn-gold w-full"
               >
                 Show results
               </button>

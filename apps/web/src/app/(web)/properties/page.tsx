@@ -66,7 +66,7 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
     minBedrooms: isCommercial ? undefined : raw.minBedrooms,
   };
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen bg-lx-page pt-20 lg:pt-24">
       <PropertiesHeader />
       <div className="container-site py-12 lg:py-16">
         <PropertiesCategoryTabs category={category} search={params.search} listingType={params.listingType} unitType={params.unitType} />
@@ -85,12 +85,12 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
 
 function PropertiesGridSkeleton() {
   return (
-    <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="grid grid-cols-1 gap-x-10 gap-y-14 sm:grid-cols-2 xl:grid-cols-3">
       {Array.from({ length: 6 }).map((_, i) => (
         <div key={i} className="animate-pulse">
-          <div className="aspect-[4/3] rounded-[4px] bg-[#E6DFD5]" />
-          <div className="mt-5 h-5 w-3/4 rounded-[2px] bg-[#E6DFD5]" />
-          <div className="mt-3 h-3 w-1/2 rounded-[2px] bg-[#E6DFD5]/70" />
+          <div className="aspect-[4/3] rounded-[4px] bg-lx-raised" />
+          <div className="mt-6 h-5 w-3/4 rounded-[2px] bg-lx-raised" />
+          <div className="mt-3 h-3 w-1/2 rounded-[2px] bg-lx-raised/70" />
         </div>
       ))}
     </div>
