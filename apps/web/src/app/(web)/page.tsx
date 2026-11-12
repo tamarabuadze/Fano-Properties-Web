@@ -4,6 +4,7 @@ import { PropertySearchSection } from "@/components/sections/property-search";
 import { FeaturedPropertiesSection } from "@/components/sections/featured-properties";
 import { PropertyTypesSection } from "@/components/sections/property-types";
 import { WhyUsSection } from "@/components/sections/why-us";
+import { InvitationBand } from "@/components/sections/invitation-band";
 import { AgentsShowcaseSection } from "@/components/sections/agents-showcase";
 import { LatestArticlesSection } from "@/components/sections/latest-articles";
 import { CtaSection } from "@/components/sections/cta-section";
@@ -76,8 +77,9 @@ export default async function HomePage() {
       <HeroSection />
       <PropertySearchSection />
       <FeaturedPropertiesSection properties={properties as never} />
-      <PropertyTypesSection />
       <WhyUsSection />
+      <InvitationBand />
+      <PropertyTypesSection />
       {agents.length > 0 && <AgentsShowcaseSection agents={agents as never} />}
       <LatestArticlesSection articles={articles as never} />
       <CtaSection />

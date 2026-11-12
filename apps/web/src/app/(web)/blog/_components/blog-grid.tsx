@@ -16,15 +16,15 @@ export async function BlogGrid({
   if (result.data.length === 0) {
     return (
       <div className="py-24 text-center">
-        <p className="text-xl font-semibold text-[#2B2520] mb-2">No articles yet</p>
-        <p className="text-zinc-500">Check back soon for market insights and news.</p>
+        <p className="font-display text-[32px] font-normal leading-tight text-[#2B2520]">No articles yet</p>
+        <p className="mt-3 text-[14px] text-[#2B2520]/60">Check back soon for market insights and news.</p>
       </div>
     );
   }
 
   return (
-    <div className="mt-8">
-      <AnimateStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="mt-12">
+      <AnimateStagger className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
         {result.data.map((article) => (
           <BlogCard
             key={article.id}

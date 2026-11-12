@@ -1,14 +1,12 @@
 export function PropertiesHeader() {
   return (
-    <div className="page-band py-12">
+    <div className="page-band py-14 lg:py-20">
       <div className="container-site">
-        <p className="text-xs font-medium uppercase tracking-widest text-zinc-400 mb-3">
-          All Listings
-        </p>
-        <h1 className="text-4xl lg:text-5xl font-semibold [letter-spacing:-0.025em] text-black">
-          Find Your Property
+        <p className="eyebrow mb-5">All listings</p>
+        <h1 className="font-display text-[clamp(40px,5.5vw,72px)] font-normal leading-[1.02] tracking-[-0.01em] text-[#2B2520] text-balance">
+          Find your property
         </h1>
-        <p className="text-zinc-500 mt-3 max-w-xl">
+        <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-[#2B2520]/70">
           Explore our curated portfolio of premium homes, apartments, and investment properties.
         </p>
       </div>

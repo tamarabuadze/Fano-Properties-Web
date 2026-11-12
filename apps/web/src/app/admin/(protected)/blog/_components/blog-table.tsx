@@ -31,11 +31,11 @@ export function BlogTable({ articles }: { articles: Article[] }) {
   }
 
   return (
-    <div className="rounded-2xl border border-border bg-card overflow-hidden">
+    <div className="rounded-[4px] border border-border bg-card overflow-hidden">
       <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-border bg-secondary/40">
+          <tr className="border-b border-border">
             <th className="text-left px-4 py-3 font-medium text-muted-foreground">Title</th>
             <th className="text-left px-4 py-3 font-medium text-muted-foreground">Category</th>
             <th className="text-left px-4 py-3 font-medium text-muted-foreground">Status</th>
@@ -62,7 +62,7 @@ export function BlogTable({ articles }: { articles: Article[] }) {
                 </td>
                 <td className="px-4 py-3">
                   <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${
-                    a.published ? "bg-green-50 text-green-700" : "bg-zinc-100 text-zinc-600"
+                    a.published ? "bg-[#F6E7D2] text-[#6B5038]" : "bg-secondary text-muted-foreground"
                   }`}>
                     {a.published ? "Published" : "Draft"}
                   </span>
@@ -75,17 +75,17 @@ export function BlogTable({ articles }: { articles: Article[] }) {
                     <button
                       onClick={() => handleToggle(a.id, a.published)}
                       aria-label={a.published ? "Unpublish" : "Publish"}
-                      className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
+                      className="h-8 w-8 rounded-full flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
                     >
                       {a.published ? <EyeOff className="h-4 w-4" /> : <Globe className="h-4 w-4" />}
                     </button>
-                    <Link href={`/admin/blog/${a.id}`} aria-label="Edit" className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors">
+                    <Link href={`/admin/blog/${a.id}`} aria-label="Edit" className="h-8 w-8 rounded-full flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors">
                       <Edit className="h-4 w-4" />
                     </Link>
                     <button
                       onClick={() => handleDelete(a.id)}
                       aria-label="Delete"
-                      className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-red-50 hover:text-red-600 transition-colors"
+                      className="h-8 w-8 rounded-full flex items-center justify-center text-muted-foreground hover:bg-[#F6E3DF] hover:text-[#B0453A] transition-colors"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>

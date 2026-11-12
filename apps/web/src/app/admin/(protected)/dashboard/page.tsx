@@ -82,7 +82,7 @@ export default async function DashboardPage() {
   return (
     <div className="p-6 lg:p-8 space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold text-foreground [letter-spacing:-0.02em]">Dashboard</h1>
+        <h1 className="font-display text-[32px] font-normal leading-tight text-foreground">Dashboard</h1>
         <p className="text-muted-foreground text-sm mt-1">Overview of your real estate platform.</p>
       </div>
 
@@ -92,17 +92,17 @@ export default async function DashboardPage() {
           <Link
             key={card.label}
             href={card.href}
-            className="group bg-card rounded-2xl border border-border p-5 hover:border-primary/30 transition-all hover:shadow-sm"
+            className="group bg-card rounded-[4px] border border-border p-5 transition-colors hover:border-[#C5BAAB]"
           >
             <div className="flex items-start justify-between mb-4">
-              <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${
-                card.highlight ? "bg-amber-50 border border-amber-100" : "bg-secondary"
+              <div className={`h-10 w-10 rounded-full flex items-center justify-center ${
+                card.highlight ? "bg-[#F6E7D2] border border-[#EFD3AE]" : "bg-secondary"
               }`}>
-                <card.icon className={`h-5 w-5 ${card.highlight ? "text-amber-600" : "text-muted-foreground"}`} />
+                <card.icon className={`h-5 w-5 ${card.highlight ? "text-[#8C6A47]" : "text-muted-foreground"}`} />
               </div>
               <ArrowUpRight className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-            <p className="text-2xl font-semibold text-foreground [letter-spacing:-0.02em]">{card.value}</p>
+            <p className="font-display text-[32px] font-normal leading-tight text-foreground">{card.value}</p>
             <p className="text-sm text-muted-foreground mt-1">{card.label}</p>
             <p className="text-xs text-muted-foreground mt-0.5">{card.sub}</p>
           </Link>
@@ -111,9 +111,9 @@ export default async function DashboardPage() {
 
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Recent Inquiries */}
-        <div className="bg-card rounded-2xl border border-border">
+        <div className="bg-card rounded-[4px] border border-border">
           <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-            <h2 className="font-semibold text-foreground text-sm">Recent Inquiries</h2>
+            <h2 className="font-label text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Recent Inquiries</h2>
             <Link href="/admin/inquiries" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               View all →
             </Link>
@@ -139,10 +139,10 @@ export default async function DashboardPage() {
                   </div>
                   <div className={`px-2 py-0.5 rounded-full text-xs font-medium ${
                     inq.status === "new"
-                      ? "bg-amber-50 text-amber-700"
+                      ? "bg-[#F6E7D2] text-[#8C6A47]"
                       : inq.status === "closed"
-                      ? "bg-green-50 text-green-700"
-                      : "bg-blue-50 text-blue-700"
+                      ? "bg-[#F6E7D2] text-[#6B5038]"
+                      : "bg-[#E6DFD5] text-[#2B2520]"
                   }`}>
                     {inq.status}
                   </div>
@@ -153,9 +153,9 @@ export default async function DashboardPage() {
         </div>
 
         {/* Recent Properties */}
-        <div className="bg-card rounded-2xl border border-border">
+        <div className="bg-card rounded-[4px] border border-border">
           <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-            <h2 className="font-semibold text-foreground text-sm">Recent Properties</h2>
+            <h2 className="font-label text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">Recent Properties</h2>
             <Link href="/admin/properties" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
               View all →
             </Link>
@@ -181,8 +181,8 @@ export default async function DashboardPage() {
                   </div>
                   <div className={`px-2 py-0.5 rounded-full text-xs font-medium ${
                     p.published
-                      ? "bg-green-50 text-green-700"
-                      : "bg-zinc-100 text-zinc-600"
+                      ? "bg-[#F6E7D2] text-[#6B5038]"
+                      : "bg-secondary text-muted-foreground"
                   }`}>
                     {p.published ? "Live" : "Draft"}
                   </div>

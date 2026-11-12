@@ -68,11 +68,11 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
   return (
     <div className="min-h-screen pt-20">
       <PropertiesHeader />
-      <div className="container-site py-10">
+      <div className="container-site py-12 lg:py-16">
         <PropertiesCategoryTabs category={category} search={params.search} listingType={params.listingType} unitType={params.unitType} />
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8">
+        <div className="flex flex-col gap-8 lg:flex-row lg:gap-14">
           <PropertiesFiltersPanel initialFilters={params} />
-          <main className="flex-1 min-w-0">
+          <main className="min-w-0 flex-1">
             <Suspense fallback={<PropertiesGridSkeleton />}>
               <PropertiesGrid filters={params} />
             </Suspense>
@@ -85,9 +85,13 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
 
 function PropertiesGridSkeleton() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
       {Array.from({ length: 6 }).map((_, i) => (
-        <div key={i} className="rounded-2xl bg-zinc-100 animate-pulse h-80" />
+        <div key={i} className="animate-pulse">
+          <div className="aspect-[4/3] rounded-[4px] bg-[#E6DFD5]" />
+          <div className="mt-5 h-5 w-3/4 rounded-[2px] bg-[#E6DFD5]" />
+          <div className="mt-3 h-3 w-1/2 rounded-[2px] bg-[#E6DFD5]/70" />
+        </div>
       ))}
     </div>
   );

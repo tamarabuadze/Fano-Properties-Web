@@ -9,8 +9,10 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "Arial", "sans-serif"],
-        display: ["var(--font-montserrat)", "Montserrat", "system-ui", "sans-serif"],
-        serif: ["var(--font-serif)", "Source Serif 4", "Georgia", "serif"],
+        /* Headings are the Bodoni serif; Montserrat remains for the wordmark and tracked labels */
+        display: ["var(--font-serif)", "Bodoni Moda", "Didot", "Georgia", "serif"],
+        serif: ["var(--font-serif)", "Bodoni Moda", "Didot", "Georgia", "serif"],
+        label: ["var(--font-montserrat)", "Montserrat", "system-ui", "sans-serif"],
       },
       colors: {
         /* Fano "Calcite Sand" theme, same as the Fano team app */

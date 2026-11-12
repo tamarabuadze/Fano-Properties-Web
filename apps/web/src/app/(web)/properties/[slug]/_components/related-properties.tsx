@@ -24,8 +24,9 @@ interface RelatedPropertiesProps {
 export function RelatedProperties({ properties }: RelatedPropertiesProps) {
   return (
     <div>
-      <h2 className="text-xl font-semibold text-black mb-6">Similar Properties</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <p className="eyebrow mb-3">You may also like</p>
+      <h2 className="mb-10 font-display text-[clamp(30px,3.6vw,44px)] font-normal leading-tight text-[#2B2520]">Similar properties</h2>
+      <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
         {properties.map((p) => (
           <PropertyCard
             key={p.id}

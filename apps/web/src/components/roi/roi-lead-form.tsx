@@ -51,6 +51,9 @@ function summarise(inputs: RoiInputs, result: RoiResult, propertyTitle?: string)
   ].join("\n");
 }
 
+const inputCls =
+  "w-full h-11 border-0 border-b border-[#C5BAAB]/60 bg-transparent px-0 text-[14px] text-[#2B2520] placeholder:text-[#A39886] focus:border-[#E2A862] focus:outline-none focus:ring-0 transition-colors";
+
 export function RoiLeadForm({ inputs, result, propertyId, propertyTitle }: RoiLeadFormProps) {
   const {
     register,
@@ -77,39 +80,37 @@ export function RoiLeadForm({ inputs, result, propertyId, propertyTitle }: RoiLe
     }
   }
 
-  const inputCls =
-    "w-full h-11 px-4 rounded-xl border border-border text-sm focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent placeholder:text-zinc-400 transition-all hover:border-zinc-300";
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="rounded-2xl border border-border p-6 space-y-3">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 rounded-[4px] bg-[#FBF8F4] p-6">
       <div>
-        <h3 className="text-sm font-semibold text-[#2B2520]">Talk these numbers through with an advisor</h3>
-        <p className="text-xs text-zinc-500 mt-1">
+        <p className="eyebrow mb-3">Speak to an advisor</p>
+        <h3 className="font-display text-[22px] font-normal leading-tight text-[#2B2520]">Talk these numbers through</h3>
+        <p className="mt-2 text-[13px] leading-[1.7] text-[#2B2520]/60">
           We&apos;ll send your figures to a Fano investment advisor, who will get back to you.
         </p>
       </div>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-5">
         <div>
           <input {...register("firstName")} placeholder="First name" aria-label="First name" className={inputCls} />
-          {errors.firstName && <p className="text-xs text-red-500 mt-1">{errors.firstName.message}</p>}
+          {errors.firstName && <p className="mt-1 text-xs text-red-600">{errors.firstName.message}</p>}
         </div>
         <div>
           <input {...register("lastName")} placeholder="Last name" aria-label="Last name" className={inputCls} />
-          {errors.lastName && <p className="text-xs text-red-500 mt-1">{errors.lastName.message}</p>}
+          {errors.lastName && <p className="mt-1 text-xs text-red-600">{errors.lastName.message}</p>}
         </div>
       </div>
       <div>
         <input {...register("email")} type="email" placeholder="Email address" aria-label="Email address" className={inputCls} />
-        {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
+        {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>}
       </div>
       <div>
         <input {...register("phone")} type="tel" inputMode="tel" placeholder="Mobile number (with country code)" aria-label="Mobile number" className={inputCls} />
-        {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone.message}</p>}
+        {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone.message}</p>}
       </div>
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full h-11 rounded-xl bg-[#8C6A47] text-white text-sm font-medium hover:bg-[#6B5038] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="btn-pill w-full disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? "Sending…" : "Request a free consultation"}
       </button>

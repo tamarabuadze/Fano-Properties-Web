@@ -2,7 +2,7 @@
 
 import React, { useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { Search, SlidersHorizontal } from "lucide-react";
+import { Search } from "lucide-react";
 import { COMMERCIAL_UNIT_TYPES, cn } from "@fano/utils";
 
 const LISTING_TYPES = [
@@ -35,6 +35,8 @@ interface PropertiesFiltersProps {
   initialFilters: Record<string, string | undefined>;
 }
 
+// A quiet filter column: tracked labels, hairline-separated groups, outline pills
+// and plain text options. No box, no fill; the active choice is solid espresso.
 export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -67,17 +69,28 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
 
   const hasFilters = Object.entries(initialFilters).some(([k, v]) => k !== "category" && !(isCommercial && k === "listingType") && Boolean(v));
 
+  const pill = (active: boolean) =>
+    cn(
+      "h-9 rounded-full border px-4 text-[12px] transition-colors",
+      active
+        ? "border-[#2B2520] bg-[#2B2520] text-[#F4EFEA]"
+        : "border-[#C5BAAB]/60 text-[#2B2520]/70 hover:border-[#2B2520] hover:text-[#2B2520]"
+    );
+
+  const option = (active: boolean) =>
+    cn(
+      "flex h-8 w-full items-center gap-3 text-left text-[13px] transition-colors",
+      active ? "text-[#2B2520]" : "text-[#2B2520]/60 hover:text-[#2B2520]"
+    );
+
   return (
-    <div className="rounded-2xl p-5 space-y-6" style={{ backgroundColor: "#2B2520" }}>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <SlidersHorizontal className="h-4 w-4 text-[#E2A862]" />
-          <span className="font-semibold text-sm text-[#E2A862]">Filters</span>
-        </div>
+    <div className="divide-y divide-[#C5BAAB]/40">
+      <div className="flex items-center justify-between pb-5">
+        <span className="eyebrow">Filters</span>
         {hasFilters && (
           <button
             onClick={clearFilters}
-            className="text-xs text-white/40 hover:text-white transition-colors"
+            className="text-[12px] text-[#2B2520]/55 underline-offset-4 transition-colors hover:text-[#2B2520] hover:underline"
           >
             Clear all
           </button>
@@ -85,12 +98,12 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
       </div>
 
       {/* Search */}
-      <div>
-        <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
+      <div className="py-5">
+        <label className="mb-3 block font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-[#2B2520]/55">
           Search
         </label>
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30" />
+          <Search className="pointer-events-none absolute left-0 top-1/2 h-4 w-4 -translate-y-1/2 text-[#A39886]" aria-hidden="true" />
           <input
             type="text"
             defaultValue={initialFilters.search}
@@ -100,27 +113,24 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
                 updateFilters("search", (e.target as HTMLInputElement).value);
               }
             }}
-            className="w-full h-10 pl-9 pr-3 rounded-xl border border-white/15 bg-white/5 text-white placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-[#E2A862]/30 focus:border-transparent"
+            className="h-10 w-full border-0 border-b border-[#C5BAAB]/60 bg-transparent pl-7 pr-0 text-[14px] text-[#2B2520] placeholder:text-[#A39886] focus:border-[#E2A862] focus:outline-none focus:ring-0"
           />
         </div>
       </div>
 
       {/* Listing Type (commercial uses the Buy / Lease tabs instead) */}
-      {!isCommercial && <div>
-        <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
-          Listing Type
+      {!isCommercial && <div className="py-5">
+        <label className="mb-3 block font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-[#2B2520]/55">
+          Listing type
         </label>
-        <div className="grid grid-cols-2 gap-1.5">
+        <div className="flex flex-wrap gap-2">
           {LISTING_TYPES.map((t) => (
             <button
               key={t.value}
               onClick={() => updateFilters("listingType", t.value)}
-              className={cn(
-                "h-9 px-3 rounded-xl text-sm font-medium border transition-all",
+              className={pill(
                 initialFilters.listingType === t.value ||
                   (!initialFilters.listingType && t.value === "")
-                  ? "bg-[#E2A862] text-[#2B2520] border-[#E2A862]"
-                  : "border-white/15 text-white/60 hover:border-[#E2A862]/50 hover:text-white"
               )}
             >
               {t.label}
@@ -131,70 +141,55 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
 
       {/* Unit Type (commercial) */}
       {isCommercial && (
-        <div>
-          <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
-            Unit Type
+        <div className="py-5">
+          <label className="mb-3 block font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-[#2B2520]/55">
+            Unit type
           </label>
-          <div className="space-y-1">
-            {UNIT_TYPES.map((t) => (
-              <button
-                key={t.value}
-                onClick={() => updateFilters("unitType", t.value)}
-                className={cn(
-                  "w-full text-left px-3 h-9 rounded-xl text-sm transition-all",
-                  initialFilters.unitType === t.value ||
-                    (!initialFilters.unitType && t.value === "")
-                    ? "bg-[#E2A862]/20 font-medium text-[#E2A862]"
-                    : "text-white/60 hover:bg-white/10 hover:text-white"
-                )}
-              >
-                {t.label}
-              </button>
-            ))}
+          <div className="space-y-0.5">
+            {UNIT_TYPES.map((t) => {
+              const active = initialFilters.unitType === t.value || (!initialFilters.unitType && t.value === "");
+              return (
+                <button key={t.value} onClick={() => updateFilters("unitType", t.value)} className={option(active)}>
+                  <span aria-hidden="true" className={cn("h-px transition-all", active ? "w-5 bg-[#E2A862]" : "w-0 bg-transparent")} />
+                  {t.label}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
 
       {/* Property Type */}
-      {!isCommercial && <div>
-        <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
-          Property Type
+      {!isCommercial && <div className="py-5">
+        <label className="mb-3 block font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-[#2B2520]/55">
+          Property type
         </label>
-        <div className="space-y-1">
-          {PROPERTY_TYPES.map((t) => (
-            <button
-              key={t.value}
-              onClick={() => updateFilters("propertyType", t.value)}
-              className={cn(
-                "w-full text-left px-3 h-9 rounded-xl text-sm transition-all",
-                initialFilters.propertyType === t.value ||
-                  (!initialFilters.propertyType && t.value === "")
-                  ? "bg-[#E2A862]/20 font-medium text-[#E2A862]"
-                  : "text-white/60 hover:bg-white/10 hover:text-white"
-              )}
-            >
-              {t.label}
-            </button>
-          ))}
+        <div className="space-y-0.5">
+          {PROPERTY_TYPES.map((t) => {
+            const active = initialFilters.propertyType === t.value || (!initialFilters.propertyType && t.value === "");
+            return (
+              <button key={t.value} onClick={() => updateFilters("propertyType", t.value)} className={option(active)}>
+                <span aria-hidden="true" className={cn("h-px transition-all", active ? "w-5 bg-[#E2A862]" : "w-0 bg-transparent")} />
+                {t.label}
+              </button>
+            );
+          })}
         </div>
       </div>}
 
       {/* Bedrooms */}
-      {!isCommercial && <div>
-        <label className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2 block">
+      {!isCommercial && <div className="py-5">
+        <label className="mb-3 block font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-[#2B2520]/55">
           Bedrooms
         </label>
-        <div className="flex gap-1.5 flex-wrap">
+        <div className="flex flex-wrap gap-2">
           {BEDROOMS.map((b) => (
             <button
               key={b.value}
               onClick={() => updateFilters("minBedrooms", b.value)}
-              className={cn(
-                "h-9 px-4 rounded-xl text-sm font-medium border transition-all",
+              className={pill(
                 initialFilters.minBedrooms === b.value ||
                   (!initialFilters.minBedrooms && b.value === "")
-                  ? "bg-[#E2A862] text-[#2B2520] border-[#E2A862]"
-                  : "border-white/15 text-white/60 hover:border-[#E2A862]/50 hover:text-white"
               )}
             >
               {b.label}
@@ -204,8 +199,8 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
       </div>}
 
       {/* Featured toggle */}
-      <div className="flex items-center justify-between">
-        <label className="text-sm font-medium text-white/80">Featured only</label>
+      <div className="flex items-center justify-between py-5">
+        <label className="text-[13px] text-[#2B2520]">Featured only</label>
         <button
           role="switch"
           aria-checked={initialFilters.featured === "true"}
@@ -216,16 +211,16 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
             )
           }
           className={cn(
-            "relative h-6 w-11 rounded-full transition-all duration-200",
+            "relative h-6 w-11 rounded-full border transition-colors duration-200",
             initialFilters.featured === "true"
-              ? "bg-[#E2A862]"
-              : "bg-[#3a3028]"
+              ? "border-[#2B2520] bg-[#2B2520]"
+              : "border-[#C5BAAB] bg-transparent"
           )}
         >
           <span
             className={cn(
-              "absolute top-0.5 h-4 w-4 rounded-full bg-surface shadow transition-transform duration-200",
-              initialFilters.featured === "true" ? "translate-x-5" : "translate-x-0.5"
+              "absolute top-1/2 h-4 w-4 -translate-y-1/2 rounded-full transition-transform duration-200",
+              initialFilters.featured === "true" ? "translate-x-[22px] bg-[#F4EFEA]" : "translate-x-[3px] bg-[#C5BAAB]"
             )}
           />
         </button>

@@ -30,6 +30,10 @@ interface PropertyInquiryFormProps {
   propertyTitle: string;
 }
 
+// Hairline-underlined fields on a linen panel, closed by an espresso pill
+const inputCls =
+  "w-full h-11 border-0 border-b border-[#C5BAAB]/60 bg-transparent px-0 text-[14px] text-[#2B2520] placeholder:text-[#A39886] focus:border-[#E2A862] focus:outline-none focus:ring-0 transition-colors";
+
 export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInquiryFormProps) {
   const {
     register,
@@ -55,29 +59,32 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
   }
 
   return (
-    <div className="rounded-2xl border border-border p-6 bg-surface shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)]">
-      <h3 className="font-semibold text-[#2B2520] text-lg mb-5">Request Information</h3>
+    <div className="rounded-[4px] bg-[#FBF8F4] p-6">
+      <p className="eyebrow mb-3">Enquire</p>
+      <h3 className="mb-6 font-display text-[26px] font-normal leading-tight text-[#2B2520]">Request information</h3>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <div className="grid grid-cols-2 gap-3">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <div className="grid grid-cols-2 gap-5">
           <div>
             <input
               {...register("firstName")}
               placeholder="First name"
-              className="w-full h-11 px-3.5 rounded-xl border border-border text-sm focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent placeholder:text-zinc-400 transition-all hover:border-zinc-300"
+              aria-label="First name"
+              className={inputCls}
             />
             {errors.firstName && (
-              <p className="text-xs text-red-500 mt-1">{errors.firstName.message}</p>
+              <p className="mt-1 text-xs text-red-600">{errors.firstName.message}</p>
             )}
           </div>
           <div>
             <input
               {...register("lastName")}
               placeholder="Last name"
-              className="w-full h-11 px-3.5 rounded-xl border border-border text-sm focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent placeholder:text-zinc-400 transition-all hover:border-zinc-300"
+              aria-label="Last name"
+              className={inputCls}
             />
             {errors.lastName && (
-              <p className="text-xs text-red-500 mt-1">{errors.lastName.message}</p>
+              <p className="mt-1 text-xs text-red-600">{errors.lastName.message}</p>
             )}
           </div>
         </div>
@@ -87,10 +94,11 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
             {...register("email")}
             type="email"
             placeholder="Email address"
-            className="w-full h-11 px-3.5 rounded-xl border border-border text-sm focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent placeholder:text-zinc-400 transition-all hover:border-zinc-300"
+            aria-label="Email address"
+            className={inputCls}
           />
           {errors.email && (
-            <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>
+            <p className="mt-1 text-xs text-red-600">{errors.email.message}</p>
           )}
         </div>
 
@@ -100,9 +108,10 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
             type="tel"
             inputMode="tel"
             placeholder="Mobile number (with country code)"
-            className="w-full h-11 px-3.5 rounded-xl border border-border text-sm focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent placeholder:text-zinc-400 transition-all hover:border-zinc-300"
+            aria-label="Mobile number"
+            className={inputCls}
           />
-          {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone.message}</p>}
+          {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone.message}</p>}
         </div>
 
         <div>
@@ -110,22 +119,23 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
             {...register("message")}
             rows={4}
             placeholder="Your message"
-            className="w-full px-3.5 py-3 rounded-xl border border-border text-sm focus:outline-none focus:ring-2 focus:ring-black/10 focus:border-transparent placeholder:text-zinc-400 resize-none transition-all hover:border-zinc-300"
+            aria-label="Your message"
+            className="w-full resize-none border-0 border-b border-[#C5BAAB]/60 bg-transparent px-0 py-2 text-[14px] leading-relaxed text-[#2B2520] placeholder:text-[#A39886] focus:border-[#E2A862] focus:outline-none focus:ring-0 transition-colors"
           />
           {errors.message && (
-            <p className="text-xs text-red-500 mt-1">{errors.message.message}</p>
+            <p className="mt-1 text-xs text-red-600">{errors.message.message}</p>
           )}
         </div>
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full h-12 rounded-xl bg-gradient-to-b from-[#3A322B] to-[#2B2520] text-[#F4EFEA] shadow-[0_10px_24px_-10px_rgba(43,37,32,.6)] hover:-translate-y-px hover:shadow-[0_16px_30px_-12px_rgba(43,37,32,.7)] font-medium text-sm transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          className="btn-pill w-full disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {isSubmitting ? "Sending…" : "Send Inquiry"}
+          {isSubmitting ? "Sending…" : "Send inquiry"}
         </button>
 
-        <p className="text-xs text-zinc-400 text-center">
+        <p className="text-center text-[12px] text-[#2B2520]/50">
           No commitment required. We typically respond within 2 hours.
         </p>
       </form>

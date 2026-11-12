@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { AgentCard } from "@fano/ui";
 import { SectionHeader } from "@/components/shared/section-header";
 import { AnimateStagger } from "@/components/shared/animate-stagger";
@@ -26,29 +25,25 @@ interface AgentsShowcaseProps {
 
 export function AgentsShowcaseSection({ agents }: AgentsShowcaseProps) {
   return (
-    <section className="section-y bg-gold-50">
+    <section className="section-y">
       <div className="container-site">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+        <div className="mb-14 flex flex-col gap-6 border-b border-[#C5BAAB]/40 pb-10 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeader
             eyebrow="Meet the team"
-            title="Your Real Estate Insiders"
+            title="Your real estate insiders"
             description="Discover the dedicated experts behind your next successful property investment."
           />
-          <Link
-            href="/agents"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#8C6A47] hover:text-[#6B5038] hover:gap-3 transition-all group shrink-0"
-          >
+          <Link href="/agents" className="link-rule shrink-0">
             Meet the team
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
 
         {agents.length === 0 ? (
-          <div className="py-24 text-center text-zinc-400">
-            <p className="text-lg">Agents coming soon.</p>
+          <div className="py-24 text-center">
+            <p className="font-display text-2xl font-normal text-[#2B2520]/60">Agents coming soon.</p>
           </div>
         ) : (
-          <AnimateStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <AnimateStagger className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {agents.map((agent) => (
               <AgentCard
                 key={agent.id}

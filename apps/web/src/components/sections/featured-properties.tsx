@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { PropertyCard } from "@fano/ui";
 import { SectionHeader } from "@/components/shared/section-header";
 import { AnimateStagger } from "@/components/shared/animate-stagger";
@@ -32,27 +31,21 @@ export function FeaturedPropertiesSection({ properties }: FeaturedPropertiesProp
   return (
     <section className="section-y" id="discover">
       <div className="container-site">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+        <div className="mb-12 flex flex-col gap-6 lg:mb-16 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeader
             eyebrow="Selected by Fano"
             title="Spaces with distinction."
-            description="Explore our featured properties, with the details that matter and an advisor to guide your next step."
+            description="A short list of residences and workspaces our advisors would show first, each verified with the developer and priced in full."
           />
-          <Link
-            href="/properties?featured=true"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#8C6A47] hover:text-[#6B5038] hover:gap-3 transition-all group shrink-0"
-          >
-            View all listings
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
+          <Link href="/properties" className="link-rule shrink-0">View all listings</Link>
         </div>
 
         {properties.length === 0 ? (
-          <div className="py-24 text-center text-zinc-400">
+          <div className="py-24 text-center text-[#A39886]">
             <p className="text-lg">No featured properties yet.</p>
           </div>
         ) : (
-          <AnimateStagger className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-6 gap-y-10">
+          <AnimateStagger className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 xl:grid-cols-3">
             {properties.map((property) => (
               <PropertyCard
                 key={property.id}

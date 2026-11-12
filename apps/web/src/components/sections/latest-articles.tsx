@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { BlogCard } from "@fano/ui";
 import { SectionHeader } from "@/components/shared/section-header";
 import { AnimateStagger } from "@/components/shared/animate-stagger";
@@ -27,24 +26,20 @@ export function LatestArticlesSection({ articles }: LatestArticlesProps) {
   return (
     <section className="section-y section-tint">
       <div className="container-site">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+        <div className="mb-14 flex flex-col gap-6 border-b border-[#C5BAAB]/50 pb-10 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeader
             eyebrow="Insights"
-            title="Latest Articles"
+            title="Latest articles"
             description="Market insights, buying guides, and real estate news."
           />
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[#8C6A47] hover:text-[#6B5038] hover:gap-3 transition-all group shrink-0"
-          >
+          <Link href="/blog" className="link-rule shrink-0">
             View all articles
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
 
         {!featured ? (
-          <div className="py-24 text-center text-[#A39886]">
-            <p className="text-lg">Articles coming soon.</p>
+          <div className="py-24 text-center">
+            <p className="font-display text-2xl font-normal text-[#2B2520]/60">Articles coming soon.</p>
           </div>
         ) : rest.length === 0 ? (
           <AnimateStagger className="grid grid-cols-1 gap-6">
@@ -55,7 +50,7 @@ export function LatestArticlesSection({ articles }: LatestArticlesProps) {
             />
           </AnimateStagger>
         ) : (
-          <AnimateStagger className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+          <AnimateStagger className="grid grid-cols-1 items-start gap-10 lg:grid-cols-5 lg:gap-14">
             {/* Featured article — wider column */}
             <div className="lg:col-span-3">
               <BlogCard
@@ -66,9 +61,9 @@ export function LatestArticlesSection({ articles }: LatestArticlesProps) {
             </div>
 
             {/* Remaining articles stacked as horizontal cards */}
-            <div className="lg:col-span-2 flex flex-col divide-y divide-[#D9CFC2]/60">
+            <div className="flex flex-col divide-y divide-[#C5BAAB]/40 lg:col-span-2">
               {rest.map((article) => (
-                <div key={article.id} className="py-5 first:pt-0 last:pb-0">
+                <div key={article.id} className="py-6 first:pt-0 last:pb-0">
                   <BlogCard
                     {...article}
                     publishedAt={article.publishedAt?.toISOString()}

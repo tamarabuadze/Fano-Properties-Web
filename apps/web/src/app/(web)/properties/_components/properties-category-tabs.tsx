@@ -10,6 +10,7 @@ interface PropertiesCategoryTabsProps {
   unitType?: string;
 }
 
+// Hairline pill groups: the active tab is solid espresso, the rest plain text
 export function PropertiesCategoryTabs({ category, search, listingType, unitType }: PropertiesCategoryTabsProps) {
   const commercial = category === "commercial";
   const href = (toCategory: Category, toListingType?: string) => {
@@ -23,52 +24,52 @@ export function PropertiesCategoryTabs({ category, search, listingType, unitType
     return qs ? `/properties?${qs}` : "/properties";
   };
 
-  return (
-    <div className="flex flex-wrap items-center gap-3 mb-8">
-    <div className="inline-flex rounded-full border border-border p-1 bg-surface shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)]" role="tablist" aria-label="Property category">
-      {[
-        { label: "All", value: "all" as const },
-        { label: "Residential", value: "residential" as const },
-        { label: "Commercial", value: "commercial" as const },
-      ].map((tab) => (
-        <Link
-          key={tab.label}
-          href={href(tab.value)}
-          role="tab"
-          aria-selected={category === tab.value}
-          scroll={false}
-          className={cn(
-            "px-6 h-10 inline-flex items-center rounded-full text-sm font-medium transition-colors",
-            category === tab.value ? "bg-[#2B2520] text-[#E2A862]" : "text-zinc-600 hover:text-[#2B2520]"
-          )}
-        >
-          {tab.label}
-        </Link>
-      ))}
-    </div>
+  const tabClass = (active: boolean) =>
+    cn(
+      "inline-flex h-10 items-center rounded-full px-5 text-[13px] transition-colors",
+      active ? "bg-[#2B2520] text-[#F4EFEA]" : "text-[#2B2520]/65 hover:text-[#2B2520]"
+    );
 
-    {commercial && (
-      <div className="inline-flex rounded-full border border-border p-1 bg-surface shadow-[0_1px_0_rgba(255,255,255,.7)_inset,0_10px_30px_-14px_rgba(43,37,32,.22)]" role="tablist" aria-label="Buy or lease">
+  return (
+    <div className="mb-10 flex flex-wrap items-center gap-3">
+      <div className="inline-flex gap-1 rounded-full border border-[#C5BAAB]/60 p-1" role="tablist" aria-label="Property category">
         {[
-          { label: "Buy", value: "sale" },
-          { label: "Lease", value: "lease" },
+          { label: "All", value: "all" as const },
+          { label: "Residential", value: "residential" as const },
+          { label: "Commercial", value: "commercial" as const },
         ].map((tab) => (
           <Link
-            key={tab.value}
-            href={href("commercial", tab.value)}
+            key={tab.label}
+            href={href(tab.value)}
             role="tab"
-            aria-selected={listingType === tab.value}
+            aria-selected={category === tab.value}
             scroll={false}
-            className={cn(
-              "px-6 h-10 inline-flex items-center rounded-full text-sm font-medium transition-colors",
-              listingType === tab.value ? "bg-[#E2A862] text-[#2B2520]" : "text-zinc-600 hover:text-[#2B2520]"
-            )}
+            className={tabClass(category === tab.value)}
           >
             {tab.label}
           </Link>
         ))}
       </div>
-    )}
+
+      {commercial && (
+        <div className="inline-flex gap-1 rounded-full border border-[#C5BAAB]/60 p-1" role="tablist" aria-label="Buy or lease">
+          {[
+            { label: "Buy", value: "sale" },
+            { label: "Lease", value: "lease" },
+          ].map((tab) => (
+            <Link
+              key={tab.value}
+              href={href("commercial", tab.value)}
+              role="tab"
+              aria-selected={listingType === tab.value}
+              scroll={false}
+              className={tabClass(listingType === tab.value)}
+            >
+              {tab.label}
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

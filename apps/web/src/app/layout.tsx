@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Montserrat, Source_Serif_4 } from "next/font/google";
+import { Bodoni_Moda, Inter, Montserrat } from "next/font/google";
 import { Toaster } from "sonner";
 import { QueryProvider } from "@/components/shared/query-provider";
 import "./globals.css";
@@ -10,16 +10,16 @@ const inter = Inter({
   display: "swap",
 });
 
-// The tagline uses Source Serif italic, as in the Fano team app
-const sourceSerif = Source_Serif_4({
+// Display serif for headings and pull quotes: a high-contrast Didone, set light and large
+const bodoni = Bodoni_Moda({
   subsets: ["latin"],
-  weight: ["400"],
-  style: ["italic"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
   variable: "--font-serif",
   display: "swap",
 });
 
-// Headings use Montserrat, as in the Fano team app
+// Montserrat stays for the logo wordmark and small tracked labels
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#E6DFD5",
+  themeColor: "#F4EFEA",
   width: "device-width",
   initialScale: 1,
 };
@@ -92,8 +92,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${montserrat.variable} ${sourceSerif.variable}`} suppressHydrationWarning>
-      <body className="min-h-screen bg-sand text-black antialiased">
+    <html lang="en" className={`${inter.variable} ${montserrat.variable} ${bodoni.variable}`} suppressHydrationWarning>
+      <body className="min-h-screen bg-surface text-black antialiased">
         <QueryProvider>
           {children}
           <Toaster position="bottom-right" richColors />

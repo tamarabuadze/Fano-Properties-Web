@@ -52,11 +52,11 @@ export function PropertiesTable({ properties, total, page, pageSize }: Propertie
 
   return (
     <div>
-      <div className="rounded-2xl border border-border bg-card overflow-hidden">
+      <div className="rounded-[4px] border border-border bg-card overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-border bg-secondary/40">
+              <tr className="border-b border-border">
                 <th className="text-left px-4 py-3 font-medium text-muted-foreground">Property</th>
                 <th className="text-left px-4 py-3 font-medium text-muted-foreground">Type</th>
                 <th className="text-left px-4 py-3 font-medium text-muted-foreground">Price</th>
@@ -99,13 +99,13 @@ export function PropertiesTable({ properties, total, page, pageSize }: Propertie
                         <span className={cn(
                           "px-2 py-0.5 rounded-full text-xs font-medium",
                           p.published
-                            ? "bg-green-50 text-green-700"
-                            : "bg-zinc-100 text-zinc-600"
+                            ? "bg-[#F6E7D2] text-[#6B5038]"
+                            : "bg-secondary text-muted-foreground"
                         )}>
                           {p.published ? "Live" : "Draft"}
                         </span>
                         {p.featured && (
-                          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-700">
+                          <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-[#F6E7D2] text-[#8C6A47]">
                             Featured
                           </span>
                         )}
@@ -120,9 +120,9 @@ export function PropertiesTable({ properties, total, page, pageSize }: Propertie
                           onClick={() => handleToggleFeatured(p.id, p.featured)}
                           aria-label={p.featured ? "Unfeature" : "Feature"}
                           className={cn(
-                            "h-8 w-8 rounded-lg flex items-center justify-center transition-colors",
+                            "h-8 w-8 rounded-full flex items-center justify-center transition-colors",
                             p.featured
-                              ? "text-amber-500 hover:bg-amber-50"
+                              ? "text-[#E2A862] hover:bg-[#F6E7D2]"
                               : "text-muted-foreground hover:bg-secondary"
                           )}
                         >
@@ -131,21 +131,21 @@ export function PropertiesTable({ properties, total, page, pageSize }: Propertie
                         <button
                           onClick={() => handleTogglePublish(p.id, p.published)}
                           aria-label={p.published ? "Unpublish" : "Publish"}
-                          className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
+                          className="h-8 w-8 rounded-full flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
                         >
                           {p.published ? <EyeOff className="h-4 w-4" /> : <Globe className="h-4 w-4" />}
                         </button>
                         <Link
                           href={`/admin/properties/${p.id}`}
                           aria-label="Edit"
-                          className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
+                          className="h-8 w-8 rounded-full flex items-center justify-center text-muted-foreground hover:bg-secondary transition-colors"
                         >
                           <Edit className="h-4 w-4" />
                         </Link>
                         <button
                           onClick={() => handleDelete(p.id)}
                           aria-label="Delete"
-                          className="h-8 w-8 rounded-lg flex items-center justify-center text-muted-foreground hover:bg-red-50 hover:text-red-600 transition-colors"
+                          className="h-8 w-8 rounded-full flex items-center justify-center text-muted-foreground hover:bg-[#F6E3DF] hover:text-[#B0453A] transition-colors"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>

@@ -40,12 +40,12 @@ export default async function PropertiesPage({
     <div className="p-6 lg:p-8 space-y-6">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground [letter-spacing:-0.02em]">Properties</h1>
+          <h1 className="font-display text-[32px] font-normal leading-tight text-foreground">Properties</h1>
           <p className="text-muted-foreground text-sm mt-1">{total} total properties</p>
         </div>
         <Link
           href="/admin/properties/new"
-          className="inline-flex items-center gap-2 h-10 px-4 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+          className="btn-gold"
         >
           <Plus className="h-4 w-4" />
           Add Property
@@ -60,7 +60,7 @@ export default async function PropertiesPage({
             name="search"
             defaultValue={params.search}
             placeholder="Search properties…"
-            className="w-full max-w-sm h-10 pl-10 pr-4 rounded-xl border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-transparent"
+            className="w-full max-w-sm h-10 pl-10 pr-4 rounded-[3px] border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-[#E2A862]/25 focus:border-[#E2A862]"
           />
         </form>
       </div>

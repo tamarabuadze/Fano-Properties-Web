@@ -21,6 +21,8 @@ export interface BlogCardProps {
 const BLUR_PLACEHOLDER =
   "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAAECAADAAQDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABQQG/8QAHBAAAgMAAwEAAAAAAAAAAAAAAQIDBAASITH/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJXi1KrXLpKhbIxWkQMVIOhGR3Qf/9k=";
 
+// An editorial card: the photograph, a tracked label, a serif title and a short excerpt.
+// No box or shadow; a hairline closes the card.
 function BlogCard({
   title,
   slug,
@@ -40,17 +42,15 @@ function BlogCard({
       }).format(new Date(publishedAt))
     : null;
 
+  const meta = [category?.name, date].filter(Boolean).join(" · ");
+
   if (variant === "horizontal") {
     return (
       <Link
         href={`/blog/${slug}`}
-        className={cn(
-          "group flex gap-5 items-start",
-          "transition-opacity duration-300 hover:opacity-80",
-          className
-        )}
+        className={cn("group flex items-start gap-5", className)}
       >
-        <div className="relative h-20 w-24 rounded-xl overflow-hidden bg-zinc-100 shrink-0">
+        <div className="relative h-20 w-24 shrink-0 overflow-hidden rounded-[4px] bg-[#E6DFD5]">
           {coverImage && (
             <Image
               src={coverImage}
@@ -58,39 +58,29 @@ function BlogCard({
               alt={title}
               fill
               sizes="96px"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
               placeholder="blur"
               blurDataURL={BLUR_PLACEHOLDER}
             />
           )}
         </div>
-        <div className="flex-1 min-w-0">
-          {category && (
-            <p className="text-xs font-medium text-text-secondary uppercase tracking-wider mb-1">
-              {category.name}
+        <div className="min-w-0 flex-1">
+          {meta && (
+            <p className="mb-1.5 font-label text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8C6A47]">
+              {meta}
             </p>
           )}
-          <h3 className="font-semibold text-black text-sm line-clamp-2 leading-snug">
+          <h3 className="line-clamp-2 font-display text-[19px] font-normal leading-snug text-[#2B2520] transition-colors group-hover:text-[#8C6A47]">
             {title}
           </h3>
-          {date && (
-            <p className="text-xs text-text-muted mt-1.5">{date}</p>
-          )}
         </div>
       </Link>
     );
   }
 
   return (
-    <Link
-      href={`/blog/${slug}`}
-      className={cn(
-        "group flex flex-col overflow-hidden rounded-2xl bg-surface border border-border h-full",
-        "transition-all duration-500 hover:shadow-xl hover:-translate-y-1",
-        className
-      )}
-    >
-      <div className="relative aspect-[16/10] overflow-hidden bg-zinc-100 shrink-0">
+    <Link href={`/blog/${slug}`} className={cn("group flex h-full flex-col", className)}>
+      <div className="relative aspect-[16/10] shrink-0 overflow-hidden rounded-[4px] bg-[#E6DFD5]">
         {coverImage ? (
           <Image
             src={coverImage}
@@ -98,42 +88,35 @@ function BlogCard({
             alt={title}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
             placeholder="blur"
             blurDataURL={BLUR_PLACEHOLDER}
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-zinc-50">
-            <span className="text-4xl">📰</span>
-          </div>
-        )}
-        {category && (
-          <div className="absolute top-3 left-3">
-            <span className="inline-flex items-center rounded-full bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-medium text-black">
-              {category.name}
-            </span>
+          <div className="flex h-full w-full items-center justify-center">
+            <span className="font-display text-4xl font-normal italic text-[#8C6A47]/50">Fano</span>
           </div>
         )}
       </div>
 
-      <div className="flex flex-col flex-1 p-5">
-        <div className="flex items-center gap-2 text-xs text-text-secondary mb-3">
-          {date && <span>{date}</span>}
-          {date && readTime && <span>·</span>}
-          {readTime && <span>{readTime} min read</span>}
-        </div>
+      <div className="flex flex-1 flex-col pt-5">
+        {meta && (
+          <p className="mb-3 font-label text-[10px] font-semibold uppercase tracking-[0.18em] text-[#8C6A47]">
+            {meta}
+          </p>
+        )}
 
-        <h3 className="font-semibold mb-2 line-clamp-2 leading-snug transition-colors" style={{ color: "#2B2520" }}>
+        <h3 className="line-clamp-2 font-display text-[24px] font-normal leading-tight text-[#2B2520] transition-colors group-hover:text-[#8C6A47]">
           {title}
         </h3>
 
-        <p className="text-sm line-clamp-3 leading-relaxed flex-1" style={{ color: "#6B5038" }}>
-          {excerpt}
-        </p>
+        <p className="mt-3 line-clamp-3 flex-1 text-[14px] leading-[1.8] text-[#2B2520]/65">{excerpt}</p>
 
-        <div className="mt-4 flex items-center gap-1.5 text-sm font-medium" style={{ color: "#8C6A47" }}>
-          <span>Read more</span>
-          <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
+        <div className="mt-5 flex items-center justify-between gap-4 border-t border-[#C5BAAB]/40 pt-3">
+          <span className="inline-flex items-center gap-3 text-[12px] font-medium text-[#2B2520] after:h-px after:w-6 after:bg-[#2B2520] after:transition-all after:duration-300 group-hover:after:w-10">
+            Read article
+          </span>
+          {readTime && <span className="text-[12px] text-[#2B2520]/55">{readTime} min read</span>}
         </div>
       </div>
     </Link>

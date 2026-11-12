@@ -99,18 +99,19 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
       {/* Gallery */}
       <PropertyGallery images={allImages} title={property.title} />
 
-      <div className="container-site py-12">
-        <div className="grid lg:grid-cols-3 gap-10">
+      <div className="container-site py-12 lg:py-16">
+        <div className="grid gap-12 lg:grid-cols-3 lg:gap-16">
           {/* Main content */}
-          <div className="lg:col-span-2 space-y-12">
+          <div className="space-y-16 lg:col-span-2">
             <PropertyOverview property={property as never} />
             {property.amenities.length > 0 && (
               <PropertyAmenities amenities={property.amenities} />
             )}
             {property.listingType === "sale" && fullPrice > 0 && (
-              <section id="roi" className="scroll-mt-24">
-                <h2 className="text-2xl font-semibold [letter-spacing:-0.02em] text-[#2B2520]">Investment calculator</h2>
-                <p className="text-sm text-zinc-500 mt-1 mb-6">
+              <section id="roi" className="scroll-mt-28">
+                <p className="eyebrow mb-3">Investor tools</p>
+                <h2 className="font-display text-[28px] font-normal leading-tight text-[#2B2520]">Investment calculator</h2>
+                <p className="mb-8 mt-3 max-w-lg text-[14px] leading-[1.8] text-[#2B2520]/65">
                   Estimate the rental yield and return on this property. Adjust any figure to match your plans.
                 </p>
                 <RoiCalculator
@@ -126,7 +127,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
 
           {/* Sticky sidebar */}
           <div className="space-y-6">
-            <div className="sticky top-24 space-y-6">
+            <div className="sticky top-28 space-y-6">
               <PropertyInquiryForm propertyId={property.id} propertyTitle={displayTitle} />
               {property.agent && (
                 <PropertyAgentCard agent={property.agent as never} />
@@ -137,7 +138,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
 
         {/* Related */}
         {related.length > 0 && (
-          <div className="mt-20 pt-12 border-t border-border">
+          <div className="mt-24 border-t border-[#C5BAAB]/40 pt-16">
             <RelatedProperties properties={related as never} />
           </div>
         )}

@@ -22,12 +22,12 @@ export default async function EditAgentPage({
       <div className="flex items-center gap-4">
         <Link
           href="/admin/agents"
-          className="h-9 w-9 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+          className="h-9 w-9 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
         </Link>
         <div>
-          <h1 className="text-xl font-semibold text-foreground [letter-spacing:-0.02em]">
+          <h1 className="font-display text-[28px] font-normal leading-tight text-foreground">
             Edit Agent
           </h1>
           <p className="text-muted-foreground text-sm truncate">

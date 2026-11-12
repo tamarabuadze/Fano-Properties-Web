@@ -2,25 +2,26 @@ import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@fano/utils";
 
+// Small tracked labels on the beige palette: espresso solid, bone, or a hairline outline
 const badgeVariants = cva(
-  "inline-flex items-center rounded-full text-xs font-medium transition-colors",
+  "inline-flex items-center rounded-full font-label font-semibold uppercase tracking-[0.16em] transition-colors",
   {
     variants: {
       variant: {
-        default: "bg-[#2B2520] text-white",
-        secondary: "bg-zinc-100 text-zinc-900",
-        outline: "border border-zinc-200 text-zinc-700",
-        success: "bg-emerald-50 text-emerald-700 border border-emerald-100",
-        warning: "bg-amber-50 text-amber-700 border border-amber-100",
-        destructive: "bg-red-50 text-red-700 border border-red-100",
-        sale: "bg-[#2B2520] text-white",
-        rent: "bg-[#3A322B] text-white",
-        lease: "bg-zinc-600 text-white",
+        default: "bg-[#2B2520] text-[#F4EFEA]",
+        secondary: "bg-[#E6DFD5] text-[#2B2520]",
+        outline: "border border-[#C5BAAB]/70 text-[#2B2520]",
+        success: "border border-[#8C6A47]/40 text-[#8C6A47]",
+        warning: "border border-[#E2A862] text-[#8C6A47]",
+        destructive: "border border-red-300 text-red-700",
+        sale: "bg-[#2B2520] text-[#F4EFEA]",
+        rent: "bg-[#3A322B] text-[#F4EFEA]",
+        lease: "bg-[#8C6A47] text-[#F4EFEA]",
       },
       size: {
-        sm: "px-2.5 py-0.5 text-xs",
-        default: "px-3 py-1 text-xs",
-        lg: "px-4 py-1.5 text-sm",
+        sm: "px-2.5 py-0.5 text-[10px]",
+        default: "px-3 py-1 text-[10px]",
+        lg: "px-4 py-1.5 text-[11px]",
       },
     },
     defaultVariants: {
