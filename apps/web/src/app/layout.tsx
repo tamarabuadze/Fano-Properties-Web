@@ -1,19 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Inter, Montserrat } from "next/font/google";
+import { Playfair_Display, Inter, Montserrat } from "next/font/google";
 import { Toaster } from "sonner";
 import { QueryProvider } from "@/components/shared/query-provider";
 import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
+  weight: ["300", "400", "500"],
   variable: "--font-inter",
   display: "swap",
 });
 
-// Display serif for headings and pull quotes: a high-contrast Didone, set light and large
-const bodoni = Bodoni_Moda({
+// Display serif for headings and pull quotes: Playfair Display, medium weight
+// with a lighter italic for the second line
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   variable: "--font-serif",
   display: "swap",
@@ -92,7 +94,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${montserrat.variable} ${bodoni.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${montserrat.variable} ${playfair.variable}`} suppressHydrationWarning>
       <body className="min-h-screen bg-surface text-black antialiased">
         <QueryProvider>
           {children}

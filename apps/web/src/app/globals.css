@@ -57,13 +57,14 @@
     color: #2B2520;
   }
 
-  /* Headings: a light, large Didone serif with quiet tracking, as on the reference site */
+  /* Headings: Playfair Display, with a lighter italic for the emotional second line */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-serif), "Bodoni Moda", Didot, Georgia, serif;
-    font-weight: 400;
+    font-family: var(--font-serif), "Playfair Display", Georgia, serif;
+    font-weight: 500;
     letter-spacing: -0.01em;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
+  h1 em, h2 em, h3 em, h1 .italic, h2 .italic, h3 .italic { font-weight: 400; }
 
   img, video {
     @apply max-w-full;
@@ -157,12 +158,12 @@
       inset 0 -1px 0 rgba(120, 78, 30, .25),
       0 2px 4px rgba(43, 37, 32, .14),
       0 1px 0 rgba(255, 255, 255, .35);
-    color: #2B2520;
+    color: #1A1A1A;
     text-shadow: 0 1px 0 rgba(255, 255, 255, .35);
-    font-family: var(--font-montserrat), Montserrat, system-ui, sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .12em;
+    font-family: var(--font-inter), Inter, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
     transition: background .2s, transform .2s, box-shadow .2s, border-color .2s;
   }
@@ -202,10 +203,10 @@
     border-radius: 999px;
     border: 1px solid #C99A5B;
     color: #2B2520;
-    font-family: var(--font-montserrat), Montserrat, system-ui, sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .12em;
+    font-family: var(--font-inter), Inter, system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
     transition: border-color .2s, background .2s, color .2s;
   }
@@ -346,6 +347,21 @@ html:has(> body > .lx-root), html:has(.lx-root) body { background: #0B1220; }
 .lx-link-quiet { color: rgba(244, 239, 234, 0.6); }
 .lx-link-quiet::after { background: rgba(226, 168, 98, 0.5); }
 
+/* Secondary action: tracked capitals with a hairline underneath */
+.lx-underline {
+  display: inline-block;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #FFFFFF;
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  transition: color .3s, border-color .3s;
+}
+.lx-underline:hover { color: #E2A862; border-color: #E2A862; }
+
 /* Hairline where a border used to be */
 .lx-hairline { border-color: var(--lx-line); }
 
@@ -395,7 +411,7 @@ html:has(> body > .lx-root), html:has(.lx-root) body { background: #0B1220; }
   min-height: 100vh;
 }
 .admin-root h1, .admin-root h2, .admin-root h3 {
-  font-family: var(--font-serif), "Bodoni Moda", Didot, Georgia, serif;
+  font-family: var(--font-serif), "Playfair Display", Georgia, serif;
   font-weight: 400;
   letter-spacing: -0.005em;
 }
@@ -417,7 +433,7 @@ html:has(> body > .lx-root), html:has(.lx-root) body { background: #0B1220; }
 
 /* Cinematic public-site treatment. Existing Fano palette and font families retained. */
 .cinema-serif {
-  font-family: var(--font-serif), "Bodoni Moda", Didot, Georgia, serif;
+  font-family: var(--font-serif), "Playfair Display", Georgia, serif;
   font-style: italic;
   font-weight: 400;
   letter-spacing: -0.01em;
