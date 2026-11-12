@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
+import { reportInvalid } from "@/lib/admin-form";
 import { saveSettings } from "../_actions";
 
 const schema = z.object({
@@ -54,7 +55,7 @@ export function SettingsForm({ defaultValues }: SettingsFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+    <form onSubmit={handleSubmit(onSubmit, reportInvalid())} noValidate className="space-y-8">
       {/* Site Info */}
       <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
         <h2 className="font-semibold text-foreground">Site Information</h2>

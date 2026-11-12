@@ -6,6 +6,7 @@ import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { MediaUpload } from "@fano/ui";
+import { reportInvalid } from "@/lib/admin-form";
 import { createAgent, updateAgent } from "../_actions";
 
 const schema = z.object({
@@ -77,7 +78,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+    <form onSubmit={handleSubmit(onSubmit, reportInvalid({ linkedinUrl: "LinkedIn URL", instagramUrl: "Instagram URL", twitterUrl: "Twitter / X URL", avatar: "Profile photo" }))} noValidate className="space-y-8">
       {/* Personal Info */}
       <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
         <h2 className="font-semibold text-foreground">Personal Information</h2>

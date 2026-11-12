@@ -8,7 +8,18 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { MediaUpload } from "@fano/ui";
 import { COMMERCIAL_STATUSES, COMMERCIAL_UNIT_TYPES, PROPERTY_STATUS_LABELS, RESIDENTIAL_STATUSES, cn } from "@fano/utils";
+import { reportInvalid } from "@/lib/admin-form";
 import { createProperty, updateProperty } from "../_actions";
+
+// Numbers arrive as text; accept "1,200" and "1,200.00" rather than failing silently
+const money = z.preprocess(
+  (v) => (typeof v === "string" ? Number(v.replace(/[,\s]/g, "")) : v),
+  z.number({ invalid_type_error: "Enter a number" }).positive("Must be positive")
+);
+const count = z.preprocess(
+  (v) => (typeof v === "string" ? Math.round(Number(v.replace(/[,\s]/g, "")) || 0) : v),
+  z.number({ invalid_type_error: "Enter a number" }).int().min(0, "Cannot be negative")
+);
 
 const schema = z.object({
   title: z.string().min(1, "Required"),
@@ -16,7 +27,7 @@ const schema = z.object({
   propertyType: z.enum(["apartment", "villa", "house", "commercial", "land", "penthouse", "townhouse"]),
   listingType: z.enum(["sale", "rent", "lease"]),
   status: z.enum(["available", "sold", "rented", "off_market", "off_payment_plan"]),
-  price: z.number({ coerce: true }).positive("Must be positive"),
+  price: money,
   priceUnit: z.enum(["total", "per_sqft"]),
   currency: z.literal("AED"),
   location: z.string().min(1, "Required"),
@@ -24,15 +35,15 @@ const schema = z.object({
   state: z.string().optional(),
   country: z.string(),
   unitType: z.enum(["shop", "warehouse", "office_floor", "office_space"]).nullable().optional(),
-  bedrooms: z.number({ coerce: true }).int().min(0),
-  bathrooms: z.number({ coerce: true }).int().min(0),
-  sqft: z.number({ coerce: true }).int().min(0),
-  coverImage: z.string().min(1, "Upload a cover image"),
+  bedrooms: count,
+  bathrooms: count,
+  sqft: count,
+  coverImage: z.string().trim().min(1, "Upload a cover image or paste an image link"),
   featured: z.boolean(),
   published: z.boolean(),
   agentId: z.string().optional(),
   metaTitle: z.string().optional(),
-  permitNumber: z.string().trim().max(40).optional(),
+  permitNumber: z.string().trim().max(40, "At most 40 characters").optional(),
   metaDescription: z.string().optional(),
 }).refine((d) => d.propertyType !== "commercial" || !!d.unitType, {
   message: "Choose a unit type",
@@ -101,20 +112,30 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
   }, [isCommercial, getValues, setValue]);
 
   async function onSubmit(data: FormData) {
-    const result = propertyId
-      ? await updateProperty(propertyId, { ...data, gallery })
-      : await createProperty({ ...data, gallery, amenities: [] });
+    try {
+      const result = propertyId
+        ? await updateProperty(propertyId, { ...data, gallery })
+        : await createProperty({ ...data, gallery, amenities: [] });
 
-    if (result.success) {
-      toast.success(propertyId ? "Property updated" : "Property created");
-      router.push("/admin/properties");
-    } else {
-      toast.error((result as { error?: string }).error ?? "Something went wrong");
+      if (result.success) {
+        toast.success(propertyId ? "Property updated" : "Property created");
+        router.push("/admin/properties");
+      } else {
+        toast.error((result as { error?: string }).error ?? "Something went wrong");
+      }
+    } catch (e) {
+      // A dropped connection or a server crash rejects the action instead of returning
+      console.error("[property-form] save failed", e);
+      toast.error("Could not reach the server. Check your connection and try again.");
     }
   }
 
+  const onInvalid = reportInvalid({
+    location: "Address", sqft: "Square feet", unitType: "Unit type", permitNumber: "DLD permit number",
+  });
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+    <form onSubmit={handleSubmit(onSubmit, onInvalid)} noValidate className="space-y-8">
       {/* Basic Info */}
       <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
         <h2 className="font-semibold text-foreground">Basic Information</h2>
@@ -207,7 +228,7 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className={labelCls}>{watch("priceUnit") === "per_sqft" ? "Price per sq ft" : "Price"}</label>
-            <input {...register("price")} type="number" className={inputCls} placeholder="0" />
+            <input {...register("price")} type="number" step="any" min="0" inputMode="decimal" className={inputCls} placeholder="0" />
             {errors.price && <p className="text-xs text-red-500 mt-1">{errors.price.message}</p>}
           </div>
           <div>
@@ -243,21 +264,25 @@ export function PropertyForm({ agents, defaultValues, propertyId, defaultGallery
             <>
               <div>
                 <label className={labelCls}>Bedrooms</label>
-                <input {...register("bedrooms")} type="number" min="0" className={inputCls} />
+                <input {...register("bedrooms")} type="number" min="0" step="1" className={inputCls} />
+                {errors.bedrooms && <p className="text-xs text-red-500 mt-1">{errors.bedrooms.message}</p>}
               </div>
               <div>
                 <label className={labelCls}>Bathrooms</label>
-                <input {...register("bathrooms")} type="number" min="0" className={inputCls} />
+                <input {...register("bathrooms")} type="number" min="0" step="1" className={inputCls} />
+                {errors.bathrooms && <p className="text-xs text-red-500 mt-1">{errors.bathrooms.message}</p>}
               </div>
             </>
           )}
           <div>
             <label className={labelCls}>Square Feet</label>
-            <input {...register("sqft")} type="number" min="0" className={inputCls} />
+            <input {...register("sqft")} type="number" min="0" step="1" className={inputCls} />
+            {errors.sqft && <p className="text-xs text-red-500 mt-1">{errors.sqft.message}</p>}
           </div>
           <div>
             <label className={labelCls}>DLD Permit No. (Trakheesi)</label>
             <input {...register("permitNumber")} className={inputCls} placeholder="Required before advertising in Dubai" />
+            {errors.permitNumber && <p className="text-xs text-red-500 mt-1">{errors.permitNumber.message}</p>}
           </div>
         </div>
       </section>
