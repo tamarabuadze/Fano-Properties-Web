@@ -6,6 +6,7 @@ import { CACHE_TAGS } from "@/lib/cache";
 import { z } from "zod";
 import { generateSlug } from "@fano/utils";
 import { requireAdmin } from "@/lib/admin-auth";
+import { actionFailed } from "@/lib/admin-errors";
 
 const agentSchema = z.object({
   firstName: z.string().min(1),
@@ -48,8 +49,8 @@ export async function createAgent(data: z.infer<typeof agentSchema>) {
     revalidatePath("/admin/agents");
     revalidateTag(CACHE_TAGS.agents);
     return { success: true, id: agent.id };
-  } catch {
-    return { success: false, error: "Failed to create agent." };
+  } catch (e) {
+    return actionFailed("Failed to create agent.", e);
   }
 }
 
@@ -71,8 +72,8 @@ export async function updateAgent(id: string, data: Partial<z.infer<typeof agent
     revalidatePath("/admin/agents");
     revalidateTag(CACHE_TAGS.agents);
     return { success: true };
-  } catch {
-    return { success: false, error: "Failed to update agent." };
+  } catch (e) {
+    return actionFailed("Failed to update agent.", e);
   }
 }
 
@@ -83,8 +84,8 @@ export async function deleteAgent(id: string) {
     revalidatePath("/admin/agents");
     revalidateTag(CACHE_TAGS.agents);
     return { success: true };
-  } catch {
-    return { success: false, error: "Failed to delete agent." };
+  } catch (e) {
+    return actionFailed("Failed to delete agent.", e);
   }
 }
 
@@ -95,7 +96,7 @@ export async function toggleAgentActive(id: string, active: boolean) {
     revalidatePath("/admin/agents");
     revalidateTag(CACHE_TAGS.agents);
     return { success: true };
-  } catch {
-    return { success: false, error: "Failed to update." };
+  } catch (e) {
+    return actionFailed("Failed to update.", e);
   }
 }

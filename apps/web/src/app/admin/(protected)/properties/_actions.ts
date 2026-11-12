@@ -6,6 +6,7 @@ import { CACHE_TAGS } from "@/lib/cache";
 import { z } from "zod";
 import { generateSlug } from "@fano/utils";
 import { requireAdmin } from "@/lib/admin-auth";
+import { actionFailed } from "@/lib/admin-errors";
 
 const propertySchema = z.object({
   title: z.string().min(1),
@@ -69,9 +70,8 @@ export async function createProperty(data: z.infer<typeof propertySchema>) {
     revalidatePath("/admin/properties");
     revalidateTag(CACHE_TAGS.properties);
     return { success: true, id: property.id };
-  } catch (e: unknown) {
-    if ((e as { code?: string }).code === "P2002") return { success: false, error: "A property with this title already exists." };
-    return { success: false, error: "Failed to create property." };
+  } catch (e) {
+    return actionFailed("Failed to create property.", e);
   }
 }
 
@@ -93,8 +93,8 @@ export async function updateProperty(id: string, data: Partial<z.infer<typeof pr
     revalidateTag(CACHE_TAGS.properties);
     revalidatePath(`/properties/${id}`);
     return { success: true };
-  } catch {
-    return { success: false, error: "Failed to update property." };
+  } catch (e) {
+    return actionFailed("Failed to update property.", e);
   }
 }
 
@@ -105,8 +105,8 @@ export async function deleteProperty(id: string) {
     revalidatePath("/admin/properties");
     revalidateTag(CACHE_TAGS.properties);
     return { success: true };
-  } catch {
-    return { success: false, error: "Failed to delete property." };
+  } catch (e) {
+    return actionFailed("Failed to delete property.", e);
   }
 }
 
@@ -118,8 +118,8 @@ export async function togglePropertyPublished(id: string, published: boolean) {
     revalidateTag(CACHE_TAGS.properties);
     revalidatePath(`/properties/${id}`);
     return { success: true };
-  } catch {
-    return { success: false, error: "Failed to update." };
+  } catch (e) {
+    return actionFailed("Failed to update.", e);
   }
 }
 
@@ -130,7 +130,7 @@ export async function togglePropertyFeatured(id: string, featured: boolean) {
     revalidatePath("/admin/properties");
     revalidateTag(CACHE_TAGS.properties);
     return { success: true };
-  } catch {
-    return { success: false, error: "Failed to update." };
+  } catch (e) {
+    return actionFailed("Failed to update.", e);
   }
 }

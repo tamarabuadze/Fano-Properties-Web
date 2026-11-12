@@ -35,19 +35,19 @@ export function PropertiesTable({ properties, total, page, pageSize }: Propertie
     if (!confirm("Delete this property? This cannot be undone.")) return;
     const result = await deleteProperty(id);
     if (result.success) toast.success("Property deleted");
-    else toast.error(result.error ?? "Failed to delete");
+    else toast.error(("error" in result && result.error) || "Failed to delete");
   }
 
   async function handleTogglePublish(id: string, current: boolean) {
     const result = await togglePropertyPublished(id, !current);
     if (result.success) toast.success(current ? "Unpublished" : "Published");
-    else toast.error(result.error ?? "Failed to update");
+    else toast.error(("error" in result && result.error) || "Failed to update");
   }
 
   async function handleToggleFeatured(id: string, current: boolean) {
     const result = await togglePropertyFeatured(id, !current);
     if (result.success) toast.success(current ? "Removed from featured" : "Marked as featured");
-    else toast.error(result.error ?? "Failed to update");
+    else toast.error(("error" in result && result.error) || "Failed to update");
   }
 
   return (
