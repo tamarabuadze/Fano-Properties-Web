@@ -76,7 +76,7 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
                     key={link.href}
                     href={link.href}
                     className={cn(
-                      "relative rounded-full border px-4 py-2 text-[13px] font-semibold tracking-[0.01em] transition-colors",
+                      "relative rounded-full border px-4 py-2 font-label text-[11px] font-bold uppercase tracking-[0.14em] transition-colors",
                       active
                         ? "text-[#2B2520]"
                         : "border-[#EBD3AC] bg-[#F6E7D2] text-[#6B5038] hover:border-[#E2A862] hover:bg-[#EFC98D] hover:text-[#2B2520]"
@@ -137,7 +137,7 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
                     <Link
                       href={link.href}
                       className={cn(
-                        "flex items-center justify-between py-5 font-display text-[28px] font-medium leading-none text-[#2B2520]",
+                        "flex items-center justify-between py-5 font-label text-[15px] font-bold uppercase tracking-[0.16em] leading-none text-[#2B2520]",
                         pathname.startsWith(link.href) && "text-[#8C6A47]"
                       )}
                     >

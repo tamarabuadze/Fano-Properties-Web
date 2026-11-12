@@ -55,7 +55,7 @@ export function WhyUsSection() {
             <Image
               src="/hero-dubai.jpg"
               unoptimized
-              alt="The Burj Khalifa and Downtown Dubai skyline"
+              alt="Emirates Towers and the Museum of the Future on Sheikh Zayed Road"
               fill
               sizes="(max-width: 1024px) 100vw, 58vw"
               className="object-cover"
