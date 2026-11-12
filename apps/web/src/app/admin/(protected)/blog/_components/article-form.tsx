@@ -5,13 +5,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { MediaUpload } from "@fano/ui";
 import { createArticle, updateArticle } from "../_actions";
+
+// Uploads come back as site-relative /media/… paths; pasted links are absolute URLs
+const imageRef = z
+  .string()
+  .trim()
+  .refine((v) => v === "" || v.startsWith("/") || /^https?:\/\/\S+$/i.test(v), "Must be an uploaded image or a valid URL");
 
 const schema = z.object({
   title: z.string().min(1, "Required"),
   excerpt: z.string().min(1, "Required"),
   content: z.string().min(1, "Required"),
-  coverImage: z.string().url("Must be a valid URL").optional().or(z.literal("")),
+  coverImage: imageRef.optional(),
   published: z.boolean().default(false),
   readTime: z.number({ coerce: true }).int().min(1).optional(),
   categoryId: z.string().optional(),
@@ -43,6 +50,8 @@ export function ArticleForm({ categories, defaultValues, articleId }: ArticleFor
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -51,6 +60,7 @@ export function ArticleForm({ categories, defaultValues, articleId }: ArticleFor
       ...defaultValues,
     },
   });
+  const coverImage = watch("coverImage");
 
   async function onSubmit(data: FormData) {
     const result = articleId
@@ -140,13 +150,24 @@ export function ArticleForm({ categories, defaultValues, articleId }: ArticleFor
         </div>
 
         <div>
-          <label className={labelCls}>Cover Image URL</label>
-          <input
-            {...register("coverImage")}
-            type="url"
-            className={inputCls}
-            placeholder="https://…"
+          <label className={labelCls}>Cover Image</label>
+          <MediaUpload
+            uploadUrl="/api/admin/upload"
+            single
+            value={coverImage ? [coverImage] : []}
+            onChange={(urls) => setValue("coverImage", urls[0] ?? "", { shouldDirty: true, shouldValidate: true })}
+            hint="JPG, JPEG, PNG or WEBP, up to 10 MB"
           />
+          <details className="mt-2">
+            <summary className="cursor-pointer text-xs text-muted-foreground hover:text-foreground">Or paste an image link</summary>
+            <input
+              {...register("coverImage")}
+              type="text"
+              inputMode="url"
+              className={inputCls + " mt-2"}
+              placeholder="https://…/photo.jpg"
+            />
+          </details>
           {errors.coverImage && (
             <p className="text-xs text-red-500 mt-1">{errors.coverImage.message}</p>
           )}
