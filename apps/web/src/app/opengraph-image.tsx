@@ -33,9 +33,11 @@ export default async function Image() {
           fontFamily: "system-ui, sans-serif",
         }}
       >
-        {/* Background photo */}
+        {/* Background photo: next/og renders plain <img>, next/image is not available here */}
         {imageData && (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
+            alt=""
             src={imageData}
             style={{
               position: "absolute",

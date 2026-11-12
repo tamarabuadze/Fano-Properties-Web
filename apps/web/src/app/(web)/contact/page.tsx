@@ -20,7 +20,7 @@ export default function ContactPage() {
             Get in Touch
           </h1>
           <p className="text-zinc-500 mb-10 leading-relaxed max-w-md">
-            Whether you're buying, selling, or just exploring your options — our team is here to help.
+            Whether you&apos;re buying, selling, or just exploring your options — our team is here to help.
           </p>
 
           <div className="space-y-6 mb-10">

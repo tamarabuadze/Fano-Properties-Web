@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Building2, Users, MessageSquare, TrendingUp, Eye, ArrowUpRight } from "lucide-react";
+import { Building2, Users, MessageSquare, TrendingUp, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { prisma } from "@fano/db";
 import { formatPrice } from "@fano/utils";
