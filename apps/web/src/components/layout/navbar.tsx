@@ -66,7 +66,9 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
               <FanoLogo color={LOGO_COLORS.bronze} className="h-10 lg:h-11" />
             </Link>
 
-            <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-9">
+            {/* Bold chips on matching gold tones: champagne-tinted at rest, deeper on hover,
+                solid gold with a bronze hairline for the current page */}
+            <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-2.5">
               {links.map((link) => {
                 const active = pathname.startsWith(link.href);
                 return (
@@ -74,18 +76,21 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
                     key={link.href}
                     href={link.href}
                     className={cn(
-                      "relative pb-1 text-[13px] text-[#2B2520]/80 transition-colors hover:text-[#2B2520]",
-                      active && "text-[#2B2520]"
+                      "relative rounded-full border px-4 py-2 text-[13px] font-semibold tracking-[0.01em] transition-colors",
+                      active
+                        ? "text-[#2B2520]"
+                        : "border-[#EBD3AC] bg-[#F6E7D2] text-[#6B5038] hover:border-[#E2A862] hover:bg-[#EFC98D] hover:text-[#2B2520]"
                     )}
+                    aria-current={active ? "page" : undefined}
                   >
-                    {link.label}
                     {active && (
                       <motion.span
-                        layoutId="nav-underline"
-                        className="absolute inset-x-0 -bottom-px h-px bg-[#2B2520]"
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                        layoutId="nav-chip"
+                        className="absolute inset-0 -z-10 rounded-full border border-[#B98540] bg-gradient-to-b from-[#F3C981] to-[#DFA458] shadow-[inset_0_1px_0_rgba(255,255,255,.5)]"
+                        transition={{ type: "spring", stiffness: 400, damping: 32 }}
                       />
                     )}
+                    {link.label}
                   </Link>
                 );
               })}
@@ -132,7 +137,7 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
                     <Link
                       href={link.href}
                       className={cn(
-                        "flex items-center justify-between py-5 font-display text-[28px] leading-none text-[#2B2520]",
+                        "flex items-center justify-between py-5 font-display text-[28px] font-medium leading-none text-[#2B2520]",
                         pathname.startsWith(link.href) && "text-[#8C6A47]"
                       )}
                     >
