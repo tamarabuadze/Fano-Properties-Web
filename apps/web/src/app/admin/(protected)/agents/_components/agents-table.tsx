@@ -23,13 +23,13 @@ export function AgentsTable({ agents }: { agents: Agent[] }) {
     if (!confirm("Delete this agent?")) return;
     const r = await deleteAgent(id);
     if (r.success) toast.success("Agent deleted");
-    else toast.error(r.error);
+    else toast.error(("error" in r && r.error) || "Something went wrong");
   }
 
   async function handleToggle(id: string, active: boolean) {
     const r = await toggleAgentActive(id, !active);
     if (r.success) toast.success(active ? "Agent deactivated" : "Agent activated");
-    else toast.error(r.error);
+    else toast.error(("error" in r && r.error) || "Something went wrong");
   }
 
   return (

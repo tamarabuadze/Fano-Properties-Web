@@ -4,6 +4,7 @@ import { prisma } from "@fano/db";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/admin-auth";
+import { actionFailed } from "@/lib/admin-errors";
 
 const settingsSchema = z.object({
   siteName: z.string().min(1),
@@ -43,7 +44,7 @@ export async function saveSettings(data: SettingsData) {
     );
     revalidatePath("/");
     return { success: true };
-  } catch {
-    return { success: false, error: "Failed to save settings." };
+  } catch (e) {
+    return actionFailed("Failed to save settings.", e);
   }
 }

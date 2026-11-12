@@ -3,6 +3,7 @@
 import { prisma } from "@fano/db";
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/admin-auth";
+import { actionFailed } from "@/lib/admin-errors";
 
 export async function updateInquiryStatus(id: string, status: "new" | "contacted" | "in_progress" | "closed") {
   await requireAdmin();
@@ -13,7 +14,7 @@ export async function updateInquiryStatus(id: string, status: "new" | "contacted
     });
     revalidatePath("/admin/inquiries");
     return { success: true };
-  } catch {
-    return { success: false, error: "Failed to update status." };
+  } catch (e) {
+    return actionFailed("Failed to update status.", e);
   }
 }
