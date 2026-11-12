@@ -68,7 +68,7 @@ export function PropertiesFilters({ initialFilters }: PropertiesFiltersProps) {
   const hasFilters = Object.entries(initialFilters).some(([k, v]) => k !== "category" && !(isCommercial && k === "listingType") && Boolean(v));
 
   return (
-    <div className="rounded-2xl p-5 sticky top-24 space-y-6" style={{ backgroundColor: "#2B2520" }}>
+    <div className="rounded-2xl p-5 space-y-6" style={{ backgroundColor: "#2B2520" }}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <SlidersHorizontal className="h-4 w-4 text-[#E2A862]" />

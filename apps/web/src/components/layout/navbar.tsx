@@ -45,7 +45,11 @@ export function Navbar({ showAgents = true }: { showAgents?: boolean }) {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    document.body.toggleAttribute("data-overlay-open", mobileOpen);
+    return () => {
+      document.body.style.overflow = "";
+      document.body.removeAttribute("data-overlay-open");
+    };
   }, [mobileOpen]);
 
   // Scrolled/non-home: frosted Calcite Sand glass like the Fano app; transparent on the home hero

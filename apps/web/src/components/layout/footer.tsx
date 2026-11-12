@@ -139,7 +139,7 @@ export function Footer({ showAgents = true }: { showAgents?: boolean }) {
           <path d="M-40 150 C 100 90, 240 80, 470 92" fill="none" stroke="url(#fano-footer-line)" strokeWidth="1" opacity=".4" />
           <path d="M-60 158 C 80 112, 210 104, 420 116" fill="none" stroke="url(#fano-footer-line)" strokeWidth="1" opacity=".25" />
         </svg>
-        <div className="container-site relative flex flex-col items-center gap-4 pt-10 pb-10 !pr-[4.75rem] text-center text-xs text-[#A99D8F] sm:pb-8 sm:!pr-24 lg:flex-row lg:justify-between lg:!pr-12 lg:text-left">
+        <div className="container-site relative flex flex-col items-center gap-4 pt-10 pb-24 text-center text-xs text-[#A99D8F] sm:pb-8 sm:!pr-24 lg:flex-row lg:justify-between lg:!pr-28 lg:text-left">
           <p className="text-[13px]">© 2025 Fano Real Estate. All rights reserved.</p>
           <p className="group inline-flex items-center gap-2 rounded-full border border-[#DFCFB9]/20 bg-[#DFCFB9]/5 px-4 py-2 text-[13px] text-[#A99D8F] transition-all duration-300 hover:border-[#DFCFB9] hover:bg-[#DFCFB9]/10 hover:text-[#DFCFB9]">
             <span aria-hidden className="text-base text-[#DFCFB9] [text-shadow:0_0_8px_rgba(223,207,185,0.4)]">◈</span>
