@@ -9,9 +9,9 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "Arial", "sans-serif"],
-        /* Headings are the Bodoni serif; Montserrat remains for the wordmark and tracked labels */
-        display: ["var(--font-serif)", "Bodoni Moda", "Didot", "Georgia", "serif"],
-        serif: ["var(--font-serif)", "Bodoni Moda", "Didot", "Georgia", "serif"],
+        /* Headings are Playfair Display; Montserrat remains for the wordmark and tracked labels */
+        display: ["var(--font-serif)", "Playfair Display", "Georgia", "serif"],
+        serif: ["var(--font-serif)", "Playfair Display", "Georgia", "serif"],
         label: ["var(--font-montserrat)", "Montserrat", "system-ui", "sans-serif"],
       },
       colors: {

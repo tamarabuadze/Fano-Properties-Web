@@ -65,17 +65,17 @@ export function LuxHero() {
 
       <div className="container-site relative z-10 grid pb-20 pt-40 lg:grid-cols-12 lg:pb-28">
         <div className="lg:col-span-8 xl:col-span-7">
-          <p className="lx-eyebrow lx-rise">Private real estate advisory</p>
-          <h1 className="lx-rise lx-rise-1 mt-7 font-display text-[clamp(40px,6vw,84px)] font-normal leading-[0.98] tracking-[-0.015em] text-lx-text">
-            Dubai,<br />
-            <span className="italic text-lx-pale">by introduction.</span>
+          <p className="lx-rise font-sans text-[12px] font-medium uppercase tracking-[2.5px] text-[#E8D5B0]">Dubai&rsquo;s finest addresses, by introduction</p>
+          <h1 className="lx-rise lx-rise-1 mt-3 font-display text-[clamp(40px,5vw,64px)] font-medium leading-[1.05] tracking-[-0.5px] text-white">
+            Real Estate.<br />
+            <em className="font-normal italic">Real Relationships.</em>
           </h1>
-          <p className="lx-rise lx-rise-2 mt-8 max-w-xl text-[15px] leading-[1.8] text-lx-text/70">
+          <p className="lx-rise lx-rise-2 mt-4 max-w-[420px] text-[16px] leading-[1.6] text-[#E5E5E5]">
             A Business Bay advisory for the homes and office floors that are sold before they are listed.
           </p>
-          <div className="lx-rise lx-rise-3 mt-10 flex flex-wrap items-center gap-x-10 gap-y-4">
-            <Link href="/properties" className="btn-gold">View the collection</Link>
-            <Link href="/contact" className="lx-link lx-link-quiet">Speak to an advisor</Link>
+          <div className="lx-rise lx-rise-3 mt-7 flex flex-wrap items-center gap-x-5 gap-y-4">
+            <Link href="/properties" className="btn-gold">View the Collection</Link>
+            <Link href="/contact" className="lx-underline">Speak to an Advisor</Link>
           </div>
         </div>
       </div>
