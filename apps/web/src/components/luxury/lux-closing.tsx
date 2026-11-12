@@ -12,7 +12,7 @@ export function LuxClosing() {
       </div>
 
       <Reveal className="container-site relative z-10 flex flex-col items-start gap-8 pb-20 pt-40 lg:flex-row lg:items-end lg:justify-between lg:pb-28">
-        <h2 id="lx-closing-title" className="font-display text-[clamp(40px,6.4vw,96px)] font-normal leading-[0.98] tracking-[-0.015em] text-lx-text text-balance">
+        <h2 id="lx-closing-title" className="font-display text-[clamp(36px,5vw,72px)] font-normal leading-[0.98] tracking-[-0.015em] text-lx-text text-balance">
           Your property.<br /><span className="italic text-lx-pale">Its next chapter.</span>
         </h2>
         <div className="max-w-sm">

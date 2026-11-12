@@ -14,7 +14,7 @@ export function LuxResidences({ properties }: { properties: Listing[] }) {
         <Reveal className="mb-14 flex flex-col gap-6 lg:mb-20 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="lx-numeral">01</p>
-            <h2 className="mt-5 font-display text-[clamp(36px,4.6vw,60px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
+            <h2 className="mt-5 font-display text-[clamp(32px,3.8vw,50px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
               Selected <span className="italic text-lx-pale">residences.</span>
             </h2>
           </div>

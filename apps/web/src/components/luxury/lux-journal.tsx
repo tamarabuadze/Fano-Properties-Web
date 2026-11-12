@@ -29,7 +29,7 @@ export function LuxJournal({ articles }: { articles: Article[] }) {
         <Reveal className="mb-14 flex flex-col gap-6 lg:mb-20 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="lx-numeral">05</p>
-            <h2 className="mt-5 font-display text-[clamp(36px,4.6vw,60px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
+            <h2 className="mt-5 font-display text-[clamp(32px,3.8vw,50px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
               The <span className="italic text-lx-pale">journal.</span>
             </h2>
           </div>
@@ -55,7 +55,7 @@ export function LuxJournal({ articles }: { articles: Article[] }) {
                 <p className="mt-7 font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-lx-muted">
                   {[formatDate(a.publishedAt), a.readTime ? `${a.readTime} min read` : null].filter(Boolean).join(" · ")}
                 </p>
-                <h3 className="mt-3 font-display text-[28px] font-normal leading-tight text-lx-text transition-colors group-hover:text-lx-gold">
+                <h3 className="mt-3 font-display text-[24px] font-normal leading-tight text-lx-text transition-colors group-hover:text-lx-gold">
                   {a.title}
                 </h3>
                 <p className="mt-3 line-clamp-2 max-w-md text-[14px] leading-[1.8] text-lx-text/60">{a.excerpt}</p>

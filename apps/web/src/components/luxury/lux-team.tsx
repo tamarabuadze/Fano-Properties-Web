@@ -37,11 +37,11 @@ export function LuxTeam({ advisor }: { advisor?: Advisor | null }) {
 
         <Reveal delay={0.1} className="lg:col-span-6 lg:col-start-7">
           <p className="lx-numeral">04</p>
-          <h2 className="mt-5 font-display text-[clamp(36px,4.6vw,60px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
+          <h2 className="mt-5 font-display text-[clamp(32px,3.8vw,50px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
             A team <span className="italic text-lx-pale">on your side.</span>
           </h2>
           <span className="my-9 block h-14 w-px bg-lx-gold" aria-hidden="true" />
-          <p className="max-w-md text-[16px] leading-[1.8] text-lx-text/70">
+          <p className="max-w-md text-[15px] leading-[1.8] text-lx-text/70">
             Local knowledge and clear conversations, from your first enquiry to the transfer at the Dubai Land Department.
             Every listing comes with its facts laid out before you decide: price, size, payment plan and handover, straight from the developer.
           </p>

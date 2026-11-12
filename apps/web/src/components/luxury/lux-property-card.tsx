@@ -63,13 +63,13 @@ export function LuxPropertyCard({
 
       <div className="flex items-start justify-between gap-6 pt-6">
         <div className="min-w-0">
-          <h3 className={cn("truncate font-display font-normal leading-tight text-lx-text transition-colors group-hover:text-lx-gold", feature ? "text-[30px]" : "text-[24px]")}>
+          <h3 className={cn("truncate font-display font-normal leading-tight text-lx-text transition-colors group-hover:text-lx-gold", feature ? "text-[26px]" : "text-[21px]")}>
             {headline}
           </h3>
           <p className="mt-2 font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-lx-muted">{place}</p>
           {facts.length > 0 && <p className="mt-3 text-[13px] text-lx-text/55">{facts.join(" · ")}</p>}
         </div>
-        <p className="shrink-0 text-right font-display text-[22px] leading-none text-lx-text">
+        <p className="shrink-0 text-right font-display text-[19px] leading-none text-lx-text">
           <span className="mr-2 font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-lx-muted">{currency}</span>
           {formatMoney(price, currency)}
           {priceUnit === "per_sqft" && <span className="ml-1 text-[12px] text-lx-muted">/sq ft</span>}

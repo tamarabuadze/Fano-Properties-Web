@@ -33,7 +33,7 @@ export function LuxCollections() {
       <div className="container-site">
         <Reveal className="mb-14 max-w-2xl lg:mb-20">
           <p className="lx-numeral">02</p>
-          <h2 className="mt-5 font-display text-[clamp(36px,4.6vw,60px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
+          <h2 className="mt-5 font-display text-[clamp(32px,3.8vw,50px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
             Different spaces.<br /><span className="italic text-lx-pale">The same personal touch.</span>
           </h2>
         </Reveal>
@@ -53,7 +53,7 @@ export function LuxCollections() {
                     className="object-cover transition-[transform,opacity] duration-[1400ms] ease-out group-hover:scale-[1.04] group-hover:opacity-90"
                   />
                 </div>
-                <h3 className="mt-7 font-display text-[26px] font-normal leading-tight text-lx-text transition-colors group-hover:text-lx-gold">
+                <h3 className="mt-7 font-display text-[22px] font-normal leading-tight text-lx-text transition-colors group-hover:text-lx-gold">
                   {item.title}
                 </h3>
                 <p className="mt-3 max-w-xs text-[14px] leading-[1.8] text-lx-text/60">{item.detail}</p>

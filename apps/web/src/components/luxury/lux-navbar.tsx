@@ -127,7 +127,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
                     <Link
                       href={link.href}
                       className={cn(
-                        "flex items-center justify-between py-6 font-display text-[30px] leading-none text-lx-text",
+                        "flex items-center justify-between py-6 font-display text-[26px] leading-none text-lx-text",
                         pathname.startsWith(link.href) && "text-lx-gold"
                       )}
                     >
