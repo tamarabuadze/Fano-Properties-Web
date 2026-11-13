@@ -6,5 +6,5 @@ set -e
 
 export DIRECT_URL="${DIRECT_URL:-$DATABASE_URL}"
 
-pnpm --filter @fano/db exec prisma db push --skip-generate
+pnpm --filter @fano/db exec prisma db push --skip-generate --accept-data-loss
 exec pnpm --filter @fano/web start

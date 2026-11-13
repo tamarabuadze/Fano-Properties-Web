@@ -11,7 +11,7 @@ async function getAgentsUncached(limit?: number) {
   const agents = await prisma.agent.findMany({
     where: { active: true },
     take: limit,
-    orderBy: { createdAt: "asc" },
+    orderBy: [{ createdAt: "asc" }],
     include: {
       _count: { select: { properties: { where: { published: true } } } },
     },

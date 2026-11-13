@@ -1,4 +1,4 @@
-[phases.setup]
+﻿[phases.setup]
 nixPkgs = ["nodejs_22"]
 
 [phases.install]
@@ -13,3 +13,6 @@ cmds = [
 
 [start]
 cmd = "pnpm --filter @fano/web start"
+
+[deploy]
+releaseCommand = "pnpm --filter @fano/db exec -- prisma db push --skip-generate --accept-data-loss"

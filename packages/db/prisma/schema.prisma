@@ -68,6 +68,11 @@ enum InquiryType {
   callback
 }
 
+enum StaffType {
+  agent
+  administrative
+}
+
 model User {
   id          String   @id @default(cuid())
   supabaseId  String   @unique
@@ -107,6 +112,7 @@ model Agent {
   twitterUrl        String?
   facebookUrl       String?
   websiteUrl        String?
+  staffType         StaffType @default(agent)
   active            Boolean   @default(true)
   /// Show email and phone on the public website
   showContact       Boolean   @default(true)

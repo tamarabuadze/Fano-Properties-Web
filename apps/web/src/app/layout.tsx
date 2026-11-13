@@ -1,32 +1,33 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Inter, Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import { QueryProvider } from "@/components/shared/query-provider";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
+const inter = localFont({
+  src: "../../public/fonts/inter-latin-variable.woff2",
   variable: "--font-inter",
   display: "swap",
+  weight: "100 900",
 });
 
 // Display serif for headings and pull quotes: Playfair Display, medium weight
 // with a lighter italic for the second line
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
+const playfair = localFont({
+  src: [
+    { path: "../../public/fonts/playfair-display-latin-normal.woff2", weight: "400 700", style: "normal" },
+    { path: "../../public/fonts/playfair-display-latin-italic.woff2", weight: "400 700", style: "italic" },
+  ],
   variable: "--font-serif",
   display: "swap",
 });
 
 // Montserrat stays for the logo wordmark and small tracked labels
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
+const montserrat = localFont({
+  src: "../../public/fonts/montserrat-latin-variable.woff2",
   variable: "--font-montserrat",
   display: "swap",
+  weight: "100 900",
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
