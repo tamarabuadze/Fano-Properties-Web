@@ -15,7 +15,6 @@ const agentSchema = z.object({
   bio: z.string().optional(),
   avatar: z.string().url().optional().or(z.literal("")),
   staffType: z.enum(["agent", "administrative"]).default("agent"),
-  employeeId: z.string().optional(),
   specialization: z.string().optional(),
   licenseNumber: z.string().optional(),
   yearsExperience: z.number({ coerce: true }).int().optional(),

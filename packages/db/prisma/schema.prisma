@@ -100,7 +100,6 @@ model Agent {
   avatar            String?
   title             String?
   specialization    String?
-  employeeId        String?   @unique
   licenseNumber     String?
   yearsExperience   Int?
   languages         String[]  @default([])

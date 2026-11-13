@@ -17,7 +17,6 @@ const agentSchema = z.object({
   bio: z.string().optional(),
   avatar: z.string().refine((v) => v === "" || v.startsWith("/") || /^https?:\/\//.test(v), "Upload a photo or paste a link").optional(),
   staffType: z.enum(["agent", "administrative"]).default("agent"),
-  employeeId: z.string().optional(),
   specialization: z.string().optional(),
   licenseNumber: z.string().optional(),
   yearsExperience: z.number({ coerce: true }).int().optional(),
