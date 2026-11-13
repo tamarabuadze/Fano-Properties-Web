@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
+import { buildPageMeta } from "@/lib/seo";
 import { Suspense } from "react";
 import { BlogGrid } from "./_components/blog-grid";
 import { BlogCategories } from "./_components/blog-categories";
 import { getBlogCategories } from "@/lib/queries/blog";
 
+const title = "Blog & Insights";
+const description = "Real estate market insights, buying guides, investment tips, and industry news.";
+
 export const metadata: Metadata = {
-  title: "Blog & Insights",
-  description: "Real estate market insights, buying guides, investment tips, and industry news.",
+  title,
+  description,
   alternates: { canonical: "/blog" },
+  ...buildPageMeta({ path: "/blog", title, description }),
 };
 
 export const dynamic = "force-dynamic";

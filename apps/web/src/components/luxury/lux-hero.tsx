@@ -13,6 +13,7 @@ const PAUSE_KEY = "fano-hero-video-paused";
 // One headline, one sentence, two text links. Nothing else in the frame.
 export function LuxHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [videoReady, setVideoReady] = useState(false);
   const [hasVideo, setHasVideo] = useState(false);
   const [paused, setPaused] = useState(false);
@@ -70,6 +71,20 @@ export function LuxHero() {
     };
   }, [startVideo]);
 
+  // Lets the floating seller CTA step back to an outline while the hero's own CTA is on screen
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(([entry]) => {
+      document.body.toggleAttribute("data-hero-in-view", entry?.isIntersecting ?? false);
+    });
+    observer.observe(section);
+    return () => {
+      observer.disconnect();
+      document.body.removeAttribute("data-hero-in-view");
+    };
+  }, []);
+
   const togglePaused = () => {
     const video = videoRef.current;
     if (!video) return;
@@ -87,7 +102,7 @@ export function LuxHero() {
   };
 
   return (
-    <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-lx-page" aria-label="Fano Properties, Dubai">
+    <section ref={sectionRef} className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-lx-page" aria-label="Fano Properties, Dubai">
       <div className="absolute inset-0 -z-10" aria-hidden="true">
         <Image src={HERO_POSTER} alt="" fill priority fetchPriority="high" sizes="100vw" className="object-cover" />
         <video
@@ -147,7 +162,7 @@ export function LuxHero() {
       )}
 
       {/* Scroll cue */}
-      <div className="absolute bottom-8 right-6 hidden flex-col items-center gap-3 lg:right-12 lg:flex" aria-hidden="true">
+      <div className="absolute bottom-28 right-6 hidden flex-col items-center gap-3 lg:right-12 lg:flex" aria-hidden="true">
         <span className="font-label text-[9px] uppercase tracking-[0.3em] text-lx-text/50 [writing-mode:vertical-rl]">Scroll</span>
         <span className="lx-scroll-line block h-14 w-px bg-lx-gold" />
       </div>

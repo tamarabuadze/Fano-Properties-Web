@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
+import { buildPageMeta } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { SectionHeader } from "@/components/shared/section-header";
 
+const title = "About Us";
+const description = "Learn about Fano Properties — our story, mission, and the team behind the brand.";
+
 export const metadata: Metadata = {
-  title: "About Us",
-  description: "Learn about Fano Properties — our story, mission, and the team behind the brand.",
+  title,
+  description,
   alternates: { canonical: "/about" },
+  ...buildPageMeta({ path: "/about", title, description }),
 };
 
 const values = [

@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
+import { buildPageMeta } from "@/lib/seo";
 import { FaqAccordion } from "./_components/faq-accordion";
 
+const title = "FAQ";
+const description = "Answers about buying property in Dubai: freehold ownership for foreigners, DLD fees, off-plan payment plans, mortgages and the Golden Visa.";
+
 export const metadata: Metadata = {
-  title: "FAQ",
-  description: "Answers about buying property in Dubai: freehold ownership for foreigners, DLD fees, off-plan payment plans, mortgages and the Golden Visa.",
+  title,
+  description,
   alternates: { canonical: "/faq" },
+  ...buildPageMeta({ path: "/faq", title, description }),
 };
 
 const faqs = [

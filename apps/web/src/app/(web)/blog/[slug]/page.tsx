@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { getBlogArticleBySlug } from "@/lib/queries/blog";
 import { formatDate } from "@fano/utils";
 import { articleBodyToHtml } from "@/lib/markdown";
+import { buildPageMeta } from "@/lib/seo";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
@@ -18,16 +19,23 @@ export async function generateMetadata({ params }: BlogArticlePageProps): Promis
   const article = await getBlogArticleBySlug(slug);
   if (!article || !article.published) return { title: "Article Not Found", robots: { index: false } };
 
+  const meta = buildPageMeta({
+    path: `/blog/${slug}`,
+    title: article.title,
+    description: article.excerpt,
+    images: article.coverImage ? [{ url: article.coverImage }] : undefined,
+    type: "article",
+  });
   return {
     title: article.metaTitle?.trim() || article.title,
     description: article.metaDescription?.trim() || article.excerpt,
     alternates: { canonical: `/blog/${slug}` },
+    twitter: meta.twitter,
     openGraph: {
-      title: article.title,
-      description: article.excerpt,
-      images: article.coverImage ? [{ url: article.coverImage }] : [],
+      ...meta.openGraph,
       type: "article",
       publishedTime: article.publishedAt?.toISOString(),
+      modifiedTime: article.updatedAt.toISOString(),
     },
   };
 }

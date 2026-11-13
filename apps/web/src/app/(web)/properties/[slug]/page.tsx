@@ -10,6 +10,7 @@ import { RelatedProperties } from "./_components/related-properties";
 import { PropertyAgentCard } from "./_components/property-agent-card";
 import { RoiCalculator } from "@/components/roi/roi-calculator";
 import { totalPrice, splitListingTitle } from "@fano/utils";
+import { buildPageMeta, metaDescription } from "@/lib/seo";
 
 interface PropertyPageProps {
   params: Promise<{ slug: string }>;
@@ -17,29 +18,30 @@ interface PropertyPageProps {
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
+// The full listing title with each part de-shouted, for search and share titles
+function cleanListingTitle(raw: string) {
+  const { headline, details } = splitListingTitle(raw);
+  return [headline, ...details].join(" | ");
+}
+
 export async function generateMetadata({ params }: PropertyPageProps): Promise<Metadata> {
   const { slug } = await params;
   const property = await getPropertyBySlug(slug);
   if (!property || !property.published) return { title: "Property Not Found", robots: { index: false } };
 
   const url = `${SITE_URL}/properties/${slug}`;
+  const title = cleanListingTitle(property.title);
+  const desc = metaDescription(property.description);
   return {
-    title: property.metaTitle?.trim() || property.title,
-    description: property.metaDescription?.trim() || property.description.slice(0, 160),
+    title: property.metaTitle?.trim() || title,
+    description: property.metaDescription?.trim() || desc,
     alternates: { canonical: url },
-    openGraph: {
-      type: "website",
-      url,
-      title: property.title,
-      description: property.description.slice(0, 160),
-      images: [{ url: property.coverImage, width: 1200, height: 800, alt: property.title }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: property.title,
-      description: property.description.slice(0, 160),
-      images: [property.coverImage],
-    },
+    ...buildPageMeta({
+      path: url,
+      title,
+      description: desc,
+      images: [{ url: property.coverImage, width: 1200, height: 800, alt: title }],
+    }),
   };
 }
 
@@ -63,7 +65,7 @@ export default async function PropertyPage({ params }: PropertyPageProps) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "RealEstateListing",
-    name: property.title,
+    name: cleanListingTitle(property.title),
     description: property.description.slice(0, 300),
     url: `${SITE_URL}/properties/${slug}`,
     image: allImages,

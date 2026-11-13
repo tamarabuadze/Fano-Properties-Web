@@ -1,4 +1,8 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+// A slug page that calls notFound() takes its metadata from this boundary, not from its generateMetadata
+export const metadata: Metadata = { title: "Page Not Found", robots: { index: false } };
 
 export default function NotFound() {
   return (

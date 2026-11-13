@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
+import { buildPageMeta } from "@/lib/seo";
 import { ListForm } from "./_components/list-form";
 
+const title = "List Your Property";
+const description =
+  "List your Dubai property with Fano Properties. We introduce your home or investment to qualified, discreet buyers — often before it ever reaches the open market.";
+
 export const metadata: Metadata = {
-  title: "List Your Property",
-  description:
-    "List your Dubai property with Fano Properties. We introduce your home or investment to qualified, discreet buyers — often before it ever reaches the open market.",
+  title,
+  description,
   alternates: { canonical: "/list-with-us" },
+  ...buildPageMeta({ path: "/list-with-us", title, description }),
 };
 
 const whyUs = [

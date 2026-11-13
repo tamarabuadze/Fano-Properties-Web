@@ -4,11 +4,18 @@
 const KEEP_UPPER = new Set([
   "UAE", "DIFC", "DXB", "JVC", "JLT", "JBR", "JVT", "DSO", "MBR", "SZR", "HQ",
   "RERA", "DLD", "AED", "USD", "GBP", "EUR", "VAT", "ROI", "LLC", "FZE", "FZCO",
+  "AHS", "MEP", "HVAC", "GCC", "DMCC", "JAFZA", "DWC", "BUA",
   "II", "III", "IV", "VI", "VII", "VIII", "IX", "XI", "XII",
 ]);
 
 const SMALL_WORDS = new Set([
   "a", "an", "and", "as", "at", "by", "for", "from", "in", "of", "on", "or", "the", "to", "with",
+]);
+
+// A single letter after one of these is a grade or block label ("GRADE A", "TOWER A"), not the article
+const DESIGNATOR_BEFORE = new Set([
+  "grade", "tower", "block", "plot", "phase", "type", "class", "wing", "unit", "level", "zone",
+  "floor", "cluster", "category",
 ]);
 
 function isShouting(text: string): boolean {
@@ -18,11 +25,14 @@ function isShouting(text: string): boolean {
   return upper / letters.length >= 0.8;
 }
 
-function caseWord(word: string, first: boolean): string {
+function caseWord(word: string, first: boolean, prev = ""): string {
   const core = word.replace(/^[^A-Za-z0-9]+|[^A-Za-z0-9]+$/g, "");
   if (!core) return word;
   if (KEEP_UPPER.has(core.toUpperCase())) return word.toUpperCase();
   if (/\d/.test(core)) return word.toUpperCase();
+  if (core.length === 1 && DESIGNATOR_BEFORE.has(prev.replace(/[^A-Za-z]/g, "").toLowerCase())) {
+    return word.toUpperCase();
+  }
   const lower = word.toLowerCase();
   if (!first && SMALL_WORDS.has(core.toLowerCase())) return lower;
   // Capitalise after hyphens and slashes too: "AL-BARSHA" -> "Al-Barsha"
@@ -38,7 +48,8 @@ export function smartCase(text: string): string {
     .map((part, i, parts) => {
       if (/^\s+$/.test(part)) return part;
       const prevSeparator = i === 0 || /[|:,–—-]\s*$/.test(parts.slice(0, i).join(""));
-      return caseWord(part, prevSeparator);
+      const prev = parts.slice(0, i).reverse().find((p) => !/^\s+$/.test(p)) ?? "";
+      return caseWord(part, prevSeparator, prev);
     })
     .join("");
 }

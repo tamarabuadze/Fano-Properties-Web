@@ -112,11 +112,9 @@ async function getRelatedPropertiesUncached(propertyId: string, propertyType: st
   return rows.map(serialize);
 }
 
+// Raw SQL so Prisma's @updatedAt is not bumped by a page view (sitemap lastmod uses updatedAt)
 export async function incrementPropertyViewCount(id: string) {
-  return prisma.property.update({
-    where: { id },
-    data: { viewCount: { increment: 1 } },
-  });
+  return prisma.$executeRaw`UPDATE "properties" SET "viewCount" = "viewCount" + 1 WHERE "id" = ${id}`;
 }
 
 export const getFeaturedProperties = cached(getFeaturedPropertiesUncached, "getFeaturedProperties", [CACHE_TAGS.properties]);

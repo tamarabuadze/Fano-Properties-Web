@@ -6,19 +6,11 @@ export const dynamic = "force-dynamic";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE_URL, lastModified: new Date(), changeFrequency: "daily", priority: 1 },
-    { url: `${BASE_URL}/properties`, lastModified: new Date(), changeFrequency: "hourly", priority: 0.9 },
-    { url: `${BASE_URL}/properties?category=commercial`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
-    { url: `${BASE_URL}/agents`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
-    { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
-    { url: `${BASE_URL}/roi-calculator`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${BASE_URL}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE_URL}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.6 },
-    { url: `${BASE_URL}/faq`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
-  ];
+function newest(rows: { updatedAt: Date }[]): Date | undefined {
+  return rows.reduce<Date | undefined>((m, r) => (!m || r.updatedAt > m ? r.updatedAt : m), undefined);
+}
 
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [properties, agents, articles] = await Promise.all([
     prisma.property.findMany({
       where: { published: true },
@@ -33,6 +25,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       select: { slug: true, updatedAt: true },
     }).catch(() => []),
   ]);
+
+  // Brochure pages carry no lastmod; listing pages take their newest item's date
+  const latestProperty = newest(properties);
+  const latestArticle = newest(articles);
+  const staticPages: MetadataRoute.Sitemap = [
+    { url: BASE_URL, lastModified: latestProperty, changeFrequency: "daily", priority: 1 },
+    { url: `${BASE_URL}/properties`, lastModified: latestProperty, changeFrequency: "hourly", priority: 0.9 },
+    { url: `${BASE_URL}/properties?category=commercial`, lastModified: latestProperty, changeFrequency: "daily", priority: 0.8 },
+    { url: `${BASE_URL}/properties?category=residential`, lastModified: latestProperty, changeFrequency: "daily", priority: 0.8 },
+    { url: `${BASE_URL}/agents`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${BASE_URL}/blog`, lastModified: latestArticle, changeFrequency: "daily", priority: 0.8 },
+    { url: `${BASE_URL}/roi-calculator`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/about`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/contact`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/list-with-us`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${BASE_URL}/faq`, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${BASE_URL}/privacy-policy`, changeFrequency: "yearly", priority: 0.3 },
+  ];
 
   const propertyPages: MetadataRoute.Sitemap = properties.map((p) => ({
     url: `${BASE_URL}/properties/${p.slug}`,

@@ -22,15 +22,13 @@ test.describe("Inquiries", () => {
   test("can filter by status", async ({ page }) => {
     await page.goto("/inquiries");
 
-    const statusFilter = page.getByRole("combobox", { name: /status/i });
-    if (await statusFilter.isVisible()) {
-      await statusFilter.selectOption("new");
-      // Page should reload/filter — just verify it doesn't crash
-      await expect(page.getByRole("heading", { name: /inquiries/i })).toBeVisible();
+    await page.getByRole("link", { name: "New", exact: true }).click();
+    await expect(page).toHaveURL(/status=new/);
+    await expect(page.getByRole("heading", { name: /inquiries/i })).toBeVisible();
 
-      await statusFilter.selectOption("contacted");
-      await expect(page.getByRole("heading", { name: /inquiries/i })).toBeVisible();
-    }
+    await page.getByRole("link", { name: "In Progress", exact: true }).click();
+    await expect(page).toHaveURL(/status=in_progress/);
+    await expect(page.getByRole("heading", { name: /inquiries/i })).toBeVisible();
   });
 
   test("can change inquiry status", async ({ page }) => {

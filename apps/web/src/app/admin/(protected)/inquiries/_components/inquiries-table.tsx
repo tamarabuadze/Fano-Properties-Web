@@ -92,6 +92,7 @@ export function InquiriesTable({ inquiries, total, page, pageSize }: InquiriesTa
                     <td className="px-4 py-3">
                       <select
                         defaultValue={inq.status}
+                        aria-label={`Status for ${inq.firstName} ${inq.lastName}`.trim()}
                         onChange={(e) => handleStatusChange(inq.id, e.target.value)}
                         className={cn(
                           "px-2 py-1 rounded-lg text-xs font-medium border-0 cursor-pointer focus:outline-none",

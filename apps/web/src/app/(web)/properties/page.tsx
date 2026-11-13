@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMeta } from "@/lib/seo";
 import { Suspense } from "react";
 import { PropertiesGrid } from "./_components/properties-grid";
 import { PropertiesFiltersPanel } from "./_components/properties-filters-panel";
@@ -32,7 +33,7 @@ function categoryOf(raw: { category?: string; propertyType?: string }) {
 
 export async function generateMetadata({ searchParams }: PropertiesPageProps): Promise<Metadata> {
   const { title, description, canonical } = CATEGORY_META[categoryOf(await searchParams)];
-  return { title, description, alternates: { canonical } };
+  return { title, description, alternates: { canonical }, ...buildPageMeta({ path: canonical, title, description }) };
 }
 
 interface PropertiesPageProps {
