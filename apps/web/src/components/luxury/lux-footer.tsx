@@ -54,7 +54,7 @@ export function LuxFooter({ showAgents = true }: { showAgents?: boolean }) {
         </div>
       </div>
 
-      <div className="container-site flex flex-col gap-2 border-t border-lx-line py-6 font-label text-[10px] uppercase tracking-[0.18em] text-lx-text/45 sm:flex-row sm:items-center sm:justify-between">
+      <div className="container-site flex flex-col gap-2 border-t border-lx-line py-6 font-label text-[10px] uppercase tracking-[0.18em] text-lx-text/55 sm:flex-row sm:items-center sm:justify-between">
         <p>© 2025 Fano Properties</p>
         <p>RERA 49852</p>
       </div>

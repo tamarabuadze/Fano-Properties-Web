@@ -1,54 +1,102 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Pause, Play } from "lucide-react";
 
 const HERO_VIDEO = "/hero-aerial.mp4";
 const HERO_POSTER = "/hero-aerial.jpg";
+const PAUSE_KEY = "fano-hero-video-paused";
 
 // Full-screen film under a gradient that deepens toward the bottom third.
 // One headline, one sentence, two text links. Nothing else in the frame.
 export function LuxHero() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoReady, setVideoReady] = useState(false);
+  const [hasVideo, setHasVideo] = useState(false);
+  const [paused, setPaused] = useState(false);
+
+  const startVideo = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (!video.getAttribute("src")) {
+      video.src = HERO_VIDEO;
+      video.load();
+    }
+    setHasVideo(true);
+    void video.play().catch((err: unknown) => {
+      setVideoReady(false);
+      // Autoplay blocked (e.g. iOS Low Power Mode): show Play, but don't save it as the visitor's choice
+      if (err instanceof DOMException && err.name === "NotAllowedError") setPaused(true);
+    });
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    let storedPaused = false;
+    try {
+      storedPaused = localStorage.getItem(PAUSE_KEY) === "1";
+    } catch {}
     let timer: ReturnType<typeof setTimeout>;
     const load = () => {
       if (reducedMotion.matches || connection?.saveData) return;
-      timer = setTimeout(() => {
-        video.src = HERO_VIDEO;
-        video.load();
-        void video.play().catch(() => setVideoReady(false));
-      }, 250);
+      if (storedPaused) {
+        setHasVideo(true);
+        setPaused(true);
+        return;
+      }
+      timer = setTimeout(startVideo, 250);
     };
+    // Turning on Reduce Motion mid-visit stops the film and returns to the still
+    const onMotionChange = () => {
+      if (!reducedMotion.matches) return;
+      clearTimeout(timer);
+      video.pause();
+      setVideoReady(false);
+      setPaused(true);
+    };
+    reducedMotion.addEventListener("change", onMotionChange);
     if (document.readyState === "complete") load();
     else window.addEventListener("load", load, { once: true });
     return () => {
       clearTimeout(timer);
       window.removeEventListener("load", load);
+      reducedMotion.removeEventListener("change", onMotionChange);
       video.pause();
     };
-  }, []);
+  }, [startVideo]);
+
+  const togglePaused = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    const next = !paused;
+    setPaused(next);
+    try {
+      localStorage.setItem(PAUSE_KEY, next ? "1" : "0");
+    } catch {}
+    if (next) {
+      video.pause();
+      setVideoReady(false);
+    } else {
+      startVideo();
+    }
+  };
 
   return (
-    <section className="relative isolate flex min-h-[100svh] items-center sm:items-end overflow-hidden bg-lx-page" aria-label="Fano Properties, Dubai">
+    <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-lx-page" aria-label="Fano Properties, Dubai">
       <div className="absolute inset-0 -z-10" aria-hidden="true">
-        <Image src={HERO_POSTER} alt="" fill priority unoptimized sizes="100vw" className="object-cover" />
+        <Image src={HERO_POSTER} alt="" fill priority fetchPriority="high" sizes="100vw" className="object-cover" />
         <video
           ref={videoRef}
-          autoPlay
           muted
           loop
           playsInline
           preload="none"
           tabIndex={-1}
-          poster={HERO_POSTER}
           className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[2000ms]"
           style={{ opacity: videoReady ? 1 : 0 }}
           onPlaying={() => setVideoReady(true)}
@@ -63,7 +111,7 @@ export function LuxHero() {
         Business Bay · Dubai · RERA 49852
       </p>
 
-      <div className="container-site relative z-10 grid py-10 sm:pb-20 sm:pt-40 lg:grid-cols-12 lg:pb-28">
+      <div className="container-site relative z-10 grid pb-28 pt-32 sm:pt-40 lg:grid-cols-12">
         <div className="lg:col-span-8 xl:col-span-7">
           <p className="lx-rise font-sans text-[12px] font-medium uppercase tracking-[2.5px] text-[#E8D5B0]">Dubai&rsquo;s finest addresses, by introduction</p>
           <h1 className="lx-rise lx-rise-1 mt-3 font-display font-bold uppercase leading-none text-white">
@@ -82,6 +130,21 @@ export function LuxHero() {
           </div>
         </div>
       </div>
+
+      {/* Pause control for the looping film (WCAG 2.2.2) */}
+      {hasVideo && (
+        <div className="container-site pointer-events-none absolute inset-x-0 bottom-6 z-10 sm:bottom-8">
+          <button
+            type="button"
+            onClick={togglePaused}
+            aria-pressed={paused}
+            aria-label="Pause background video"
+            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-lx-gold/40 bg-lx-page/40 text-lx-text/80 backdrop-blur-sm transition-colors hover:border-lx-gold hover:text-lx-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lx-gold"
+          >
+            {paused ? <Play className="h-4 w-4" aria-hidden="true" /> : <Pause className="h-4 w-4" aria-hidden="true" />}
+          </button>
+        </div>
+      )}
 
       {/* Scroll cue */}
       <div className="absolute bottom-8 right-6 hidden flex-col items-center gap-3 lg:right-12 lg:flex" aria-hidden="true">

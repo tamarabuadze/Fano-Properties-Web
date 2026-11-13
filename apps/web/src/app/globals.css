@@ -262,12 +262,20 @@
 }
 
 /* ─── Public site: navy with champagne gold, one set of tokens ───── */
+/* RGB channels so Tailwind opacity modifiers (bg-lx-page/60) work; on :root so portals get them too */
+:root {
+  --lx-page-rgb: 11 18 32;        /* #0B1220 */
+  --lx-surface-rgb: 18 26 43;     /* #121A2B */
+  --lx-raised-rgb: 27 36 56;      /* #1B2438 */
+  --lx-text-rgb: 244 239 234;     /* #F4EFEA */
+  --lx-muted-rgb: 163 152 134;    /* #A39886 */
+}
 .lx-root {
-  --lx-page: #0B1220;
-  --lx-surface: #121A2B;
-  --lx-raised: #1B2438;
-  --lx-text: #F4EFEA;
-  --lx-muted: #A39886;
+  --lx-page: rgb(var(--lx-page-rgb));
+  --lx-surface: rgb(var(--lx-surface-rgb));
+  --lx-raised: rgb(var(--lx-raised-rgb));
+  --lx-text: rgb(var(--lx-text-rgb));
+  --lx-muted: rgb(var(--lx-muted-rgb));
   --lx-line: rgba(226, 168, 98, 0.22);
   background: var(--lx-page);
   color: var(--lx-text);

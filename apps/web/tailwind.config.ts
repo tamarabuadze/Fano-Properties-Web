@@ -15,13 +15,13 @@ const config: Config = {
         label: ["var(--font-montserrat)", "Montserrat", "system-ui", "sans-serif"],
       },
       colors: {
-        /* Luxury dark homepage tokens: resolved per theme in globals.css ([data-theme]) */
+        /* Public-site navy tokens: RGB channels in globals.css so /<opacity> modifiers compile */
         lx: {
-          page: "var(--lx-page)",
-          surface: "var(--lx-surface)",
-          raised: "var(--lx-raised)",
-          text: "var(--lx-text)",
-          muted: "var(--lx-muted)",
+          page: "rgb(var(--lx-page-rgb) / <alpha-value>)",
+          surface: "rgb(var(--lx-surface-rgb) / <alpha-value>)",
+          raised: "rgb(var(--lx-raised-rgb) / <alpha-value>)",
+          text: "rgb(var(--lx-text-rgb) / <alpha-value>)",
+          muted: "rgb(var(--lx-muted-rgb) / <alpha-value>)",
           line: "var(--lx-line)",
           gold: "#E2A862",
           bronze: "#8C6A47",
@@ -130,6 +130,9 @@ const config: Config = {
         "2xl": "1rem",
         "3xl": "1.5rem",
         "4xl": "2rem",
+      },
+      opacity: {
+        "92": "0.92",
       },
       maxWidth: {
         "8xl": "88rem",
