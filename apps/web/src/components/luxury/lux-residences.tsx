@@ -49,9 +49,9 @@ export function LuxResidences({ properties }: { properties: Listing[] }) {
           <div>
             <p className="lx-numeral">01</p>
             <h2 className="mt-5 font-display text-[clamp(32px,3.8vw,50px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
-              Selected{" "}
+              Featured{" "}
               <span className="italic text-lx-pale">
-                {tab === "residential" ? "residences." : "commercial."}
+                {tab === "residential" ? "properties." : "commercial."}
               </span>
             </h2>
           </div>
