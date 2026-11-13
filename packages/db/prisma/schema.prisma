@@ -14,6 +14,11 @@ enum UserRole {
   user
 }
 
+enum AgentRole {
+  agent
+  administrative_staff
+}
+
 enum PropertyType {
   apartment
   villa

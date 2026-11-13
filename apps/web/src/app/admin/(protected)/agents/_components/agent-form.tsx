@@ -25,6 +25,7 @@ const schema = z.object({
   twitterUrl: z.string().url("Must be a valid URL").optional().or(z.literal("")),
   /** Comma-separated in the form, saved as a list */
   languages: z.string().optional(),
+  role: z.enum(["agent", "administrative_staff"]).default("agent"),
   active: z.boolean().default(true),
   showContact: z.boolean().default(true),
 });
@@ -54,6 +55,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
     defaultValues: {
       active: true,
       showContact: true,
+      role: "agent",
       ...defaultValues,
     },
   });
@@ -120,6 +122,13 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className={labelCls}>Staff Type</label>
+            <select {...register("role")} className={inputCls}>
+              <option value="agent">Agent</option>
+              <option value="administrative_staff">Administrative Staff</option>
+            </select>
+          </div>
           <div>
             <label className={labelCls}>Title / Role</label>
             <input

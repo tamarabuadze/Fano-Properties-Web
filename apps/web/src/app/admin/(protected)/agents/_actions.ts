@@ -23,6 +23,7 @@ const agentSchema = z.object({
   instagramUrl: z.string().url().optional().or(z.literal("")),
   twitterUrl: z.string().url().optional().or(z.literal("")),
   languages: z.array(z.string().trim().min(1)).default([]),
+  role: z.enum(["agent", "administrative_staff"]).default("agent"),
   active: z.boolean().default(true),
   showContact: z.boolean().default(true),
 });

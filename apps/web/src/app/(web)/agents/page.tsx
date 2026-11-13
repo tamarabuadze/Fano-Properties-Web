@@ -54,26 +54,61 @@ async function AgentsGrid() {
     );
   }
 
+  const salesAgents = agents.filter((a) => (a as never as { role: string }).role !== "administrative_staff");
+  const adminStaff = agents.filter((a) => (a as never as { role: string }).role === "administrative_staff");
+
   return (
-    <AnimateStagger className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {agents.map((agent) => (
-        <AgentCard
-          key={agent.id}
-          id={agent.id}
-          firstName={agent.firstName}
-          lastName={agent.lastName}
-          slug={agent.slug}
-          avatar={agent.avatar}
-          title={agent.title}
-          specialization={agent.specialization}
-          licenseNumber={agent.licenseNumber}
-          languages={agent.languages}
-          phone={agent.phone}
-          email={agent.email}
-          totalListings={(agent as never as { _count: { properties: number } })._count?.properties}
-        />
-      ))}
-    </AnimateStagger>
+    <div className="space-y-20">
+      {salesAgents.length > 0 && (
+        <div>
+          <h2 className="mb-10 font-display text-[clamp(24px,2.4vw,32px)] font-normal text-lx-text">Agents</h2>
+          <AnimateStagger className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {salesAgents.map((agent) => (
+              <AgentCard
+                key={agent.id}
+                id={agent.id}
+                firstName={agent.firstName}
+                lastName={agent.lastName}
+                slug={agent.slug}
+                avatar={agent.avatar}
+                title={agent.title}
+                specialization={agent.specialization}
+                licenseNumber={agent.licenseNumber}
+                languages={agent.languages}
+                phone={agent.phone}
+                email={agent.email}
+                totalListings={(agent as never as { _count: { properties: number } })._count?.properties}
+              />
+            ))}
+          </AnimateStagger>
+        </div>
+      )}
+
+      {adminStaff.length > 0 && (
+        <div>
+          <h2 className="mb-10 font-display text-[clamp(24px,2.4vw,32px)] font-normal text-lx-text">Administrative Staff</h2>
+          <AnimateStagger className="grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {adminStaff.map((agent) => (
+              <AgentCard
+                key={agent.id}
+                id={agent.id}
+                firstName={agent.firstName}
+                lastName={agent.lastName}
+                slug={agent.slug}
+                avatar={agent.avatar}
+                title={agent.title}
+                specialization={agent.specialization}
+                licenseNumber={agent.licenseNumber}
+                languages={agent.languages}
+                phone={agent.phone}
+                email={agent.email}
+                totalListings={(agent as never as { _count: { properties: number } })._count?.properties}
+              />
+            ))}
+          </AnimateStagger>
+        </div>
+      )}
+    </div>
   );
 }
 
