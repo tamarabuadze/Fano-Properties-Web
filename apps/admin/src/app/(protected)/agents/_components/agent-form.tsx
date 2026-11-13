@@ -15,6 +15,7 @@ const schema = z.object({
   title: z.string().optional(),
   bio: z.string().optional(),
   avatar: z.string().url("Must be a valid URL").optional().or(z.literal("")),
+  staffType: z.enum(["agent", "administrative"]).default("agent"),
   employeeId: z.string().optional(),
   specialization: z.string().optional(),
   licenseNumber: z.string().optional(),
@@ -42,14 +43,17 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       active: true,
+      staffType: "agent",
       ...defaultValues,
     },
   });
+  const staffType = watch("staffType");
 
   async function onSubmit(data: FormData) {
     const result = agentId
@@ -66,6 +70,26 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+      {/* Staff Type */}
+      <section className="bg-card rounded-2xl border border-border p-6">
+        <h2 className="font-semibold text-foreground mb-4">Staff Type</h2>
+        <div className="flex gap-6">
+          {(["agent", "administrative"] as const).map((type) => (
+            <label key={type} className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                value={type}
+                {...register("staffType")}
+                className="w-4 h-4"
+              />
+              <span className="text-sm font-medium text-foreground">
+                {type === "agent" ? "Real Estate Agent" : "Administrative Staff"}
+              </span>
+            </label>
+          ))}
+        </div>
+      </section>
+
       {/* Personal Info */}
       <section className="bg-card rounded-2xl border border-border p-6 space-y-5">
         <h2 className="font-semibold text-foreground">Personal Information</h2>
@@ -115,6 +139,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
               placeholder="Senior Real Estate Agent"
             />
           </div>
+          {staffType === "agent" && (
           <div>
             <label className={labelCls}>Specialization</label>
             <input
@@ -123,6 +148,7 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
               placeholder="Luxury Residences"
             />
           </div>
+          )}
         </div>
 
         <div>
@@ -145,10 +171,12 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
             <label className={labelCls}>Employee ID</label>
             <input {...register("employeeId")} className={inputCls} placeholder="FP-26-00028" />
           </div>
+          {staffType === "agent" && (
           <div>
-            <label className={labelCls}>License Number</label>
+            <label className={labelCls}>RERA BRN Number</label>
             <input {...register("licenseNumber")} className={inputCls} placeholder="RE-12345" />
           </div>
+          )}
           <div>
             <label className={labelCls}>Years of Experience</label>
             <input
