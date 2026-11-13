@@ -15,6 +15,7 @@ const schema = z.object({
   title: z.string().optional(),
   bio: z.string().optional(),
   avatar: z.string().url("Must be a valid URL").optional().or(z.literal("")),
+  employeeId: z.string().optional(),
   specialization: z.string().optional(),
   licenseNumber: z.string().optional(),
   yearsExperience: z.number({ coerce: true }).int().min(0).optional(),
@@ -140,6 +141,10 @@ export function AgentForm({ defaultValues, agentId }: AgentFormProps) {
         <h2 className="font-semibold text-foreground">Professional Details</h2>
 
         <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className={labelCls}>Employee ID</label>
+            <input {...register("employeeId")} className={inputCls} placeholder="FP-26-00028" />
+          </div>
           <div>
             <label className={labelCls}>License Number</label>
             <input {...register("licenseNumber")} className={inputCls} placeholder="RE-12345" />
