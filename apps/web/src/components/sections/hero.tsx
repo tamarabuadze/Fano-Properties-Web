@@ -159,13 +159,13 @@ export function HeroSection() {
       {/* ── Content (fades + rises on scroll) ───────────────── */}
       <motion.div
         style={{ opacity: contentOpacity, y: contentY }}
-        className="relative z-10 h-full flex flex-col justify-end pb-10 lg:pb-16"
+        className="relative z-10 h-full flex flex-col justify-start sm:justify-end pt-24 sm:pt-0 pb-8 sm:pb-10 lg:pb-16"
       >
         <div className="container-site">
           <div className="max-w-3xl">
 
             {/* Eyebrow — expanding line + label */}
-            <div className="flex items-center gap-3 mb-6 overflow-hidden">
+            <div className="flex items-center gap-3 mb-4 sm:mb-6 overflow-hidden">
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
@@ -184,7 +184,7 @@ export function HeroSection() {
             </div>
 
             {/* Headline — word-by-word reveal */}
-            <h1 className="font-semibold heading-display text-[clamp(38px,5.5vw,76px)] mb-5 leading-[1.04]">
+            <h1 className="font-semibold heading-display text-[clamp(28px,7.5vw,76px)] sm:text-[clamp(38px,5.5vw,76px)] mb-3 sm:mb-5 leading-[1.04]">
               <div className="mb-1">
                 <RevealWords text="Real Estate." delay={0.3} className="text-white" />
               </div>
@@ -198,7 +198,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
-              className="text-white/55 text-base max-w-lg mb-8 leading-relaxed"
+              className="text-white/55 text-sm sm:text-base max-w-lg mb-5 sm:mb-8 leading-relaxed"
             >
               We help you find more than a property — we find your next chapter.
             </motion.p>
@@ -238,10 +238,10 @@ export function HeroSection() {
                 />
                 <button
                   type="submit"
-                  className="h-13 px-7 py-3.5 bg-gradient-to-br from-[#ECBE80] via-[#E2A862] to-[#B9824A] text-[#2B2520] font-semibold text-sm flex items-center gap-2 rounded-r-lg hover:brightness-105 transition-all whitespace-nowrap shadow-[0_4px_20px_-6px_rgba(185,130,74,.8)]"
+                  className="h-13 px-5 sm:px-7 py-3.5 bg-gradient-to-br from-[#ECBE80] via-[#E2A862] to-[#B9824A] text-[#2B2520] font-semibold text-sm flex items-center gap-2 rounded-r-lg hover:brightness-105 transition-all whitespace-nowrap shadow-[0_4px_20px_-6px_rgba(185,130,74,.8)]"
                 >
                   <Search className="h-4 w-4" />
-                  Search
+                  <span className="hidden sm:inline">Search</span>
                 </button>
               </form>
 
