@@ -28,7 +28,7 @@ export function LuxJournal({ articles }: { articles: Article[] }) {
       <div className="container-site">
         <Reveal className="mb-14 flex flex-col gap-6 lg:mb-20 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="lx-numeral">05</p>
+            <p className="lx-numeral">06</p>
             <h2 className="mt-5 font-display text-[clamp(32px,3.8vw,50px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
               The <span className="italic text-lx-pale">journal.</span>
             </h2>

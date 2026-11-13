@@ -9,6 +9,7 @@ import { LuxResidences } from "@/components/luxury/lux-residences";
 import { LuxCollections } from "@/components/luxury/lux-collections";
 import { LuxIntroduction } from "@/components/luxury/lux-introduction";
 import { LuxTeam } from "@/components/luxury/lux-team";
+import { LuxPeople } from "@/components/luxury/lux-people";
 import { LuxJournal } from "@/components/luxury/lux-journal";
 import { LuxClosing } from "@/components/luxury/lux-closing";
 
@@ -63,7 +64,7 @@ const jsonLd = {
 export default async function HomePage() {
   const [properties, agents, articles] = await Promise.all([
     getFeaturedProperties(3).catch(() => []),
-    getAgents(1).catch(() => []),
+    getAgents().catch(() => []),
     getLatestArticles(2).catch(() => []),
   ]);
 
@@ -83,6 +84,7 @@ export default async function HomePage() {
       <LuxCollections />
       <LuxIntroduction />
       <LuxTeam advisor={(agents as never[])[0] as never} />
+      <LuxPeople people={agents as never[]} />
       <LuxJournal articles={articles as never} />
       <LuxClosing />
     </>
