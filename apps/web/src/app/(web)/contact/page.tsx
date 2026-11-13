@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
+import { buildPageMeta } from "@/lib/seo";
 import Image from "next/image";
 import { ContactForm } from "./_components/contact-form";
 
+const title = "Contact Us";
+const description = "Get in touch with Fano Properties. We're ready to help you with your property needs.";
+
 export const metadata: Metadata = {
-  title: "Contact Us",
-  description: "Get in touch with Fano Properties. We're ready to help you with your property needs.",
+  title,
+  description,
   alternates: { canonical: "/contact" },
+  ...buildPageMeta({ path: "/contact", title, description }),
 };
 
 const details: { label: string; text: string; href?: string }[] = [

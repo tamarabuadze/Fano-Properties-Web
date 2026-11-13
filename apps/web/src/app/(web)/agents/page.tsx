@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMeta } from "@/lib/seo";
 import { Suspense } from "react";
 import { AgentCard } from "@fano/ui";
 import { getAgents } from "@/lib/queries/agents";
@@ -6,10 +7,13 @@ import { AnimateStagger } from "@/components/shared/animate-stagger";
 
 export async function generateMetadata(): Promise<Metadata> {
   const hasAgents = (await getAgents(1).catch(() => [])).length > 0;
+  const title = "Your Real Estate Insiders";
+  const description = "Discover the dedicated experts behind your next successful property investment in Dubai.";
   return {
-    title: "Your Real Estate Insiders",
-    description: "Discover the dedicated experts behind your next successful property investment in Dubai.",
+    title,
+    description,
     alternates: { canonical: "/agents" },
+    ...buildPageMeta({ path: "/agents", title, description }),
     // An empty team page stays out of search results
     ...(!hasAgents && { robots: { index: false, follow: true } }),
   };

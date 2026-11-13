@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildPageMeta } from "@/lib/seo";
 import { getFeaturedProperties } from "@/lib/queries/properties";
 import { getAgents } from "@/lib/queries/agents";
 import { getLatestArticles } from "@/lib/queries/blog";
@@ -15,11 +16,15 @@ import { LuxClosing } from "@/components/luxury/lux-closing";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
+const HOME_TITLE = "Fano Properties — Luxury Real Estate in Dubai";
+const HOME_DESCRIPTION =
+  "Discover luxury properties for sale and rent in Dubai. Find your dream home with Fano Properties — premium real estate, exceptional service.";
+
 export const metadata: Metadata = {
-  title: { absolute: "Fano Properties — Luxury Real Estate in Dubai" },
-  description:
-    "Discover luxury properties for sale and rent in Dubai. Find your dream home with Fano Properties — premium real estate, exceptional service.",
+  title: { absolute: HOME_TITLE },
+  description: HOME_DESCRIPTION,
   alternates: { canonical: SITE_URL },
+  ...buildPageMeta({ path: "/", title: HOME_TITLE, description: HOME_DESCRIPTION }),
 };
 
 // Rendered on request: the build has no database, so a cached build-time page shows no listings

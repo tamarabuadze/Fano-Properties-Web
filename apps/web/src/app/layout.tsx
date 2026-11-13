@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import { QueryProvider } from "@/components/shared/query-provider";
+import { DEFAULT_OG_IMAGE } from "@/lib/seo";
 import "./globals.css";
 
 const inter = localFont({
@@ -50,14 +51,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: SITE_URL,
     siteName: "Fano Properties",
     title: "Fano Properties — Luxury Real Estate in Dubai",
     description:
       "Discover luxury properties for sale and rent in Dubai. Premium real estate, exceptional service.",
     images: [
       {
-        url: "/opengraph-image",
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Fano Properties — Luxury Real Estate in Dubai",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fano Properties — Luxury Real Estate in Dubai",
     description: "Discover luxury properties for sale and rent in Dubai.",
-    images: ["/opengraph-image"],
+    images: [DEFAULT_OG_IMAGE],
   },
   robots: {
     index: true,

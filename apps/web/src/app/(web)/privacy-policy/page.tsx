@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
+import { buildPageMeta } from "@/lib/seo";
+
+const title = "Privacy Policy";
+const description = "Fano Properties privacy policy — how we collect, use, and protect your data.";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "Fano Properties privacy policy — how we collect, use, and protect your data.",
+  title,
+  description,
   alternates: { canonical: "/privacy-policy" },
+  ...buildPageMeta({ path: "/privacy-policy", title, description }),
 };
 
 export default function PrivacyPolicyPage() {

@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
+import { buildPageMeta } from "@/lib/seo";
 import { RoiCalculator } from "@/components/roi/roi-calculator";
 
+const title = "Dubai Property ROI Calculator";
+const description =
+  "Estimate rental yield, cash-on-cash return, monthly cash flow and total ROI for a Dubai property, including DLD fees, mortgage and service charges.";
+
 export const metadata: Metadata = {
-  title: "Dubai Property ROI Calculator",
-  description:
-    "Estimate rental yield, cash-on-cash return, monthly cash flow and total ROI for a Dubai property, including DLD fees, mortgage and service charges.",
+  title,
+  description,
   alternates: { canonical: "/roi-calculator" },
+  ...buildPageMeta({ path: "/roi-calculator", title, description }),
 };
 
 const notes = [

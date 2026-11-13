@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { FanoLogo, LOGO_COLORS } from "@/components/shared/fano-logo";
+import { FanoLogo } from "@/components/shared/fano-logo";
 import { cn } from "@fano/utils";
 
 const navLinks = [
@@ -22,6 +22,9 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const closeMenu = () => setMobileOpen(false);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
@@ -32,18 +35,50 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);
 
+  // While open: Escape closes and returns focus to the toggle, Tab cycles between the toggle and the menu
   useEffect(() => {
-    const closeOnEscape = (e: KeyboardEvent) => { if (e.key === "Escape") setMobileOpen(false); };
-    window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
-  }, []);
+    if (!mobileOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        toggleRef.current?.focus();
+        return;
+      }
+      const first = toggleRef.current;
+      if (e.key !== "Tab" || !menuRef.current || !first) return;
+      const items = menuRef.current.querySelectorAll<HTMLElement>("a[href], button");
+      const last = items[items.length - 1] ?? first;
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [mobileOpen]);
+
+  // The menu is lg:hidden, so close it on widening or the inert page behind would stay stuck
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const close = () => { if (mq.matches) setMobileOpen(false); };
+    close();
+    mq.addEventListener("change", close);
+    return () => mq.removeEventListener("change", close);
+  }, [mobileOpen]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     document.body.toggleAttribute("data-overlay-open", mobileOpen);
+    const behind = document.querySelectorAll<HTMLElement>(".lx-root > main, .lx-root > footer");
+    behind.forEach((el) => el.toggleAttribute("inert", mobileOpen));
     return () => {
       document.body.style.overflow = "";
       document.body.removeAttribute("data-overlay-open");
+      behind.forEach((el) => el.removeAttribute("inert"));
     };
   }, [mobileOpen]);
 
@@ -59,11 +94,8 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
       >
         <div className="container-site">
           <div className="flex h-20 items-center justify-between gap-8 lg:h-24">
-            <Link href="/" className="flex items-center" aria-label="Fano Properties home">
-              <FanoLogo
-                color={scrolled || mobileOpen ? LOGO_COLORS.bronze : "#D4A843"}
-                className="h-11 lg:h-12"
-              />
+            <Link href="/" onClick={closeMenu} className="flex items-center" aria-label="Fano Properties home">
+              <FanoLogo color="#D4A843" className="h-11 lg:h-12" />
             </Link>
 
             <nav aria-label="Main navigation" className="hidden items-center gap-9 lg:flex">
@@ -95,6 +127,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
             <div className="flex items-center gap-3">
               <Link href="/contact" className="btn-gold hidden lg:inline-flex">Enquire</Link>
               <button
+                ref={toggleRef}
                 onClick={() => setMobileOpen((v) => !v)}
                 className="flex h-10 w-10 items-center justify-center rounded-full text-lx-text transition-colors hover:bg-lx-text/10 lg:hidden"
                 aria-label="Toggle menu"
@@ -111,6 +144,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            ref={menuRef}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -120,26 +154,31 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
           >
             <div className="container-site flex h-full flex-col py-10">
               <nav className="flex flex-col divide-y divide-lx-line" aria-label="Mobile">
-                {links.map((link, i) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05, duration: 0.3 }}
-                  >
-                    <Link
-                      href={link.href}
-                      className={cn(
-                        "flex items-center justify-between py-6 font-display text-[26px] leading-none text-lx-text",
-                        pathname.startsWith(link.href) && "text-lx-gold"
-                      )}
+                {links.map((link, i) => {
+                  const active = pathname.startsWith(link.href);
+                  return (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.05, duration: 0.3 }}
                     >
-                      {link.label}
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        href={link.href}
+                        onClick={closeMenu}
+                        aria-current={active ? "page" : undefined}
+                        className={cn(
+                          "flex items-center justify-between py-6 font-display text-[26px] leading-none text-lx-text",
+                          active && "text-lx-gold"
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </nav>
-              <Link href="/contact" className="btn-gold mt-12 w-full">Enquire</Link>
+              <Link href="/contact" onClick={closeMenu} className="btn-gold mt-12 w-full">Enquire</Link>
               <p className="lx-eyebrow mt-auto pt-10">Churchill Executive Tower · Business Bay · Dubai</p>
             </div>
           </motion.div>

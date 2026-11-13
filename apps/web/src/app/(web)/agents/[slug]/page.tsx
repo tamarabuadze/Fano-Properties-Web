@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Phone, Mail, Linkedin, Instagram, Globe } from "lucide-react";
 import { getAgentBySlug } from "@/lib/queries/agents";
+import { buildPageMeta, metaDescription } from "@/lib/seo";
 import { PropertyCard } from "@fano/ui";
 import { AnimateStagger } from "@/components/shared/animate-stagger";
 
@@ -14,10 +15,18 @@ export async function generateMetadata({ params }: AgentPageProps): Promise<Meta
   const { slug } = await params;
   const agent = await getAgentBySlug(slug);
   if (!agent || !agent.active) return { title: "Agent Not Found", robots: { index: false } };
+  const title = `${agent.firstName} ${agent.lastName} — Real Estate Agent`;
+  const description = metaDescription(agent.bio);
   return {
-    title: `${agent.firstName} ${agent.lastName} — Real Estate Agent`,
-    description: agent.bio?.slice(0, 160),
+    title,
+    description,
     alternates: { canonical: `/agents/${slug}` },
+    ...buildPageMeta({
+      path: `/agents/${slug}`,
+      title,
+      description,
+      images: agent.avatar ? [{ url: agent.avatar, alt: `${agent.firstName} ${agent.lastName}` }] : undefined,
+    }),
   };
 }
 

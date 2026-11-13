@@ -1,4 +1,10 @@
 import { defineConfig, devices } from "@playwright/test";
+import path from "path";
+
+// Optional local credentials (ADMIN_EMAIL / ADMIN_PASSWORD); real env vars take precedence.
+try {
+  process.loadEnvFile(path.join(__dirname, ".env.local"));
+} catch {}
 
 export default defineConfig({
   testDir: "./tests",
