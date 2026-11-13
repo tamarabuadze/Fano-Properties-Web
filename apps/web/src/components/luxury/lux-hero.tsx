@@ -78,7 +78,7 @@ export function LuxHero() {
           </p>
           <div className="lx-rise lx-rise-3 mt-7 flex flex-wrap items-center gap-x-5 gap-y-4">
             <Link href="/properties" className="btn-gold">View the Collection</Link>
-            <Link href="/contact" className="lx-underline">Speak to an Advisor</Link>
+            <Link href="/agents" className="lx-underline">Speak to an Advisor</Link>
           </div>
         </div>
       </div>
