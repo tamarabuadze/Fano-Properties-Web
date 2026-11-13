@@ -85,8 +85,7 @@ export async function updateProperty(id: string, data: Partial<z.infer<typeof pr
         ...(gallery && { images: { deleteMany: {}, create: gallery.map((url, position) => ({ url, position })) } }),
       },
     });
-    revalidatePath("/properties");
-    revalidatePath(`/properties/${id}`);
+    revalidatePath("/properties", "layout");
     return { success: true };
   } catch {
     return { success: false, error: "Failed to update property." };
