@@ -37,7 +37,7 @@ export function LuxHero() {
   }, []);
 
   return (
-    <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-lx-page" aria-label="Fano Properties, Dubai">
+    <section className="relative isolate flex min-h-[100svh] items-center sm:items-end overflow-hidden bg-lx-page" aria-label="Fano Properties, Dubai">
       <div className="absolute inset-0 -z-10" aria-hidden="true">
         <Image src={HERO_POSTER} alt="" fill priority unoptimized sizes="100vw" className="object-cover" />
         <video
@@ -63,7 +63,7 @@ export function LuxHero() {
         Business Bay · Dubai · RERA 49852
       </p>
 
-      <div className="container-site relative z-10 grid pb-20 pt-40 lg:grid-cols-12 lg:pb-28">
+      <div className="container-site relative z-10 grid py-10 sm:pb-20 sm:pt-40 lg:grid-cols-12 lg:pb-28">
         <div className="lg:col-span-8 xl:col-span-7">
           <p className="lx-rise font-sans text-[12px] font-medium uppercase tracking-[2.5px] text-[#E8D5B0]">Dubai&rsquo;s finest addresses, by introduction</p>
           <h1 className="lx-rise lx-rise-1 mt-3 font-display font-bold uppercase leading-none text-white">
