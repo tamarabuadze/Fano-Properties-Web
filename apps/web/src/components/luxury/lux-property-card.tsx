@@ -59,6 +59,11 @@ export function LuxPropertyCard({
             {label}
           </span>
         )}
+        {feature && (
+          <span className="absolute right-4 top-4 rounded-full border border-lx-gold/60 bg-lx-gold/20 px-3 py-1 font-label text-[9px] font-semibold uppercase tracking-[0.2em] text-lx-gold backdrop-blur-sm">
+            Featured
+          </span>
+        )}
       </div>
 
       <div className="flex items-start justify-between gap-6 pt-6">

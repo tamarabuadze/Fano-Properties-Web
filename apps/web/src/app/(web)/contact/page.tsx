@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 };
 
 const details: { label: string; text: string; href?: string }[] = [
-  { label: "Office", text: "3404, 34th Floor, Churchill Tower, Business Bay, Dubai, UAE" },
-  { label: "Phone", text: "04 564 4635", href: "tel:+97145644635" },
+  { label: "Office", text: "3404, 34th Floor, Churchill Executive Tower, Business Bay, Dubai, UAE" },
+  { label: "Phone", text: "+971 4 564 4635", href: "tel:+97145644635" },
   { label: "Email", text: "info@fanoproperties.com", href: "mailto:info@fanoproperties.com" },
   { label: "Hours", text: "Mon–Fri 9am–6pm, Sat 10am–4pm" },
 ];
@@ -74,7 +74,7 @@ export default function ContactPage() {
           <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-lx-page/75 to-transparent p-6 lg:p-10">
             <p className="lx-eyebrow text-lx-gold">Business Bay, Dubai</p>
             <p className="mt-3 font-display text-[clamp(24px,3vw,40px)] font-normal leading-tight text-lx-text">
-              Churchill Tower, 34th floor
+              Churchill Executive Tower, 34th floor
             </p>
           </div>
         </div>

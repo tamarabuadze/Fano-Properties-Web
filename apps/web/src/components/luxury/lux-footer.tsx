@@ -30,9 +30,9 @@ export function LuxFooter({ showAgents = true }: { showAgents?: boolean }) {
         </div>
 
         <div className="text-[13px] leading-[2] text-lx-text/70 lg:col-span-3">
-          <p>3404, 34th Floor, Churchill Tower</p>
+          <p>3404, 34th Floor, Churchill Executive Tower</p>
           <p>Business Bay, Dubai</p>
-          <p className="mt-4"><a href="tel:+97145644635" className="transition-colors hover:text-lx-gold">04 564 4635</a></p>
+          <p className="mt-4"><a href="tel:+97145644635" className="transition-colors hover:text-lx-gold">+971 4 564 4635</a></p>
           <p><a href="https://wa.me/971525719164" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-lx-gold">+971 52 571 9164</a></p>
           <p><a href="mailto:info@fanoproperties.com" className="transition-colors hover:text-lx-gold">info@fanoproperties.com</a></p>
         </div>

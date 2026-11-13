@@ -8,7 +8,6 @@ import { COMMERCIAL_UNIT_TYPES, cn } from "@fano/utils";
 const LISTING_TYPES = [
   { label: "Any", value: "" },
   { label: "For Sale", value: "sale" },
-  { label: "For Rent", value: "rent" },
   { label: "For Lease", value: "lease" },
 ];
 

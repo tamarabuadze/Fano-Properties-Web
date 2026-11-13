@@ -140,7 +140,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
                 ))}
               </nav>
               <Link href="/contact" className="btn-gold mt-12 w-full">Enquire</Link>
-              <p className="lx-eyebrow mt-auto pt-10">Churchill Tower · Business Bay · Dubai</p>
+              <p className="lx-eyebrow mt-auto pt-10">Churchill Executive Tower · Business Bay · Dubai</p>
             </div>
           </motion.div>
         )}

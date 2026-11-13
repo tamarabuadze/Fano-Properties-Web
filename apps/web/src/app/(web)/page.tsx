@@ -36,7 +36,7 @@ const jsonLd = {
       description: "Luxury real estate agency specialising in premium properties for sale and rent in Dubai and beyond.",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "3404, 34th Floor, Churchill Tower, Business Bay",
+        streetAddress: "3404, 34th Floor, Churchill Executive Tower, Business Bay",
         addressLocality: "Dubai",
         addressCountry: "AE",
       },

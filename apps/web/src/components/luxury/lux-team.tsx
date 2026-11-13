@@ -57,7 +57,7 @@ export function LuxTeam({ advisor }: { advisor?: Advisor | null }) {
             </div>
           ) : (
             <div className="mt-10 flex flex-wrap gap-x-10 gap-y-3 border-t border-lx-line pt-8">
-              <a href="tel:+97145644635" className="lx-link lx-link-quiet">04 564 4635</a>
+              <a href="tel:+97145644635" className="lx-link lx-link-quiet">+971 4 564 4635</a>
               <Link href="/about" className="btn-gold">About Fano</Link>
             </div>
           )}
