@@ -68,7 +68,7 @@ export default async function PropertiesPage({ searchParams }: PropertiesPagePro
   };
   return (
     <div className="min-h-screen bg-lx-page pt-20 lg:pt-24">
-      <PropertiesHeader />
+      <PropertiesHeader category={category} listingType={params.listingType} />
       <div className="container-site py-12 lg:py-16">
         <PropertiesCategoryTabs category={category} search={params.search} listingType={params.listingType} unitType={params.unitType} />
         <div className="flex flex-col gap-8 lg:flex-row lg:gap-14">
