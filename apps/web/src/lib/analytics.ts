@@ -14,7 +14,7 @@ export function trackEvent(name: string, params: Record<string, unknown> = {}) {
 }
 
 /** A sent enquiry: the event Google Ads optimises for */
-export function trackLead(form: "contact" | "property_inquiry" | "roi_lead" | "listing_submission", params: Record<string, unknown> = {}) {
+export function trackLead(form: "contact" | "property_inquiry" | "roi_lead" | "listing_submission" | "office_enquiry", params: Record<string, unknown> = {}) {
   trackEvent("generate_lead", { form_name: form, currency: "AED", ...params });
 }
 

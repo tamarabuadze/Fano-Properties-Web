@@ -93,6 +93,7 @@ export function LuxResidences({ properties }: { properties: Listing[] }) {
                         <p className="font-display text-[20px] text-lx-text">
                           <span className="mr-2 font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-lx-muted">{p.currency ?? "AED"}</span>
                           {formatMoney(Number(p.price), p.currency ?? "AED")}
+                          {p.priceUnit === "per_sqft" && <span className="ml-1 text-[13px] text-lx-muted">/sq ft</span>}
                         </p>
                         {p.bedrooms > 0 && <span className="text-[13px] text-lx-text/55">{p.bedrooms} bed{p.bedrooms === 1 ? "" : "s"}</span>}
                         {p.sqft > 0 && <span className="text-[13px] text-lx-text/55">{p.sqft.toLocaleString("en-US")} sq ft</span>}

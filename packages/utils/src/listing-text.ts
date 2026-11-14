@@ -68,7 +68,8 @@ export function splitListingTitle(title: string): { headline: string; details: s
 export function formatPlace(...parts: Array<string | null | undefined>): string {
   const kept: string[] = [];
   for (const raw of parts) {
-    const part = smartCase(raw ?? "");
+    // Drop stray commas left at either end of an admin field, so "Village Triangle," + "Dubai" isn't ",,"
+    const part = smartCase((raw ?? "").replace(/^[\s,]+|[\s,]+$/g, ""));
     if (!part) continue;
     const seen = kept.join(" ").toLowerCase();
     if (seen.includes(part.toLowerCase())) continue;
