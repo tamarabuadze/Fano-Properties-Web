@@ -39,7 +39,7 @@ export function SettingsForm({ defaultValues }: SettingsFormProps) {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      siteName: "Fano Real Estate",
+      siteName: "Fano Properties",
       siteTagline: "Find Your Dream Home",
       ...defaultValues,
     },
@@ -62,7 +62,7 @@ export function SettingsForm({ defaultValues }: SettingsFormProps) {
 
         <div>
           <label className={labelCls}>Site Name</label>
-          <input {...register("siteName")} className={inputCls} placeholder="Fano Real Estate" />
+          <input {...register("siteName")} className={inputCls} placeholder="Fano Properties" />
           {errors.siteName && (
             <p className="text-xs text-[#B0453A] mt-1">{errors.siteName.message}</p>
           )}
@@ -82,7 +82,7 @@ export function SettingsForm({ defaultValues }: SettingsFormProps) {
           <input
             {...register("footerText")}
             className={inputCls}
-            placeholder="© 2025 Fano Real Estate. All rights reserved."
+            placeholder="© 2026 Fano Properties. All rights reserved."
           />
         </div>
       </section>
@@ -120,7 +120,7 @@ export function SettingsForm({ defaultValues }: SettingsFormProps) {
             {...register("contactAddress")}
             rows={2}
             className="w-full px-3.5 py-3 rounded-[3px] border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-[#E2A862]/25 focus:border-[#E2A862] transition-all hover:border-[#C5BAAB] resize-none"
-            placeholder="123 Main Street, Suite 100, New York, NY 10001"
+            placeholder="3404, 34th Floor, Churchill Executive Tower, Business Bay, Dubai"
           />
         </div>
       </section>

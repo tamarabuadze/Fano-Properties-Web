@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { buildPageMeta } from "@/lib/seo";
 import { FaqAccordion } from "./_components/faq-accordion";
 
-const title = "FAQ";
+const title = "Dubai Real Estate FAQs | Buying Property in Dubai";
 const description = "Answers about buying property in Dubai: freehold ownership for foreigners, DLD fees, off-plan payment plans, mortgages and the Golden Visa.";
 
 export const metadata: Metadata = {

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     default: "Fano Admin",
     template: "%s | Fano Admin",
   },
-  description: "Fano Real Estate administration dashboard",
+  description: "Fano Properties administration dashboard",
   robots: { index: false, follow: false },
 };
 

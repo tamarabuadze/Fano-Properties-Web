@@ -56,15 +56,15 @@ export default function PrivacyPolicyPage() {
 
           <h2>Your Rights</h2>
           <p>
-            Depending on your location, you may have rights regarding your personal data, including the right to access, correct, or delete your data. Contact us at privacy@fanorealestate.com to exercise these rights.
+            Depending on your location, you may have rights regarding your personal data, including the right to access, correct, or delete your data. Contact us at <a href="mailto:info@fanoproperties.com">info@fanoproperties.com</a> to exercise these rights.
           </p>
 
           <h2>Contact Us</h2>
           <p>
             If you have questions about this Privacy Policy, please contact us at:<br />
-            <strong>Fano Real Estate</strong><br />
-            123 Premium Avenue, New York, NY 10001<br />
-            privacy@fanorealestate.com
+            <strong>Fano Properties</strong><br />
+            3404, 34th Floor, Churchill Executive Tower, Business Bay, Dubai, UAE<br />
+            <a href="mailto:info@fanoproperties.com">info@fanoproperties.com</a>
           </p>
         </div>
       </div>

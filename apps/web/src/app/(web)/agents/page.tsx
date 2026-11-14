@@ -7,8 +7,8 @@ import { AnimateStagger } from "@/components/shared/animate-stagger";
 
 export async function generateMetadata(): Promise<Metadata> {
   const hasAgents = (await getAgents(1).catch(() => [])).length > 0;
-  const title = "Your Real Estate Insiders";
-  const description = "Discover the dedicated experts behind your next successful property investment in Dubai.";
+  const title = "Our Real Estate Agents | Dubai Property Specialists";
+  const description = "Meet the Fano Properties team: real estate agents in Dubai for commercial offices, apartments and villas to buy, sell and lease.";
   return {
     title,
     description,
