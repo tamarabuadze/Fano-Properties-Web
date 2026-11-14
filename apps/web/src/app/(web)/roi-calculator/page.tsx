@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { buildPageMeta } from "@/lib/seo";
 import { RoiCalculator } from "@/components/roi/roi-calculator";
 
-const title = "Dubai Property ROI Calculator";
+const title = "Dubai Property ROI Calculator | Estimate Rental Yield & Returns";
 const description =
   "Estimate rental yield, cash-on-cash return, monthly cash flow and total ROI for a Dubai property, including DLD fees, mortgage and service charges.";
 

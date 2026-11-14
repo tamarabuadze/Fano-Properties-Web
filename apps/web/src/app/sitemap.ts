@@ -32,7 +32,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: latestProperty, changeFrequency: "daily", priority: 1 },
     { url: `${BASE_URL}/properties`, lastModified: latestProperty, changeFrequency: "hourly", priority: 0.9 },
-    { url: `${BASE_URL}/properties?category=commercial`, lastModified: latestProperty, changeFrequency: "daily", priority: 0.8 },
+    // Commercial lives on clean URLs; /properties?category=commercial canonicalises to the hub
+    { url: `${BASE_URL}/commercial-properties`, lastModified: latestProperty, changeFrequency: "daily", priority: 0.9 },
+    { url: `${BASE_URL}/commercial-properties/offices-for-sale`, lastModified: latestProperty, changeFrequency: "daily", priority: 0.8 },
+    { url: `${BASE_URL}/commercial-properties/business-bay`, lastModified: latestProperty, changeFrequency: "daily", priority: 0.7 },
+    { url: `${BASE_URL}/commercial-properties/sheikh-zayed-road`, lastModified: latestProperty, changeFrequency: "daily", priority: 0.7 },
     { url: `${BASE_URL}/properties?category=residential`, lastModified: latestProperty, changeFrequency: "daily", priority: 0.8 },
     { url: `${BASE_URL}/agents`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/blog`, lastModified: latestArticle, changeFrequency: "daily", priority: 0.8 },

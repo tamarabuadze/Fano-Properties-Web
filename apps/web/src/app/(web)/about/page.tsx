@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionHeader } from "@/components/shared/section-header";
 
-const title = "About Us";
-const description = "Learn about Fano Properties — our story, mission, and the team behind the brand.";
+const title = "About Us | Dubai Real Estate Agency | RERA 49852";
+const description = "Fano Properties is a RERA-registered (No. 49852) real estate agency in Business Bay, Dubai, for commercial and residential property to buy, sell and lease.";
 
 export const metadata: Metadata = {
   title,

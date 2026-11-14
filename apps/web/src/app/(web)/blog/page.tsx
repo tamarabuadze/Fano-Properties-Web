@@ -5,8 +5,8 @@ import { BlogGrid } from "./_components/blog-grid";
 import { BlogCategories } from "./_components/blog-categories";
 import { getBlogCategories } from "@/lib/queries/blog";
 
-const title = "Blog & Insights";
-const description = "Real estate market insights, buying guides, investment tips, and industry news.";
+const title = "Dubai Property Insights | Market Updates & Investment Guides";
+const description = "Market updates, buying guides and investment insights for Dubai real estate, from the Fano Properties team.";
 
 export const metadata: Metadata = {
   title,

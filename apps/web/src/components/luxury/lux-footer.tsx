@@ -5,7 +5,7 @@ import { SOCIAL_LINKS } from "@/lib/social-links";
 
 const pages = [
   { label: "properties", href: "/properties" },
-  { label: "commercial", href: "/properties?category=commercial" },
+  { label: "commercial", href: "/commercial-properties" },
   { label: "agents", href: "/agents" },
   { label: "insights", href: "/blog" },
   { label: "about", href: "/about" },

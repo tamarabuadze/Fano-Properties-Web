@@ -16,9 +16,9 @@ import { LuxClosing } from "@/components/luxury/lux-closing";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
-const HOME_TITLE = "Fano Properties — Luxury Real Estate in Dubai";
+const HOME_TITLE = "Fano Properties — Dubai Real Estate | Offices, Apartments & Villas";
 const HOME_DESCRIPTION =
-  "Discover luxury properties for sale and rent in Dubai. Find your dream home with Fano Properties — premium real estate, exceptional service.";
+  "Offices for sale in Business Bay and on Sheikh Zayed Road, plus apartments and villas across Dubai. Fano Properties, RERA-registered agency No. 49852.";
 
 export const metadata: Metadata = {
   title: { absolute: HOME_TITLE },

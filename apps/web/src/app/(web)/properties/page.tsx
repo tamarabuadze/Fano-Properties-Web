@@ -20,7 +20,7 @@ const CATEGORY_META = {
   commercial: {
     title: "Commercial Properties & Offices for Sale in Dubai",
     description: "Grade A offices, shops and commercial space for sale and lease in Dubai, including off-plan towers in Business Bay and on Sheikh Zayed Road.",
-    canonical: "/properties?category=commercial",
+    canonical: "/commercial-properties",
   },
 };
 
