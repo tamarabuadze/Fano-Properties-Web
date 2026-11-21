@@ -64,7 +64,7 @@ export function OfficeEnquiryForm({ lease = false, scope = "office" }: { lease?:
     const result = await submitInquiry({
       ...data,
       message: lease ? copy.lease : copy.sale,
-      startedAt: startedAt.current,
+      startedAt: Date.now() - startedAt.current,
       type: "general",
       page: window.location.pathname + window.location.search,
       attribution: getAttribution(),

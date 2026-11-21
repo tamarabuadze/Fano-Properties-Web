@@ -46,8 +46,8 @@ export default function AboutPage() {
       <section className="container-site pt-10 lg:pt-14">
         <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-lx-raised lg:aspect-[21/9]">
           <Image
-            src="/hero-dubai.jpg"
-            alt="Sheikh Zayed Road and the Dubai skyline"
+            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=85&w=2560&auto=format"
+            alt="Luxury Dubai real estate"
             fill
             sizes="100vw"
             className="object-cover object-[50%_45%]"
@@ -102,8 +102,8 @@ export default function AboutPage() {
 
             <div className="relative aspect-[4/5] overflow-hidden rounded-[4px] bg-lx-raised">
               <Image
-                src="/collection-offices.webp"
-                alt="A modern office floor in Dubai"
+                src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=85&w=1200&auto=format"
+                alt="Dubai skyline at night"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"

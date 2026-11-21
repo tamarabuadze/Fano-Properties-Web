@@ -7,7 +7,7 @@ export function LuxClosing() {
   return (
     <section className="relative isolate flex min-h-[70vh] items-end overflow-hidden bg-lx-page lg:min-h-[85vh]" aria-labelledby="lx-closing-title">
       <div className="absolute inset-0 -z-10" aria-hidden="true">
-        <Image src="/hero-dubai.jpg" alt="" fill sizes="100vw" quality={85} className="object-cover object-[60%_50%]" />
+        <Image src="https://images.unsplash.com/photo-1526495124232-a04e1849168c?q=85&w=2560&auto=format" alt="" fill sizes="100vw" className="object-cover object-[50%_50%]" />
         <div className="absolute inset-0 bg-gradient-to-t from-lx-page via-lx-page/45 to-lx-page/10" />
       </div>
 

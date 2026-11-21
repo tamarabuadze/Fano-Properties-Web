@@ -47,7 +47,7 @@ export async function submitInquiry(data: InquiryFormData) {
   const { page, attribution, website, startedAt, ...inquiry } = parsed.data;
 
   // Bots get the same answer as people, and nothing is saved
-  if (website || (startedAt !== undefined && Date.now() - startedAt < MIN_FILL_MS)) {
+  if (website || (startedAt !== undefined && startedAt < MIN_FILL_MS)) {
     return { success: true, message: "Your inquiry has been submitted successfully." };
   }
   if (inquiry.phone && !plausiblePhone(inquiry.phone)) {
