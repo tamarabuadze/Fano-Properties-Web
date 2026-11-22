@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
 import { googleTagHead } from "@/lib/google-tag-html";
+import { defaultTheme } from "@/lib/site-theme";
 
 // Landing pages for the Google Ads campaigns, one per property in English and Arabic:
 //   /lp/en                English index of every property      /lp/ar               Arabic investor page
@@ -37,6 +38,8 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug?: s
   }
 
   const pagePath = `/lp/${slug.join("/")}`;
+  // The page's own script keeps the visitor's saved theme; SITE_THEME sets the one shown first
+  html = html.replace("<html ", `<html data-theme="${defaultTheme()}" `);
   html = html.replace("</head>", `<link rel="canonical" href="${SITE}${pagePath}">\n${googleTagHead()}</head>`);
 
   return new NextResponse(html, {

@@ -211,6 +211,8 @@
   --lx-pale-rgb: 140 106 71;      /* #8C6A47 bronze: the italic accent words */
 }
 .lx-root {
+  --lx-logo: #8C6A47;
+  --lx-logo-footer: #8C6A47;
   --lx-page: rgb(var(--lx-page-rgb));
   --lx-surface: rgb(var(--lx-surface-rgb));
   --lx-raised: rgb(var(--lx-raised-rgb));
@@ -420,3 +422,43 @@ header :is(a,button):focus-visible { outline:2px solid #E2A862; outline-offset:5
   .fano-web *, .fano-web *::before, .fano-web *::after { animation-duration:.01ms !important; animation-delay:0ms !important; transition-duration:.01ms !important; }
   .fano-web .group:hover img { transform:none; }
 }
+
+/* Hero and closing photo veils: strong sand veil in the sand theme, light navy veil in navy */
+.lx-veil { background: linear-gradient(to top, rgb(var(--lx-page-rgb)) 0%, rgb(var(--lx-page-rgb) / .75) 50%, rgb(var(--lx-page-rgb) / .3) 100%); }
+.lx-veil-top { background: linear-gradient(to bottom, rgb(var(--lx-page-rgb) / .8), transparent); }
+
+/* Theme switch button */
+.theme-tg { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--lx-line); color: rgb(var(--lx-text-rgb) / .75); transition: color .2s, border-color .2s; }
+.theme-tg:hover { color: #8C6A47; border-color: #8C6A47; }
+
+/* ─── Navy theme: the earlier fanoproperties.com look, kept as an option (SITE_THEME=navy or the switch) ─── */
+html[data-theme="navy"] {
+  --lx-page-rgb: 11 18 32;        /* #0B1220 */
+  --lx-surface-rgb: 18 26 43;     /* #121A2B */
+  --lx-raised-rgb: 27 36 56;      /* #1B2438 */
+  --lx-text-rgb: 244 239 234;     /* #F4EFEA */
+  --lx-muted-rgb: 163 152 134;    /* #A39886 */
+  --lx-pale-rgb: 246 231 210;     /* #F6E7D2 */
+}
+html[data-theme="navy"] .lx-root { --lx-line: rgba(226, 168, 98, 0.22); --lx-logo: #D4A843; --lx-logo-footer: #DFCFB9; background: var(--lx-page); }
+html[data-theme="navy"]:has(.lx-root), html[data-theme="navy"]:has(.lx-root) body { background: #0B1220; }
+html[data-theme="navy"] .lx-root ::selection { color: #0B1220; }
+html[data-theme="navy"] .lx-root :is(.text-lx-gold, .hover\:text-lx-gold:hover, .group:hover .group-hover\:text-lx-gold, .prose-a\:text-lx-gold a) { color: #E2A862; }
+html[data-theme="navy"] .lx-root .bg-lx-raised { box-shadow: none; }
+html[data-theme="navy"] .lx-root .btn-gold-outline { color: #F4EFEA; border-color: rgba(226, 168, 98, 0.55); }
+html[data-theme="navy"] .lx-root .btn-gold-outline:hover { color: #0B1220; }
+html[data-theme="navy"] .lx-root :is(input, textarea, select) { color-scheme: dark; }
+html[data-theme="navy"] .lx-root select option { background: #121A2B; color: #F4EFEA; }
+html[data-theme="navy"] .lx-eyebrow, html[data-theme="navy"] .lx-numeral { color: #E2A862; }
+html[data-theme="navy"] .lx-numeral::after { background: rgba(226, 168, 98, 0.5); }
+html[data-theme="navy"] .lx-link { color: #F4EFEA; }
+html[data-theme="navy"] .lx-link:hover { color: #E2A862; }
+html[data-theme="navy"] .lx-link-quiet { color: rgba(244, 239, 234, 0.6); }
+html[data-theme="navy"] .lx-underline { color: #FFFFFF; border-bottom-color: #FFFFFF; }
+html[data-theme="navy"] .lx-underline:hover { color: #E2A862; border-color: #E2A862; }
+html[data-theme="navy"] .lx-veil { background: linear-gradient(to top, rgb(var(--lx-page-rgb)) 0%, rgb(var(--lx-page-rgb) / .35) 50%, rgb(var(--lx-page-rgb) / .1) 100%); }
+html[data-theme="navy"] .lx-veil-top { background: linear-gradient(to bottom, rgb(var(--lx-page-rgb) / .6), transparent); }
+html[data-theme="navy"] .theme-tg:hover { color: #E2A862; border-color: #E2A862; }
+html[data-theme="navy"] body[data-hero-in-view] .fano-fab { background: rgba(11, 18, 32, 0.45); border-color: rgba(226, 168, 98, 0.55); color: #F4EFEA; }
+html[data-theme="navy"] body[data-hero-in-view] .fano-fab:hover { background: #E2A862; color: #0B1220; }
+html[data-theme="navy"] .lx-root .text-\[\#B3413A\] { color: #F0A08F; }

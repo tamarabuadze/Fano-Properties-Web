@@ -8,7 +8,7 @@ export function LuxClosing() {
     <section className="relative isolate flex min-h-[70vh] items-end overflow-hidden bg-lx-page lg:min-h-[85vh]" aria-labelledby="lx-closing-title">
       <div className="absolute inset-0 -z-10" aria-hidden="true">
         <Image src="/hero-dubai.jpg" alt="" fill sizes="100vw" quality={85} className="object-cover object-[60%_50%]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-lx-page via-lx-page/75 to-lx-page/30" />
+        <div className="lx-veil absolute inset-0" />
       </div>
 
       <Reveal className="container-site relative z-10 flex flex-col items-start gap-8 pb-20 pt-40 lg:flex-row lg:items-end lg:justify-between lg:pb-28">

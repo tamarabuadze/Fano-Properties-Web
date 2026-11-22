@@ -16,7 +16,7 @@ SRC = pathlib.Path(sys.argv[1])
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 PAGES = ROOT / "apps/web/lp-pages"
 CSS = ROOT / "apps/web/public/lp-assets"
-VERSION = "calcite1"
+VERSION = "theme2"
 
 # Dark-theme colours that survive after /* lx:end */, and their sand equivalents
 TAIL = [
@@ -31,6 +31,12 @@ TAIL = [
     ("background:rgba(11,18,32,.82)", "background:rgba(43,37,32,.9)"),
     ('font-family:"Playfair Display",Georgia,serif', "font-family:Montserrat,system-ui,sans-serif;font-weight:600"),
 ]
+
+# Navy-only fixes: logos drawn in bronze for sand turn back to sand-on-navy
+NAVY_EXTRA = """
+html[data-theme=navy] [fill="#8C6A47"]{fill:#C4AD8E}
+html[data-theme=navy] .done b.ltr{color:#F4EFEA!important}
+"""
 
 # Shared extras: the team app's WhatsApp button, section numerals and a few sand touches
 EXTRA = """
@@ -51,20 +57,74 @@ html[dir=rtl] .wa-float .lbl{order:0;font-family:"IBM Plex Sans Arabic",Inter,sa
 @keyframes waPulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(1.45);opacity:0}100%{opacity:0}}
 @media (max-width:720px){.wa-float,html[dir=rtl] .wa-float{bottom:calc(86px + env(safe-area-inset-bottom))}.wa-float{right:16px}html[dir=rtl] .wa-float{left:16px}.wa-float .dot{width:56px;height:56px}.wa-float .lbl{display:none}}
 @media (prefers-reduced-motion:reduce){.wa-float .dot::after{animation:none;opacity:0}}
+/* colour theme switch in the top bar */
+.theme-tg{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;padding:0}
+.theme-tg:hover,.theme-tg:focus-visible{color:var(--gold-deep);border-color:var(--gold-deep);outline:none}
+@media (max-width:720px){.theme-tg{width:30px;height:30px}}
 """
+
+THEME_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>'
+THEME_SCRIPT = ('<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem("fano-theme");if(t==="sand"||t==="navy")d.dataset.theme=t}catch(e){}'
+    'document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-theme-toggle]");if(!b)return;'
+    'var t=d.dataset.theme==="navy"?"sand":"navy";d.dataset.theme=t;try{localStorage.setItem("fano-theme",t)}catch(e){}})})();</script>')
 
 WA_SVG = '<svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>'
 
 
-def sand_css(css: str) -> str:
+NAVY = "html[data-theme=navy]"
+
+
+def prefix_rules(css: str, pre: str) -> str:
+    """Scope every rule under `pre` (keeps @media blocks, leaves @keyframes alone)."""
+    out, i, n = [], 0, len(css)
+    while i < n:
+        j = css.find("{", i)
+        if j < 0:
+            break
+        sel = css[i:j].strip()
+        if sel.startswith("@"):
+            depth, k = 1, j + 1
+            while depth and k < n:
+                depth += {"{": 1, "}": -1}.get(css[k], 0)
+                k += 1
+            inner = css[j + 1:k - 1]
+            out.append(sel + "{" + (inner if sel.startswith("@keyframes") else prefix_rules(inner, pre)) + "}")
+            i = k
+            continue
+        k = css.find("}", j)
+        sel = re.sub(r"/\*.*?\*/", "", sel, flags=re.S).strip()
+        parts = []
+        for one in sel.split(","):
+            one = one.strip()
+            if one in (":root", "html"):
+                parts.append(pre)
+            elif one.startswith("html"):
+                parts.append(pre + one[4:])
+            else:
+                parts.append(pre + " " + one)
+        out.append(",".join(parts) + "{" + css[j + 1:k] + "}")
+        i = k + 1
+    return "\n".join(out)
+
+
+def split_css(css: str):
     i, j = css.find("/* lx:start"), css.find("/* lx:end */")
     if i < 0:
-        head, tail = css, ""
-    else:
-        head, tail = css[:i], css[j + len("/* lx:end */"):] if j >= 0 else ""
+        return css, "", ""
+    return css[:i], css[i:j], css[j + len("/* lx:end */"):] if j >= 0 else ""
+
+
+def sand_css(css: str) -> str:
+    """Sand (the team app's look) is the default; the website's navy look stays available under
+    html[data-theme=navy], switched by the visitor or by SITE_THEME on Railway."""
+    head, lx, tail = split_css(css)
+    sand_tail = tail
     for a, b in TAIL:
-        tail = tail.replace(a, b)
-    return head + tail
+        sand_tail = sand_tail.replace(a, b)
+    navy = ""
+    if lx or tail:
+        navy = "\n/* navy: the fanoproperties.com look, kept as a theme option */\n" + prefix_rules(lx + tail, NAVY) + NAVY_EXTRA
+    return head + sand_tail + navy
 
 
 def link(p: str) -> str:
@@ -88,8 +148,12 @@ def page(html: str) -> str:
     html = html.replace('href="/icons/icon-192.png"', 'href="/icon"')
     html = html.replace('content="#0B1220"', 'content="#E6DFD5"')
     html = html.replace('style="color:#F4EFEA"', 'style="color:var(--text)"')
-    html = html.replace('fill="#C4AD8E"', 'fill="#8C6A47"')  # logo: sand is for dark backgrounds, bronze for light
+    html = html.replace('fill="#C4AD8E"', 'fill="#8C6A47"').replace('logoFull("#C4AD8E"', 'logoFull("#8C6A47"')  # logo: sand is for dark backgrounds, bronze for light
     html = html.replace('fetch("/api/lead"', 'fetch("/api/lp-lead"')
+    html = html.replace("</head>", THEME_SCRIPT + "\n</head>", 1)
+    ar = 'lang="ar"' in html[:300]
+    tip = "تغيير الألوان" if ar else "Switch colour theme"
+    html = html.replace('<a class="lang"', f'<button type="button" class="theme-tg" data-theme-toggle aria-label="{tip}" title="{tip}">{THEME_ICON}</button>\n  <a class="lang"', 1)
     html = re.sub(r'\b(href)="(/(?!/)[^"]*)"', lambda m: f'{m.group(1)}="{link(m.group(2))}"', html)
     if 'class="wa-float"' not in html:
         ar = 'lang="ar"' in html[:300]

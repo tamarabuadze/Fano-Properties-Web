@@ -117,8 +117,8 @@ export function LuxHero() {
           onPlaying={() => setVideoReady(true)}
           onError={() => setVideoReady(false)}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-lx-page via-lx-page/75 to-lx-page/30" />
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-lx-page/80 to-transparent" />
+        <div className="lx-veil absolute inset-0" />
+        <div className="lx-veil-top absolute inset-x-0 top-0 h-40" />
       </div>
 
       {/* Top-right caption */}

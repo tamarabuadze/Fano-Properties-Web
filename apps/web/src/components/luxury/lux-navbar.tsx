@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { FanoLogo } from "@/components/shared/fano-logo";
+import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { cn } from "@fano/utils";
 
 const navLinks = [
@@ -95,7 +96,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
         <div className="container-site">
           <div className="flex h-20 items-center justify-between gap-8 lg:h-24">
             <Link href="/" onClick={closeMenu} className="flex items-center" aria-label="Fano Properties home">
-              <FanoLogo color="#8C6A47" className="h-11 lg:h-12" />
+              <FanoLogo color="var(--lx-logo)" className="h-11 lg:h-12" />
             </Link>
 
             <nav aria-label="Main navigation" className="hidden items-center gap-9 lg:flex">
@@ -125,6 +126,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
             </nav>
 
             <div className="flex items-center gap-3">
+              <ThemeToggle />
               <Link href="/contact" className="btn-gold hidden lg:inline-flex">Enquire</Link>
               <button
                 ref={toggleRef}
