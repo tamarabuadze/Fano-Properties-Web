@@ -39,7 +39,7 @@ const selectCls =
 
 function FieldError({ msg }: { msg?: string }) {
   if (!msg) return null;
-  return <p className="mt-1 text-xs text-[#E08A7E]">{msg}</p>;
+  return <p className="mt-1 text-xs text-[#B3413A]">{msg}</p>;
 }
 
 export function ListForm() {

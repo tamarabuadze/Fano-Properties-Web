@@ -328,7 +328,7 @@ function Metric({
       <p
         className={cn(
           "mt-2 font-display text-[clamp(26px,2.4vw,32px)] font-normal leading-none tabular-nums",
-          tone === "negative" ? "text-[#E08A7A]" : "text-lx-text"
+          tone === "negative" ? "text-[#B3413A]" : "text-lx-text"
         )}
       >
         {value}
@@ -361,7 +361,7 @@ function Breakdown({
         ))}
         <div className="flex justify-between gap-4 border-t border-lx-line pt-1.5 text-lx-text">
           <dt>{totalLabel}</dt>
-          <dd className={cn("tabular-nums", total < 0 && "text-[#E08A7A]")}>{aed(total)}</dd>
+          <dd className={cn("tabular-nums", total < 0 && "text-[#B3413A]")}>{aed(total)}</dd>
         </div>
       </dl>
     </div>
@@ -392,8 +392,8 @@ function YearTable({ years }: { years: ReturnType<typeof calculateRoi>["years"] 
                 <td className="py-3 pr-6 font-display text-[16px] text-lx-text">{y.year}</td>
                 <td className="whitespace-nowrap py-3 pr-6">{aed(y.propertyValue)}</td>
                 <td className="whitespace-nowrap py-3 pr-6">{aed(y.rent)}</td>
-                <td className={cn("whitespace-nowrap py-3 pr-6", y.cashFlow < 0 && "text-[#E08A7A]")}>{aed(y.cashFlow)}</td>
-                <td className={cn("whitespace-nowrap py-3 pr-6", y.cumulativeCashFlow < 0 && "text-[#E08A7A]")}>
+                <td className={cn("whitespace-nowrap py-3 pr-6", y.cashFlow < 0 && "text-[#B3413A]")}>{aed(y.cashFlow)}</td>
+                <td className={cn("whitespace-nowrap py-3 pr-6", y.cumulativeCashFlow < 0 && "text-[#B3413A]")}>
                   {aed(y.cumulativeCashFlow)}
                 </td>
                 <td className="whitespace-nowrap py-3 pr-6">{aed(y.loanBalance)}</td>

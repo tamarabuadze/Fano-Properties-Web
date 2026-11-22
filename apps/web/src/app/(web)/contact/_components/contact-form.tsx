@@ -78,22 +78,22 @@ export function ContactForm() {
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
             <input {...register("firstName")} placeholder="First name" aria-label="First name" className={inputCls} />
-            {errors.firstName && <p className="mt-1 text-xs text-[#E08A7A]">{errors.firstName.message}</p>}
+            {errors.firstName && <p className="mt-1 text-xs text-[#B3413A]">{errors.firstName.message}</p>}
           </div>
           <div>
             <input {...register("lastName")} placeholder="Last name" aria-label="Last name" className={inputCls} />
-            {errors.lastName && <p className="mt-1 text-xs text-[#E08A7A]">{errors.lastName.message}</p>}
+            {errors.lastName && <p className="mt-1 text-xs text-[#B3413A]">{errors.lastName.message}</p>}
           </div>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
             <input {...register("email")} type="email" placeholder="Email address" aria-label="Email address" className={inputCls} />
-            {errors.email && <p className="mt-1 text-xs text-[#E08A7A]">{errors.email.message}</p>}
+            {errors.email && <p className="mt-1 text-xs text-[#B3413A]">{errors.email.message}</p>}
           </div>
           <div>
             <input {...register("phone")} type="tel" inputMode="tel" placeholder="Mobile number (with country code)" aria-label="Mobile number" className={inputCls} />
-            {errors.phone && <p className="mt-1 text-xs text-[#E08A7A]">{errors.phone.message}</p>}
+            {errors.phone && <p className="mt-1 text-xs text-[#B3413A]">{errors.phone.message}</p>}
           </div>
         </div>
 
@@ -105,7 +105,7 @@ export function ContactForm() {
             aria-label="Message"
             className="w-full resize-none border-0 border-b border-lx-line bg-transparent px-0 py-3 text-[15px] leading-relaxed text-lx-text placeholder:text-lx-muted focus:border-[#E2A862] focus:outline-none focus:ring-0 transition-colors"
           />
-          {errors.message && <p className="mt-1 text-xs text-[#E08A7A]">{errors.message.message}</p>}
+          {errors.message && <p className="mt-1 text-xs text-[#B3413A]">{errors.message.message}</p>}
         </div>
       </div>
 

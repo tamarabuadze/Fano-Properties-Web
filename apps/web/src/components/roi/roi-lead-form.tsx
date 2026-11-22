@@ -92,20 +92,20 @@ export function RoiLeadForm({ inputs, result, propertyId, propertyTitle }: RoiLe
       <div className="grid grid-cols-2 gap-5">
         <div>
           <input {...register("firstName")} placeholder="First name" aria-label="First name" className={inputCls} />
-          {errors.firstName && <p className="mt-1 text-xs text-[#E08A7A]">{errors.firstName.message}</p>}
+          {errors.firstName && <p className="mt-1 text-xs text-[#B3413A]">{errors.firstName.message}</p>}
         </div>
         <div>
           <input {...register("lastName")} placeholder="Last name" aria-label="Last name" className={inputCls} />
-          {errors.lastName && <p className="mt-1 text-xs text-[#E08A7A]">{errors.lastName.message}</p>}
+          {errors.lastName && <p className="mt-1 text-xs text-[#B3413A]">{errors.lastName.message}</p>}
         </div>
       </div>
       <div>
         <input {...register("email")} type="email" placeholder="Email address" aria-label="Email address" className={inputCls} />
-        {errors.email && <p className="mt-1 text-xs text-[#E08A7A]">{errors.email.message}</p>}
+        {errors.email && <p className="mt-1 text-xs text-[#B3413A]">{errors.email.message}</p>}
       </div>
       <div>
         <input {...register("phone")} type="tel" inputMode="tel" placeholder="Mobile number (with country code)" aria-label="Mobile number" className={inputCls} />
-        {errors.phone && <p className="mt-1 text-xs text-[#E08A7A]">{errors.phone.message}</p>}
+        {errors.phone && <p className="mt-1 text-xs text-[#B3413A]">{errors.phone.message}</p>}
       </div>
       <button
         type="submit"

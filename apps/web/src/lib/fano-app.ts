@@ -11,6 +11,7 @@ export interface FanoAppLead {
   message?: string;
   project?: string;
   unit?: string;
+  budget?: string;
   purpose?: string;
   page?: string;
   attribution?: Attribution;
@@ -29,8 +30,8 @@ export async function sendLeadToFanoApp(lead: FanoAppLead): Promise<boolean> {
         name: lead.name.slice(0, 80),
         phone: lead.phone,
         email: lead.email ?? "",
-        unit: lead.unit ?? "",
-        budget: "",
+        unit: (lead.unit ?? "").slice(0, 80),
+        budget: (lead.budget ?? "").slice(0, 80),
         purpose: lead.purpose ?? "",
         message: (lead.message ?? "").slice(0, 1500),
         website: "",

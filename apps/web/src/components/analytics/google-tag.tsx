@@ -11,6 +11,8 @@ const GRANTED = { ad_storage: "granted", ad_user_data: "granted", ad_personaliza
 const DENIED = { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: "denied" };
 
 interface GoogleTagProps {
+  /** Google Tag Manager container, GTM-XXXXXXX */
+  gtmId?: string;
   /** Google Analytics 4 measurement ID, G-XXXXXXX */
   gaId?: string;
   /** Google Ads tag ID, AW-XXXXXXXXX */
@@ -22,7 +24,7 @@ interface GoogleTagProps {
 // Loads the Google tag with Consent Mode v2: denied by default in the EEA, UK and
 // Switzerland until the visitor accepts, granted elsewhere. Also reports taps on
 // phone and WhatsApp links, which count as conversions.
-export function GoogleTag({ gaId, adsId, askConsent }: GoogleTagProps) {
+export function GoogleTag({ gtmId, gaId, adsId, askConsent }: GoogleTagProps) {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export function GoogleTag({ gaId, adsId, askConsent }: GoogleTagProps) {
     return () => document.removeEventListener("click", onClick);
   }, []);
 
-  if (!gaId && !adsId) return null;
+  if (!gtmId && !gaId && !adsId) return null;
 
   function choose(granted: boolean) {
     try {
@@ -72,7 +74,14 @@ gtag('consent','default',${JSON.stringify(GRANTED)});
 gtag('js',new Date());
 ${ids.map((id) => `gtag('config',${JSON.stringify(id)});`).join("\n")}`}
       </Script>
-      <Script src={`https://www.googletagmanager.com/gtag/js?id=${ids[0]}`} strategy="afterInteractive" />
+      {ids.length > 0 && (
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${ids[0]}`} strategy="afterInteractive" />
+      )}
+      {gtmId && (
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',${JSON.stringify(gtmId)});`}
+        </Script>
+      )}
 
       {showBanner && (
         <div

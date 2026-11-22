@@ -89,20 +89,20 @@ export function OfficeEnquiryForm({ lease = false, scope = "office" }: { lease?:
         <div className="grid grid-cols-2 gap-5">
           <div>
             <input {...register("firstName")} placeholder="First name" aria-label="First name" autoComplete="given-name" className={inputCls} />
-            {errors.firstName && <p className="mt-1 text-xs text-[#E08A7E]">{errors.firstName.message}</p>}
+            {errors.firstName && <p className="mt-1 text-xs text-[#B3413A]">{errors.firstName.message}</p>}
           </div>
           <div>
             <input {...register("lastName")} placeholder="Last name" aria-label="Last name" autoComplete="family-name" className={inputCls} />
-            {errors.lastName && <p className="mt-1 text-xs text-[#E08A7E]">{errors.lastName.message}</p>}
+            {errors.lastName && <p className="mt-1 text-xs text-[#B3413A]">{errors.lastName.message}</p>}
           </div>
         </div>
         <div>
           <input {...register("phone")} type="tel" inputMode="tel" placeholder="Mobile number (with country code)" aria-label="Mobile number" autoComplete="tel" className={inputCls} />
-          {errors.phone && <p className="mt-1 text-xs text-[#E08A7E]">{errors.phone.message}</p>}
+          {errors.phone && <p className="mt-1 text-xs text-[#B3413A]">{errors.phone.message}</p>}
         </div>
         <div>
           <input {...register("email")} type="email" placeholder="Email address" aria-label="Email address" autoComplete="email" className={inputCls} />
-          {errors.email && <p className="mt-1 text-xs text-[#E08A7E]">{errors.email.message}</p>}
+          {errors.email && <p className="mt-1 text-xs text-[#B3413A]">{errors.email.message}</p>}
         </div>
         <button type="submit" disabled={isSubmitting} className="btn-gold w-full disabled:cursor-not-allowed disabled:opacity-60">
           {isSubmitting ? "Sending…" : "Request a call back"}

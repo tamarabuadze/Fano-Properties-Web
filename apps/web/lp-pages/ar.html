@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>عقارات تجارية ومشاريع على الخارطة في دبي | فانو العقارية</title>
+<meta name="description" content="مكاتب ومحلات وبلازا تجارية ومبانٍ كاملة ومشاريع على الخارطة في دبي، للمستثمرين من الخليج والشرق الأوسط. اطلب قائمة مختارة من فانو العقارية، وسيط عقاري مرخص من ريرا.">
+<meta name="theme-color" content="#E6DFD5">
+<meta property="og:title" content="عقارات دبي التجارية والمشاريع على الخارطة — فانو العقارية">
+<meta property="og:description" content="مكاتب · محلات وبلازا · مبانٍ كاملة · مشاريع على الخارطة في دبي. اطلب قائمتك المختارة.">
+<meta property="og:type" content="website"><meta property="og:locale" content="ar_AE">
+<link rel="icon" href="/icon">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Montserrat:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E6DFD5;--surface:#F4EFEA;--titan:#C5BAAB;--text:#2B2520;--gold:#E2A862;--gold-deep:#8C6A47;
+  --gold-soft:#F6E7D2;--line:#D9CFC2;--muted:#7A6E62;--faint:#A39886;--r:18px;
+  --shadow:0 1px 0 rgba(255,255,255,.7) inset,0 1px 2px rgba(43,37,32,.05),0 10px 30px -12px rgba(43,37,32,.16);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;color:var(--text);background:radial-gradient(1200px 700px at 85% -10%,#F4EFEA,transparent 60%),var(--bg);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.num,.mont{font-family:Montserrat,sans-serif}
+a{color:var(--gold-deep)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.card{background:linear-gradient(180deg,rgba(250,247,243,.92),rgba(244,239,234,.88));border:1px solid rgba(197,186,171,.45);border-radius:var(--r);box-shadow:var(--shadow);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 15px/1 Inter,sans-serif;padding:14px 22px;border-radius:12px;border:1px solid var(--titan);background:var(--surface);color:var(--text);text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px -10px rgba(43,37,32,.35)}
+.btn.pri{background:linear-gradient(180deg,#3A322B,#2B2520);color:#F4EFEA;border-color:#2B2520}
+.btn.gold{background:linear-gradient(135deg,#ECBE80,#E2A862 45%,#B9824A);color:#2B2520;border-color:#C8924F}
+.btn svg{flex:none}
+.eyebrow{font:600 12px/1.2 Montserrat,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep)}
+.serif{font-family:"Source Serif 4",Georgia,serif;font-style:italic;font-weight:400}
+.muted{color:var(--muted)}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:rgba(244,239,234,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(197,186,171,.45)}
+.top .wrap{display:flex;align-items:center;gap:18px;height:68px}
+.top .sp{flex:1}
+.top .tel{font:600 14px Montserrat,sans-serif;color:var(--text);text-decoration:none;letter-spacing:.02em}
+.top .btn{padding:11px 18px;font-size:14px}
+
+/* hero */
+.hero{position:relative;padding:56px 0 64px;overflow:hidden}
+.hero-art{position:absolute;inset:0;pointer-events:none;opacity:.9}
+.hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:start}
+.hero h1{font-size:clamp(44px,6.4vw,84px);line-height:.98;font-weight:700;letter-spacing:-.02em;margin:14px 0 6px}
+.hero h1 small{display:block;font-size:.36em;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);margin-top:14px}
+.hero .lede{font-size:clamp(20px,2.2vw,26px);line-height:1.35;margin:18px 0 22px;max-width:30ch}
+.hero p.body{max-width:52ch;color:#4A4038;margin:0 0 26px}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 28px;max-width:640px}
+.fact{padding:14px 14px 12px}
+.fact .v{font:700 19px/1.15 Montserrat,sans-serif;letter-spacing:-.01em}
+.fact .l{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.3}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* form */
+.form-card{padding:28px;position:relative}
+.form-card::before{content:"";position:absolute;left:28px;right:28px;top:0;height:3px;border-radius:0 0 3px 3px;background:linear-gradient(90deg,#ECBE80,#E2A862,#B9824A)}
+.form-card h2{font-size:22px;margin:4px 0 4px;letter-spacing:-.01em}
+.form-card .sub{font-size:14px;color:var(--muted);margin:0 0 18px}
+.fld{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.fld label{font-size:13px;font-weight:600;color:#4A4038}
+.fld label i{font-style:normal;color:var(--faint);font-weight:500}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.inp{width:100%;font:500 15px Inter,sans-serif;color:var(--text);background:#FBF9F6;border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:none;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238C6A47' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+textarea.inp{resize:vertical;min-height:76px}
+.inp:focus{border-color:#E2A862;box-shadow:0 0 0 4px rgba(226,168,98,.22)}
+.inp.bad{border-color:#B4483A;box-shadow:0 0 0 3px rgba(180,72,58,.14)}
+.seg{display:flex;gap:8px}
+.seg label{flex:1;position:relative;cursor:pointer}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg span{display:block;text-align:center;padding:11px 8px;border:1px solid var(--line);border-radius:12px;background:#FBF9F6;font-size:14px;font-weight:600;color:#4A4038;transition:.15s}
+.seg input:checked+span{border-color:var(--gold);background:var(--gold-soft);color:var(--text);box-shadow:0 0 0 3px rgba(226,168,98,.18)}
+.seg input:focus-visible+span{box-shadow:0 0 0 4px rgba(226,168,98,.35)}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);margin:4px 0 16px;line-height:1.45}
+.consent input{margin-top:2px;width:18px;height:18px;accent-color:#8C6A47;flex:none}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.form-card .btn.pri{width:100%;padding:16px;font-size:16px}
+.err{color:#9C3B2F;font-size:13px;margin:10px 0 0;min-height:1em}
+.trust{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:14px;font-size:12px;color:var(--muted)}
+.trust span{display:inline-flex;align-items:center;gap:6px}
+.done{text-align:center;padding:26px 6px 10px}
+.done .tick{width:64px;height:64px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;background:var(--gold-soft);border:1px solid #E9CFA6}
+.done h2{margin-bottom:8px}
+.done p{color:var(--muted);margin:0 0 18px}
+
+/* sections */
+section{padding:72px 0}
+.sec-head{max-width:640px;margin-bottom:34px}
+.sec-head h2{font-size:clamp(28px,3.4vw,40px);line-height:1.12;letter-spacing:-.015em;margin:10px 0 12px}
+.sec-head p{color:#4A4038;margin:0}
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.about blockquote{margin:0;font-size:clamp(24px,2.7vw,32px);line-height:1.3;color:var(--text)}
+.about blockquote::before{content:"";display:block;width:56px;height:2px;background:var(--gold);margin-bottom:22px}
+.feats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:40px}
+.feat{padding:24px}
+.feat .ico{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--gold-soft);border:1px solid #EBD5B4;margin-bottom:16px;color:var(--gold-deep)}
+.feat h3{font-size:17px;margin:0 0 6px}
+.feat p{margin:0;font-size:14.5px;color:var(--muted)}
+.sadu{height:14px;background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(140,106,71,.22) 6px 8px),repeating-linear-gradient(45deg,transparent 0 6px,rgba(140,106,71,.22) 6px 8px);border-top:1px solid rgba(197,186,171,.5);border-bottom:1px solid rgba(197,186,171,.5);opacity:.8}
+
+/* units */
+.units{overflow:hidden}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{text-align:left;font:600 11.5px Montserrat,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:16px 18px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:15px 18px;border-bottom:1px solid #E7DFD4;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:rgba(246,231,210,.45)}
+td.num,th.num{text-align:right;white-space:nowrap}
+td .unit{font:600 15px Montserrat,sans-serif}
+td .tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gold-deep);background:var(--gold-soft);border-radius:999px;padding:2px 8px;margin-left:8px;vertical-align:2px}
+td .btn{padding:9px 14px;font-size:13px}
+td .sz{display:none;font-size:12.5px;color:var(--muted);margin-top:2px}
+.note{font-size:13px;color:var(--muted);margin:14px 4px 0}
+
+/* plan */
+.plan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:center}
+.bar{display:flex;height:64px;border-radius:16px;overflow:hidden;border:1px solid rgba(197,186,171,.6);box-shadow:var(--shadow)}
+.bar div{display:flex;flex-direction:column;justify-content:center;padding:0 18px}
+.bar .a{flex:60;background:linear-gradient(135deg,#ECBE80,#E2A862 45%,#B9824A);color:#2B2520}
+.bar .b{flex:40;background:linear-gradient(180deg,#3A322B,#2B2520);color:#F4EFEA}
+.bar b{font:700 22px/1 Montserrat,sans-serif}
+.bar small{font-size:12px;opacity:.85;margin-top:4px}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
+.step{padding:18px}
+.step .k{font:700 13px Montserrat,sans-serif;color:var(--gold-deep);letter-spacing:.08em;text-transform:uppercase}
+.step .v{font:700 20px/1.2 Montserrat,sans-serif;margin:6px 0 2px}
+.step .d{font-size:13px;color:var(--muted)}
+
+/* closing */
+.closing{padding:80px 0;text-align:center}
+.closing .card{padding:56px 28px;background:linear-gradient(180deg,#3A322B,#2B2520);border-color:#2B2520;color:#F4EFEA;position:relative;overflow:hidden}
+.closing h2{font-size:clamp(28px,3.6vw,42px);margin:16px 0 10px;letter-spacing:-.015em}
+.closing p{color:#D8CCBC;margin:0 auto 26px;max-width:52ch}
+.closing .eyebrow{color:#E2A862}
+.closing .btn{border-color:rgba(244,239,234,.25)}
+.closing .btn.ghost{background:transparent;color:#F4EFEA}
+
+footer{padding:36px 0 110px;border-top:1px solid rgba(197,186,171,.5)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+footer .tag{font-size:17px;color:var(--gold-deep)}
+footer .contact{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px}
+footer .contact a{color:var(--text);text-decoration:none}
+footer .legal{flex-basis:100%;font-size:12px;color:var(--faint);line-height:1.5}
+
+/* phone sticky bar */
+.mbar{display:none}
+
+@media (max-width:980px){
+  .hero .wrap{grid-template-columns:1fr;gap:32px}
+  .about,.plan{grid-template-columns:1fr;gap:28px}
+  .hero{padding:36px 0 48px}
+}
+@media (max-width:720px){
+  .wrap{padding:0 18px}
+  .top .wrap{height:60px;gap:10px}
+  .top .tel,.top .btn.gold{display:none}
+  .facts{grid-template-columns:1fr 1fr}
+  .feats,.steps{grid-template-columns:1fr}
+  section{padding:52px 0}
+  .form-card{padding:22px 18px}
+  .form-card::before{left:18px;right:18px}
+  .f2{grid-template-columns:1fr}
+  .hide-m{display:none}
+  th,td{padding:13px 12px}
+  td .btn{padding:8px 11px}
+  td .sz{display:block}
+  td .tag{margin-left:0;display:table;margin-top:4px}
+  .bar b{font-size:19px}
+  .mbar{display:flex;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(244,239,234,.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid rgba(197,186,171,.55)}
+  .mbar .btn{flex:1;padding:14px 10px}
+  .cta-row .btn{flex:1}
+  .hero .cta-row{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+
+
+/* ---- Arabic / right-to-left ---- */
+body{font-family:"IBM Plex Sans Arabic",Inter,system-ui,sans-serif;line-height:1.75}
+h1,h2,h3,.ar-h{font-family:"Amiri","IBM Plex Sans Arabic",Georgia,serif;font-weight:700}
+.eyebrow{font-family:"IBM Plex Sans Arabic",Montserrat,sans-serif;letter-spacing:0;text-transform:none;font-size:13px;font-weight:600}
+.sec-head .lx-numeral{display:flex;width:max-content}
+.hero h1{letter-spacing:0;line-height:1.18;font-size:clamp(38px,5.4vw,68px)}
+.hero h1 small{letter-spacing:0;text-transform:none;font-size:.34em;line-height:1.6}
+.hero .lede{font-family:"Amiri","IBM Plex Sans Arabic",serif;font-style:italic;max-width:34ch;line-height:1.55}
+.sec-head h2,.closing h2,.form-card h2{letter-spacing:0;line-height:1.3}
+.fact .v{font-family:"IBM Plex Sans Arabic",Montserrat,sans-serif;letter-spacing:0;font-size:18px}
+.fact .l{font-size:12.5px;line-height:1.45}
+.btn{font-family:"IBM Plex Sans Arabic",Inter,sans-serif;letter-spacing:0;text-transform:none;font-size:14px;font-weight:600}
+.top .btn{font-size:13px}
+.form-card .btn.pri{font-size:15px}
+.inp{font-family:"IBM Plex Sans Arabic",Inter,sans-serif}
+select.inp{background-position:left 14px center;padding-right:14px;padding-left:36px}
+.inp[dir=ltr]{text-align:right}
+.inp[dir=ltr]::placeholder{text-align:right}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block;white-space:nowrap}
+.logo{direction:ltr;display:block}
+.hero-art{transform:scaleX(-1)}
+.feats.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.step .k{letter-spacing:0;font-family:"IBM Plex Sans Arabic",Montserrat,sans-serif}
+.step .v{font-family:"IBM Plex Sans Arabic",Montserrat,sans-serif;font-size:19px}
+.browse{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.browse .note{margin:0}
+footer .tag{font-family:"IBM Plex Sans Arabic",serif;font-style:normal;font-size:16px}
+footer .contact a{direction:ltr;unicode-bidi:isolate}
+@media (max-width:720px){.feats.two{grid-template-columns:1fr}.hero h1{font-size:clamp(34px,9vw,44px)}}
+/* floating WhatsApp button (bottom corner, above the phone bar) */
+.wa-float{position:fixed;left:24px;bottom:24px;z-index:40;display:flex;flex-direction:row-reverse;align-items:center;gap:10px;text-decoration:none}
+.wa-float .dot{position:relative;width:60px;height:60px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 12px 26px -8px rgba(18,140,74,.65),0 2px 6px rgba(0,0,0,.14);transition:transform .15s}
+.wa-float .dot::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25D366;animation:waPulse 2.4s ease-out infinite}
+.wa-float:hover .dot{transform:scale(1.07)}
+.wa-float .lbl{background:rgba(43,37,32,.9);border:1px solid var(--line);color:var(--text);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font:600 14px "IBM Plex Sans Arabic",Inter,sans-serif;padding:9px 14px;border-radius:12px;box-shadow:var(--shadow);white-space:nowrap}
+.wa-float:focus-visible .dot{box-shadow:0 0 0 4px rgba(226,168,98,.55)}
+@keyframes waPulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(1.45);opacity:0}100%{opacity:0}}
+@media (max-width:720px){.wa-float{left:16px;bottom:calc(86px + env(safe-area-inset-bottom))}.wa-float .dot{width:56px;height:56px}.wa-float .lbl{display:none}}
+@media (prefers-reduced-motion:reduce){.wa-float .dot::after{animation:none;opacity:0}}
+
+.top .lang{font:700 11px Montserrat,system-ui,sans-serif;letter-spacing:.2em;color:var(--muted);text-decoration:none;padding:6px 4px}
+.top .lang:hover{color:var(--gold-deep)}
+html[dir=rtl] .top .lang{font-family:Montserrat,sans-serif}
+.gal{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:220px 220px;gap:10px}
+.gal a{display:block;position:relative;overflow:hidden;border-radius:6px;border:1px solid var(--line);background:var(--surface)}
+.gal a:first-child{grid-row:span 2}
+.gal a:nth-child(2){grid-column:span 2}
+.gal img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s ease}
+.gal a:hover img{transform:scale(1.03)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.two .card{padding:28px}
+.two h3{margin:0 0 14px;font-size:22px;color:var(--text)}
+.lst{list-style:none;margin:0;padding:0}
+.lst li{padding:12px 0;border-bottom:1px solid var(--line);color:var(--text);font-size:15px;line-height:1.6}
+.lst li:last-child{border-bottom:0}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.pc{display:block;padding:0;overflow:hidden;text-decoration:none;color:inherit;transition:border-color .3s,transform .3s}
+.pc:hover{border-color:var(--gold-deep);transform:translateY(-2px)}
+.pc .ph{aspect-ratio:16/10;overflow:hidden;background:var(--surface)}
+.pc .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.2s ease}
+.pc:hover .ph img{transform:scale(1.03)}
+.pc .b{padding:16px 18px 20px}
+.pc .k{font:600 10px Montserrat,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)}
+.pc .t{margin-top:8px;font-family:Montserrat,system-ui,sans-serif;font-weight:600;font-size:20px;line-height:1.25;color:var(--text)}
+.pc .m{margin-top:6px;color:var(--muted);font-size:13.5px}
+.pc .p{margin-top:10px;color:var(--gold-deep);font:600 13px Montserrat,sans-serif;letter-spacing:.04em}
+html[dir=rtl] .pc .k{font-family:"IBM Plex Sans Arabic",sans-serif;letter-spacing:0;font-size:12.5px}
+html[dir=rtl] .pc .t{font-family:"Amiri","IBM Plex Sans Arabic",serif;font-weight:700}
+html[dir=rtl] .two h3{font-family:"Amiri","IBM Plex Sans Arabic",serif}
+@media (max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:720px){.gal{grid-template-columns:1fr 1fr;grid-template-rows:220px 140px 140px}.gal a:first-child{grid-row:auto;grid-column:span 2}.gal a:nth-child(2){grid-column:auto}
+  .two{grid-template-columns:1fr}.cards{grid-template-columns:1fr}}
+</style>
+<link rel="stylesheet" href="/lp-assets/extras.css?v=calcite1">
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <a href="https://fanoproperties.com" aria-label="Fano Properties" style="display:flex"><svg class="logo" viewBox="0 0 300 92" width="150" role="img" aria-label="Fano Properties — فانو العقارية"><g transform="translate(-6,-6) scale(1.07)"><path fill="#8C6A47" d="M9 89.4V31L42 10L76.6 31V89.4H37V70H47V80H66.6V37L42 22L19 37V89.4Z"/><path fill="#8C6A47" fill-rule="evenodd" d="M42.6 33.9a13.5 13.5 0 1 1 0 27a13.5 13.5 0 1 1 0-27zM42.6 41a6.4 6.4 0 1 0 0 12.8a6.4 6.4 0 1 0 0-12.8z"/></g><text x="96" y="58" fill="#8C6A47" font-family="Montserrat,sans-serif" font-weight="600" font-size="52" letter-spacing="7">FANO</text><text x="98" y="86" fill="#8C6A47" font-family="Montserrat,sans-serif" font-weight="600" font-size="19.5" letter-spacing="5.6">PROPERTIES</text></svg></a>
+    <span class="sp"></span>
+    <a class="lang" href="/lp/en" hreflang="en">English</a>
+    <a class="tel ltr" href="tel:+97145644635">04 564 4635</a>
+    <a class="btn gold" href="#enquire">اطلب القائمة</a>
+    <a class="btn pri" target="_blank" rel="noopener" data-wa>واتساب</a>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <svg class="hero-art" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E2A862" stop-opacity=".55"/><stop offset="1" stop-color="#8C6A47" stop-opacity=".05"/></linearGradient>
+      <linearGradient id="g2" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#C5BAAB" stop-opacity=".0"/><stop offset=".5" stop-color="#C5BAAB" stop-opacity=".7"/><stop offset="1" stop-color="#C5BAAB" stop-opacity=".0"/></linearGradient>
+    </defs>
+    <g fill="none" stroke-width="1.2">
+      <path id="w0" d="M-40 640C260 520 420 700 700 560S1160 300 1480 380" stroke="url(#g2)"/>
+      <path d="M-40 668C250 556 440 720 720 590S1170 340 1480 420" stroke="url(#g2)"/>
+      <path d="M-40 696C240 592 460 740 740 620S1180 380 1480 460" stroke="url(#g2)"/>
+      <path d="M-40 724C230 628 480 760 760 650S1190 420 1480 500" stroke="url(#g2)"/>
+      <path d="M760 -20C900 120 860 300 1010 420S1340 560 1480 720" stroke="url(#g1)" stroke-width="1.4"/>
+      <path d="M800 -20C940 110 910 290 1050 400S1370 540 1480 680" stroke="url(#g1)"/>
+      <path d="M840 -20C980 100 960 280 1090 380S1400 520 1480 640" stroke="url(#g1)"/>
+      <path d="M880 -20C1020 90 1010 270 1130 360S1420 500 1480 600" stroke="url(#g1)"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">للمستثمرين من الخليج والشرق الأوسط</div>
+      <h1>عقارات دبي التجارية<small>مكاتب · محلات وبلازا · مبانٍ كاملة · مشاريع على الخارطة</small></h1>
+      <p class="lede">قائمة مختارة من العقارات التجارية والمشاريع على الخارطة في دبي، بأسعار موثقة مع المطور وخطط سداد مرنة.</p>
+      <p class="body">أخبرنا بميزانيتك ونوع العقار الذي تبحث عنه، ويرسل لك مستشار من فانو العقارية الخيارات المتاحة مع الأسعار وخطط السداد عبر واتساب.</p>
+      <div class="facts">
+        <div class="card fact"><div class="v">مكاتب</div><div class="l">الخليج التجاري وداون تاون وشارع الشيخ زايد</div></div>
+        <div class="card fact"><div class="v">محلات وبلازا</div><div class="l">وحدات تجارية جاهزة وعلى الخارطة</div></div>
+        <div class="card fact"><div class="v">مبانٍ كاملة</div><div class="l">تُعرض عند الطلب</div></div>
+        <div class="card fact"><div class="v">على الخارطة</div><div class="l">خطط سداد من المطور</div></div>
+      </div>
+      <div class="cta-row"><a class="btn pri" href="#enquire">اطلب قائمتك المختارة</a><a class="btn wa" target="_blank" rel="noopener" data-wa><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#1F8A5B" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg> واتساب</a></div>
+    </div>
+
+    <div class="card form-card" id="enquire"><div id="form-box">
+      <div class="eyebrow">سجّل اهتمامك</div>
+      <h2>احصل على قائمة مختارة من العقارات</h2>
+      <p class="sub">يتواصل معك مستشار من فانو العقارية عادة خلال ساعتين، بالأسعار والتوفر وخطط السداد.</p>
+      <form id="lead-form" novalidate>
+        <div class="fld"><label for="f-name">الاسم الكامل</label><input class="inp" id="f-name" name="name" autocomplete="name" maxlength="80" required></div>
+        <div class="f2">
+          <div class="fld"><label for="f-phone">رقم الجوال / واتساب</label><input class="inp" id="f-phone" name="phone" type="tel" inputmode="tel" dir="ltr" autocomplete="tel" placeholder="+966 55 123 4567" maxlength="25" required></div>
+          <div class="fld"><label for="f-country">بلد الإقامة</label><select class="inp" id="f-country" name="country"><option value="">اختر…</option><option value="United Arab Emirates">الإمارات</option><option value="Saudi Arabia">السعودية</option><option value="Qatar">قطر</option><option value="Kuwait">الكويت</option><option value="Bahrain">البحرين</option><option value="Oman">عُمان</option><option value="Jordan">الأردن</option><option value="Lebanon">لبنان</option><option value="Iraq">العراق</option><option value="Egypt">مصر</option><option value="Other">دولة أخرى</option></select></div>
+        </div>
+        <div class="fld"><label for="f-email">البريد الإلكتروني <i>(اختياري)</i></label><input class="inp" id="f-email" name="email" type="email" dir="ltr" autocomplete="email" maxlength="120"></div>
+        <div class="f2">
+          <div class="fld"><label for="f-unit">نوع العقار</label><select class="inp" id="f-unit" name="unit"><option value="">اختر…</option><option value="Office">مكتب</option><option value="Shop / retail plaza">محل أو بلازا تجارية</option><option value="Whole building">مبنى كامل</option><option value="Off-plan project">مشروع على الخارطة</option><option value="Not sure yet">لم أقرر بعد</option></select></div>
+          <div class="fld"><label for="f-budget">الميزانية</label><select class="inp" id="f-budget" name="budget"><option value="">اختر…</option><option value="Under AED 1M">أقل من مليون درهم</option><option value="AED 1M – 2M">من 1 إلى 2 مليون درهم</option><option value="AED 2M – 5M">من 2 إلى 5 ملايين درهم</option><option value="AED 5M – 10M">من 5 إلى 10 ملايين درهم</option><option value="Over AED 10M">أكثر من 10 ملايين درهم</option></select></div>
+        </div>
+        <div class="fld"><label>الغرض من الشراء</label><div class="seg" role="radiogroup">
+          <label><input type="radio" name="purpose" value="Investment"><span>استثمار</span></label>
+          <label><input type="radio" name="purpose" value="Own business use"><span>لنشاطي التجاري</span></label>
+          <label><input type="radio" name="purpose" value="Both"><span>الاثنان</span></label>
+        </div></div>
+        <div class="fld"><label for="f-msg">رسالتك <i>(اختياري)</i></label><textarea class="inp" id="f-msg" name="message" rows="2" maxlength="900" placeholder="المنطقة المفضلة، أفضل وقت للتواصل، أي سؤال…"></textarea></div>
+        <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <label class="consent"><input type="checkbox" name="consent" id="f-consent" required><span>أوافق على أن تتواصل معي فانو العقارية عبر الهاتف أو واتساب أو البريد الإلكتروني بخصوص هذا الطلب.</span></label>
+        <button class="btn pri" type="submit" id="f-send">أرسل طلبي</button><p class="err" id="f-err" role="alert"></p>
+      </form>
+      <div class="trust"><span>✓ بدون أي التزام</span><span>✓ بياناتك تبقى لدى فانو</span></div>
+    </div></div>
+  </div>
+</div>
+<div class="sadu" aria-hidden="true"></div>
+
+<section id="offer"><div class="wrap">
+  <div class="sec-head"><div class="lx-numeral">01</div><div class="eyebrow">ما نوفره لك</div><h2>عقارات تجارية ومشاريع جديدة في دبي</h2><p>نختار لك ما يناسب ميزانيتك وهدفك، سواء كنت تشتري لشركتك أو للاستثمار.</p></div>
+  <div class="feats two">
+    <div class="card feat"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l4-3v14M9 21V4l6 3v14M15 21v-9l4 2v7"/></svg></div><h3>مكاتب للبيع</h3><p>مكاتب جاهزة وعلى الخارطة في الخليج التجاري وداون تاون وشارع الشيخ زايد، لشركتك أو للاستثمار.</p></div>
+    <div class="card feat"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16l-1.5-5h-13zM5 10v10h14V10M9 20v-5h6v5"/></svg></div><h3>محلات وبلازا تجارية</h3><p>محلات ووحدات تجارية ومعارض في دبي، جاهزة وعلى الخارطة.</p></div>
+    <div class="card feat"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5l8-3 8 3v16M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1M2 21h20"/></svg></div><h3>مبانٍ كاملة</h3><p>مبانٍ تجارية وسكنية كاملة للمستثمرين الباحثين عن صفقة أكبر، تُعرض عند الطلب.</p></div>
+    <div class="card feat"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12c0-4 3-7 8-8-1 5-4 8-8 8zM12 15c0-3-2.5-5.5-7-6 .5 4 3 6 7 6z"/></svg></div><h3>مشاريع على الخارطة</h3><p>شقق ومكاتب ومحلات في مشاريع دبي الجديدة، مع خطط سداد مرنة من المطور.</p></div>
+  </div>
+</div></section>
+
+<section id="why" style="padding-top:10px"><div class="wrap">
+  <div class="sec-head"><div class="lx-numeral">02</div><div class="eyebrow">لماذا فانو العقارية</div><h2>شريك يمكنك الاعتماد عليه في دبي</h2></div>
+  <div class="feats">
+    <div class="card feat"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>وسيط مرخص من ريرا</h3><p>فانو العقارية وسيط عقاري مرخص في دبي، رقم الترخيص <span class="ltr">RERA 49852</span>.</p></div>
+    <div class="card feat"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M4 6h16M4 18h10"/></svg></div><h3>أسعار موثقة</h3><p>نتحقق من الأسعار والتوفر مع المطور أو المالك قبل أن نرسلها لك.</p></div>
+    <div class="card feat"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"/></svg></div><h3>متابعة أينما كنت</h3><p>نرسل لك القوائم والمخططات وخطط السداد عبر واتساب، ونرتب المعاينة عند زيارتك لدبي.</p></div>
+  </div>
+</div></section>
+
+<section id="how" style="padding-top:10px"><div class="wrap">
+  <div class="sec-head"><div class="lx-numeral">03</div><div class="eyebrow">كيف نعمل</div><h2>ثلاث خطوات إلى عقارك في دبي</h2></div>
+  <div class="steps">
+    <div class="card step"><div class="k">الخطوة ١</div><div class="v">أخبرنا بما تبحث عنه</div><div class="d">نوع العقار والميزانية والمنطقة المفضلة.</div></div>
+    <div class="card step"><div class="k">الخطوة ٢</div><div class="v">نرسل لك قائمة مختارة</div><div class="d">يتواصل معك مستشار من فانو عادة خلال ساعتين.</div></div>
+    <div class="card step"><div class="k">الخطوة ٣</div><div class="v">اختر وأتمم الصفقة</div><div class="d">نرافقك في المعاينة والحجز مع المطور حتى نقل الملكية.</div></div>
+  </div>
+  <div class="browse" style="margin-top:28px">
+    <a class="btn" href="https://fanoproperties.com/properties?category=commercial&amp;listingType=sale" target="_blank" rel="noopener">تصفح العقارات التجارية للبيع</a>
+    <a class="btn" href="https://fanoproperties.com/properties?listingType=sale" target="_blank" rel="noopener">جميع العقارات للبيع</a>
+    <p class="note">الموقع باللغة الإنجليزية — ويسعدنا شرح أي عقار لك بالعربية عبر واتساب.</p>
+  </div>
+</div></section>
+
+<section id="projects" style="padding-top:10px"><div class="wrap">
+  <div class="sec-head"><div class="lx-numeral">04</div><div class="eyebrow">مشاريع مختارة</div><h2>عقارات نسوّقها الآن في دبي</h2><p>اختر المشروع لمعرفة التفاصيل والأسعار وخطة السداد، أو اطلب قائمة مختارة تناسب ميزانيتك.</p></div>
+  <div class="cards"><a class="card pc" href="/lp/ar/symphony"><div class="ph"><img src="https://fanoproperties.com/media/f43d86ae-1e7c-4fc1-afba-8d7e2e76779c.jpg" alt="ذا سيمفوني من امتياز — ميدان، دبي" loading="lazy"></div><div class="b"><div class="k">مكاتب · على الخارطة</div><div class="t">ذا سيمفوني من امتياز</div><div class="m">ميدان، دبي</div><div class="p">ابتداءً من 2.78 مليون درهم</div></div></a><a class="card pc" href="/lp/ar/poly-clinic"><div class="ph"><img src="https://fanoproperties.com/media/c68a7dbd-4942-4a9f-a65a-4a0f032e1b1d.jpg" alt="عيادة متعددة التخصصات، صبحا هارتلاند — كريك فيستاز غراند، مدينة محمد بن راشد" loading="lazy"></div><div class="b"><div class="k">وحدة عيادة · للإيجار</div><div class="t">عيادة متعددة التخصصات، صبحا هارتلاند</div><div class="m">كريك فيستاز غراند، مدينة محمد بن راشد</div><div class="p">2,000,000 درهم · للإيجار</div></div></a><a class="card pc" href="/lp/ar/palm-jebel-ali-villa"><div class="ph"><img src="https://fanoproperties.com/media/25de9424-2da9-4296-846b-5bfed77e3352.jpg" alt="فيلا على الشاطئ، نخلة جبل علي — الفرع N، نخلة جبل علي" loading="lazy"></div><div class="b"><div class="k">فيلا · 5 غرف نوم</div><div class="t">فيلا على الشاطئ، نخلة جبل علي</div><div class="m">الفرع N، نخلة جبل علي</div><div class="p">22,000,000 درهم</div></div></a><a class="card pc" href="/lp/ar/sol-luxe"><div class="ph"><img src="https://fanoproperties.com/media/b73ff245-547e-4ca5-94e2-d6ac901a0c92.jpg" alt="سول لوكس من سول العقارية — شارع الشيخ زايد، دبي" loading="lazy"></div><div class="b"><div class="k">مكاتب ومحلات · على الخارطة</div><div class="t">سول لوكس من سول العقارية</div><div class="m">شارع الشيخ زايد، دبي</div><div class="p">4,770 درهم للقدم²</div></div></a><a class="card pc" href="/lp/ar/sol-levante"><div class="ph"><img src="https://fanoproperties.com/media/7046d5b0-9324-4df0-bac9-df0e4d97706a.jpg" alt="سول ليفانتي — قرية جميرا الثلاثية (JVT)، دبي" loading="lazy"></div><div class="b"><div class="k">مكتب ومحل تجاري</div><div class="t">سول ليفانتي</div><div class="m">قرية جميرا الثلاثية (JVT)، دبي</div><div class="p">2,100 درهم للقدم²</div></div></a><a class="card pc" href="/lp/ar/ahs-twin-towers"><div class="ph"><img src="https://fanoproperties.com/media/cad76b38-a1b5-40ad-9f8c-aec5b3e899d8.jpg" alt="أبراج AHS التوأم — شارع الشيخ زايد، دبي" loading="lazy"></div><div class="b"><div class="k">مكاتب فئة أ · على الخارطة</div><div class="t">أبراج AHS التوأم</div><div class="m">شارع الشيخ زايد، دبي</div><div class="p">3,850 درهم للقدم²</div></div></a><a class="card pc" href="/lp/ar/lumena"><div class="ph"><img src="https://fanoproperties.com/media/789d5274-e8fd-4406-9264-d8104baf8cf8.jpg" alt="لومينا من أومنيات — الخليج التجاري، دبي" loading="lazy"></div><div class="b"><div class="k">مكاتب · على الخارطة</div><div class="t">لومينا من أومنيات</div><div class="m">الخليج التجاري، دبي</div><div class="p">5,700 درهم للقدم²</div></div></a><a class="card pc" href="/lp/ar/enara"><div class="ph"><img src="https://fanoproperties.com/media/df04e87e-826b-4250-9139-c72bb5f556d3.jpg" alt="إنارا من أومنيات — خليج مراسي، الخليج التجاري" loading="lazy"></div><div class="b"><div class="k">مكاتب فاخرة · على الخارطة</div><div class="t">إنارا من أومنيات</div><div class="m">خليج مراسي، الخليج التجاري</div><div class="p">8,600 درهم للقدم²</div></div></a><a class="card pc" href="/lp/ar/rockefeller-tower"><div class="ph"><img src="https://fanoproperties.com/media/51981e2e-d4ec-4c0b-8573-dc1a581c328d.jpg" alt="برج كريستيان أ. روكفلر للأعمال — شارع الشيخ زايد، دبي" loading="lazy"></div><div class="b"><div class="k">مكاتب فئة أ · على الخارطة</div><div class="t">برج كريستيان أ. روكفلر للأعمال</div><div class="m">شارع الشيخ زايد، دبي</div><div class="p">4,000 درهم للقدم²</div></div></a><a class="card pc" href="/lp/ar/berkeley-tower"><div class="ph"><img src="https://fanoproperties.com/media/5e91c869-8a1b-412a-833e-f4652c8bd957.jpg" alt="مكاتب برج بيركلي — الخليج التجاري، دبي" loading="lazy"></div><div class="b"><div class="k">مكاتب فئة أ · على الخارطة</div><div class="t">مكاتب برج بيركلي</div><div class="m">الخليج التجاري، دبي</div><div class="p">4,500 درهم للقدم²</div></div></a><a class="card pc" href="/lp/ar/hq-by-rove"><div class="ph"><img src="https://fanoproperties.com/media/6c5e3b25-622e-4c63-b386-9fc1a071ebf6.jpg" alt="مكتب في HQ من روف — مراسي درايف، الخليج التجاري" loading="lazy"></div><div class="b"><div class="k">مكتب · على الخارطة</div><div class="t">مكتب في HQ من روف</div><div class="m">مراسي درايف، الخليج التجاري</div><div class="p">5,759 درهم للقدم²</div></div></a></div>
+</div></section>
+
+<section class="closing"><div class="wrap"><div class="card">
+  <div style="display:flex;justify-content:center"><svg class="logo" viewBox="0 0 300 92" width="150" role="img" aria-label="Fano Properties — فانو العقارية"><g transform="translate(-6,-6) scale(1.07)"><path fill="#8C6A47" d="M9 89.4V31L42 10L76.6 31V89.4H37V70H47V80H66.6V37L42 22L19 37V89.4Z"/><path fill="#8C6A47" fill-rule="evenodd" d="M42.6 33.9a13.5 13.5 0 1 1 0 27a13.5 13.5 0 1 1 0-27zM42.6 41a6.4 6.4 0 1 0 0 12.8a6.4 6.4 0 1 0 0-12.8z"/></g><text x="96" y="58" fill="#8C6A47" font-family="Montserrat,sans-serif" font-weight="600" font-size="52" letter-spacing="7">FANO</text><text x="98" y="86" fill="#8C6A47" font-family="Montserrat,sans-serif" font-weight="600" font-size="19.5" letter-spacing="5.6">PROPERTIES</text></svg></div>
+  <div class="eyebrow" style="margin-top:22px">فانو العقارية</div>
+  <h2>جاهز لاستثمارك القادم في دبي؟</h2>
+  <p>أخبرنا بما تحتاجه وسنرسل لك الخيارات المتاحة والأسعار وخطط السداد، بدون أي التزام.</p>
+  <div class="cta-row" style="justify-content:center"><a class="btn gold" href="#enquire">اطلب قائمتك</a><a class="btn ghost" target="_blank" rel="noopener" data-wa>واتساب <span class="ltr">+971 52 571 9164</span></a></div>
+</div></div></section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><svg class="logo" viewBox="0 0 300 92" width="150" role="img" aria-label="Fano Properties — فانو العقارية"><g transform="translate(-6,-6) scale(1.07)"><path fill="#8C6A47" d="M9 89.4V31L42 10L76.6 31V89.4H37V70H47V80H66.6V37L42 22L19 37V89.4Z"/><path fill="#8C6A47" fill-rule="evenodd" d="M42.6 33.9a13.5 13.5 0 1 1 0 27a13.5 13.5 0 1 1 0-27zM42.6 41a6.4 6.4 0 1 0 0 12.8a6.4 6.4 0 1 0 0-12.8z"/></g><text x="96" y="58" fill="#8C6A47" font-family="Montserrat,sans-serif" font-weight="600" font-size="52" letter-spacing="7">FANO</text><text x="98" y="86" fill="#8C6A47" font-family="Montserrat,sans-serif" font-weight="600" font-size="19.5" letter-spacing="5.6">PROPERTIES</text></svg><div class="tag" style="margin-top:6px">شريكك العقاري الموثوق</div></div>
+    <div class="contact">
+      <a href="https://wa.me/971525719164" target="_blank" rel="noopener">WhatsApp +971 52 571 9164</a>
+      <a href="tel:+97145644635">Office 04 564 4635</a>
+      <a href="mailto:info@fanoproperties.com">info@fanoproperties.com</a>
+      <a href="https://fanoproperties.com">fanoproperties.com</a>
+    </div>
+    <div class="legal">فانو العقارية وسيط عقاري مرخص في دبي (<span class="ltr">RERA 49852</span>). الأسعار والمساحات وخطط السداد استرشادية وقد تتغير، وتخضع لعقد البيع والشراء الخاص بالمطور. © <span id="yr"></span> فانو العقارية.</div>
+  </div>
+</footer>
+
+<a class="wa-float" target="_blank" rel="noopener" data-wa aria-label="تواصل معنا عبر واتساب"><span class="dot"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg></span><span class="lbl">تواصل معنا عبر واتساب</span></a>
+
+<div class="mbar">
+  <a class="btn" target="_blank" rel="noopener" data-wa>واتساب</a>
+  <a class="btn pri" href="#enquire">اطلب القائمة</a>
+</div>
+
+<script>
+(function(){
+"use strict";
+var PROJECT="Arabic investors — Dubai commercial & off-plan",WA="971525719164";
+document.getElementById("yr").textContent=new Date().getFullYear();
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+var form=document.getElementById("lead-form");
+function typeLabel(){var o=form.unit.options[form.unit.selectedIndex];return form.unit.value&&o?o.text:""}
+function waLink(){var t=typeLabel();return"https://wa.me/"+WA+"?text="+encodeURIComponent("مرحباً فانو العقارية، أنا مهتم بالاستثمار العقاري في دبي"+(t?" ("+t+")":"")+". أرجو إرسال قائمة مختارة بالأسعار وخطط السداد.")}
+function setWa(){[].forEach.call(document.querySelectorAll("[data-wa]"),function(a){a.href=waLink()})}
+setWa();form.unit.addEventListener("change",setWa);
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("[data-wa]");if(!a)return;a.href=waLink();
+  if(window.dataLayer)window.dataLayer.push({event:"whatsapp_click",project:PROJECT});if(window.gtag)window.gtag("event","whatsapp_click",{project:PROJECT})});
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href="#enquire"]');if(!a)return;e.preventDefault();
+  var box=document.getElementById("enquire");window.scrollTo({top:box.getBoundingClientRect().top+window.pageYOffset-80,behavior:"smooth"});
+  setTimeout(function(){var n=document.getElementById("f-name");if(n)n.focus({preventScroll:true})},450)});
+var qs=new URLSearchParams(location.search),started=Date.now();
+var err=document.getElementById("f-err"),send=document.getElementById("f-send");
+function bad(el,msg){el.classList.add("bad");el.focus();err.textContent=msg;return false}
+[].forEach.call(form.querySelectorAll(".inp"),function(el){el.addEventListener("input",function(){el.classList.remove("bad");err.textContent=""})});
+function toLatin(s){return s.replace(/[\u0660-\u0669]/g,function(d){return String(d.charCodeAt(0)-0x0660)}).replace(/[\u06F0-\u06F9]/g,function(d){return String(d.charCodeAt(0)-0x06F0)})}
+form.addEventListener("submit",function(e){e.preventDefault();err.textContent="";
+  var name=form.name.value.trim(),phone=toLatin(form.phone.value.trim()),email=form.email.value.trim();
+  if(name.length<2)return bad(form.name,"يرجى كتابة اسمك.");
+  var digits=phone.replace(/\D/g,"");
+  if(digits.length<7||digits.length>15||!/^[+\d\s()\-.]+$/.test(phone))return bad(form.phone,"يرجى كتابة رقم جوال صحيح مع رمز الدولة، مثل +966.");
+  if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))return bad(form.email,"يبدو أن البريد الإلكتروني غير صحيح.");
+  if(!form.consent.checked){err.textContent="يرجى الموافقة على التواصل معك حتى نتمكن من الرد.";return}
+  var p=form.querySelector("[name=purpose]:checked"),msg=form.message.value.trim(),country=form.country.value;
+  var lines=[msg,country&&"Country of residence: "+country,"Page language: Arabic"].filter(Boolean);
+  var data={name:name,phone:phone,email:email,unit:form.unit.value,budget:form.budget.value,purpose:p?p.value:"",message:lines.join("\n"),website:form.website.value,
+    project:PROJECT,page:location.pathname,ms:Date.now()-started,c:qs.get("c")||"",gclid:qs.get("gclid")||"",gbraid:qs.get("gbraid")||"",wbraid:qs.get("wbraid")||"",
+    utm_source:qs.get("utm_source")||"",utm_medium:qs.get("utm_medium")||"",utm_campaign:qs.get("utm_campaign")||"",ref:document.referrer||""};
+  send.disabled=true;send.textContent="جارٍ الإرسال…";
+  fetch("/api/lp-lead",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)})
+    .then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(!r.ok||!j.ok){var x=new Error("failed");x.status=r.status;throw x}return j})})
+    .then(function(){document.getElementById("form-box").innerHTML='<div class="done"><div class="tick"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E2A862" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div><div class="eyebrow">تم استلام طلبك</div><h2>شكراً لك، '+esc(name.split(" ")[0])+'</h2><p>سيتصل بك مستشار من فانو العقارية على الرقم <b class="ltr" style="color:var(--text)">'+esc(phone)+'</b> قريباً مع الخيارات المتاحة.</p><a class="btn" target="_blank" rel="noopener" href="'+waLink()+'">تحدث معنا الآن عبر واتساب</a></div>';
+      if(window.dataLayer)window.dataLayer.push({event:"generate_lead",project:PROJECT});if(window.gtag)window.gtag("event","generate_lead",{project:PROJECT});if(window.fbq)window.fbq("track","Lead")})
+    .catch(function(x){send.disabled=false;send.textContent="أرسل طلبي";
+      err.innerHTML=(x&&x.status===429?"أرسلت عدة طلبات خلال وقت قصير.":"عذراً، لم يتم إرسال الطلب.")+' يرجى المحاولة مرة أخرى، أو <a href="'+waLink()+'" target="_blank" rel="noopener">راسلنا عبر واتساب</a>.'})});
+})();
+</script>
+</body>
+</html>

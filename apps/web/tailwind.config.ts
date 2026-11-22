@@ -15,7 +15,7 @@ const config: Config = {
         label: ["var(--font-montserrat)", "Montserrat", "system-ui", "sans-serif"],
       },
       colors: {
-        /* Public-site navy tokens: RGB channels in globals.css so /<opacity> modifiers compile */
+        /* Public-site tokens (Calcite Sand, as in the team app): RGB channels in globals.css so /<opacity> modifiers compile */
         lx: {
           page: "rgb(var(--lx-page-rgb) / <alpha-value>)",
           surface: "rgb(var(--lx-surface-rgb) / <alpha-value>)",
@@ -25,7 +25,7 @@ const config: Config = {
           line: "var(--lx-line)",
           gold: "#E2A862",
           bronze: "#8C6A47",
-          pale: "#F6E7D2",
+          pale: "rgb(var(--lx-pale-rgb) / <alpha-value>)",
         },
         /* Fano "Calcite Sand" theme, same as the Fano team app */
         sand: "#E6DFD5",      /* Calcite Sand: page background */

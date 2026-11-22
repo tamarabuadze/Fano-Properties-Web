@@ -95,7 +95,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
         <div className="container-site">
           <div className="flex h-20 items-center justify-between gap-8 lg:h-24">
             <Link href="/" onClick={closeMenu} className="flex items-center" aria-label="Fano Properties home">
-              <FanoLogo color="#D4A843" className="h-11 lg:h-12" />
+              <FanoLogo color="#8C6A47" className="h-11 lg:h-12" />
             </Link>
 
             <nav aria-label="Main navigation" className="hidden items-center gap-9 lg:flex">
