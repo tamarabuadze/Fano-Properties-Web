@@ -19,7 +19,7 @@ const inquirySchema = z.object({
   /** Page the form was sent from, and the ad or link that brought the visitor */
   page: z.string().max(300).optional(),
   attribution: z.record(z.string().max(300)).optional(),
-  /** Spam guards: a field people never see, and when the form was opened (ms) */
+  /** Spam guards: a field people never see, and how long the form was open (ms) */
   website: z.string().max(200).optional(),
   startedAt: z.number().optional(),
 });
@@ -46,8 +46,14 @@ export async function submitInquiry(data: InquiryFormData) {
 
   const { page, attribution, website, startedAt, ...inquiry } = parsed.data;
 
+  // startedAt is how long the form was open (ms). Comparing the visitor's clock with the server's
+  // dropped real enquiries whenever the visitor's clock ran ahead, so a page still open from before
+  // this change, which sends a clock time instead, is let through.
+  const sentAClockTime = startedAt !== undefined && startedAt > 1e11;
+  const tooFast = startedAt !== undefined && !sentAClockTime && startedAt < MIN_FILL_MS;
+
   // Bots get the same answer as people, and nothing is saved
-  if (website || (startedAt !== undefined && Date.now() - startedAt < MIN_FILL_MS)) {
+  if (website || tooFast) {
     return { success: true, message: "Your inquiry has been submitted successfully." };
   }
   if (inquiry.phone && !plausiblePhone(inquiry.phone)) {

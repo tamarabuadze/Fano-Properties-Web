@@ -18,7 +18,14 @@ export interface FanoAppLead {
   inquiryId?: string;
 }
 
+/** Sends the lead, and once more after a short wait if the app did not take it */
 export async function sendLeadToFanoApp(lead: FanoAppLead): Promise<boolean> {
+  if (await sendOnce(lead)) return true;
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return sendOnce(lead);
+}
+
+async function sendOnce(lead: FanoAppLead): Promise<boolean> {
   const digits = lead.phone.replace(/\D/g, "");
   if (digits.length < 7 || digits.length > 15) return false;
   const a = lead.attribution ?? {};
