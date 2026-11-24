@@ -1,0 +1,22 @@
+
+/* ---- website-owned extras (Calcite Sand, same as the Fano team app) ---- */
+.lx-numeral{display:inline-flex;align-items:center;gap:12px;margin:0 0 14px;font:600 11px Montserrat,system-ui,sans-serif;letter-spacing:.2em;color:var(--gold-deep)}
+.lx-numeral::after{content:"";width:24px;height:1px;background:rgba(140,106,71,.45)}
+.top .lang{color:var(--muted)}.top .lang:hover{color:var(--gold-deep)}
+.hero-art{display:block}
+.wa-float{position:fixed;right:24px;bottom:24px;z-index:40;display:flex;align-items:center;gap:10px;text-decoration:none}
+html[dir=rtl] .wa-float{right:auto;left:24px;flex-direction:row-reverse}
+.wa-float .dot{position:relative;width:60px;height:60px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 12px 26px -8px rgba(18,140,74,.65),0 2px 6px rgba(0,0,0,.14);transition:transform .15s}
+.wa-float .dot::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #25D366;animation:waPulse 2.4s ease-out infinite}
+.wa-float:hover .dot{transform:scale(1.07)}
+.wa-float .lbl{order:-1;opacity:0;transform:translateX(6px);pointer-events:none;transition:opacity .2s,transform .2s;background:rgba(43,37,32,.9);color:#F4EFEA;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font:600 14px Inter,system-ui,sans-serif;padding:9px 14px;border-radius:12px;box-shadow:var(--shadow);white-space:nowrap}
+html[dir=rtl] .wa-float .lbl{order:0;font-family:"IBM Plex Sans Arabic",Inter,sans-serif}
+.wa-float:hover .lbl,.wa-float:focus-visible .lbl{opacity:1;transform:none}
+.wa-float:focus-visible .dot{box-shadow:0 0 0 4px rgba(226,168,98,.55)}
+@keyframes waPulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(1.45);opacity:0}100%{opacity:0}}
+@media (max-width:720px){.wa-float,html[dir=rtl] .wa-float{bottom:calc(86px + env(safe-area-inset-bottom))}.wa-float{right:16px}html[dir=rtl] .wa-float{left:16px}.wa-float .dot{width:56px;height:56px}.wa-float .lbl{display:none}}
+@media (prefers-reduced-motion:reduce){.wa-float .dot::after{animation:none;opacity:0}}
+/* colour theme switch in the top bar */
+.theme-tg{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;padding:0}
+.theme-tg:hover,.theme-tg:focus-visible{color:var(--gold-deep);border-color:var(--gold-deep);outline:none}
+@media (max-width:720px){.theme-tg{width:30px;height:30px}}

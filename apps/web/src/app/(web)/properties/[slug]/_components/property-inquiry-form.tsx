@@ -73,7 +73,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
               className={inputCls}
             />
             {errors.firstName && (
-              <p className="mt-1 text-xs text-[#E08A7E]">{errors.firstName.message}</p>
+              <p className="mt-1 text-xs text-[#B3413A]">{errors.firstName.message}</p>
             )}
           </div>
           <div>
@@ -84,7 +84,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
               className={inputCls}
             />
             {errors.lastName && (
-              <p className="mt-1 text-xs text-[#E08A7E]">{errors.lastName.message}</p>
+              <p className="mt-1 text-xs text-[#B3413A]">{errors.lastName.message}</p>
             )}
           </div>
         </div>
@@ -98,7 +98,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
             className={inputCls}
           />
           {errors.email && (
-            <p className="mt-1 text-xs text-[#E08A7E]">{errors.email.message}</p>
+            <p className="mt-1 text-xs text-[#B3413A]">{errors.email.message}</p>
           )}
         </div>
 
@@ -111,7 +111,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
             aria-label="Mobile number"
             className={inputCls}
           />
-          {errors.phone && <p className="mt-1 text-xs text-[#E08A7E]">{errors.phone.message}</p>}
+          {errors.phone && <p className="mt-1 text-xs text-[#B3413A]">{errors.phone.message}</p>}
         </div>
 
         <div>
@@ -123,7 +123,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
             className="w-full resize-none rounded-none !border-0 !border-b !border-lx-line !bg-transparent px-0 py-2 text-[14px] leading-relaxed text-lx-text placeholder:text-lx-muted focus:!border-lx-gold focus:outline-none focus:ring-0 transition-colors"
           />
           {errors.message && (
-            <p className="mt-1 text-xs text-[#E08A7E]">{errors.message.message}</p>
+            <p className="mt-1 text-xs text-[#B3413A]">{errors.message.message}</p>
           )}
         </div>
 

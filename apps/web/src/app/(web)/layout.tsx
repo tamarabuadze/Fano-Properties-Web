@@ -5,10 +5,10 @@ import { LuxEnquire } from "@/components/luxury/lux-enquire";
 import { GoogleTag } from "@/components/analytics/google-tag";
 import { getAgents } from "@/lib/queries/agents";
 import { CONSENT_COUNTRIES } from "@/lib/analytics";
+import { googleTagIds } from "@/lib/google-tag-html";
+import { defaultTheme, themeScript } from "@/lib/site-theme";
+import { WhatsAppFloat } from "@/components/shared/whatsapp-float";
 
-// Tag IDs are read when the page is served, so they can be set on Railway without a rebuild
-const tagId = (value: string | undefined, prefix: string) =>
-  value && new RegExp(`^${prefix}-[A-Z0-9-]+$`).test(value.trim()) ? value.trim() : undefined;
 
 export default async function WebLayout({ children }: { children: React.ReactNode }) {
   // The Agents page stays out of the menus until agents are added
@@ -19,15 +19,15 @@ export default async function WebLayout({ children }: { children: React.ReactNod
 
   return (
     <div className="lx-root">
+      {/* Sand (team app look) or navy: the visitor's saved choice, else SITE_THEME */}
+      <script dangerouslySetInnerHTML={{ __html: themeScript(defaultTheme()) }} />
       <LuxNavbar showAgents={showAgents} />
       <main className="fano-web">{children}</main>
       <LuxFooter showAgents={showAgents} />
       <LuxEnquire />
-      <GoogleTag
-        gaId={tagId(process.env.GA_MEASUREMENT_ID, "G")}
-        adsId={tagId(process.env.GOOGLE_ADS_ID, "AW")}
-        askConsent={askConsent}
-      />
+      <WhatsAppFloat />
+      {/* Tag IDs are read when the page is served, so they can be set on Railway without a rebuild */}
+      <GoogleTag {...googleTagIds()} askConsent={askConsent} />
     </div>
   );
 }

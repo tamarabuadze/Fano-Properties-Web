@@ -117,8 +117,8 @@ export function LuxHero() {
           onPlaying={() => setVideoReady(true)}
           onError={() => setVideoReady(false)}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-lx-page via-lx-page/35 to-lx-page/10" />
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-lx-page/60 to-transparent" />
+        <div className="lx-veil absolute inset-0" />
+        <div className="lx-veil-top absolute inset-x-0 top-0 h-40" />
       </div>
 
       {/* Top-right caption */}
@@ -128,15 +128,15 @@ export function LuxHero() {
 
       <div className="container-site relative z-10 grid pb-28 pt-32 sm:pt-40 lg:grid-cols-12">
         <div className="lg:col-span-8 xl:col-span-7">
-          <p className="lx-rise font-sans text-[12px] font-medium uppercase tracking-[2.5px] text-[#E8D5B0]">Dubai&rsquo;s finest addresses, by introduction</p>
-          <h1 className="lx-rise lx-rise-1 mt-3 font-display font-bold uppercase leading-none text-white">
+          <p className="lx-rise font-sans text-[12px] font-medium uppercase tracking-[2.5px] text-lx-gold">Dubai&rsquo;s finest addresses, by introduction</p>
+          <h1 className="lx-rise lx-rise-1 mt-3 font-display font-bold uppercase leading-none text-lx-text">
             <span className="block text-[clamp(44px,5.6vw,72px)] tracking-[0.02em]">Fano</span>
-            <span className="mt-2 block text-[clamp(18px,2.2vw,28px)] tracking-[0.32em] text-[#E8D5B0]">Properties</span>
+            <span className="mt-2 block text-[clamp(18px,2.2vw,28px)] tracking-[0.32em] text-lx-gold">Properties</span>
           </h1>
           <p className="lx-rise lx-rise-1 mt-4 font-display text-[clamp(18px,1.9vw,24px)] font-normal italic leading-snug text-lx-pale">
             Real Estate. Real Relationships.
           </p>
-          <p className="lx-rise lx-rise-2 mt-4 max-w-[420px] text-[16px] leading-[1.6] text-[#E5E5E5]">
+          <p className="lx-rise lx-rise-2 mt-4 max-w-[420px] text-[16px] leading-[1.6] text-lx-text/80">
             A Business Bay advisory for the homes and office floors that are sold before they are listed.
           </p>
           <div className="lx-rise lx-rise-3 mt-7 flex flex-wrap items-center gap-x-5 gap-y-4">
@@ -154,7 +154,7 @@ export function LuxHero() {
             onClick={togglePaused}
             aria-pressed={paused}
             aria-label="Pause background video"
-            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-lx-gold/40 bg-lx-page/40 text-lx-text/80 backdrop-blur-sm transition-colors hover:border-lx-gold hover:text-lx-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lx-gold"
+            className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-full border border-lx-gold/40 bg-lx-raised/70 text-lx-text/80 backdrop-blur-sm transition-colors hover:border-lx-gold hover:text-lx-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lx-gold"
           >
             {paused ? <Play className="h-4 w-4" aria-hidden="true" /> : <Pause className="h-4 w-4" aria-hidden="true" />}
           </button>

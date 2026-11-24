@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { FanoLogo, LOGO_COLORS } from "@/components/shared/fano-logo";
+import { FanoLogo } from "@/components/shared/fano-logo";
 import { SOCIAL_LINKS } from "@/lib/social-links";
 
 const pages = [
@@ -15,7 +15,7 @@ const pages = [
   { label: "faq", href: "/faq" },
 ];
 
-// Charcoal footer: wordmark, address, two numbers, lowercase links, socials as text
+// Warm Bone footer: wordmark, address, two numbers, lowercase links, socials as text
 export function LuxFooter({ showAgents = true }: { showAgents?: boolean }) {
   const links = showAgents ? pages : pages.filter((l) => l.href !== "/agents");
 
@@ -24,7 +24,7 @@ export function LuxFooter({ showAgents = true }: { showAgents?: boolean }) {
       <div className="container-site grid gap-12 py-16 lg:grid-cols-12 lg:gap-8 lg:py-24">
         <div className="lg:col-span-4">
           <Link href="/" className="inline-flex" aria-label="Fano Properties home">
-            <FanoLogo color={LOGO_COLORS.champagne} className="h-11" />
+            <FanoLogo color="var(--lx-logo-footer)" className="h-11" />
           </Link>
           <p className="mt-6 font-display text-[20px] italic leading-snug text-lx-pale">Real Estate. Real Relationships.</p>
         </div>
