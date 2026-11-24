@@ -76,7 +76,7 @@ export function ListForm() {
     });
 
     if (result.success) {
-      trackLead("listing_submission", { property_type: data.propertyType });
+      trackLead("listing_submission", { property_type: data.propertyType }, { email: data.email, phone: data.phone });
       toast.success("Submission received. We'll be in touch within 24 hours.");
       reset();
     } else {

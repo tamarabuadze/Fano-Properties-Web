@@ -50,7 +50,7 @@ export function PropertyInquiryForm({ propertyId, propertyTitle }: PropertyInqui
   async function onSubmit(data: FormData) {
     const result = await submitInquiry({ ...data, propertyId, type: "property", page: window.location.pathname, attribution: getAttribution() });
     if (result.success) {
-      trackLead("property_inquiry", { property_title: propertyTitle });
+      trackLead("property_inquiry", { property_title: propertyTitle }, { email: data.email, phone: data.phone });
       toast.success("Inquiry sent! We'll be in touch shortly.");
       reset();
     } else {

@@ -70,7 +70,7 @@ export function OfficeEnquiryForm({ lease = false, scope = "office" }: { lease?:
       attribution: getAttribution(),
     });
     if (result.success) {
-      trackLead("office_enquiry", { listing_type: lease ? "lease" : "sale", scope });
+      trackLead("office_enquiry", { listing_type: lease ? "lease" : "sale", scope }, { email: data.email, phone: data.phone });
       toast.success("Thank you. An advisor will call you shortly.");
       reset();
     } else {

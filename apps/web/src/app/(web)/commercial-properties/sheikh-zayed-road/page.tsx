@@ -30,6 +30,7 @@ export default function SheikhZayedRoadPage() {
       filters={{ category: "commercial", listingType: "sale", search: "Sheikh Zayed" }}
       listingsHeading="Offices for sale on Sheikh Zayed Road"
       browseHref="/properties?category=commercial&listingType=sale&search=Sheikh%20Zayed"
+      market={{ area: "sheikh-zayed-road" }}
       related={related(path)}
       breadcrumbs={[
         { name: "Home", path: "/" },

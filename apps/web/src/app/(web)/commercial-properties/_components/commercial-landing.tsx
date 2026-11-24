@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import { Phone } from "lucide-react";
 import { PropertiesGrid } from "../../properties/_components/properties-grid";
 import { OfficeEnquiryForm } from "../../properties/_components/office-enquiry-form";
+import { MarketSnapshot } from "@/components/market/market-snapshot";
+import type { MarketAreaKey } from "@/lib/market-snapshot-schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
 
@@ -26,10 +28,38 @@ export interface CommercialLandingProps {
   sections?: LandingSection[];
   related: { href: string; label: string }[];
   breadcrumbs: { name: string; path: string }[];
+  /**
+   * DLD market figures for this area (entered in Admin → Market data). When figures exist they
+   * take the place of the section headed `replaces`; until then that section shows as before.
+   */
+  market?: { area: MarketAreaKey; replaces?: string };
+}
+
+function SectionBlock({ s }: { s: LandingSection }) {
+  return (
+    <section className="mb-12 last:mb-0">
+      <h2 className="font-display text-[clamp(24px,2.6vw,32px)] font-normal leading-tight text-lx-text">{s.heading}</h2>
+      {s.paragraphs?.map((p) => (
+        <p key={p} className="mt-4 text-[15px] leading-[1.8] text-lx-text/70">{p}</p>
+      ))}
+      {s.items && (
+        <dl className="mt-6 space-y-5">
+          {s.items.map((it) => (
+            <div key={it.title}>
+              <dt className="font-label text-[11px] font-semibold uppercase tracking-[0.18em] text-lx-gold">{it.title}</dt>
+              <dd className="mt-1 text-[15px] leading-[1.8] text-lx-text/70">{it.text}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </section>
+  );
 }
 
 export function CommercialLanding(props: CommercialLandingProps) {
-  const { eyebrow, lead, accent, intro, filters, listingsHeading, browseHref, sections = [], related, breadcrumbs } = props;
+  const { eyebrow, lead, accent, intro, filters, listingsHeading, browseHref, sections = [], related, breadcrumbs, market } = props;
+  const replaced = market?.replaces ? sections.find((s) => s.heading === market.replaces) : undefined;
+  const otherSections = replaced ? sections.filter((s) => s !== replaced) : sections;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -92,26 +122,31 @@ export function CommercialLanding(props: CommercialLandingProps) {
         </Suspense>
       </div>
 
-      {sections.length > 0 && (
+      {market && (
+        <MarketSnapshot
+          area={market.area}
+          wrap={(box) => (
+            <div className="border-t border-lx-line">
+              <div className="container-site py-14 lg:py-20">{box}</div>
+            </div>
+          )}
+          fallback={
+            replaced && (
+              <div className="border-t border-lx-line">
+                <div className="container-site max-w-3xl py-14 lg:py-20">
+                  <SectionBlock s={replaced} />
+                </div>
+              </div>
+            )
+          }
+        />
+      )}
+
+      {otherSections.length > 0 && (
         <div className="border-t border-lx-line">
           <div className="container-site max-w-3xl py-14 lg:py-20">
-            {sections.map((s) => (
-              <section key={s.heading} className="mb-12 last:mb-0">
-                <h2 className="font-display text-[clamp(24px,2.6vw,32px)] font-normal leading-tight text-lx-text">{s.heading}</h2>
-                {s.paragraphs?.map((p) => (
-                  <p key={p} className="mt-4 text-[15px] leading-[1.8] text-lx-text/70">{p}</p>
-                ))}
-                {s.items && (
-                  <dl className="mt-6 space-y-5">
-                    {s.items.map((it) => (
-                      <div key={it.title}>
-                        <dt className="font-label text-[11px] font-semibold uppercase tracking-[0.18em] text-lx-gold">{it.title}</dt>
-                        <dd className="mt-1 text-[15px] leading-[1.8] text-lx-text/70">{it.text}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                )}
-              </section>
+            {otherSections.map((s) => (
+              <SectionBlock key={s.heading} s={s} />
             ))}
           </div>
         </div>

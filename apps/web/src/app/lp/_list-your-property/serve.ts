@@ -1,0 +1,16 @@
+import { NextResponse } from "next/server";
+import { landingPageGoogleTag } from "@/lib/landing-page-tag";
+import { LIST_YOUR_PROPERTY_PAGES } from "./pages";
+
+/** Serves the "List your property" landing page in one language, with the website's Google tag. */
+export function serveListYourProperty(lang: keyof typeof LIST_YOUR_PROPERTY_PAGES) {
+  const html = LIST_YOUR_PROPERTY_PAGES[lang].replace("<!--GOOGLE_TAG-->", landingPageGoogleTag());
+  return new NextResponse(html, {
+    headers: {
+      "Content-Type": "text/html; charset=utf-8",
+      "Cache-Control": "public, max-age=300",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+    },
+  });
+}

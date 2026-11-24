@@ -11,6 +11,7 @@ import {
   Users,
   BookOpen,
   MessageSquare,
+  BarChart3,
   Settings,
   Home,
   LogOut,
@@ -25,6 +26,7 @@ const navItems = [
   { href: "/admin/agents", icon: Users, label: "Agents" },
   { href: "/admin/blog", icon: BookOpen, label: "Blog" },
   { href: "/admin/inquiries", icon: MessageSquare, label: "Inquiries" },
+  { href: "/admin/market-data", icon: BarChart3, label: "Market data" },
   { href: "/admin/settings", icon: Settings, label: "Settings" },
 ];
 

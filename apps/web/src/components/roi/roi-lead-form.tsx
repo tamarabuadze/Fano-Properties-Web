@@ -72,7 +72,7 @@ export function RoiLeadForm({ inputs, result, propertyId, propertyTitle }: RoiLe
       attribution: getAttribution(),
     });
     if (res.success) {
-      trackLead("roi_lead");
+      trackLead("roi_lead", {}, { email: data.email, phone: data.phone });
       toast.success("Thanks! An advisor will contact you about these numbers shortly.");
       reset();
     } else {

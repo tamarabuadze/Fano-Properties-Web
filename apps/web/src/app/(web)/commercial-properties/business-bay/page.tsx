@@ -30,6 +30,7 @@ export default function BusinessBayPage() {
       filters={{ category: "commercial", listingType: "sale", search: "Business Bay" }}
       listingsHeading="Offices for sale in Business Bay"
       browseHref="/properties?category=commercial&listingType=sale&search=Business%20Bay"
+      market={{ area: "business-bay" }}
       related={related(path)}
       breadcrumbs={[
         { name: "Home", path: "/" },

@@ -45,6 +45,7 @@ export default function CommercialPropertiesPage() {
           ],
         },
       ]}
+      market={{ area: "dubai" }}
       related={related(path)}
       breadcrumbs={[
         { name: "Home", path: "/" },

@@ -48,6 +48,7 @@ export default function OfficesForSalePage() {
           ],
         },
       ]}
+      market={{ area: "dubai", replaces: "Buying an office in Dubai: the essentials" }}
       related={related(path)}
       breadcrumbs={[
         { name: "Home", path: "/" },

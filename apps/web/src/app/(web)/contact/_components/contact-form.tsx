@@ -49,7 +49,7 @@ export function ContactForm() {
       attribution: getAttribution(),
     });
     if (result.success) {
-      trackLead("contact");
+      trackLead("contact", {}, { email: data.email, phone: data.phone });
       toast.success("Message sent! We'll be in touch shortly.");
       reset();
     } else {
