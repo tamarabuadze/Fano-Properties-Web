@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { AgentCard } from "@fano/ui";
 import { getAgents } from "@/lib/queries/agents";
 import { AnimateStagger } from "@/components/shared/animate-stagger";
+import { PageBanner } from "@/components/luxury/page-banner";
 
 export async function generateMetadata(): Promise<Metadata> {
   const hasAgents = (await getAgents(1).catch(() => [])).length > 0;
@@ -26,17 +27,13 @@ export const dynamic = "force-dynamic";
 export default function AgentsPage() {
   return (
     <div className="min-h-screen pt-20">
-      <div className="page-band py-14 lg:py-20">
-        <div className="container-site">
-          <p className="lx-eyebrow mb-5">The team</p>
-          <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text text-balance">
-            Your real estate insiders
-          </h1>
-          <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-lx-text/70">
-            Discover the dedicated experts behind your next successful property investment.
-          </p>
-        </div>
-      </div>
+      <PageBanner
+        image="/media/f8f423b8-936d-4970-9165-558815f2a243.jpg"
+        eyebrow="The team"
+        title="Your real estate"
+        accent="insiders."
+        subtitle="Discover the dedicated experts behind your next successful property investment."
+      />
 
       <div className="container-site section-y">
         <Suspense fallback={<AgentsSkeleton />}>
