@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { buildPageMeta } from "@/lib/seo";
 import { RoiCalculator } from "@/components/roi/roi-calculator";
+import { PageBanner } from "@/components/luxury/page-banner";
 
 const title = "Dubai Property ROI Calculator | Estimate Rental Yield & Returns";
 const description =
@@ -35,18 +36,14 @@ const notes = [
 export default function RoiCalculatorPage() {
   return (
     <div className="min-h-screen pt-20">
-      <div className="page-band py-14 lg:py-20">
-        <div className="container-site">
-          <p className="lx-eyebrow mb-5">Investor tools</p>
-          <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
-            ROI calculator
-          </h1>
-          <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-lx-text/70">
-            See what a Dubai property could earn you: rental yield, monthly cash flow and long-term return, with DLD
-            fees, mortgage costs and service charges built in.
-          </p>
-        </div>
-      </div>
+      <PageBanner
+        image="/hero-dubai.webp"
+        position="50% 45%"
+        eyebrow="Investor tools"
+        title="ROI"
+        accent="calculator."
+        subtitle="See what a Dubai property could earn you: rental yield, monthly cash flow and long-term return, with DLD fees, mortgage costs and service charges built in."
+      />
 
       <div className="container-site py-12 lg:py-16">
         <RoiCalculator variant="full" />
