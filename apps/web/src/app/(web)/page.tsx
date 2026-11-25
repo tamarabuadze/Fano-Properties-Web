@@ -3,6 +3,7 @@ import { buildPageMeta } from "@/lib/seo";
 import { getFeaturedProperties } from "@/lib/queries/properties";
 import { getAgents } from "@/lib/queries/agents";
 import { getLatestArticles } from "@/lib/queries/blog";
+import { getDubaiPropertyNews } from "@/lib/dubai-news";
 import { SOCIAL_LINKS } from "@/lib/social-links";
 import { LuxHero } from "@/components/luxury/lux-hero";
 import { LuxStatement } from "@/components/luxury/lux-statement";
@@ -12,6 +13,7 @@ import { LuxIntroduction } from "@/components/luxury/lux-introduction";
 import { LuxTeam } from "@/components/luxury/lux-team";
 import { LuxPeople } from "@/components/luxury/lux-people";
 import { LuxJournal } from "@/components/luxury/lux-journal";
+import { LuxNews } from "@/components/luxury/lux-news";
 import { LuxClosing } from "@/components/luxury/lux-closing";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
@@ -67,10 +69,11 @@ const jsonLd = {
 };
 
 export default async function HomePage() {
-  const [properties, agents, articles] = await Promise.all([
+  const [properties, agents, articles, news] = await Promise.all([
     getFeaturedProperties(3).catch(() => []),
     getAgents().catch(() => []),
     getLatestArticles(2).catch(() => []),
+    getDubaiPropertyNews(6).catch(() => []),
   ]);
 
   const jsonLdScript = (
@@ -91,6 +94,7 @@ export default async function HomePage() {
       <LuxTeam advisor={(agents as never[])[0] as never} />
       <LuxPeople people={agents as never[]} />
       <LuxJournal articles={articles as never} />
+      <LuxNews items={news} />
       <LuxClosing />
     </>
   );
