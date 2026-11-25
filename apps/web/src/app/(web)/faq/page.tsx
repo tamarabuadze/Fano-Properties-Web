@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { buildPageMeta } from "@/lib/seo";
 import { FaqAccordion } from "./_components/faq-accordion";
+import { PageBanner } from "@/components/luxury/page-banner";
 
 const title = "Dubai Real Estate FAQs | Buying Property in Dubai";
 const description = "Answers about buying property in Dubai: freehold ownership for foreigners, DLD fees, off-plan payment plans, mortgages and the Golden Visa.";
@@ -64,17 +65,13 @@ export default function FaqPage() {
           }),
         }}
       />
-      <div className="page-band py-14 lg:py-20">
-        <div className="container-site">
-          <p className="lx-eyebrow mb-5">Help centre</p>
-          <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text text-balance">
-            Frequently asked questions
-          </h1>
-          <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-lx-text/70">
-            Everything you need to know about working with Fano Properties.
-          </p>
-        </div>
-      </div>
+      <PageBanner
+        image="/media/6c5e3b25-622e-4c63-b386-9fc1a071ebf6.jpg"
+        eyebrow="Help centre"
+        title="Frequently asked"
+        accent="questions."
+        subtitle="Everything you need to know about working with Fano Properties."
+      />
 
       <div className="container-site max-w-3xl py-14 lg:py-20">
         <FaqAccordion faqs={faqs} />
