@@ -10,6 +10,7 @@ import { CONSENT_COUNTRIES } from "@/lib/analytics";
 import { googleTagIds } from "@/lib/google-tag-html";
 import { defaultTheme, themeScript } from "@/lib/site-theme";
 import { WhatsAppFloat } from "@/components/shared/whatsapp-float";
+import { whatsAppGateJs } from "@/lib/whatsapp-gate";
 
 export const dynamic = "force-dynamic";
 
@@ -221,6 +222,7 @@ export default async function LpEnPage() {
       <LuxFooter showAgents={showAgents} />
       <LuxEnquire />
       <WhatsAppFloat />
+      <script dangerouslySetInnerHTML={{ __html: whatsAppGateJs() }} />
       <GoogleTag {...googleTagIds()} askConsent={askConsent} />
     </div>
   );
