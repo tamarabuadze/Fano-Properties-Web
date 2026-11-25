@@ -1,21 +1,20 @@
 import type { Attribution } from "@/lib/attribution";
 
 // Website enquiries are copied into the Fano team app's Lead inbox as "Website" leads.
-// The apps accept requests from the fanoproperties.com origin and need a 7-15 digit phone.
+// The app accepts requests from the fanoproperties.com origin and needs a 7-15 digit phone.
 //
-// Every lead goes to the new team app, and a copy still goes to the team app in use today
-// (fano-ai.fanoproperties.workers.dev, version 28) while the team moves over, so nothing is missed
-// if one of them turns a lead away. Once everyone works in the new app, set FANO_APP_LEAD_URLS on
-// Railway to the new app's address alone.
-//   FANO_APP_LEAD_URLS  comma-separated list; replaces both addresses below
-//   FANO_APP_LEAD_URL   older single setting; still honoured, in place of the current app's address
-const NEW_APP_LEAD_URL = "https://fano-ai.marketing-a98.workers.dev/api/lead";
-const CURRENT_APP_LEAD_URL = "https://fano-ai.fanoproperties.workers.dev/api/lead";
+// The team app answers at two addresses that share one database, so each lead goes to the first
+// address only; the second is a backup, used only when the first does not take the lead. Sending
+// to both would put every lead in the inbox twice.
+//   FANO_APP_LEAD_URLS  comma-separated list, tried in order; replaces the addresses below
+//   FANO_APP_LEAD_URL   older single setting; still honoured, tried first
+const APP_LEAD_URL = "https://app.fanoproperties.workers.dev/api/lead";
+const BACKUP_APP_LEAD_URL = "https://fano-ai.fanoproperties.workers.dev/api/lead";
 
 function leadUrls(): string[] {
   const list = process.env.FANO_APP_LEAD_URLS?.trim()
     ? process.env.FANO_APP_LEAD_URLS.split(",")
-    : [NEW_APP_LEAD_URL, process.env.FANO_APP_LEAD_URL?.trim() || CURRENT_APP_LEAD_URL];
+    : [process.env.FANO_APP_LEAD_URL?.trim() ?? "", APP_LEAD_URL, BACKUP_APP_LEAD_URL];
   return [...new Set(list.map((u) => u.trim()).filter((u) => /^https?:\/\//.test(u)))];
 }
 
@@ -34,12 +33,14 @@ export interface FanoAppLead {
 }
 
 /**
- * Sends the lead to every team app address at once, retrying each once after a short wait.
- * True when at least one app took it.
+ * Sends the lead to the team app, retrying once after a short wait, and moves on to the backup
+ * address only if that fails. True when the app took it.
  */
 export async function sendLeadToFanoApp(lead: FanoAppLead): Promise<boolean> {
-  const results = await Promise.all(leadUrls().map((url) => sendWithRetry(url, lead)));
-  return results.some(Boolean);
+  for (const url of leadUrls()) {
+    if (await sendWithRetry(url, lead)) return true;
+  }
+  return false;
 }
 
 async function sendWithRetry(url: string, lead: FanoAppLead): Promise<boolean> {
