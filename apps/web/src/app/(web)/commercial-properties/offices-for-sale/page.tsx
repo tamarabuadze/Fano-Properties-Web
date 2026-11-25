@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 export default function OfficesForSalePage() {
   return (
     <CommercialLanding
+      image="/media/14203454-02dd-4a01-bab0-65f8605fbeed.jpg"
       path={path}
       eyebrow="Offices · For sale"
       lead="Offices for sale"
