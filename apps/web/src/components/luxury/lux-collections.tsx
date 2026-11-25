@@ -21,9 +21,9 @@ const collections = [
     title: "Villas",
     detail: "Family homes and beachfront estates with room to make them yours.",
     href: "/properties?propertyType=villa",
-    image: "/collection-villas.webp",
-    // wide aerial of the community: keep the pool and gardens at the heart of the tall crop
-    position: "38% 45%",
+    // The villa and pool from the Beachfront Villa, Palm Jebel Ali listing (already in the site's media)
+    image: "/media/4e0c0437-8b9e-42e6-bf72-142276297a5e.jpg",
+    position: "50% 50%",
   },
 ];
 
