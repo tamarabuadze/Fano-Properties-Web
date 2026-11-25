@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { buildPageMeta } from "@/lib/seo";
 import { ListForm } from "./_components/list-form";
+import { PageBanner } from "@/components/luxury/page-banner";
 
 const title = "List Your Property";
 const description =
@@ -35,16 +36,20 @@ const whyUs = [
 export default function ListWithUsPage() {
   return (
     <div className="min-h-screen pt-20">
-      <div className="container-site py-14 lg:py-24">
+      <PageBanner
+        image="/property-conversation.webp"
+        position="50% 60%"
+        size="md"
+        eyebrow="List with Fano"
+        title="Your property, in front of the"
+        accent="right buyers."
+      />
+      <div className="container-site py-14 lg:py-20">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-20">
 
           {/* Left — copy */}
           <div className="lg:col-span-5">
-            <p className="lx-eyebrow mb-5">List with Fano</p>
-            <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.0] tracking-[-0.01em] text-lx-text">
-              Your property,<br />in front of the<br />right buyers.
-            </h1>
-            <p className="mt-6 max-w-md text-[15px] leading-[1.85] text-lx-text/70">
+            <p className="max-w-md text-[15px] leading-[1.85] text-lx-text/70">
               We work by introduction. Our buyers are pre-qualified, discreet, and motivated — many acquisitions are agreed before a property is ever publicly listed. Tell us about your home or investment and we will be in touch within 24 hours.
             </p>
 
