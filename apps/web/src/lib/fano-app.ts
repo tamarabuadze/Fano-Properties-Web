@@ -3,18 +3,19 @@ import type { Attribution } from "@/lib/attribution";
 // Website enquiries are copied into the Fano team app's Lead inbox as "Website" leads.
 // The apps accept requests from the fanoproperties.com origin and need a 7-15 digit phone.
 //
-// Every lead goes to the new team app, and a copy still goes to the old one (version 15) while
-// the team moves over, so nothing is missed if one of them turns a lead away. Once everyone works
-// in the new app, set FANO_APP_LEAD_URLS on Railway to the new app's address alone.
+// Every lead goes to the new team app, and a copy still goes to the team app in use today
+// (fano-ai.fanoproperties.workers.dev, version 28) while the team moves over, so nothing is missed
+// if one of them turns a lead away. Once everyone works in the new app, set FANO_APP_LEAD_URLS on
+// Railway to the new app's address alone.
 //   FANO_APP_LEAD_URLS  comma-separated list; replaces both addresses below
-//   FANO_APP_LEAD_URL   older single setting; still honoured, in place of the old app's address
+//   FANO_APP_LEAD_URL   older single setting; still honoured, in place of the current app's address
 const NEW_APP_LEAD_URL = "https://fano-ai.marketing-a98.workers.dev/api/lead";
-const OLD_APP_LEAD_URL = "https://app.fanoproperties.workers.dev/api/lead";
+const CURRENT_APP_LEAD_URL = "https://fano-ai.fanoproperties.workers.dev/api/lead";
 
 function leadUrls(): string[] {
   const list = process.env.FANO_APP_LEAD_URLS?.trim()
     ? process.env.FANO_APP_LEAD_URLS.split(",")
-    : [NEW_APP_LEAD_URL, process.env.FANO_APP_LEAD_URL?.trim() || OLD_APP_LEAD_URL];
+    : [NEW_APP_LEAD_URL, process.env.FANO_APP_LEAD_URL?.trim() || CURRENT_APP_LEAD_URL];
   return [...new Set(list.map((u) => u.trim()).filter((u) => /^https?:\/\//.test(u)))];
 }
 
