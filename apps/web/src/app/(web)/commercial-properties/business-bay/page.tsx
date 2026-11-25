@@ -20,6 +20,8 @@ export const metadata: Metadata = {
 export default function BusinessBayPage() {
   return (
     <CommercialLanding
+      image="/media/3bdf6fd3-0c53-4aa2-9528-f179ef384e4b.jpg"
+      imagePosition="50% 55%"
       path={path}
       eyebrow="Business Bay"
       lead="Commercial property for sale"

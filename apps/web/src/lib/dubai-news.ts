@@ -1,8 +1,12 @@
-// Dubai property headlines for the homepage news feed, read from publishers' public RSS feeds.
+// Dubai property headlines for the homepage and blog news feed, read from publishers' public RSS feeds.
 // Refreshed automatically: the server keeps the list for an hour, then reads the feeds again on the
 // next visit. If a feed cannot be reached, the last good list is kept; with nothing at all the
 // section simply does not show. Only headlines, dates and links are shown; each opens the
 // publisher's own article.
+//
+// Editorial rule (Fano's own site, not a neutral news desk): headlines are real and never edited,
+// but only stories that sit well with Fano are picked: Dubai stories, nothing negative about the
+// market, nothing naming rival brokers, agencies or portals, and nothing promoting other markets.
 
 export interface NewsItem {
   title: string;
@@ -20,8 +24,23 @@ interface Source {
 
 const PROPERTY_WORDS =
   /\b(real estate|realty|propert(y|ies)|off-plan|villas?|apartments?|townhouses?|homes?|rents?|rental|mortgages?|landlords?|tenants?|Land Department|DLD|RERA|Emaar|Nakheel|Damac|Sobha|Aldar|Meraas|Binghatti|Ellington|Azizi|Danube)\b/i;
-// Dubai and the wider UAE only; the big Dubai developers count as Dubai stories
-const DUBAI_WORDS = /\b(dubai|uae|emirates?|emirati|abu dhabi|sharjah|ras al khaimah|ajman|Emaar|Nakheel|Damac|Sobha|Meraas|Binghatti|Ellington|Azizi|Danube)\b/i;
+// The headline itself must be about Dubai: the city, its big developers or its best-known districts
+const DUBAI_WORDS =
+  /\b(dubai|Emaar|Nakheel|Meraas|Sobha|Damac|Binghatti|Ellington|Azizi|Danube|Omniyat|Deyaar|Union Properties|Majid Al Futtaim|Palm Jumeirah|Palm Jebel Ali|Business Bay|Downtown|Jumeirah|Mall of the Emirates|Expo City)\b/i;
+// Stories that would work against a Dubai brokerage: market worries, disputes, discounting
+const NEGATIVE_WORDS =
+  /\b(corrections?|crash\w*|collaps\w*|plung\w*|plummet\w*|tumbl\w*|slump\w*|sink\w*|sank|fall|falls|falling|fell|drops?|dropped|dropping|declin\w*|dips?|dipped|lower|lowest|cheaper|below|discount\w*|black friday|bargains?|deals|loss|losses|losing|bubbles?|oversuppl\w*|glut|cool|cools|cooled|cooling|soften\w*|softer|softening|flat|flatten\w*|moderat\w*|slow\w*|stall\w*|warn\w*|risks?|risky|fears?|concerns?|worr\w*|crisis|challeng\w*|uncertain\w*|volatil\w*|default\w*|bankrupt\w*|insolven\w*|fraud\w*|scams?|arrest\w*|jail\w*|prison|court|lawsuits?|sued|sues|disputes?|fined|fines|penalt\w*|bans?|banned|crackdown|evict\w*|stuck|delay\w*|cancel\w*|halt\w*|freez\w*|frozen|exodus|flee\w*|fled|unsold|vacan\w*|struggl\w*|pressures?|squeez\w*|expensive|costl\w*|afford\w*|tax|taxes|wars?|attack\w*|missiles?|strikes?|conflict\w*|tensions?|sanction\w*|regional|panic\w*|doubts?|downturn|recession|inflation)\b/i;
+// Rival brokers, agencies, portals and investment platforms, and pieces built around them
+const COMPETITOR_WORDS =
+  /(Sotheby|Savills|Knight Frank|\bCBRE\b|\bJLL\b|Cavendish Maxwell|Better ?homes|Allsopp|Haus\s*(&|and)\s*Haus|f[a\u00e4]m Properties|Driven Properties|\bEspace\b|Metropolitan|Provident|Engel|Coldwell|Keller Williams|RE\/?MAX|Property ?Finder|Bayut|Dubizzle|Houza|\bStake\b|SmartCrowd|Prypco|Huspy|Maria Morris|Hamptons|Christie|\bbrokers?\b|\bbrokerages?\b|\bagents?\b|\bagenc(y|ies)\b|podcast|panel)/i;
+// Other property markets competing for the same buyers
+const OTHER_MARKETS =
+  /\b(Abu Dhabi|Sharjah|Ras Al Khaimah|RAK|Ajman|Umm Al Quwain|Fujairah|Al Ain|Saudi|Riyadh|Jeddah|NEOM|Qatar|Doha|Oman|Muscat|Bahrain|Kuwait|Cyprus|Greece|Turkey|Istanbul|Mar-a-Lago)\b/i;
+
+/** True when a headline is a Dubai property story that sits well with Fano (exported for tests) */
+export function suitsFano(title: string): boolean {
+  return DUBAI_WORDS.test(title) && !NEGATIVE_WORDS.test(title) && !COMPETITOR_WORDS.test(title) && !OTHER_MARKETS.test(title);
+}
 
 const SOURCES: Source[] = [
   {
@@ -31,7 +50,7 @@ const SOURCES: Source[] = [
       (url.includes("/real-estate/") ||
         categories.some((c) => /real estate|property/i.test(c)) ||
         PROPERTY_WORDS.test(title)) &&
-      DUBAI_WORDS.test(`${title} ${url.replace(/[-/]/g, " ")} ${categories.join(" ")}`),
+      suitsFano(title),
   },
 ];
 

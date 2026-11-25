@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 export default function CommercialPropertiesPage() {
   return (
     <CommercialLanding
+      image="/collection-offices.webp"
       path={path}
       eyebrow="Commercial property"
       lead="Commercial property"

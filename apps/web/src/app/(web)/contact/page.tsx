@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { buildPageMeta } from "@/lib/seo";
 import Image from "next/image";
 import { ContactForm } from "./_components/contact-form";
+import { PageBanner } from "@/components/luxury/page-banner";
 
 const title = "Contact Us";
 const description = "Get in touch with Fano Properties. We're ready to help you with your property needs.";
@@ -25,19 +26,19 @@ const details: { label: string; text: string; href?: string }[] = [
 export default function ContactPage() {
   return (
     <div className="min-h-screen pt-20">
-      <div className="container-site py-14 lg:py-24">
+      <PageBanner
+        image="/media/5e91c869-8a1b-412a-833e-f4652c8bd957.jpg"
+        size="md"
+        eyebrow="Get in touch"
+        title="Contact"
+        accent="us."
+        subtitle="Whether you're buying, selling, or just exploring your options, our team is here to help."
+      />
+      <div className="container-site py-14 lg:py-20">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-20">
-          {/* Introduction and details */}
+          {/* Contact details */}
           <div className="lg:col-span-5">
-            <p className="lx-eyebrow mb-5">Get in touch</p>
-            <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.0] tracking-[-0.01em] text-lx-text">
-              Contact us
-            </h1>
-            <p className="mt-6 max-w-md text-[15px] leading-[1.85] text-lx-text/70">
-              Whether you&apos;re buying, selling, or just exploring your options, our team is here to help.
-            </p>
-
-            <dl className="mt-12 divide-y divide-lx-line border-y border-lx-line">
+            <dl className="divide-y divide-lx-line border-y border-lx-line">
               {details.map(({ label, text, href }) => (
                 <div key={label} className="grid grid-cols-[88px_1fr] gap-4 py-4">
                   <dt className="font-label text-[10px] font-semibold uppercase tracking-[0.2em] text-lx-gold pt-1">{label}</dt>

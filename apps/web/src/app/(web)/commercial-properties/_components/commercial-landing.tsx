@@ -4,6 +4,7 @@ import { Phone } from "lucide-react";
 import { PropertiesGrid } from "../../properties/_components/properties-grid";
 import { OfficeEnquiryForm } from "../../properties/_components/office-enquiry-form";
 import { MarketSnapshot } from "@/components/market/market-snapshot";
+import { PageBanner } from "@/components/luxury/page-banner";
 import type { MarketAreaKey } from "@/lib/market-snapshot-schema";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://fanoproperties.com";
@@ -16,6 +17,10 @@ export interface LandingSection {
 
 export interface CommercialLandingProps {
   path: string;
+  /** Photograph behind the opening banner */
+  image: string;
+  /** CSS object-position for that photograph */
+  imagePosition?: string;
   eyebrow: string;
   lead: string;
   accent: string;
@@ -57,7 +62,7 @@ function SectionBlock({ s }: { s: LandingSection }) {
 }
 
 export function CommercialLanding(props: CommercialLandingProps) {
-  const { eyebrow, lead, accent, intro, filters, listingsHeading, browseHref, sections = [], related, breadcrumbs, market } = props;
+  const { image, imagePosition, eyebrow, lead, accent, intro, filters, listingsHeading, browseHref, sections = [], related, breadcrumbs, market } = props;
   const replaced = market?.replaces ? sections.find((s) => s.heading === market.replaces) : undefined;
   const otherSections = replaced ? sections.filter((s) => s !== replaced) : sections;
 
@@ -76,41 +81,41 @@ export function CommercialLanding(props: CommercialLandingProps) {
     <div className="min-h-screen bg-lx-page pt-20 lg:pt-24">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className="border-b border-lx-line bg-lx-page pb-14 pt-16 lg:pb-20 lg:pt-24">
-        <div className="container-site grid gap-10 lg:grid-cols-[1fr_380px] lg:items-start lg:gap-16">
-          <div>
-            <nav aria-label="Breadcrumb" className="mb-6 text-[12px] text-lx-muted">
-              {breadcrumbs.map((b, i) => (
-                <span key={b.path}>
-                  {i > 0 && <span className="mx-2">/</span>}
-                  {i < breadcrumbs.length - 1 ? (
-                    <Link href={b.path} className="hover:text-lx-gold">{b.name}</Link>
-                  ) : (
-                    <span aria-current="page">{b.name}</span>
-                  )}
-                </span>
-              ))}
-            </nav>
-            <p className="lx-eyebrow mb-6">{eyebrow}</p>
-            <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text text-balance">
-              {lead} <span className="italic text-lx-pale">{accent}</span>
-            </h1>
-            {intro.map((p) => (
-              <p key={p} className="mt-6 max-w-xl text-[15px] leading-[1.8] text-lx-text/70">{p}</p>
+      <PageBanner
+        image={image}
+        position={imagePosition}
+        eyebrow={eyebrow}
+        title={lead}
+        accent={accent}
+        subtitle={intro.map((p) => (
+          <p key={p} className="mt-4 first:mt-0">{p}</p>
+        ))}
+        before={
+          <nav aria-label="Breadcrumb" className="mb-6 text-[12px] text-[#F7F1E8]/60">
+            {breadcrumbs.map((b, i) => (
+              <span key={b.path}>
+                {i > 0 && <span className="mx-2">/</span>}
+                {i < breadcrumbs.length - 1 ? (
+                  <Link href={b.path} className="hover:text-[#E2A862]">{b.name}</Link>
+                ) : (
+                  <span aria-current="page">{b.name}</span>
+                )}
+              </span>
             ))}
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href="tel:+97145644635" className="btn-gold inline-flex items-center gap-2">
-                <Phone className="h-4 w-4" aria-hidden="true" />
-                Call +971 4 564 4635
-              </a>
-              <a href="https://wa.me/971525719164" target="_blank" rel="noopener noreferrer" className="btn-gold-outline inline-flex items-center gap-2">
-                WhatsApp +971 52 571 9164
-              </a>
-            </div>
-          </div>
-          <OfficeEnquiryForm lease={filters.listingType === "lease"} />
+          </nav>
+        }
+        aside={<OfficeEnquiryForm lease={filters.listingType === "lease"} />}
+      >
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a href="tel:+97145644635" className="btn-gold inline-flex items-center gap-2">
+            <Phone className="h-4 w-4" aria-hidden="true" />
+            Call +971 4 564 4635
+          </a>
+          <a href="https://wa.me/971525719164" target="_blank" rel="noopener noreferrer" className="btn-gold-outline inline-flex items-center gap-2">
+            WhatsApp +971 52 571 9164
+          </a>
         </div>
-      </div>
+      </PageBanner>
 
       <div className="container-site py-12 lg:py-16">
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">

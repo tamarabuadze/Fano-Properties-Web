@@ -4,6 +4,11 @@ import { Suspense } from "react";
 import { BlogGrid } from "./_components/blog-grid";
 import { BlogCategories } from "./_components/blog-categories";
 import { getBlogCategories } from "@/lib/queries/blog";
+import { getDubaiPropertyNews } from "@/lib/dubai-news";
+import { getDubaiMarket } from "@/lib/dubai-market";
+import { PageBanner } from "@/components/luxury/page-banner";
+import { LuxNews } from "@/components/luxury/lux-news";
+import { MarketTicker } from "@/components/market/market-board";
 
 const title = "Dubai Property Insights | Market Updates & Investment Guides";
 const description = "Market updates, buying guides and investment insights for Dubai real estate, from the Fano Properties team.";
@@ -23,21 +28,22 @@ interface BlogPageProps {
 
 export default async function BlogPage({ searchParams }: BlogPageProps) {
   const params = await searchParams;
-  const categories = await getBlogCategories().catch(() => []);
+  const [categories, news, market] = await Promise.all([
+    getBlogCategories().catch(() => []),
+    getDubaiPropertyNews(6).catch(() => []),
+    getDubaiMarket().catch(() => []),
+  ]);
 
   return (
     <div className="min-h-screen pt-20">
-      <div className="page-band py-14 lg:py-20">
-        <div className="container-site">
-          <p className="lx-eyebrow mb-5">Insights</p>
-          <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text text-balance">
-            Blog &amp; market updates
-          </h1>
-          <p className="mt-5 max-w-xl text-[15px] leading-[1.85] text-lx-text/70">
-            Expert insights, buying guides, and the latest real estate market news.
-          </p>
-        </div>
-      </div>
+      <PageBanner
+        image="/media/648d1136-ebf5-4b0b-90ed-d94da7d4f3e0.jpg"
+        eyebrow="Insights"
+        title="Blog &"
+        accent="market updates."
+        subtitle="Expert insights, buying guides, and the latest Dubai real estate market news."
+      />
+      <MarketTicker items={news} market={market} />
 
       <div className="container-site py-12 lg:py-16">
         <BlogCategories categories={categories} activeSlug={params.category} />
@@ -45,6 +51,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         <Suspense fallback={<BlogSkeleton />}>
           <BlogGrid filters={params} />
         </Suspense>
+      </div>
+
+      {/* Market charts and the latest headlines, the same feed as the homepage */}
+      <div className="border-t border-lx-line">
+        <LuxNews items={news} market={market} ticker={false} />
       </div>
     </div>
   );

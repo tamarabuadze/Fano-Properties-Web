@@ -330,6 +330,21 @@ html:has(> body > .lx-root), html:has(.lx-root) body { background: #E6DFD5; }
 .lx-scroll-line { animation: lx-scroll 2.4s ease-in-out infinite; transform-origin: top; }
 @keyframes lx-scroll { 0% { transform: scaleY(0); opacity: 0; } 30% { opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
 
+/* Market ticker tape: one slow loop of two identical rows, paused under the pointer, still for reduced motion */
+.lx-ticker-track { width: max-content; animation: lx-ticker var(--lx-ticker-duration, 60s) linear infinite; }
+.lx-ticker:hover .lx-ticker-track { animation-play-state: paused; }
+@keyframes lx-ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .lx-ticker { overflow-x: auto; }
+  .lx-ticker-track { animation: none; }
+}
+
+/* Photo banners: light type in both themes, so outline buttons and fields over the photo stay legible */
+.lx-root .lx-photo-type .btn-gold-outline,
+html[data-theme="navy"] .lx-root .lx-photo-type .btn-gold-outline { color: #F7F1E8; border-color: rgba(226, 168, 98, 0.7); }
+.lx-root .lx-photo-type .btn-gold-outline:hover,
+html[data-theme="navy"] .lx-root .lx-photo-type .btn-gold-outline:hover { color: #2B2520; }
+
 /* The page scrollbar takes its style from body, which sits outside .lx-root */
 .lx-root ::-webkit-scrollbar-thumb, body:has(> .lx-root)::-webkit-scrollbar-thumb { background: #8C6A47; }
 .lx-root ::-webkit-scrollbar-thumb:hover, body:has(> .lx-root)::-webkit-scrollbar-thumb:hover { background: #E2A862; }

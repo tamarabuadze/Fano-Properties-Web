@@ -4,6 +4,7 @@ import { getFeaturedProperties } from "@/lib/queries/properties";
 import { getAgents } from "@/lib/queries/agents";
 import { getLatestArticles } from "@/lib/queries/blog";
 import { getDubaiPropertyNews } from "@/lib/dubai-news";
+import { getDubaiMarket } from "@/lib/dubai-market";
 import { SOCIAL_LINKS } from "@/lib/social-links";
 import { LuxHero } from "@/components/luxury/lux-hero";
 import { LuxStatement } from "@/components/luxury/lux-statement";
@@ -69,11 +70,12 @@ const jsonLd = {
 };
 
 export default async function HomePage() {
-  const [properties, agents, articles, news] = await Promise.all([
+  const [properties, agents, articles, news, market] = await Promise.all([
     getFeaturedProperties(3).catch(() => []),
     getAgents().catch(() => []),
     getLatestArticles(2).catch(() => []),
     getDubaiPropertyNews(6).catch(() => []),
+    getDubaiMarket().catch(() => []),
   ]);
 
   const jsonLdScript = (
@@ -94,7 +96,7 @@ export default async function HomePage() {
       <LuxTeam advisor={(agents as never[])[0] as never} />
       <LuxPeople people={agents as never[]} />
       <LuxJournal articles={articles as never} />
-      <LuxNews items={news} />
+      <LuxNews items={news} market={market} />
       <LuxClosing />
     </>
   );

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { buildPageMeta } from "@/lib/seo";
+import { PageBanner } from "@/components/luxury/page-banner";
 
 const title = "Privacy Policy";
 const description = "Fano Properties privacy policy — how we collect, use, and protect your data.";
@@ -14,15 +15,14 @@ export const metadata: Metadata = {
 export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen pt-20">
-      <div className="page-band py-14 lg:py-20">
-        <div className="container-site">
-          <p className="lx-eyebrow mb-5">Legal</p>
-          <h1 className="font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.02] tracking-[-0.01em] text-lx-text">
-            Privacy policy
-          </h1>
-          <p className="mt-5 text-[13px] tracking-[0.04em] text-lx-text/55">Last updated: November 4, 2026</p>
-        </div>
-      </div>
+      <PageBanner
+        image="/media/b02b1a16-7062-4c6f-88c1-9b0af5e66efb.jpg"
+        size="md"
+        eyebrow="Legal"
+        title="Privacy"
+        accent="policy."
+        subtitle={<p className="text-[13px] tracking-[0.04em]">Last updated: November 4, 2026</p>}
+      />
 
       <div className="container-site max-w-3xl py-14 lg:py-20">
         <div className="prose prose-invert max-w-none prose-headings:font-display prose-headings:font-normal prose-headings:tracking-[-0.01em] prose-headings:text-lx-text prose-h2:text-[28px] prose-h2:mt-12 prose-h2:mb-4 prose-p:text-[15px] prose-p:leading-[1.85] prose-p:text-lx-text/80 prose-strong:text-lx-text prose-a:text-lx-gold">

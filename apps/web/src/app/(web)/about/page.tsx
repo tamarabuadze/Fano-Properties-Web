@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SectionHeader } from "@/components/shared/section-header";
 import { SOCIAL_LINKS } from "@/lib/social-links";
+import { PageBanner } from "@/components/luxury/page-banner";
 
 const title = "About Us | Dubai Real Estate Agency | RERA 49852";
 const description = "Fano Properties is a RERA-registered (No. 49852) real estate agency in Business Bay, Dubai, for commercial and residential property to buy, sell and lease.";
@@ -33,15 +34,14 @@ const credentials = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen pt-20">
-      {/* Opening: a quiet headline band, then the photograph */}
-      <section className="page-band py-14 lg:py-20">
-        <div className="container-site">
-          <p className="lx-eyebrow mb-5">Our story</p>
-          <h1 className="max-w-3xl font-display text-[clamp(36px,4.6vw,56px)] font-normal leading-[1.0] tracking-[-0.01em] text-lx-text text-balance">
-            Built on trust.<br /><span className="italic">Driven by results.</span>
-          </h1>
-        </div>
-      </section>
+      {/* Opening: the banner over a sunset across the Palm, then the photograph */}
+      <PageBanner
+        image="/media/ceec20ca-6c9d-4ca5-b57f-01755c46bc78.jpg"
+        position="50% 60%"
+        eyebrow="Our story"
+        title="Built on trust."
+        accent="Driven by results."
+      />
 
       <section className="container-site pt-10 lg:pt-14">
         <div className="relative aspect-[16/9] overflow-hidden rounded-[4px] bg-lx-raised lg:aspect-[21/9]">
