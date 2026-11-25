@@ -20,6 +20,8 @@ export const metadata: Metadata = {
 export default function SheikhZayedRoadPage() {
   return (
     <CommercialLanding
+      image="/hero-dubai.jpg"
+      imagePosition="50% 50%"
       path={path}
       eyebrow="Sheikh Zayed Road"
       lead="Offices for sale"
