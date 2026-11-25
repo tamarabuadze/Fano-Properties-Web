@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import { landingPageGoogleTag } from "@/lib/landing-page-tag";
+import { whatsAppGateTag } from "@/lib/whatsapp-gate";
 import { LIST_YOUR_PROPERTY_PAGES } from "./pages";
 
 /** Serves the "List your property" landing page in one language, with the website's Google tag. */
 export function serveListYourProperty(lang: keyof typeof LIST_YOUR_PROPERTY_PAGES) {
-  const html = LIST_YOUR_PROPERTY_PAGES[lang].replace("<!--GOOGLE_TAG-->", landingPageGoogleTag());
+  const html = LIST_YOUR_PROPERTY_PAGES[lang]
+    .replace("<!--GOOGLE_TAG-->", landingPageGoogleTag())
+    .replace("</body>", `${whatsAppGateTag()}</body>`);
   return new NextResponse(html, {
     headers: {
       "Content-Type": "text/html; charset=utf-8",
