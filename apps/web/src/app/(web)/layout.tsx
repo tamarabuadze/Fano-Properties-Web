@@ -8,6 +8,7 @@ import { CONSENT_COUNTRIES } from "@/lib/analytics";
 import { googleTagIds } from "@/lib/google-tag-html";
 import { defaultTheme, themeScript } from "@/lib/site-theme";
 import { WhatsAppFloat } from "@/components/shared/whatsapp-float";
+import { whatsAppGateJs } from "@/lib/whatsapp-gate";
 
 
 export default async function WebLayout({ children }: { children: React.ReactNode }) {
@@ -26,6 +27,8 @@ export default async function WebLayout({ children }: { children: React.ReactNod
       <LuxFooter showAgents={showAgents} />
       <LuxEnquire />
       <WhatsAppFloat />
+      {/* Asks for name and mobile before any WhatsApp link opens, so taps become leads */}
+      <script dangerouslySetInnerHTML={{ __html: whatsAppGateJs() }} />
       {/* Tag IDs are read when the page is served, so they can be set on Railway without a rebuild */}
       <GoogleTag {...googleTagIds()} askConsent={askConsent} />
     </div>
