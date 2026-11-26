@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { FanoLogo } from "@/components/shared/fano-logo";
 import { SOCIAL_LINKS } from "@/lib/social-links";
+import { copyrightLine } from "@/lib/copyright";
 
 const pages = [
   { label: "properties", href: "/properties" },
@@ -55,7 +56,7 @@ export function LuxFooter({ showAgents = true }: { showAgents?: boolean }) {
       </div>
 
       <div className="container-site flex flex-col gap-2 border-t border-lx-line py-6 font-label text-[10px] uppercase tracking-[0.18em] text-lx-text/55 sm:flex-row sm:items-center sm:justify-between">
-        <p>© {new Date().getFullYear()} Fano Properties</p>
+        <p className="normal-case tracking-[0.06em]">{copyrightLine()}</p>
         <p>RERA 49852</p>
       </div>
     </footer>
