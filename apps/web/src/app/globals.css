@@ -524,9 +524,10 @@ html[data-theme="navy"] .lx-root .text-\[\#B3413A\] { color: #F0A08F; }
 .lx-map-link::after { content: ""; width: 32px; height: 1px; background: #E2A862; transition: width .45s; }
 .lx-map-link:hover { color: #E2A862; }
 .lx-map-link:hover::after { width: 56px; }
-.lx-map-frame .maplibregl-ctrl-attrib { background: rgba(18, 14, 11, .7); color: #A39886; }
-.lx-map-frame .maplibregl-ctrl-attrib a { color: #C99A5B; }
-.lx-map-frame .maplibregl-ctrl-attrib-button { filter: invert(1) sepia(.4); }
+/* MapLibre's own stylesheet loads after this one, so these carry an extra class to win */
+.lx-map-section .lx-map-frame .maplibregl-ctrl-attrib { background: rgba(18, 14, 11, .72); color: #A39886; }
+.lx-map-section .lx-map-frame .maplibregl-ctrl-attrib a { color: #C99A5B; }
+.lx-map-section .lx-map-frame .maplibregl-ctrl-attrib-button { filter: invert(1) sepia(.4); background-color: transparent; }
 /* The listing pins: a gold light with a soft pulse; the name shows on hover and for the active one */
 .lx-pin { position: relative; width: 16px; height: 16px; padding: 0; border: 0; background: none; cursor: pointer; }
 .lx-pin-dot { position: absolute; inset: 3px; border-radius: 50%; background: #F7D597; box-shadow: 0 0 0 2px rgba(18, 14, 11, .7), 0 0 14px 3px rgba(226, 168, 98, .85); }
