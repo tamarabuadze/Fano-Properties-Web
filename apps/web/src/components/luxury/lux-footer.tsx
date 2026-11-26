@@ -11,6 +11,7 @@ const pages = [
   { label: "insights", href: "/blog" },
   { label: "about", href: "/about" },
   { label: "contact", href: "/contact" },
+  { label: "list your property", href: "/list-with-us" },
   { label: "roi calculator", href: "/roi-calculator" },
   { label: "privacy", href: "/privacy-policy" },
   { label: "faq", href: "/faq" },
