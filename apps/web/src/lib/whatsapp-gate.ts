@@ -2,21 +2,22 @@
 // landing pages, a small box first asks for their name and mobile:
 //   Continue to WhatsApp  the details go to /api/wa-lead (saved with the website's enquiries and
 //                         copied to the team app's Lead inbox), then WhatsApp opens as normal
-//   Skip                  WhatsApp opens straight away, so nobody is blocked from chatting
 //   ✕ / Esc / outside     closes the box and stays on the page
+// There is no way past the box without a name and a valid mobile: no Skip button, and
+// Ctrl/Cmd/Shift-clicks and middle-clicks on a WhatsApp link open the box too.
 // After someone has left their details once, later taps in that browser session go straight to
 // WhatsApp. The box is in Arabic, right to left, on Arabic pages.
 //
 // The tap itself still reaches the pages' own click handlers, so whatsapp_click keeps counting as a
-// Google Ads conversion exactly as before. A sent lead is also reported as whatsapp_lead, a skip as
-// whatsapp_gate_skip. Plain ES5 so it runs the same in the React site and the static /lp pages.
+// Google Ads conversion exactly as before. A sent lead is also reported as whatsapp_lead.
+// Plain ES5 so it runs the same in the React site and the static /lp pages.
 
 const GATE_JS = String.raw`(function(){
 if(window.__fanoWaGate)return;window.__fanoWaGate=1;
 var DONE="fano-wa-lead",WA=/^https:\/\/(wa\.me|api\.whatsapp\.com|(www\.)?whatsapp\.com)\//i;
 var T={
- en:{t:"Before we open WhatsApp",s:"Leave your name and mobile so an advisor can follow up, even if the chat drops.",n:"Your name",p:"Mobile number",go:"Continue to WhatsApp",skip:"Skip",en:"Please enter your name.",ep:"Please enter a valid mobile number.",x:"Close"},
- ar:{t:"قبل فتح واتساب",s:"اترك اسمك ورقم جوالك ليتابع معك أحد مستشارينا، حتى لو انقطعت المحادثة.",n:"الاسم",p:"رقم الجوال",go:"المتابعة إلى واتساب",skip:"تخطي",en:"يرجى كتابة اسمك.",ep:"يرجى كتابة رقم جوال صحيح.",x:"إغلاق"}};
+ en:{t:"Before we open WhatsApp",s:"Leave your name and mobile so an advisor can follow up, even if the chat drops.",n:"Your name",p:"Mobile number",go:"Continue to WhatsApp",en:"Please enter your name.",ep:"Please enter a valid mobile number.",x:"Close"},
+ ar:{t:"قبل فتح واتساب",s:"اترك اسمك ورقم جوالك ليتابع معك أحد مستشارينا، حتى لو انقطعت المحادثة.",n:"الاسم",p:"رقم الجوال",go:"المتابعة إلى واتساب",en:"يرجى كتابة اسمك.",ep:"يرجى كتابة رقم جوال صحيح.",x:"إغلاق"}};
 function store(k,v){try{if(v===undefined)return sessionStorage.getItem(k);sessionStorage.setItem(k,v)}catch(e){}}
 function isAr(){var h=document.documentElement;return (h.lang||"").toLowerCase().indexOf("ar")===0||h.dir==="rtl"}
 function latin(s){return String(s).replace(/[٠-٩]/g,function(d){return String(d.charCodeAt(0)-0x660)}).replace(/[۰-۹]/g,function(d){return String(d.charCodeAt(0)-0x6F0)})}
@@ -45,11 +46,10 @@ function show(a){link=a;opened=Date.now();var L=T[isAr()?"ar":"en"];
  +'<input name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">'
  +'<p data-err role="alert" style="min-height:18px;margin:0 0 8px;font-size:13px;color:#B3261E"></p>'
  +'<button type="submit" style="display:block;width:100%;height:48px;border:0;border-radius:24px;background:#1F8A5B;color:#fff;font:inherit;font-size:16px;font-weight:600;cursor:pointer">'+L.go+'</button>'
- +'<button type="button" data-skip style="display:block;margin:8px auto 0;padding:8px 16px;border:0;background:transparent;color:#6B5E52;font:inherit;font-size:14px;text-decoration:underline;cursor:pointer">'+L.skip+'</button>'
  +'</form>';
  document.body.appendChild(box);document.addEventListener("keydown",onKey,true);
  var f=box.querySelector("form"),err=box.querySelector("[data-err]"),fn=f.querySelector("[name=name]"),fp=f.querySelector("[name=phone]"),fw=f.querySelector("[name=website]");
- box.addEventListener("click",function(e){if(e.target===box||e.target.closest("[data-x]")){close()}else if(e.target.closest("[data-skip]")){track("whatsapp_gate_skip");openWa()}});
+ box.addEventListener("click",function(e){if(e.target===box||e.target.closest("[data-x]"))close()});
  f.addEventListener("input",function(){err.textContent=""});
  f.addEventListener("submit",function(e){e.preventDefault();
   var name=fn.value.trim(),phone=latin(fp.value.trim()),d=phone.replace(/\D/g,"");
@@ -60,12 +60,14 @@ function show(a){link=a;opened=Date.now();var L=T[isAr()?"ar":"en"];
   try{fetch("/api/wa-lead",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body),keepalive:true}).catch(function(){})}catch(x){}
   store(DONE,"1");track("whatsapp_lead");openWa()});
  setTimeout(function(){try{fn.focus({preventScroll:true})}catch(e){}},30)}
-document.addEventListener("click",function(e){
- if(e.defaultPrevented||e.button>0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+function gate(e){
+ if(e.defaultPrevented||e.button>1)return;
  var a=e.target&&e.target.closest&&e.target.closest("a");if(!a||(box&&box.contains(a)))return;
  if(!WA.test(a.href||"")&&!a.hasAttribute("data-wa"))return;
  if(store(DONE)==="1")return;
- e.preventDefault();if(!box)show(a)},true);
+ e.preventDefault();if(!box)show(a)}
+document.addEventListener("click",gate,true);
+document.addEventListener("auxclick",gate,true);
 })();`;
 
 /** The script itself, for an inline <script> in the React pages */
