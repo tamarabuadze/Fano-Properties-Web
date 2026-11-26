@@ -1,5 +1,9 @@
 import type { NextConfig } from "next";
 
+// fanoproperties.com/listings is served by the Fano listings app (Cloudflare Worker "app").
+// Next.js passes these requests through, so the address bar keeps fanoproperties.com.
+const LISTINGS_APP = "https://app.fanoproperties.workers.dev";
+
 const nextConfig: NextConfig = {
   transpilePackages: ["@fano/ui", "@fano/utils", "@fano/types"],
   images: {
@@ -35,7 +39,11 @@ const nextConfig: NextConfig = {
   },
   // Browsers and crawlers ask for /favicon.ico directly; serve the generated app icon there
   async rewrites() {
-    return [{ source: "/favicon.ico", destination: "/icon" }];
+    return [
+      { source: "/favicon.ico", destination: "/icon" },
+      { source: "/listings", destination: `${LISTINGS_APP}/listings` },
+      { source: "/listings/:path*", destination: `${LISTINGS_APP}/listings/:path*` },
+    ];
   },
 };
 
