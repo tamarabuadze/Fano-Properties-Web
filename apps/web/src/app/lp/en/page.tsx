@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LuxNavbar } from "@/components/luxury/lux-navbar";
 import { LuxFooter } from "@/components/luxury/lux-footer";
-import { LuxEnquire } from "@/components/luxury/lux-enquire";
 import { GoogleTag } from "@/components/analytics/google-tag";
 import { getAgents } from "@/lib/queries/agents";
 import { CONSENT_COUNTRIES } from "@/lib/analytics";
@@ -220,7 +219,6 @@ export default async function LpEnPage() {
         </section>
       </main>
       <LuxFooter showAgents={showAgents} />
-      <LuxEnquire />
       <WhatsAppFloat />
       <script dangerouslySetInnerHTML={{ __html: whatsAppGateJs() }} />
       <GoogleTag {...googleTagIds()} askConsent={askConsent} />
