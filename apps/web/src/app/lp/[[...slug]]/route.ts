@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 import { googleTagHead } from "@/lib/google-tag-html";
 import { whatsAppGateTag } from "@/lib/whatsapp-gate";
 import { defaultTheme } from "@/lib/site-theme";
+import { withCopyright } from "@/lib/copyright";
 
 // Landing pages for the Google Ads campaigns, one per property in English and Arabic:
 //   /lp/en                English index of every property      /lp/ar               Arabic investor page
@@ -44,6 +45,8 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug?: s
   html = html.replace("</head>", `<link rel="canonical" href="${SITE}${pagePath}">\n${googleTagHead()}</head>`);
   // Name and mobile before WhatsApp opens, so taps become leads (lib/whatsapp-gate.ts)
   html = html.replace("</body>", `${whatsAppGateTag()}</body>`);
+  // The site-wide copyright line in the footer (lib/copyright.ts)
+  html = withCopyright(html);
 
   return new NextResponse(html, {
     headers: {
