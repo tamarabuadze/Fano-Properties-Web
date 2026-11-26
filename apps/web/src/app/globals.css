@@ -401,21 +401,11 @@ html[data-theme="navy"] .lx-root .lx-photo-type .btn-gold-outline:hover { color:
   background: #8C6A47;
 }
 
-/* Floating action buttons step aside while the mobile menu or filter sheet is open */
-body[data-overlay-open] .fano-fab { visibility: hidden; }
-/* Over the homepage hero the floating CTA steps back to an outline, leaving the hero's own button to lead */
-body[data-hero-in-view] .fano-fab {
-  background: rgba(244, 239, 234, 0.6);
-  border-color: rgba(140, 106, 71, 0.55);
-  color: #2B2520;
-  text-shadow: none;
-  box-shadow: none;
-  backdrop-filter: blur(4px);
-}
-body[data-hero-in-view] .fano-fab:hover { background: #E2A862; border-color: #E2A862; color: #2B2520; }
-
-/* WhatsApp button, the same as on the team app's landing pages; stacked above "List Your Property" */
-.wa-float { position: fixed; right: 20px; bottom: 88px; z-index: 50; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+/* WhatsApp button, the same as on the team app's landing pages: the only floating button, in the corner.
+   It fades out while a section with its own WhatsApp button (or the map) is on screen, so nothing doubles up. */
+.wa-float { position: fixed; right: 20px; bottom: 20px; z-index: 50; display: flex; align-items: center; gap: 10px; text-decoration: none;
+  transition: opacity .35s ease, transform .35s ease, visibility .35s; }
+body[data-wa-hidden] .wa-float { opacity: 0; transform: translateY(12px); visibility: hidden; pointer-events: none; }
 .wa-float-dot { position: relative; width: 60px; height: 60px; border-radius: 50%; background: #25D366; display: grid; place-items: center;
   box-shadow: 0 12px 26px -8px rgba(18, 140, 74, .65), 0 2px 6px rgba(0, 0, 0, .14); transition: transform .15s; }
 .wa-float-dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid #25D366; animation: waPulse 2.4s ease-out infinite; }
@@ -425,8 +415,8 @@ body[data-hero-in-view] .fano-fab:hover { background: #E2A862; border-color: #E2
 .wa-float:hover .wa-float-lbl, .wa-float:focus-visible .wa-float-lbl { opacity: 1; transform: none; }
 .wa-float:focus-visible .wa-float-dot { box-shadow: 0 0 0 4px rgba(226, 168, 98, .55); }
 @keyframes waPulse { 0% { transform: scale(1); opacity: .7; } 70% { transform: scale(1.45); opacity: 0; } 100% { opacity: 0; } }
-@media (min-width: 640px) { .wa-float { right: 32px; } }
-@media (max-width: 720px) { .wa-float-dot { width: 54px; height: 54px; } .wa-float-lbl { display: none; } }
+@media (min-width: 640px) { .wa-float { right: 28px; bottom: 28px; } }
+@media (max-width: 720px) { .wa-float-dot { width: 52px; height: 52px; } .wa-float-dot svg { width: 26px; height: 26px; } .wa-float-lbl { display: none; } }
 @media (prefers-reduced-motion: reduce) { .wa-float-dot::after { animation: none; opacity: 0; } }
 body[data-overlay-open] .wa-float { visibility: hidden; }
 .fano-web :is(a,button):focus-visible,
@@ -474,6 +464,80 @@ html[data-theme="navy"] .lx-underline:hover { color: #E2A862; border-color: #E2A
 html[data-theme="navy"] .lx-veil { background: linear-gradient(to top, rgb(var(--lx-page-rgb)) 0%, rgb(var(--lx-page-rgb) / .35) 50%, rgb(var(--lx-page-rgb) / .1) 100%); }
 html[data-theme="navy"] .lx-veil-top { background: linear-gradient(to bottom, rgb(var(--lx-page-rgb) / .6), transparent); }
 html[data-theme="navy"] .theme-tg:hover { color: #E2A862; border-color: #E2A862; }
-html[data-theme="navy"] body[data-hero-in-view] .fano-fab { background: rgba(11, 18, 32, 0.45); border-color: rgba(226, 168, 98, 0.55); color: #F4EFEA; }
-html[data-theme="navy"] body[data-hero-in-view] .fano-fab:hover { background: #E2A862; color: #0B1220; }
 html[data-theme="navy"] .lx-root .text-\[\#B3413A\] { color: #F0A08F; }
+
+/* Slide 03 promotion: the Fano Properties app on an espresso card with a warm gold light */
+.lx-app-promo {
+  background:
+    radial-gradient(420px 300px at 85% 30%, rgba(226, 168, 98, .22), transparent 70%),
+    radial-gradient(600px 400px at 0% 110%, rgba(140, 106, 71, .28), transparent 70%),
+    linear-gradient(160deg, #2B2520 0%, #1A1512 100%);
+  box-shadow: 0 40px 80px -40px rgba(43, 37, 32, .65);
+}
+.lx-app-promo::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(226, 168, 98, .55), transparent) top / 100% 1px no-repeat; }
+.lx-app-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-family: var(--font-montserrat), Montserrat, system-ui, sans-serif;
+  font-size: 10px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: #E2A862; }
+.lx-app-eyebrow::before { content: ""; width: 28px; height: 1px; background: #E2A862; }
+.lx-app-outline { display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 22px; border-radius: 999px;
+  border: 1px solid rgba(226, 168, 98, .6); color: #F4EFEA; font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  font-size: 13px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; transition: background .2s, color .2s, border-color .2s; }
+.lx-app-outline:hover { background: #E2A862; border-color: #E2A862; color: #2B2520; }
+.lx-app-phone { position: relative; z-index: 1; aspect-ratio: 390 / 760; overflow: hidden; border-radius: 30px; border: 7px solid #0E0B09;
+  outline: 1px solid rgba(226, 168, 98, .35); outline-offset: 0; background: #0E0B09;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .7), inset 0 0 0 1px rgba(255, 255, 255, .06);
+  animation: lx-app-float 7s ease-in-out infinite; }
+.lx-app-phone::before { content: ""; position: absolute; top: 7px; left: 50%; z-index: 2; width: 34%; height: 15px; transform: translateX(-50%);
+  border-radius: 999px; background: #0E0B09; }
+.lx-app-glow { position: absolute; inset: 12% -18% -6%; z-index: 0; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(226, 168, 98, .45), transparent); filter: blur(18px); }
+@keyframes lx-app-float { 0%, 100% { transform: translateY(0) rotate(-1.2deg); } 50% { transform: translateY(-10px) rotate(-1.2deg); } }
+@media (prefers-reduced-motion: reduce) { .lx-app-phone { animation: none; } }
+
+/* Slide 05: the cinematic Dubai map, always night-dark in both themes */
+.lx-map-section { background: radial-gradient(1100px 520px at 72% 0%, rgba(140, 106, 71, .24), transparent 70%), #120E0B; }
+.lx-map-frame { background: #17110E; box-shadow: 0 0 0 1px rgba(226, 168, 98, .18), 0 50px 100px -50px #000; }
+.lx-map-veil { background:
+  radial-gradient(ellipse at center, transparent 58%, rgba(18, 14, 11, .6) 100%),
+  linear-gradient(to bottom, rgba(18, 14, 11, .5), transparent 16%, transparent 82%, rgba(18, 14, 11, .55)); }
+.lx-map-loading { animation: lx-map-breathe 1.8s ease-in-out infinite; }
+@keyframes lx-map-breathe { 50% { opacity: .35; } }
+.lx-map-panel { background: rgba(18, 14, 11, .74); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 168, 98, .2); border-radius: 6px; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .8); }
+.lx-map-panel ul { scrollbar-width: thin; scrollbar-color: rgba(226, 168, 98, .35) transparent; }
+.lx-map-item { transition: background .25s, box-shadow .25s; }
+.lx-map-item:hover { background: rgba(226, 168, 98, .08); }
+.lx-map-item[data-active] { background: rgba(226, 168, 98, .14); box-shadow: inset 2px 0 0 #E2A862; }
+.lx-map-swatch { flex: none; width: 8px; height: 8px; margin-top: 7px; border-radius: 50%; background: #E2A862; box-shadow: 0 0 10px rgba(226, 168, 98, .8); }
+.lx-map-swatch-hq { background: #F7D597; outline: 1px solid #E2A862; outline-offset: 2px; }
+.lx-map-btn, .lx-map-chip { display: inline-flex; align-items: center; justify-content: center; min-height: 38px; padding: 0 16px; border-radius: 999px;
+  border: 1px solid rgba(226, 168, 98, .45); color: #F4EFEA; background: rgba(18, 14, 11, .4); white-space: nowrap;
+  font: 500 11px/1 var(--font-inter), Inter, system-ui, sans-serif; letter-spacing: 1px; text-transform: uppercase;
+  transition: background .2s, color .2s, border-color .2s; }
+.lx-map-chip { text-transform: none; letter-spacing: 0; font-size: 13px; }
+.lx-map-btn:hover:not(:disabled), .lx-map-chip:hover, .lx-map-chip[data-active] { background: #E2A862; border-color: #E2A862; color: #2B2520; }
+.lx-map-btn:disabled { opacity: .45; cursor: default; }
+.lx-map-card { background: rgba(18, 14, 11, .8); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 6px;
+  border: 1px solid rgba(226, 168, 98, .25); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .8); animation: lx-rise .6s cubic-bezier(.2, .65, .25, 1) both; }
+.lx-map-link { display: inline-flex; align-items: center; gap: 12px; font: 600 11px var(--font-montserrat), Montserrat, system-ui, sans-serif;
+  letter-spacing: .18em; text-transform: uppercase; color: #F4EFEA; transition: color .3s; }
+.lx-map-link::after { content: ""; width: 32px; height: 1px; background: #E2A862; transition: width .45s; }
+.lx-map-link:hover { color: #E2A862; }
+.lx-map-link:hover::after { width: 56px; }
+.lx-map-frame .maplibregl-ctrl-attrib { background: rgba(18, 14, 11, .7); color: #A39886; }
+.lx-map-frame .maplibregl-ctrl-attrib a { color: #C99A5B; }
+.lx-map-frame .maplibregl-ctrl-attrib-button { filter: invert(1) sepia(.4); }
+/* The listing pins: a gold light with a soft pulse; the name shows on hover and for the active one */
+.lx-pin { position: relative; width: 16px; height: 16px; padding: 0; border: 0; background: none; cursor: pointer; }
+.lx-pin-dot { position: absolute; inset: 3px; border-radius: 50%; background: #F7D597; box-shadow: 0 0 0 2px rgba(18, 14, 11, .7), 0 0 14px 3px rgba(226, 168, 98, .85); }
+.lx-pin-dot::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 1px solid rgba(226, 168, 98, .8); animation: lx-pin-pulse 2.6s ease-out infinite; }
+.lx-pin-hq .lx-pin-dot { inset: 1px; background: #FFF1D6; }
+.lx-pin-label { position: absolute; left: 22px; top: 50%; transform: translate(-4px, -50%); opacity: 0; pointer-events: none; white-space: nowrap;
+  padding: 5px 10px; border-radius: 999px; background: rgba(18, 14, 11, .88); border: 1px solid rgba(226, 168, 98, .35); color: #F4EFEA;
+  font: 500 12px var(--font-inter), Inter, system-ui, sans-serif; transition: opacity .25s, transform .25s; }
+.lx-pin:hover .lx-pin-label, .lx-pin:focus-visible .lx-pin-label, .lx-pin[data-active] .lx-pin-label { opacity: 1; transform: translate(0, -50%); }
+.lx-pin[data-active] { z-index: 2; }
+@keyframes lx-pin-pulse { 0% { transform: scale(.6); opacity: .9; } 80%, 100% { transform: scale(1.9); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .lx-pin-dot::after, .lx-map-loading { animation: none; } }
+.lx-app-hero { background: linear-gradient(180deg, rgba(26, 21, 18, .78), rgba(26, 21, 18, .92)), url("/hero-dubai.webp") center / cover; }
+.lx-app-card { background: linear-gradient(180deg, transparent 40%, rgba(26, 21, 18, .35)), url("/collection-offices.webp") center / cover; }
