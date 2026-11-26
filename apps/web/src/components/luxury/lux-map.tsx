@@ -116,7 +116,10 @@ export function LuxMap({ properties, office }: { properties: MapProperty[]; offi
 
       <div className="mx-auto mt-12 max-w-[1680px] sm:px-6 lg:mt-16 lg:px-10">
         <div className="lx-map-frame relative h-[clamp(460px,76vh,860px)] overflow-hidden sm:rounded-[6px]">
-          <div ref={mapRef} className="absolute inset-0" />
+          {/* MapLibre's stylesheet sets its own box to position: relative, so the map fills a sized wrapper */}
+          <div className="absolute inset-0">
+            <div ref={mapRef} className="h-full w-full" />
+          </div>
           <div className="lx-map-veil pointer-events-none absolute inset-0" aria-hidden="true" />
           {!ready && !failed && (
             <div className="pointer-events-none absolute inset-0 grid place-items-center">
