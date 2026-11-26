@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { buildPageMeta } from "@/lib/seo";
-import { getFeaturedProperties } from "@/lib/queries/properties";
+import { getFeaturedProperties, getMapProperties } from "@/lib/queries/properties";
+import { FANO_OFFICE } from "@/lib/dubai-areas";
 import { getAgents } from "@/lib/queries/agents";
 import { getLatestArticles } from "@/lib/queries/blog";
 import { getDubaiPropertyNews } from "@/lib/dubai-news";
@@ -12,7 +13,7 @@ import { LuxResidences } from "@/components/luxury/lux-residences";
 import { LuxCollections } from "@/components/luxury/lux-collections";
 import { LuxIntroduction } from "@/components/luxury/lux-introduction";
 import { LuxTeam } from "@/components/luxury/lux-team";
-import { LuxPeople } from "@/components/luxury/lux-people";
+import { LuxMap } from "@/components/luxury/lux-map";
 import { LuxJournal } from "@/components/luxury/lux-journal";
 import { LuxNews } from "@/components/luxury/lux-news";
 import { LuxClosing } from "@/components/luxury/lux-closing";
@@ -70,12 +71,13 @@ const jsonLd = {
 };
 
 export default async function HomePage() {
-  const [properties, agents, articles, news, market] = await Promise.all([
+  const [properties, agents, articles, news, market, mapProperties] = await Promise.all([
     getFeaturedProperties(3).catch(() => []),
     getAgents().catch(() => []),
     getLatestArticles(2).catch(() => []),
     getDubaiPropertyNews(6).catch(() => []),
     getDubaiMarket().catch(() => []),
+    getMapProperties().catch(() => []),
   ]);
 
   const jsonLdScript = (
@@ -93,8 +95,8 @@ export default async function HomePage() {
       <LuxResidences properties={properties as never} />
       <LuxCollections />
       <LuxIntroduction />
-      <LuxTeam advisor={(agents as never[])[0] as never} />
-      <LuxPeople people={agents as never[]} />
+      <LuxTeam people={agents as never[]} />
+      <LuxMap properties={mapProperties} office={FANO_OFFICE} />
       <LuxJournal articles={articles as never} />
       <LuxNews items={news} market={market} />
       <LuxClosing />

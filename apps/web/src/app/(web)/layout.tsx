@@ -1,13 +1,13 @@
 import { headers } from "next/headers";
 import { LuxNavbar } from "@/components/luxury/lux-navbar";
 import { LuxFooter } from "@/components/luxury/lux-footer";
-import { LuxEnquire } from "@/components/luxury/lux-enquire";
 import { GoogleTag } from "@/components/analytics/google-tag";
 import { getAgents } from "@/lib/queries/agents";
 import { CONSENT_COUNTRIES } from "@/lib/analytics";
 import { googleTagIds } from "@/lib/google-tag-html";
 import { defaultTheme, themeScript } from "@/lib/site-theme";
 import { WhatsAppFloat } from "@/components/shared/whatsapp-float";
+import { WaFloatWatch } from "@/components/shared/wa-float-watch";
 import { whatsAppGateJs } from "@/lib/whatsapp-gate";
 
 
@@ -25,8 +25,8 @@ export default async function WebLayout({ children }: { children: React.ReactNod
       <LuxNavbar showAgents={showAgents} />
       <main className="fano-web">{children}</main>
       <LuxFooter showAgents={showAgents} />
-      <LuxEnquire />
       <WhatsAppFloat />
+      <WaFloatWatch />
       {/* Asks for name and mobile before any WhatsApp link opens, so taps become leads */}
       <script dangerouslySetInnerHTML={{ __html: whatsAppGateJs() }} />
       {/* Tag IDs are read when the page is served, so they can be set on Railway without a rebuild */}
