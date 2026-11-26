@@ -11,10 +11,17 @@ import { cn } from "@fano/utils";
 
 const navLinks = [
   { label: "Properties", href: "/properties" },
+  { label: "Listings", href: "/listings" },
   { label: "Agents", href: "/agents" },
   { label: "Insights", href: "/blog" },
   { label: "About", href: "/about" },
 ];
+
+// /listings is served by the Fano listings app (src/app/api/listings), not a Next.js page, so it
+// gets a plain link: a client-side Link would fetch it once and then reload the page anyway.
+function NavLink({ href, ...props }: React.ComponentPropsWithoutRef<"a"> & { href: string }) {
+  return href === "/listings" ? <a href={href} {...props} /> : <Link href={href} {...props} />;
+}
 
 // Transparent over the film, settling onto the page colour after the first scroll.
 // Bold tracked capitals in bone; the current page is gold with a hairline beneath.
@@ -103,7 +110,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
               {links.map((link) => {
                 const active = pathname.startsWith(link.href);
                 return (
-                  <Link
+                  <NavLink
                     key={link.href}
                     href={link.href}
                     aria-current={active ? "page" : undefined}
@@ -120,7 +127,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
                         transition={{ type: "spring", stiffness: 400, damping: 32 }}
                       />
                     )}
-                  </Link>
+                  </NavLink>
                 );
               })}
             </nav>
@@ -165,7 +172,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: i * 0.05, duration: 0.3 }}
                     >
-                      <Link
+                      <NavLink
                         href={link.href}
                         onClick={closeMenu}
                         aria-current={active ? "page" : undefined}
@@ -175,7 +182,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
                         )}
                       >
                         {link.label}
-                      </Link>
+                      </NavLink>
                     </motion.div>
                   );
                 })}
