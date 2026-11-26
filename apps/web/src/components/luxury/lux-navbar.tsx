@@ -188,6 +188,7 @@ export function LuxNavbar({ showAgents = true }: { showAgents?: boolean }) {
                 })}
               </nav>
               <Link href="/contact" onClick={closeMenu} className="btn-gold mt-12 w-full">Enquire</Link>
+              <Link href="/list-with-us" onClick={closeMenu} className="btn-gold-outline mt-3 w-full">List your property</Link>
               <p className="lx-eyebrow mt-auto pt-10">Churchill Executive Tower · Business Bay · Dubai</p>
             </div>
           </motion.div>
