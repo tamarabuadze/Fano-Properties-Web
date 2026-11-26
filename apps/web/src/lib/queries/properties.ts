@@ -2,6 +2,7 @@ import { prisma } from "@fano/db";
 import type { PropertyFilters } from "@fano/types";
 import { cached, CACHE_TAGS } from "@/lib/cache";
 import { publicAgent } from "@/lib/queries/agents";
+import { placeOnMap } from "@/lib/dubai-areas";
 
 // Prisma returns Decimal objects for price/lat/lng which can't cross the
 // Server → Client Component boundary. Convert them to plain numbers here.
@@ -117,6 +118,34 @@ export async function incrementPropertyViewCount(id: string) {
   return prisma.$executeRaw`UPDATE "properties" SET "viewCount" = "viewCount" + 1 WHERE "id" = ${id}`;
 }
 
+// Every published listing for the homepage map: just what the map needs, no prices or photos
+async function getMapPropertiesUncached() {
+  const rows = await prisma.property.findMany({
+    where: { published: true },
+    take: 60,
+    orderBy: [{ featured: "desc" }, { createdAt: "desc" }],
+    select: {
+      slug: true,
+      title: true,
+      location: true,
+      city: true,
+      propertyType: true,
+      listingType: true,
+      unitType: true,
+      lat: true,
+      lng: true,
+    },
+  });
+  return placeOnMap(
+    rows.map((r: (typeof rows)[number]) => ({
+      ...r,
+      lat: r.lat != null ? Number(r.lat) : null,
+      lng: r.lng != null ? Number(r.lng) : null,
+    }))
+  );
+}
+
+export const getMapProperties = cached(getMapPropertiesUncached, "getMapProperties", [CACHE_TAGS.properties]);
 export const getFeaturedProperties = cached(getFeaturedPropertiesUncached, "getFeaturedProperties", [CACHE_TAGS.properties]);
 export const getProperties = cached(getPropertiesUncached, "getProperties", [CACHE_TAGS.properties]);
 export const getPropertyBySlug = cached(getPropertyBySlugUncached, "getPropertyBySlug", [CACHE_TAGS.properties]);
