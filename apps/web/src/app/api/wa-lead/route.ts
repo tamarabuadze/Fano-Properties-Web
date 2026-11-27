@@ -3,10 +3,22 @@ import { prisma } from "@fano/db";
 import { z } from "zod";
 import { sendLeadToFanoApp } from "@/lib/fano-app";
 
-// Name and mobile left in the box that shows before WhatsApp opens (lib/whatsapp-gate.ts).
-// Each one is saved with the website's other enquiries (Admin → Inquiries, as a call-back) and
-// copied to the team app's Lead inbox. WhatsApp opens whatever happens here, so this never blocks
+// Name and mobile left in the box that shows before WhatsApp opens (lib/whatsapp-gate.ts), plus
+// the optional one-tap answers from its quick questions (buy/invest/rent, property type, budget,
+// when). Each lead is saved with the website's other enquiries (Admin → Inquiries, as a call-back)
+// and copied to the team app's Lead inbox, with the property type as "Interested in" and the
+// budget in the lead's Budget field. WhatsApp opens whatever happens here, so this never blocks
 // the chat; the answer only matters to bots.
+
+// The answers the box offers. Anything else is dropped rather than refused, so an old copy of the
+// page still open in someone's browser never loses the lead.
+const LOOK = ["Buy", "Invest", "Rent"] as const;
+const TYPE = ["Office", "Apartment", "Shop", "Other"] as const;
+const BUDGET = [
+  "Under AED 1M", "AED 1M-2M", "AED 2M-5M", "AED 5M+",
+  "Under AED 100K a year", "AED 100K-250K a year", "AED 250K+ a year",
+] as const;
+const WHEN = ["Now", "Within 3 months", "Later"] as const;
 
 const lead = z.object({
   name: z.string().trim().min(2).max(80),
@@ -23,6 +35,10 @@ const lead = z.object({
   utm_medium: z.string().max(200).optional(),
   utm_campaign: z.string().max(200).optional(),
   ref: z.string().max(300).optional(),
+  look: z.enum(LOOK).optional().catch(undefined),
+  type: z.enum(TYPE).optional().catch(undefined),
+  budget: z.enum(BUDGET).optional().catch(undefined),
+  when: z.enum(WHEN).optional().catch(undefined),
 });
 
 const MIN_FILL_MS = 1500; // typing a name and a number takes longer than this
@@ -70,10 +86,16 @@ export async function POST(req: Request) {
   const ip = req.headers.get("cf-connecting-ip") ?? req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   if (tooMany(ip)) return NextResponse.json({ ok: false, error: "too_many" }, { status: 429 });
 
+  // A rent budget only makes sense with Rent, and a purchase budget only without it
+  const rentBudget = d.budget?.endsWith("a year") ?? false;
+  const budget = d.budget && rentBudget === (d.look === "Rent") ? d.budget : undefined;
+  const answers = [d.look, d.type, budget, d.when].filter(Boolean);
+
   const country = req.headers.get("cf-ipcountry")?.toUpperCase();
   const where = d.title?.trim() || d.page || "fanoproperties.com";
   const message = [
     `Tapped WhatsApp on: ${where}`,
+    answers.length ? `Quick answers: ${answers.join(" · ")}` : "Quick answers: none given",
     d.page && `Page: ${d.page}`,
     "They were sent on to WhatsApp +971 52 571 9164 and may already have messaged there.",
     country && country !== "XX" && `Visitor country: ${country}`,
@@ -112,6 +134,9 @@ export async function POST(req: Request) {
       phone: d.phone,
       message,
       project: where.slice(0, 160),
+      unit: d.type && d.type !== "Other" ? d.type : undefined,
+      budget,
+      purpose: d.look === "Invest" ? "Investment" : d.look === "Buy" ? "Own use" : undefined,
       page: d.page,
       attribution,
     }).then((ok) => { if (!ok) console.warn("[wa-lead] team app did not accept", inquiryId ?? "(not saved)"); }),
